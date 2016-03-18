@@ -2,17 +2,37 @@
 
 <link href="{% static "css/illustrations.css" %}" rel="stylesheet">
 
-{% for illustration in illustration_list %}
-  <div class="illustration card">
-    <div class="card-image">
-      <img src="{{ illustration.thumbnail }}" style="width: calc({{ illustration.thumbnail_size }} / 100 * 350px)">
+<section id="illustrations">
+  <header>
+    <h3>Illustrations</h3>
+
+    <div id="categoriesButtonDiv">
+      <a id="categoriesButton" class='dropdown-button btn' href='#' data-activates='categories'>Categories</a>
     </div>
-    <div class="card-content">
-      <h5>{{ illustration.title }}</h5>
-      <p>{{ illustration.description }}</p>
+
+    <div id="categoriesDiv">
+      <ul id="categories" class="dropdown-content">
+        <li><a href="#">Logos</a></li>
+        <li><a href="#">Grant Applications</a></li>
+        <li><a href="#">Doctoral Theses</a></li>
+      </ul>
     </div>
-    <div class="card-action">
-      <a class="waves-effect waves-teal btn-flat readmore">Read more</a>
+  </header>
+
+  <br><br>
+
+  {% for illustration in illustration_list %}
+    <div class="illustration card">
+      <div class="card-image">
+        <img src="{{ illustration.thumbnail }}" style="width: calc({{ illustration.thumbnail_size }} / 100 * 350px)">
+      </div>
+      <div class="card-content">
+        <h5>{{ illustration.title }}</h5>
+        <p>{{ illustration.description }}</p>
+      </div>
+      <div class="card-action">
+        <a class="waves-effect waves-teal btn-flat readmore">Read more</a>
+      </div>
     </div>
-  </div>
-{% endfor %}
+  {% endfor %}
+</section>

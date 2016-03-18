@@ -1,3 +1,16 @@
+#illustrations {
+  position: relative;
+  margin-top: 100px;
+}
+#illustrations header {
+  position: absolute;
+  left: 30%;
+  transform: translate(0, -50%);
+  z-index: 10;
+}
+#illustrations h3 {
+  float: left;
+}
 .illustration {
   width: 360px;
   display: inline-block;;
@@ -20,4 +33,12 @@
 }
 .illustration .readmore {
   color: #000 !important;
+}
+#categoriesButtonDiv {
+  float: left;
+  margin-top: 26px;
+  margin-left: 5px;
+}
+#categoriesDiv {
+  margin-top: 100px;
 }
