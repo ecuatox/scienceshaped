@@ -1,0 +1,23 @@
+.illustration {
+  width: 360px;
+  display: inline-block;;
+}
+.illustration .card-image {
+  position: relative;
+  height: 300px;
+}
+.illustration .card-image img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.illustration .card-content {
+  height: 150px;
+}
+.illustration .card-action {
+  margin-left: -10px;
+}
+.illustration .readmore {
+  color: #000 !important;
+}

@@ -1,9 +1,14 @@
 html {
-  background: #ddd;
 }
 body {
   margin: 0;
+  background: #ddd;
 }
-h1 {
+section {
+  width: 80%;
+  margin: 20px auto;
+  padding: 30px;
+}
+.sectiontitle {
   text-align: center;
 }
