@@ -1,0 +1,25 @@
+#header {
+  width: 100%;
+  height: 120px;
+  background: #fff;
+}
+#logo {
+  position: absolute;
+  width: 200px;
+  top: 30px;
+  left: 30px;
+}
+#menu {
+  position: absolute;
+  right: 40px;
+  top: 40px;
+}
+#menu li {
+  display: inline-block;
+  margin: 10px;
+}
+#menu li a {
+  text-decoration: none;
+  color: var(--accent-color);
+  font-size: 16px;
+}

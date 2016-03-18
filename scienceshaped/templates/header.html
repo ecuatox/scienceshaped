@@ -1,0 +1,14 @@
+{% load staticfiles %}
+<link href="{% static "css/colors.css" %}" rel="stylesheet">
+<link href="{% static "css/header.css" %}" rel="stylesheet">
+{% include 'material_design_links.html' %}
+
+<div id="header">
+  <img id="logo" src="{% static "img/logo.png" %}" />
+  <ul id="menu">
+    <li><a href="#about" class="btn">About</a></li>
+    <li><a href="#projects" class="btn">Projects</a></li>
+    <li><a href="#testamonials" class="btn">Testamonials</a></li>
+    <li><a href="#contact" class="btn">Contact</a></li>
+  </ul>
+</div>
