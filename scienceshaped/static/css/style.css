@@ -2,7 +2,7 @@ html {
 }
 body {
   margin: 0;
-  background: #ddd;
+  background: var(--background-color);
 }
 section {
   width: 80%;
