@@ -4,7 +4,7 @@ from django.utils import timezone
 class Image(models.Model):
     title = models.CharField(max_length=100, verbose_name='Filename')
     time = models.DateTimeField(default=timezone.now)
-    file = models.FileField(upload_to='uploads')
+    file = models.FileField(upload_to='images')
     number = models.IntegerField(default=0)
 
     def __str__(self):
