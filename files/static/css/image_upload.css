@@ -1,0 +1,14 @@
+#imageUploadForm {
+  width: 40%;
+  margin: 20px auto;
+}
+#submit {
+  position: relative;
+  width: 100%;
+}
+#submit img {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  margin-left: 10px;
+}

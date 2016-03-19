@@ -1,0 +1,35 @@
+{% load staticfiles %}
+<html>
+
+  <head>
+    <title>Image Upload</title>
+    {% include 'material_design_links.html' %}
+    <link href="{% static "css/image_upload.css" %}" rel="stylesheet">
+  </head>
+
+  <body>
+    <form id="imageUploadForm" action="/files/image-upload/" enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+
+        {{ form.title.errors }}
+        <label for="{{ form.title.id_for_label }}">Title:</label>
+        <input id="id_title" name="title" maxlength="{{ form.title.maxlength }}">
+
+        {{ form.file.errors }}
+        <div class="file-field input-field">
+          <div class="btn">
+            <span>File</span>
+            <input id="id_file" type="file" name="file">
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+          </div>
+        </div>
+
+        <button id="submit" class="btn waves-effect waves-light" type="submit" name="action">Submit
+          <img src="{% static "img/ic_send_white_24px.svg" %}">
+        </button>
+    </form>
+  </body>
+
+</html>
