@@ -40,7 +40,7 @@ def illustrationEdit(request, illustration_id):
                 admin_history.log_addition(request, illustration)
             else:
                 admin_history.log_change(request, illustration)
-            return HttpResponseRedirect('/projects/illustration/'+str(illustration.id)+'/')
+            return HttpResponseRedirect('/')
     else:
         if int(illustration_id) == 0:
             form = IllustrationEdit(initial={
