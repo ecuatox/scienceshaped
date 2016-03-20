@@ -22,8 +22,8 @@
       </form>
 
       {% for image in images %}
-      <div class="imageItem card">
-        <div class="card-image" style="background-image: url(/static/media/{{ image.file }});" url="/static/media/{{ image.file }}">
+      <div class="imageItem card" url="/static/media/{{ image.file }}">
+        <div class="card-image" style="background-image: url(/static/media/{{ image.file }});">
         </div>
         <div class="card-content">
           <p>
@@ -60,7 +60,7 @@
     $(".imageItem").click(function() {
       $(".imageItem").removeClass("selected");
       $(this).addClass("selected");
-      var src = $(this).children(".card-image").attr("url");
+      var src = $(this).attr("url");
       $("#previewImage").attr("src", src);
     });
   </script>
