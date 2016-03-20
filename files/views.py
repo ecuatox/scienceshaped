@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Image
-from .forms import ImageUpload
+from .forms import ImageUpload, ImageSearch
 from django.utils import timezone
 from django.http import HttpResponseRedirect
 
@@ -38,7 +38,24 @@ def upload_done(request):
     return render(request, 'upload_done.html', context)
 
 def images(request):
+    searchText = ""
+    if request.method == 'POST':
+        form = ImageSearch(request.POST)
+        images = []
+        if form.is_valid():
+            searchText = str(form.cleaned_data['search'])
+            search = searchText.lower()
+            for image in Image.objects.order_by('-time'):
+                if search in image.title.lower() or search in image.tags.lower():
+                    images.append(image)
+        else:
+            images = Image.objects.order_by('-time')
+    else:
+        images = Image.objects.order_by('-time')
+    form = ImageSearch()
     context = {
-        'images': Image.objects.order_by('-time'),
+        'images': images,
+        'form': form,
+        'searchText': searchText,
     }
     return render(request, 'images.html', context)
