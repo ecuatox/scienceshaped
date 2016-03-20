@@ -80,8 +80,6 @@
         $(".actions").css("display", "none");
         $(this).addClass("selected");
         $(this).children(".actions").css("display", "inline");
-        var src = $(this).attr("image");
-        $("#previewImage").attr("src", src);
       }
     });
 
@@ -100,6 +98,11 @@
       var src = $(this).attr("previewImage");
       $("#popupImg").attr("src", src);
       $("#popup").css("display", "inline");
+    });
+
+    $(".selectButton").click(function() {
+      var src = $(this).attr("selectImage");
+      window.opener.selectThumnail(src);
     });
 
     function doneUploading(src) {

@@ -37,6 +37,24 @@
           <input id="{{ form.thumbnail.id_for_label }}" name="thumbnail" type="text" maxlength="{{ form.thumbnail.maxlength }}" value="{{ form.thumbnail.value }}">
         </div>
 
+        <img id="thumbnailPicker" src="{{ form.thumbnail.value }}"></img>
+
+        <script>
+          $("#thumbnailPicker").click(function() {
+              thumbWindow = window.open('/files/images', 'width=920,height=640');
+          });
+
+          function selectThumnail(thumb) {
+              thumbWindow.close();
+              $("#id_thumbnail").val(thumb);
+              $("#thumbnailPicker").attr("src", thumb);
+          }
+
+          $("#id_thumbnail").change(function() {
+            $("#thumbnailPicker").attr("src", $("#id_thumbnail").val());
+          });
+        </script>
+
         {{ form.thumbnail_size.errors }}
         <div class="input-field">
           <label for="{{ form.thumbnail_size.id_for_label }}">Thumbnail size</label>
