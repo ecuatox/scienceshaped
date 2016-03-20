@@ -21,7 +21,7 @@ def image_upload(request):
 
             ext = file.name.split(".")[-1:][0]
             file.name = title+"_"+str(number)+"."+ext
-            instance = Image(file=file, title=title, time=timezone.now(), number=number)
+            instance = Image(file=file, title=title, tags=tags, time=timezone.now(), number=number)
             instance.save()
             return HttpResponseRedirect('/files/upload-done')
     else:

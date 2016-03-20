@@ -15,6 +15,10 @@
         <label for="{{ form.title.id_for_label }}">Title:</label>
         <input id="id_title" name="title" maxlength="{{ form.title.maxlength }}">
 
+        {{ form.tags.errors }}
+        <label for="{{ form.tags.id_for_label }}">Tags:</label>
+        <input id="id_tags" name="tags" maxlength="{{ form.tags.maxlength }}">
+
         {{ form.file.errors }}
         <div class="file-field input-field">
           <div class="btn">
