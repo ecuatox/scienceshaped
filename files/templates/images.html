@@ -45,8 +45,8 @@
                 {{ image.title|slice:":15"|capfirst }}...
               {% else %}
                 {{ image.title|capfirst }}
-                {% if image.number > 0 %}
-                  {{ image.number|add:"1" }}
+                {% if image.number > 1 %}
+                  {{ image.number }}
                 {% endif %}
               {% endif %}
             </p>

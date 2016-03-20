@@ -9,6 +9,6 @@ class Image(models.Model):
     number = models.IntegerField(default=0)
 
     def __str__(self):
-        if self.number > 0:
-            return self.title + " (" + str(self.number + 1) + ")"
+        if self.number > 1:
+            return self.title + " (" + str(self.number) + ")"
         return self.title

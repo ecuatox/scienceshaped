@@ -14,7 +14,7 @@ def image_upload(request):
                 title = title.replace(" ", "_")
             file = request.FILES['file']
 
-            number = 0
+            number = 1
             for element in Image.objects.order_by('-time'):
                 if title == element.title:
                     number = element.number + 1
