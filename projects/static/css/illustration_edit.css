@@ -1,0 +1,8 @@
+#submit {
+  width: 100%;
+}
+#editForm {
+  width: 90%;
+  max-width: 600px;
+  margin: 100px auto;
+}
