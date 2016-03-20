@@ -21,21 +21,9 @@ body {
   width: 180px;
   margin-left: 9px;
 }
-#submit img {
-  position: absolute;
-  top: 50%;
-  transform: translate(0, -50%);
-  margin-left: 10px;
-}
 #upload {
   margin-left: 9px;
   width: 180px;
-}
-#upload img {
-  position: absolute;
-  top: 50%;
-  transform: translate(0, -50%);
-  margin-left: 10px;
 }
 .imageItem {
   width: 180px;
