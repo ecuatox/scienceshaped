@@ -10,62 +10,71 @@
 
   <body>
 
-    <section id="images">
-
-      <form id="searchForm" action="/files/images/" method="post">
-        <!-- <label>Title or tag:</label> -->
-        {% csrf_token %}
-        <input id="id_search" name="search" maxlength="100" value="{{ searchText }}">
-        <button id="submit" class="btn waves-effect waves-light" type="submit" name="action">Search
-          <img src="{% static "img/ic_search_white_24px.svg" %}">
-        </button>
-        <a id="upload" class="waves-effect waves-light btn">Upload<img src="{% static "img/ic_file_upload_white_24px.svg" %}"></a>
-      </form>
-
-      <form id="selectForm" action="" method="post" style="display: none;">
-        {% csrf_token %}
-        <input id="id_defaultImage" name="defaultImage">
-      </form>
-
-      {% for image in images %}
-      <div class="imageItem card" url="/static/media/{{ image.file }}">
-        <div class="card-image" style="background-image: url(/static/media/{{ image.file }});">
-        </div>
-        <div class="card-content">
-          <p>
-            {% if image.title|length > 18 %}
-              {{ image.title|slice:":15"|capfirst }}...
-            {% else %}
-              {{ image.title|capfirst }}
-              {% if image.number > 0 %}
-                {{ image.number|add:"1" }}
-              {% endif %}
-            {% endif %}
-          </p>
-          <p class="date">
-            {{ image.time|date:"F d, Y, H:i:s" }}
-          </p>
-        </div>
-      </div>
-      {% endfor %}
-    </section>
-
-    <section id="preview">
-    <div id="previewItem" class="card">
-      <div class="card-image">
-        <img id="previewImage" src="{% static "img/preview.png" %}">
-      </div>
+    <div id="popup">
+      <a id="closeIco" class="btn-floating btn-large waves-effect waves-light"><img class="floatIcoImg" src="{% static "img/ic_clear_white_24px.svg" %}"></a>
+      <img id="popupImg">
     </div>
 
-    <a href="#" class="btn waves-effect waves-light">Select</a>
-    </section>
+    <div id="content">
+
+      <div id="top">
+        <form id="searchForm" action="/files/images/" method="post">
+          <!-- <label>Title or tag:</label> -->
+          {% csrf_token %}
+          <input id="id_search" name="search" maxlength="100" value="{{ searchText }}">
+          <button id="submit" class="btn waves-effect waves-light" type="submit" name="action">Search
+            <img src="{% static "img/ic_search_white_24px.svg" %}">
+          </button>
+        </form>
+        <a id="upload" class="waves-effect waves-light btn">Upload<img src="{% static "img/ic_file_upload_white_24px.svg" %}"></a>
+        </top>
+
+        <form id="selectForm" action="" method="post" style="display: none;">
+          {% csrf_token %}
+          <input id="id_defaultImage" name="defaultImage">
+        </form>
+      </div>
+
+      <div id="images">
+        {% for image in images %}
+        <div class="imageItem card" url="/static/media/{{ image.file }}">
+          <div class="card-image" style="background-image: url(/static/media/{{ image.file }});"></div>
+          <div class="card-content">
+            <p>
+              {% if image.title|length > 18 %}
+                {{ image.title|slice:":15"|capfirst }}...
+              {% else %}
+                {{ image.title|capfirst }}
+                {% if image.number > 0 %}
+                  {{ image.number|add:"1" }}
+                {% endif %}
+              {% endif %}
+            </p>
+            <p class="date">
+              {{ image.time|date:"F d, Y, H:i:s" }}
+            </p>
+          </div>
+          <div class="actions">
+            <div class="relative">
+              <a class="waves-effect waves-light btn previewButton" url="/static/media/{{ image.file }}">Preview</a>
+              <a class="waves-effect waves-light btn selectButton">Select</a>
+              <a class="waves-effect waves-light btn deleteButton">Delete</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+    </div>
 
   </body>
 
   <script>
     $(".imageItem").click(function() {
       $(".imageItem").removeClass("selected");
+      $(".actions").css("display", "none");
       $(this).addClass("selected");
+      $(this).children(".actions").css("display", "inline");
       var src = $(this).attr("url");
       $("#previewImage").attr("src", src);
     });
@@ -73,7 +82,21 @@
     $("#upload").click(function() {
       uploadWindow = window.open('/files/image-upload/','resizable,height=600,width=800');
     });
-    
+
+    $("#closeIco").click(function() {
+      $("#popup").css("display", "none");
+    });
+    $("#popup").click(function() {
+      $("#popup").css("display", "none");
+    });
+
+    $(".previewButton").click(function() {
+      var src = $(this).attr("url");
+      $("#popupImg").attr("src", src);
+      $("#popup").css("display", "inline");
+    });
+
+
     function doneUploading(src) {
       uploadWindow.close();
       $("#id_defaultImage").val(src);
