@@ -50,7 +50,7 @@
       {% if request.user|inGroup:"editor" %}
         <div class="card-action adminActions">
           <a href="/projects/illustration/{{ illustration.id }}/edit" class="waves-effect waves-teal btn-flat readmore">Edit</a>
-          <a class="waves-effect waves-teal btn-flat readmore">Delete</a>
+          <a href="/admin/projects/illustration/{{ illustration.id }}/delete/" class="waves-effect waves-teal btn-flat readmore">Delete</a>
         </div>
       {% endif %}
     </div>
