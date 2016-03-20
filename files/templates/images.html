@@ -71,12 +71,17 @@
 
   <script>
     $(".imageItem").click(function() {
-      $(".imageItem").removeClass("selected");
-      $(".actions").css("display", "none");
-      $(this).addClass("selected");
-      $(this).children(".actions").css("display", "inline");
-      var src = $(this).attr("url");
-      $("#previewImage").attr("src", src);
+      if ($(this).hasClass("selected")) {
+        $(".imageItem").removeClass("selected");
+        $(".actions").css("display", "none");
+      } else {
+        $(".imageItem").removeClass("selected");
+        $(".actions").css("display", "none");
+        $(this).addClass("selected");
+        $(this).children(".actions").css("display", "inline");
+        var src = $(this).attr("url");
+        $("#previewImage").attr("src", src);
+      }
     });
 
     $("#upload").click(function() {
