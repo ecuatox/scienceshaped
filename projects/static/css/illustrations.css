@@ -28,8 +28,15 @@
 .illustration .card-content {
   height: 150px;
 }
-.illustration .card-action {
+.illustration .cardActions {
   margin-left: -10px;
+}
+.adminActions {
+  text-align: center;
+  height: 45px;
+}
+.adminActions .btn-flat {
+  margin-top: -20px;
 }
 .illustration .readmore {
   color: #000 !important;
