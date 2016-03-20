@@ -24,6 +24,16 @@ body {
   transform: translate(0, -50%);
   margin-left: 10px;
 }
+#upload {
+  margin-left: 2%;
+  width: 180px;
+}
+#upload img {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  margin-left: 10px;
+}
 .imageItem {
   width: 180px;
   margin: 1%;

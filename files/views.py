@@ -1,14 +1,15 @@
 from django.shortcuts import render
 from .models import Image
-from .forms import ImageUpload, ImageSearch
+from .forms import ImageUpload, ImageSearch, ImageSelect
 from django.utils import timezone
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 
 def image_upload(request):
     if request.method == 'POST':
         form = ImageUpload(request.POST, request.FILES)
         if form.is_valid():
             title = str(form.cleaned_data['title'])
+            tags = str(form.cleaned_data['tags'])
             while " " in title:
                 title = title.replace(" ", "_")
             file = request.FILES['file']
@@ -23,7 +24,10 @@ def image_upload(request):
             file.name = title+"_"+str(number)+"."+ext
             instance = Image(file=file, title=title, tags=tags, time=timezone.now(), number=number)
             instance.save()
-            return HttpResponseRedirect('/files/upload-done')
+            context = {
+                'src': file.name,
+            }
+            return render(request, 'image_upload_done.html', context)
     else:
         form = ImageUpload()
 
@@ -32,13 +36,9 @@ def image_upload(request):
     }
     return render(request, 'image_upload.html', context)
 
-def upload_done(request):
-    context = {
-    }
-    return render(request, 'upload_done.html', context)
-
 def images(request):
     searchText = ""
+    defaultImage = ""
     if request.method == 'POST':
         form = ImageSearch(request.POST)
         images = []
@@ -50,6 +50,9 @@ def images(request):
                     images.append(image)
         else:
             images = Image.objects.order_by('-time')
+            form = ImageSelect(request.POST)
+            if form.is_valid():
+                defaultImage = str(form.cleaned_data['defaultImage'])
     else:
         images = Image.objects.order_by('-time')
     form = ImageSearch()
@@ -57,5 +60,6 @@ def images(request):
         'images': images,
         'form': form,
         'searchText': searchText,
+        'defaultImage': defaultImage,
     }
     return render(request, 'images.html', context)

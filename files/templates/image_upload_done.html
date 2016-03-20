@@ -1,0 +1,9 @@
+{% load staticfiles %}
+
+<script src="{% static "js/jquery.min.js" %}"></script>
+
+<script>
+  $(function(){
+    window.opener.doneUploading("{{ src }}");
+  });
+</script>

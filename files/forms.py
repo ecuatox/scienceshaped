@@ -7,3 +7,6 @@ class ImageUpload(forms.Form):
 
 class ImageSearch(forms.Form):
     search = forms.CharField(max_length=100)
+
+class ImageSelect(forms.Form):
+    defaultImage = forms.CharField(max_length=100)
