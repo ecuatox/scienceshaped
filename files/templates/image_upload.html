@@ -12,12 +12,16 @@
         {% csrf_token %}
 
         {{ form.title.errors }}
-        <label for="{{ form.title.id_for_label }}">Title:</label>
-        <input id="id_title" name="title" maxlength="{{ form.title.maxlength }}">
+        <div class="input-field">
+          <label for="{{ form.title.id_for_label }}">Title</label>
+          <input id="id_title" name="title" type="text" maxlength="{{ form.title.maxlength }}">
+        </div>
 
         {{ form.tags.errors }}
-        <label for="{{ form.tags.id_for_label }}">Tags:</label>
-        <input id="id_tags" name="tags" maxlength="{{ form.tags.maxlength }}">
+        <div class="input-field">
+          <label for="{{ form.tags.id_for_label }}">Tags</label>
+          <input id="id_tags" name="tags" type="text" maxlength="{{ form.tags.maxlength }}">
+        </div>
 
         {{ form.file.errors }}
         <div class="file-field input-field">
