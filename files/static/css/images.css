@@ -6,7 +6,7 @@ body {
   width: 60%;
   margin: 2%;
 }
-#search {
+#searchForm {
   margin: 1%;
 }
 #images input {
@@ -16,7 +16,7 @@ body {
 #submit {
   display: inline-block;
   width: 180px;
-  margin-left: 20px;
+  margin-left: 2%;
 }
 #submit img {
   position: absolute;
