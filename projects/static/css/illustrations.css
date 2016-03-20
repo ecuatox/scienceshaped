@@ -38,7 +38,7 @@
 .adminActions .btn-flat {
   margin-top: -20px;
 }
-.illustration .readmore {
+.illustration .readmore, .editorButton {
   color: #000 !important;
 }
 #categoriesButtonDiv {
