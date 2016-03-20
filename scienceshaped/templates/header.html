@@ -3,6 +3,11 @@
 
 <div id="header">
   <img id="logo" src="{% static "img/logo.png" %}" />
+  {% if request.user.is_authenticated %}
+    <div id="user">
+      Logged in as {{ request.user }}, <a href="/authentication/logout" class="waves-effect waves-teal btn-flat readmore">Logout</a>
+    </div>
+  {% endif %}
   <ul id="menu">
     <li><a href="#about" class="waves-effect waves-teal btn-flat">About</a></li>
     <li><a href="#illustrations" class="waves-effect waves-teal btn-flat">Illustrations</a></li>

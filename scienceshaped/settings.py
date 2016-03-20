@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'projects',
     'files',
     'django_cleanup',
+    'authentication',
 ]
 
 MIDDLEWARE_CLASSES = [

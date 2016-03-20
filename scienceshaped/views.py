@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from projects.models import Illustration
 from projects.forms import IllustrationFilter
+from django.http import HttpResponseRedirect, HttpResponse
 
 def index(request):
     illustrations = Illustration.objects.order_by('-pub_date')
@@ -20,3 +21,6 @@ def index(request):
     }
 
     return render(request, 'index.html', context)
+
+def login(request):
+    return HttpResponseRedirect('/authentication/login')

@@ -1,0 +1,37 @@
+{% load staticfiles %}
+<html>
+
+  <head>
+    {% include 'material_design_links.html' %}
+    <link href="{% static "css/login.css" %}" rel="stylesheet">
+    <link href="{% static "css/button_image.css" %}" rel="stylesheet">
+    <link href="{% static "css/colors.css" %}" rel="stylesheet">
+    <link href="{% static "css/style.css" %}" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <form id="loginForm" action="" method="post">
+        <p>{{ message }}</p>
+
+        {% csrf_token %}
+
+        {{ form.username.errors }}
+        <div class="input-field">
+          <label for="{{ form.username.id_for_label }}">Username</label>
+          <input id="{{ form.username.id_for_label }}" name="username" type="text" maxlength="{{ form.username.maxlength }}">
+        </div>
+
+        {{ form.password.errors }}
+        <div class="input-field">
+          <label for="{{ form.password.id_for_label }}">Password</label>
+          <input id="{{ form.password.id_for_label }}" name="password" type="password" type="text" maxlength="{{ form.password.maxlength }}">
+        </div>
+
+        <button id="submit" class="btn waves-effect waves-light" type="submit" name="action">Login
+          <img src="{% static "img/ic_face_white_24px.svg" %}">
+        </button>
+    </form>
+  </body>
+
+</html>

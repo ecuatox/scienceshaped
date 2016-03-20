@@ -18,3 +18,11 @@
   display: inline-block;
   margin: 10px;
 }
+#user {
+  position: absolute;
+  top: 2px;
+  right: 6px;
+}
+#user .btn-flat {
+  padding: 0 4px;
+}
