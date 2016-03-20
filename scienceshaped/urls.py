@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^projects/', include('projects.urls')),
     url(r'^files/', include('files.urls')),
+    url(r'^authentication/', include('authentication.urls')),
 ]
