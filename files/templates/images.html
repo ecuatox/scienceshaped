@@ -37,7 +37,7 @@
 
       <div id="images">
         {% for image in images %}
-        <div class="imageItem card" url="/static/media/{{ image.file }}">
+        <div class="imageItem card" image="/static/media/{{ image.file }}">
           <div class="card-image" style="background-image: url(/static/media/{{ image.file }});"></div>
           <div class="card-content">
             <p>
@@ -56,8 +56,8 @@
           </div>
           <div class="actions">
             <div class="relative">
-              <a class="waves-effect waves-light btn previewButton blue" url="/static/media/{{ image.file }}">Preview</a>
-              <a class="waves-effect waves-light btn selectButton green">Select</a>
+              <a class="waves-effect waves-light btn previewButton blue" previewImage="/static/media/{{ image.file }}">Preview</a>
+              <a class="waves-effect waves-light btn selectButton green" selectImage="/static/media/{{ image.file }}">Select</a>
               <a href="/admin/files/image/{{ image.id }}/delete/" class="waves-effect waves-light btn deleteButton red">Delete</a>
             </div>
           </div>
@@ -79,7 +79,7 @@
         $(".actions").css("display", "none");
         $(this).addClass("selected");
         $(this).children(".actions").css("display", "inline");
-        var src = $(this).attr("url");
+        var src = $(this).attr("image");
         $("#previewImage").attr("src", src);
       }
     });
@@ -96,11 +96,10 @@
     });
 
     $(".previewButton").click(function() {
-      var src = $(this).attr("url");
+      var src = $(this).attr("previewImage");
       $("#popupImg").attr("src", src);
       $("#popup").css("display", "inline");
     });
-
 
     function doneUploading(src) {
       uploadWindow.close();
@@ -109,7 +108,8 @@
     }
 
     $(function(){
-      $("[url='/static/media/images/{{ defaultImage }}']").click();
+      $("[image='/static/media/images/{{ defaultImage }}']").addClass("selected");
+      $("[image='/static/media/images/{{ defaultImage }}']").children(".actions").css("display", "inline");
     });
   </script>
 
