@@ -5,7 +5,7 @@
   <img id="logo" src="{% static "img/logo.png" %}" />
   {% if request.user.is_authenticated %}
     <div id="user">
-      Logged in as {{ request.user }}, <a href="/authentication/logout" class="waves-effect waves-teal btn-flat readmore">Logout</a>
+      Logged in as {{ request.user.first_name }}. <a href="/authentication/logout">Logout</a>
     </div>
   {% endif %}
   <ul id="menu">
