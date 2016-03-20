@@ -1,10 +1,13 @@
 from django.shortcuts import render
 from .models import Illustration
+from .forms import IllustrationFilter
 
 def illustrations(request):
-    illustration_list = Illustration.objects.order_by('-pub_date')
+    illustrations = Illustration.objects.order_by('-pub_date')
+    form = IllustrationFilter()
     context = {
-        'illustration_list': illustration_list,
+        'illustrations': illustrations,
+        'form': form,
     }
 
     return render(request, 'illustrations.html', context)

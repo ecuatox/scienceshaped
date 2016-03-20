@@ -2,7 +2,7 @@
   position: relative;
   margin-top: 100px;
 }
-#illustrations header {
+#illustrationsTop {
   position: absolute;
   left: 30%;
   transform: translate(0, -50%);

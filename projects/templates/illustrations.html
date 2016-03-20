@@ -3,25 +3,38 @@
 <link href="{% static "css/illustrations.css" %}" rel="stylesheet">
 
 <section id="illustrations">
-  <header>
+  <div id="illustrationsTop">
     <h3>Illustrations</h3>
 
     <div id="categoriesButtonDiv">
-      <a id="categoriesButton" class='dropdown-button btn' href='#' data-beloworigin="true" data-activates='categories'>Categories</a>
+      <a id="categoriesButton" class='dropdown-button btn' data-beloworigin="true" data-activates='categories'>Categories</a>
     </div>
 
     <div id="categoriesDiv">
       <ul id="categories" class="dropdown-content">
-        <li><a href="#">Logos</a></li>
-        <li><a href="#">Grant Applications</a></li>
-        <li><a href="#">Doctoral Theses</a></li>
+        <li><a class="filterItem">All</a></li>
+        <li><a class="filterItem">Logo</a></li>
+        <li><a class="filterItem">Grant Application</a></li>
+        <li><a class="filterItem">Doctoral Thesis</a></li>
       </ul>
     </div>
-  </header>
+
+    <form action="/" method="post">
+      {% csrf_token %}
+      {{ form }}
+    </form>
+
+    <script>
+      $(".filterItem").click(function() {
+        $("#id_search").val($(this).html());
+        $("form").submit();
+      });
+    </script>
+  </div>
 
   <br><br>
 
-  {% for illustration in illustration_list %}
+  {% for illustration in illustrations %}
     <div class="illustration card">
       <div class="card-image">
         <img src="{{ illustration.thumbnail }}" style="width: calc({{ illustration.thumbnail_size }} / 100 * 350px)">
