@@ -1,0 +1,64 @@
+{% load staticfiles %}
+<html>
+
+  <head>
+    <title>Images</title>
+    {% include 'material_design_links.html' %}
+    <link href="{% static "css/images.css" %}" rel="stylesheet">
+    <link href="{% static "css/colors.css" %}" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <section id="images">
+
+      <div id="search">
+        <label>Title:</label>
+        <br>
+        <input>
+        <button id="submit" class="btn waves-effect waves-light" type="submit" name="action">Search
+          <img src="{% static "img/ic_search_white_24px.svg" %}">
+        </button>
+      </div>
+
+      {% for image in images %}
+      <div class="imageItem card">
+        <div class="card-image" style="background-image: url(/static/media/{{ image.file }});" url="/static/media/{{ image.file }}">
+          <!-- <img src="/static/media/{{ image.file }}"> -->
+        </div>
+        <div class="card-content">
+          <p>
+            {{ image.title|capfirst }}
+            {% if image.number > 0 %}
+              {{ image.number|add:"1" }}
+            {% endif %}
+          </p>
+          <p class="date">
+            {{ image.time|date:"F d, Y, H:i:s" }}
+          </p>
+        </div>
+      </div>
+      {% endfor %}
+    </section>
+
+    <div id="previewItem" class="card">
+      <div class="card-image">
+        <img id="previewImage" src="{% static "img/preview.png" %}">
+      </div>
+      <div class="card-content">
+        <a href="#" class="waves-effect waves-teal btn-flat">Select</a>
+      </div>
+    </div>
+
+  </body>
+
+  <script>
+    $(".imageItem").click(function() {
+      $(".imageItem").removeClass("selected");
+      $(this).addClass("selected");
+      var src = $(this).children(".card-image").attr("url");
+      $("#previewImage").attr("src", src);
+    });
+  </script>
+
+</html>
