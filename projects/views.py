@@ -23,6 +23,7 @@ def illustration(request, illustration_id):
     return render(request, 'illustration.html', context)
 
 def illustrationEdit(request, illustration_id):
+    new = True
     if request.method == 'POST':
         form = IllustrationEdit(request.POST)
         if form.is_valid():
@@ -63,8 +64,10 @@ def illustrationEdit(request, illustration_id):
                 'thumbnail': illustration.thumbnail,
                 'thumbnail_size': illustration.thumbnail_size,
             })
+            new = False
     context = {
         'form': form,
+        'new': new,
     }
 
     return render(request, 'illustration_edit.html', context)

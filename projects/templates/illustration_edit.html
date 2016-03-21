@@ -7,6 +7,11 @@
     <link href="{% static "css/button_image.css" %}" rel="stylesheet">
     <link href="{% static "css/colors.css" %}" rel="stylesheet">
     <link href="{% static "css/style.css" %}" rel="stylesheet">
+    {% if new %}
+    <title>Create new illustration</title>
+    {% else %}
+    <title>Edit illustration</title>
+    {% endif %}
   </head>
 
   <body>
