@@ -51,11 +51,18 @@
       {% if request.user|inGroup:"editor" %}
         <div class="card-action adminActions">
           <a href="/projects/illustration/{{ illustration.id }}/edit" class="waves-effect waves-teal btn-flat editorButton">Edit</a>
-          <a href="/projects/illustration/{{ illustration.id }}/delete/" class="waves-effect waves-teal btn-flat editorButton">Delete</a>
+          <a url="/projects/illustration/{{ illustration.id }}/delete/" class="waves-effect waves-teal btn-flat editorButton delete">Delete</a>
         </div>
       {% endif %}
     </div>
   {% endfor %}
+
+  <script>
+    $(".delete").click(function() {
+      $("#deletePopup").css("display", "inline");
+      $("#deleteButton").attr("href", $(this).attr("url"));
+    });
+  </script>
 
   {% if request.user|inGroup:"editor" %}
   <a id="newIco" href="/projects/illustration/0/edit" class="btn-floating btn-large waves-effect waves-light teal"><img class="floatIcoImg" src="{% static "img/ic_add_white_24px.svg" %}"></a>

@@ -1,0 +1,25 @@
+{% load staticfiles %}
+
+<link href="{% static "css/delete.css" %}" rel="stylesheet">
+
+<div id="deletePopup">
+  <div class="card">
+    <div class="card-content">
+      <h5>Are you sure?</h5>
+      <p>It will be permanently deleted!</p>
+    </div>
+    <div class="card-action cardActions">
+      <a id="deleteButton" href="" class="waves-effect waves-teal btn red">Delete</a>
+      <a id="cancelButton" class="waves-effect waves-teal btn blue">Cancel</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  $("#deletePopup").click(function() {
+    $("#deletePopup").css("display", "none");
+  });
+  $("#cancelButton").click(function() {
+    $("#deletePopup").css("display", "none");
+  });
+</script>
