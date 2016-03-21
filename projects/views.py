@@ -47,7 +47,7 @@ def illustrationEdit(request, illustration_id):
                 'title': '',
                 'description': '',
                 'tags': '',
-                'thumbnail': '',
+                'thumbnail': '/static/img/click_to_select.png',
                 'thumbnail_size': 100,
             })
         else:
