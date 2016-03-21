@@ -5,4 +5,5 @@ urlpatterns = [
     # url(r'^illustration/(?P<illustration_id>[0-9]+)/$', views.illustration, name='illustration'),
     # url(r'^illustrations/$', views.illustrations, name='illustrations'),
     url(r'^illustration/(?P<illustration_id>[0-9]+)/edit', views.illustrationEdit, name='illustration-edit'),
+    url(r'^illustration/(?P<illustration_id>[0-9]+)/delete', views.illustrationDelete, name='illustration-delete'),
 ]

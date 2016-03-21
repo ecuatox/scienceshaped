@@ -63,3 +63,12 @@ def images(request):
         'defaultImage': defaultImage,
     }
     return render(request, 'images.html', context)
+
+def imageDelete(request, image_id):
+    try:
+        image = Image.objects.get(pk=image_id)
+        image.delete()
+    except Image.DoesNotExist:
+        pass
+
+    return HttpResponseRedirect('/files/images')

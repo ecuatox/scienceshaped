@@ -71,3 +71,12 @@ def illustrationEdit(request, illustration_id):
     }
 
     return render(request, 'illustration_edit.html', context)
+
+def illustrationDelete(request, illustration_id):
+    try:
+        illustration = Illustration.objects.get(pk=illustration_id)
+        illustration.delete()
+    except Illustration.DoesNotExist:
+        pass
+
+    return HttpResponseRedirect('/')
