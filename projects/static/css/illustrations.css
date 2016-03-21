@@ -4,7 +4,7 @@
 }
 #illustrationsTop {
   position: absolute;
-  left: 30%;
+  left: 40%;
   transform: translate(0, -50%);
   z-index: 10;
 }
@@ -13,6 +13,7 @@
 }
 .illustration {
   width: 360px;
+  margin: 7px 5px;
   display: inline-block;;
 }
 .illustration .card-image {
@@ -26,10 +27,15 @@
   transform: translate(-50%, -50%);
 }
 .illustration .card-content {
-  height: 150px;
+  height: 130px;
+  margin-top: -40px;
 }
 .illustration .cardActions {
   margin-left: -10px;
+  height: 50px;
+}
+.illustration .cardActions .btn-flat {
+  margin-top: -14px;
 }
 .adminActions {
   text-align: center;
