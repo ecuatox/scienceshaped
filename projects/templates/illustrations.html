@@ -2,6 +2,7 @@
 {% load tags %}
 
 <link href="{% static "css/illustrations.css" %}" rel="stylesheet">
+<link href="{% static "css/button_image.css" %}" rel="stylesheet">
 
 <section id="illustrations">
   <div id="illustrationsTop">
@@ -55,4 +56,9 @@
       {% endif %}
     </div>
   {% endfor %}
+
+  {% if request.user|inGroup:"editor" %}
+  <a id="newIco" href="/projects/illustration/0/edit" class="btn-floating btn-large waves-effect waves-light teal"><img class="floatIcoImg" src="{% static "img/ic_add_white_24px.svg" %}"></a>
+  {% endif %}
+  
 </section>

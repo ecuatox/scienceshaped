@@ -49,3 +49,8 @@
 #categoriesDiv {
   margin-top: 100px;
 }
+#newIco {
+  position: absolute;
+  left: 30px;
+  top: 0;
+}
