@@ -4,29 +4,56 @@ from .forms import ImageUpload, ImageSearch, ImageSelect, ImageEdit
 from django.utils import timezone
 from django.http import HttpResponseRedirect, HttpResponse
 from scienceshaped import admin_history
+import os
+from django.conf import settings
+
+def findId(title):
+    number = 1
+    for element in Image.objects.order_by('-time'):
+        if title.lower() == element.title.lower():
+            return element.number + 1
+    return number
+
+def fileExt(name):
+    return name.split(".")[-1:][0]
+
+def saveImage(file, title, tags):
+    while " " in title:
+        title = title.replace(" ", "_")
+    number = findId(title)
+    if number > 1:
+        file.name = title.lower()+"_"+str(number)+"."+fileExt(file.name)
+    else:
+        file.name = title.lower()+"."+fileExt(file.name)
+    instance = Image(file=file, title=title, tags=tags, time=timezone.now(), number=number)
+    instance.save()
+    return instance
+
+def renameImage(instance, title):
+    while " " in title:
+        title = title.replace(' ', '_')
+    instance.number = findId(title)
+    oldpath = instance.file.name
+    directory = settings.PROJECT_ROOT+'/static/media/'
+    print(instance.file.name)
+    if instance.number > 1:
+        instance.file.name = 'images/'+title.lower()+'_'+str(instance.number)+'.'+fileExt(instance.file.name)
+    else:
+        instance.file.name = 'images/'+title.lower()+'.'+fileExt(instance.file.name)
+    #try:
+    os.rename(directory+oldpath, directory+instance.file.name)
+    #except FileNotFoundError:
+    #    pass
+    instance.save()
+    return instance
 
 def image_upload(request):
     if request.method == 'POST':
         form = ImageUpload(request.POST, request.FILES)
         if form.is_valid():
-            title = str(form.cleaned_data['title'])
-            tags = str(form.cleaned_data['tags'])
-            while " " in title:
-                title = title.replace(" ", "_")
-            file = request.FILES['file']
-
-            number = 1
-            for element in Image.objects.order_by('-time'):
-                if title == element.title:
-                    number = element.number + 1
-                    break
-
-            ext = file.name.split(".")[-1:][0]
-            file.name = title+"_"+str(number)+"."+ext
-            instance = Image(file=file, title=title, tags=tags, time=timezone.now(), number=number)
-            instance.save()
+            img = saveImage(request.FILES['file'], str(form.cleaned_data['title']), str(form.cleaned_data['tags']))
             context = {
-                'src': file.name,
+                'src': img.file.name,
             }
             return render(request, 'image_upload_done.html', context)
     else:
@@ -80,7 +107,11 @@ def imageEdit(request, image_id):
         if form.is_valid():
             try:
                 image = Image.objects.get(pk=image_id)
-                image.tags = form.cleaned_data['tags']
+                title = str(form.cleaned_data['title'])
+                if title != image.title:
+                    image = renameImage(image, str(form.cleaned_data['title']))
+                image.title = title
+                image.tags = str(form.cleaned_data['tags'])
                 image.save()
                 admin_history.log_change(request, image)
             except Image.DoesNotExist:
