@@ -1,0 +1,71 @@
+{% load staticfiles %}
+<html>
+
+  <head>
+    {% include 'material_design_links.html' %}
+    <link href="{% static "css/illustration_edit.css" %}" rel="stylesheet">
+    <link href="{% static "css/button_image.css" %}" rel="stylesheet">
+    <link href="{% static "css/colors.css" %}" rel="stylesheet">
+    <link href="{% static "css/style.css" %}" rel="stylesheet">
+    {% if new %}
+    <title>Create new testimonial</title>
+    {% else %}
+    <title>Edit testimonial</title>
+    {% endif %}
+  </head>
+
+  <body>
+    <form id="editForm" action="" method="post">
+        {% csrf_token %}
+
+        {{ form.title.errors }}
+        <div class="input-field">
+          <label for="{{ form.title.id_for_label }}">Title</label>
+          <input id="{{ form.title.id_for_label }}" name="title" type="text" maxlength="{{ form.title.maxlength }}" value="{{ form.title.value }}">
+        </div>
+
+        {{ form.person.errors }}
+        <div class="input-field">
+          <label for="{{ form.person.id_for_label }}">Person</label>
+          <input id="{{ form.person.id_for_label }}" name="person" type="text" maxlength="{{ form.person.maxlength }}" value="{{ form.person.value }}">
+        </div>
+
+        {{ form.message.errors }}
+        <div class="input-field">
+          <label for="{{ form.message.id_for_label }}">Message</label>
+          <textarea id="{{ form.message.id_for_label }}" name="message" class="materialize-textarea" maxlength="{{ form.message.maxlength }}">{{ form.message.value }}</textarea>
+        </div>
+
+        {{ form.thumbnail.errors }}
+        <div class="input-field">
+          <label for="{{ form.thumbnail.id_for_label }}">Thumbnail</label>
+          <input id="{{ form.thumbnail.id_for_label }}" name="thumbnail" type="text" maxlength="{{ form.thumbnail.maxlength }}" value="{{ form.thumbnail.value }}">
+        </div>
+
+        <img id="thumbnailPicker" src="{{ form.thumbnail.value }}"></img>
+
+        <script>
+          $("#thumbnailPicker").click(function() {
+              thumbWindow = window.open('/files/images', 'width=920,height=640');
+          });
+
+          function selectThumnail(thumb) {
+              thumbWindow.close();
+              $("#id_thumbnail").val(thumb);
+              $("#thumbnailPicker").attr("src", thumb);
+          }
+
+          $("#id_thumbnail").change(function() {
+            $("#thumbnailPicker").attr("src", $("#id_thumbnail").val());
+          });
+        </script>
+
+        <br><br>
+
+        <button id="submit" class="btn waves-effect waves-light" type="submit" name="action">Save
+          <img src="{% static "img/ic_save_white_24px.svg" %}">
+        </button>
+    </form>
+  </body>
+
+</html>

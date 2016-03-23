@@ -14,3 +14,13 @@ class Illustration(models.Model):
 
     def __str__(self):
         return self.title
+
+class Testimonial(models.Model):
+    title = models.CharField(max_length=100, verbose_name='Title')
+    person = models.CharField(max_length=100, verbose_name='Person')
+    message = models.CharField(max_length=500, verbose_name='Message')
+    thumbnail = models.CharField(max_length=100, verbose_name='Thumbnail')
+    pub_date = models.DateTimeField(default=timezone.now, verbose_name='Publication date')
+
+    def __str__(self):
+        return self.title

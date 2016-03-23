@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
-from .models import Illustration
-from .forms import IllustrationFilter, IllustrationEdit
+from .models import Illustration, Testimonial
+from .forms import IllustrationFilter, IllustrationEdit, TestimonialEdit
 from scienceshaped import admin_history
 
 def illustrations(request):
@@ -80,3 +80,67 @@ def illustrationDelete(request, illustration_id):
         pass
 
     return HttpResponseRedirect('/')
+
+def testimonials(request):
+    testimonials = Testimonial.objects.order_by('-pub_date')
+    context = {
+        'testimonials': testimonials,
+    }
+
+    return render(request, 'testimonials.html', context)
+
+def testimonialDelete(request, testimonial_id):
+    try:
+        testimonial = Testimonial.objects.get(pk=testimonial_id)
+        testimonial.delete()
+    except Testimonial.DoesNotExist:
+        pass
+
+    return HttpResponseRedirect('/')
+
+def testimonialEdit(request, testimonial_id):
+    new = True
+    if request.method == 'POST':
+        form = TestimonialEdit(request.POST)
+        if form.is_valid():
+            if int(testimonial_id) == 0:
+                testimonial = Testimonial()
+            else:
+                testimonial = Testimonial.objects.get(pk=testimonial_id)
+            testimonial.title = form.cleaned_data['title']
+            testimonial.person = form.cleaned_data['person']
+            testimonial.message = form.cleaned_data['message']
+            testimonial.thumbnail = form.cleaned_data['thumbnail']
+            testimonial.save()
+            if int(testimonial_id) == 0:
+                admin_history.log_addition(request, testimonial)
+            else:
+                admin_history.log_change(request, testimonial)
+            return HttpResponseRedirect('/')
+    else:
+        if int(testimonial_id) == 0:
+            form = TestimonialEdit(initial={
+                'title': '',
+                'person': '',
+                'message': '',
+                'thumbnail': '/static/img/click_to_select.png',
+            })
+        else:
+            try:
+                testimonial = Testimonial.objects.get(pk=testimonial_id)
+            except Testimonial.DoesNotExist:
+                return HttpResponseRedirect('/projects/testimonial/0/edit')
+
+            form = TestimonialEdit(initial={
+                'title': testimonial.title,
+                'person': testimonial.person,
+                'message': testimonial.message,
+                'thumbnail': testimonial.thumbnail,
+            })
+            new = False
+    context = {
+        'form': form,
+        'new': new,
+    }
+
+    return render(request, 'testimonial_edit.html', context)

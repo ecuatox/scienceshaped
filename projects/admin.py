@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Illustration
+from .models import Illustration, Testimonial
 
 @admin.register(Illustration)
 class IllustrationAdmin(admin.ModelAdmin):
@@ -15,6 +15,31 @@ class IllustrationAdmin(admin.ModelAdmin):
             'fields': [
                 'thumbnail',
                 'thumbnail_size',
+            ]
+        }),
+        ('Published', {
+            'fields': [
+                'pub_date',
+            ]
+        })
+    ]
+    search_fields = [
+        'title',
+    ]
+
+@admin.register(Testimonial)
+class TestimonialAdmin(admin.ModelAdmin):
+    fieldsets = [
+        ('Testimonial', {
+            'fields': [
+                'title',
+                'person',
+                'message',
+            ]
+        }),
+        ('Thumbnail', {
+            'fields': [
+                'thumbnail',
             ]
         }),
         ('Published', {
