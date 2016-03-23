@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from .models import Illustration
 from .forms import IllustrationFilter, IllustrationEdit
-from . import admin_history
+from scienceshaped import admin_history
 
 def illustrations(request):
     illustrations = Illustration.objects.order_by('-pub_date')

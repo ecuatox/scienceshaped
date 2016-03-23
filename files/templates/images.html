@@ -57,10 +57,11 @@
               {{ image.time|date:"F d, Y, H:i:s" }}
             </p>
           </div>
-          <div class="actions">
+          <div class="card actions">
             <div class="relative">
               <a class="waves-effect waves-light btn previewButton blue" previewImage="/static/media/{{ image.file }}">Preview</a>
               <a class="waves-effect waves-light btn selectButton green" selectImage="/static/media/{{ image.file }}">Select</a>
+              <a class="waves-effect waves-light btn editButton orange" href="/files/image/{{ image.id }}/edit">Edit</a>
               <a url="/files/image/{{ image.id }}/delete/" class="waves-effect waves-light btn delete deleteButton red">Delete</a>
             </div>
           </div>

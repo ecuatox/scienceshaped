@@ -38,27 +38,47 @@ body {
 .actions {
   display: none;
   width: 180px;
-  height: 200px;
+  height: 231px;
+  border-radius: 3px;
   position: absolute;
   top: 0;
-  left: 0;
+  left: -2px;
+  background: #fff;
+  top: 211px;
+  z-index: 100;
+  border-left: 3px solid var(--accent-color);
+  border-right: 3px solid var(--accent-color);
+  border-bottom: 3px solid var(--accent-color);
+  animation-name: cardDown;
+  animation-duration: .5s;
 }
 .relative {
   position: relative;
 }
-.previewButton, .selectButton, .deleteButton {
+.previewButton, .selectButton, .deleteButton, .editButton {
   position: absolute;
   width: 80%;
-  left: 8%;
+  left: 10%;
 }
 .previewButton {
-  top: 20px;
+  top: 15px;
+  animation-name: button1Down;
+  animation-duration: .5s;
 }
 .selectButton {
-  top: 70px;
+  top: 65px;
+  animation-name: button2Down;
+  animation-duration: .5s;
+}
+.editButton {
+  top: 115px;
+  animation-name: button3Down;
+  animation-duration: .5s;
 }
 .deleteButton {
-  top: 120px;
+  top: 165px;
+  animation-name: button4Down;
+  animation-duration: .5s;
 }
 .imageItem .card-image {
   position: relative;
@@ -105,4 +125,32 @@ body {
   position: fixed;
   top: 20px;
   right: 20px;
+}
+@keyframes cardDown {
+    from {height: 0;}
+    to {height: 231px;}
+}
+@keyframes button1Down {
+  0%  {opacity: 0; top: 0;}
+ 15%  {opacity: 0; top: 0;}
+ 30%  {opacity: 1;}
+ 100% {top: 15px;}
+}
+@keyframes button2Down {
+  0%  {opacity: 0; top: 0;}
+ 15%  {opacity: 0; top: 0;}
+ 30%  {opacity: 1;}
+ 100% {top: 65px;}
+}
+@keyframes button3Down {
+  0%  {opacity: 0; top: 0;}
+ 15%  {opacity: 0; top: 0;}
+ 30%  {opacity: 1;}
+ 100% {top: 115px;}
+}
+@keyframes button4Down {
+  0%  {opacity: 0; top: 0;}
+ 15%  {opacity: 0; top: 0;}
+ 30%  {opacity: 1;}
+ 100% {top: 165px;}
 }

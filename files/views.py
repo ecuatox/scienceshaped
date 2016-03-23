@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from .models import Image
-from .forms import ImageUpload, ImageSearch, ImageSelect
+from .forms import ImageUpload, ImageSearch, ImageSelect, ImageEdit
 from django.utils import timezone
 from django.http import HttpResponseRedirect, HttpResponse
+from scienceshaped import admin_history
 
 def image_upload(request):
     if request.method == 'POST':
@@ -72,3 +73,32 @@ def imageDelete(request, image_id):
         pass
 
     return HttpResponseRedirect('/files/images')
+
+def imageEdit(request, image_id):
+    if request.method == 'POST':
+        form = ImageEdit(request.POST)
+        if form.is_valid():
+            try:
+                image = Image.objects.get(pk=image_id)
+                image.tags = form.cleaned_data['tags']
+                image.save()
+                admin_history.log_change(request, image)
+            except Image.DoesNotExist:
+                pass
+            return HttpResponseRedirect('/files/images')
+    else:
+        try:
+            image = Image.objects.get(pk=image_id)
+        except Image.DoesNotExist:
+            return HttpResponseRedirect('/files/images')
+
+        form = ImageEdit(initial={
+            'title': image.title,
+            'tags': image.tags,
+            'file': image.file,
+        })
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'image_edit.html', context)

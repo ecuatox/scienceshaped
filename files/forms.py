@@ -5,6 +5,11 @@ class ImageUpload(forms.Form):
     tags = forms.CharField(max_length=100, required=False)
     file = forms.FileField()
 
+class ImageEdit(forms.Form):
+    title = forms.CharField(max_length=100, required=False)
+    tags = forms.CharField(max_length=100, required=False)
+    file = forms.FileField(required=False)
+
 class ImageSearch(forms.Form):
     search = forms.CharField(max_length=100)
 
