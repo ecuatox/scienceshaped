@@ -54,7 +54,7 @@ def illustrationEdit(request, illustration_id):
         else:
             try:
                 illustration = Illustration.objects.get(pk=illustration_id)
-            except illustrations.DoesNotExist:
+            except Illustration.DoesNotExist:
                 return HttpResponseRedirect('/projects/illustration/0/edit')
 
             form = IllustrationEdit(initial={
