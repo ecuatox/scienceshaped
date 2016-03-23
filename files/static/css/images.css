@@ -38,13 +38,13 @@ body {
 .actions {
   display: none;
   width: 180px;
-  height: 231px;
+  height: 235px;
   border-radius: 3px;
   position: absolute;
   top: 0;
-  left: -2px;
+  left: -3px;
   background: #fff;
-  top: 211px;
+  top: 207px;
   z-index: 100;
   border-left: 3px solid var(--accent-color);
   border-right: 3px solid var(--accent-color);
@@ -101,7 +101,9 @@ body {
   font-size: 12px;
 }
 .selected {
-  border: 3px solid var(--accent-color);
+  border-left: 3px solid var(--accent-color);
+  border-right: 3px solid var(--accent-color);
+  border-top: 3px solid var(--accent-color);
 }
 #popup {
   display: none;
