@@ -7,11 +7,6 @@ body {
   min-height: 100vh;
   flex-direction: column;
 }
-section {
-  width: 97%;
-  margin: 20px auto;
-  padding: 30px;
-}
 main {
   flex: 1 0 auto;
 }
