@@ -1,18 +1,26 @@
+#testimonials {
+  background: #aaa;
+  width: 100%;
+  margin: 0;
+  padding-top: 50px;
+  padding-bottom: 80px;
+  position: relative;
+}
 #slider {
-  width: 90%;
-  max-width: 1000px;
-  margin: 0 auto;
+  width: 60%;
+  margin: auto;
 }
 h3 {
   text-align: center;
 }
 .testimonial {
-  margin: 20px 80px;
-  padding: 20px;
+  margin: 20px auto;
+  padding: 20px 30px;
   height: inherit !important;
+  outline: 0;
 }
 .testimonialText {
-  width: 60%;
+  width: calc(90% - 200px);
   float: right;
 }
 .testimonialMessage {
@@ -22,11 +30,19 @@ h3 {
   font-size: 14px;
 }
 .testimonialImage {
-  width: 30%;
+  width: 150px;
+  height: 150px;
+  border-radius: 100px;
   float: left;
+  margin-left: 50px;
 }
 .quote {
   float: left;
   margin-top: 10px;
   margin-left: -5px;
+}
+#newTestimonial {
+  position: absolute;
+  top: 50px;
+  left: 4%;
 }
