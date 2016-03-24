@@ -1,0 +1,32 @@
+#slider {
+  width: 90%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+h3 {
+  text-align: center;
+}
+.testimonial {
+  margin: 20px 80px;
+  padding: 20px;
+  height: inherit !important;
+}
+.testimonialText {
+  width: 60%;
+  float: right;
+}
+.testimonialMessage {
+  font-size: 16px;
+}
+.testimonialPerson {
+  font-size: 14px;
+}
+.testimonialImage {
+  width: 30%;
+  float: left;
+}
+.quote {
+  float: left;
+  margin-top: 10px;
+  margin-left: -5px;
+}

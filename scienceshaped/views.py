@@ -1,10 +1,11 @@
 from django.shortcuts import render
-from projects.models import Illustration
+from projects.models import Illustration, Testimonial
 from projects.forms import IllustrationFilter
 from django.http import HttpResponseRedirect, HttpResponse
 
 def index(request):
     illustrations = Illustration.objects.order_by('-pub_date')
+    testimonials = Testimonial.objects.order_by('-pub_date')
     if request.method == 'POST':
         form = IllustrationFilter(request.POST)
         if form.is_valid():
@@ -17,6 +18,7 @@ def index(request):
     form = IllustrationFilter()
     context = {
         'illustrations': illustrations,
+        'testimonials': testimonials,
         'form': form,
     }
 
