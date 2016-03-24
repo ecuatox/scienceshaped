@@ -13,8 +13,8 @@
         <img class="testimonialImage" src="{{ testimonial.thumbnail }}" />
         {% if request.user|inGroup:"editor" %}
         <div id="testimonialEditor">
-          <a href="/projects/testimonial/{{ testimonial.id }}/edit" class="waves-effect waves-teal btn-flat editorButton">Edit</a>
-          <a url="/projects/testimonial/{{ testimonial.id }}/delete/" class="waves-effect waves-teal btn-flat editorButton delete">Delete</a>
+          <a href="/projects/testimonial/{{ testimonial.id }}/edit" class="waves-effect waves-blue btn-flat editorButton">Edit</a>
+          <a url="/projects/testimonial/{{ testimonial.id }}/delete/" class="waves-effect waves-blue btn-flat editorButton delete">Delete</a>
         </div>
         {% endif %}
       </div>
@@ -28,7 +28,7 @@
   </div>
 
   {% if request.user|inGroup:"editor" %}
-  <a id="newTestimonial" href="/projects/testimonial/0/edit" class="btn-floating btn-large waves-effect waves-light teal"><img class="floatIcoImg" src="{% static "img/ic_add_white_24px.svg" %}"></a>
+  <a id="newTestimonial" href="/projects/testimonial/0/edit" class="btn-floating btn-large waves-effect waves-light blue"><img class="floatIcoImg" src="{% static "img/ic_add_white_24px.svg" %}"></a>
   {% endif %}
 
   <script type="text/javascript" src="{% static "slick/slick.min.js" %}"></script>

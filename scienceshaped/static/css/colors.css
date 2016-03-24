@@ -1,4 +1,7 @@
 :root{
-    --accent-color: #2AB6A8;
+    --accent-color: #2196F3;
     --background-color: #ddd;
+}
+.waves-effect.waves-blue .waves-ripple {
+  background-color: rgba(33, 150, 243, 0.65);
 }
