@@ -36,7 +36,9 @@
 
   <br><br>
 
+  <div id="illustrationSlider">
   {% for illustration in illustrations %}
+    <div id="extraDivToFixSlider">
     <div class="illustration card">
       <div class="card-image">
         <img src="{{ illustration.thumbnail }}" style="width: calc({{ illustration.thumbnail_size }} / 100 * 350px)">
@@ -55,10 +57,27 @@
         </div>
       {% endif %}
     </div>
+    </div>
   {% endfor %}
+  </div>
 
   {% if request.user|inGroup:"editor" %}
   <a id="newIco" href="/projects/illustration/0/edit" class="btn-floating btn-large waves-effect waves-light teal"><img class="floatIcoImg" src="{% static "img/ic_add_white_24px.svg" %}"></a>
   {% endif %}
+
+  <script type="text/javascript" src="{% static "slick/slick.min.js" %}"></script>
+  <script>
+    $(document).ready(function(){
+      $('#illustrationSlider').slick({
+        dots: true,
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        speed: 500,
+        autoplay: true,
+        autoplaySpeed: 10000,
+      });
+    });
+  </script>
 
 </section>
