@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from .models import Illustration, Testimonial
 from .forms import IllustrationFilter, IllustrationEdit, TestimonialEdit
 from scienceshaped import admin_history
+from authentication import templatetags
 
 def illustrations(request):
     illustrations = Illustration.objects.order_by('-pub_date')
@@ -24,7 +25,7 @@ def illustration(request, illustration_id):
 
 def illustrationEdit(request, illustration_id):
     new = True
-    if request.method == 'POST':
+    if request.method == 'POST' and templatetags.tags.inGroup(request.user, 'editor'):
         form = IllustrationEdit(request.POST)
         if form.is_valid():
             if int(illustration_id) == 0:
@@ -73,11 +74,12 @@ def illustrationEdit(request, illustration_id):
     return render(request, 'illustration_edit.html', context)
 
 def illustrationDelete(request, illustration_id):
-    try:
-        illustration = Illustration.objects.get(pk=illustration_id)
-        illustration.delete()
-    except Illustration.DoesNotExist:
-        pass
+    if templatetags.tags.inGroup(request.user, 'editor'):
+        try:
+            illustration = Illustration.objects.get(pk=illustration_id)
+            illustration.delete()
+        except Illustration.DoesNotExist:
+            pass
 
     return HttpResponseRedirect('/#illustrations')
 
@@ -90,17 +92,18 @@ def testimonials(request):
     return render(request, 'testimonials.html', context)
 
 def testimonialDelete(request, testimonial_id):
-    try:
-        testimonial = Testimonial.objects.get(pk=testimonial_id)
-        testimonial.delete()
-    except Testimonial.DoesNotExist:
-        pass
+    if templatetags.tags.inGroup(request.user, 'editor'):
+        try:
+            testimonial = Testimonial.objects.get(pk=testimonial_id)
+            testimonial.delete()
+        except Testimonial.DoesNotExist:
+            pass
 
     return HttpResponseRedirect('/#testimonials')
 
 def testimonialEdit(request, testimonial_id):
     new = True
-    if request.method == 'POST':
+    if request.method == 'POST'  and templatetags.tags.inGroup(request.user, 'editor'):
         form = TestimonialEdit(request.POST)
         if form.is_valid():
             if int(testimonial_id) == 0:
