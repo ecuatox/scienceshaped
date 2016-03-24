@@ -47,8 +47,8 @@ def renameImage(instance, title):
     instance.save()
     return instance
 
-def image_upload(request):
     if request.method == 'POST':
+def imageUpload(request):
         form = ImageUpload(request.POST, request.FILES)
         if form.is_valid():
             img = saveImage(request.FILES['file'], str(form.cleaned_data['title']), str(form.cleaned_data['tags']))
