@@ -22,4 +22,8 @@
   $("#cancelButton").click(function() {
     $("#deletePopup").css("display", "none");
   });
+  $(".delete").click(function() {
+    $("#deletePopup").css("display", "inline");
+    $("#deleteButton").attr("href", $(this).attr("url"));
+  });
 </script>

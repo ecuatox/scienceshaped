@@ -57,13 +57,6 @@
     </div>
   {% endfor %}
 
-  <script>
-    $(".delete").click(function() {
-      $("#deletePopup").css("display", "inline");
-      $("#deleteButton").attr("href", $(this).attr("url"));
-    });
-  </script>
-
   {% if request.user|inGroup:"editor" %}
   <a id="newIco" href="/projects/illustration/0/edit" class="btn-floating btn-large waves-effect waves-light teal"><img class="floatIcoImg" src="{% static "img/ic_add_white_24px.svg" %}"></a>
   {% endif %}
