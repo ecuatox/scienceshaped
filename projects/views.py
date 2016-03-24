@@ -41,7 +41,7 @@ def illustrationEdit(request, illustration_id):
                 admin_history.log_addition(request, illustration)
             else:
                 admin_history.log_change(request, illustration)
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect('/#illustrations')
     else:
         if int(illustration_id) == 0:
             form = IllustrationEdit(initial={
@@ -79,7 +79,7 @@ def illustrationDelete(request, illustration_id):
     except Illustration.DoesNotExist:
         pass
 
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect('/#illustrations')
 
 def testimonials(request):
     testimonials = Testimonial.objects.order_by('-pub_date')
@@ -96,7 +96,7 @@ def testimonialDelete(request, testimonial_id):
     except Testimonial.DoesNotExist:
         pass
 
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect('/#testimonials')
 
 def testimonialEdit(request, testimonial_id):
     new = True
@@ -116,7 +116,7 @@ def testimonialEdit(request, testimonial_id):
                 admin_history.log_addition(request, testimonial)
             else:
                 admin_history.log_change(request, testimonial)
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect('/#testimonials')
     else:
         if int(testimonial_id) == 0:
             form = TestimonialEdit(initial={
