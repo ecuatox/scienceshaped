@@ -1,8 +1,8 @@
 {% load staticfiles %}
 <link href="{% static "css/header.css" %}" rel="stylesheet">
 
-<div id="header">
-  <img id="logo" src="{% static "img/logo.png" %}" />
+<div id="header" class="headerLarge">
+  <a href="#top"><img id="logo" src="{% static "img/logo.png" %}" /></a>
   {% if request.user.is_authenticated %}
     <div id="user">
       Logged in as {{ request.user.first_name }}. <a href="/authentication/logout">Log out</a>
@@ -15,3 +15,29 @@
     <li><a href="#contact" class="waves-effect waves-blue btn-flat">Contact</a></li>
   </ul>
 </div>
+
+<div id="top" style="height: 120px"></div>
+
+<script>
+  $(function() {
+    pos = "top";
+  });
+
+  $(window).scroll(function() {
+    var scrollTop = $(window).scrollTop();
+    if (pos == "top" && scrollTop > 50) {
+      pos = "page";
+      $("#header").addClass("headerSmall");
+      $("#header").removeClass("headerLarge");
+    } else if (pos == "page" && scrollTop <= 50) {
+      pos = "top";
+      $("#header").addClass("headerLarge");
+      $("#header").removeClass("headerSmall");
+    }
+  });
+
+  $("#logo").click(function() {
+    $("#header").addClass("headerLarge");
+    $("#header").removeClass("headerSmall");
+  });
+</script>
