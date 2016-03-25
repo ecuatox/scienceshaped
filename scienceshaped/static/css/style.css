@@ -2,11 +2,12 @@ html {
 }
 body {
   margin: 0;
-  background: var(--background-color);
+  background: #fff;
   display: flex;
   min-height: 100vh;
   flex-direction: column;
 }
 main {
   flex: 1 0 auto;
+  background: var(--background-color)
 }
