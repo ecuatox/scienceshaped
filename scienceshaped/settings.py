@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'files',
     'django_cleanup',
     'authentication',
+    'scienceshaped',
 ]
 
 MIDDLEWARE_CLASSES = [
