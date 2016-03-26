@@ -98,6 +98,7 @@ def imageDelete(request, image_id):
         try:
             image = Image.objects.get(pk=image_id)
             image.delete()
+            admin_history.log_deletion(request, image)
         except Image.DoesNotExist:
             pass
 

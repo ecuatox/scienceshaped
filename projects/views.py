@@ -78,6 +78,7 @@ def illustrationDelete(request, illustration_id):
         try:
             illustration = Illustration.objects.get(pk=illustration_id)
             illustration.delete()
+            admin_history.log_deletion(request, illustration)
         except Illustration.DoesNotExist:
             pass
 
@@ -96,6 +97,7 @@ def testimonialDelete(request, testimonial_id):
         try:
             testimonial = Testimonial.objects.get(pk=testimonial_id)
             testimonial.delete()
+            admin_history.log_deletion(request, testimonial)
         except Testimonial.DoesNotExist:
             pass
 
