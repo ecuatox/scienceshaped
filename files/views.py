@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from scienceshaped import admin_history
 import os
 from django.conf import settings
-from authentication import templatetags
+from authentication.templatetags import authentication_groups as groups
 
 def findId(title):
     number = 1
@@ -49,7 +49,7 @@ def renameImage(instance, title):
     return instance
 
 def imageUpload(request):
-    if request.method == 'POST' and templatetags.tags.inGroup(request.user, 'editor'):
+    if request.method == 'POST' and groups.inGroup(request.user, 'editor'):
         form = ImageUpload(request.POST, request.FILES)
         if form.is_valid():
             img = saveImage(request.FILES['file'], str(form.cleaned_data['title']), str(form.cleaned_data['tags']))
@@ -94,7 +94,7 @@ def images(request):
     return render(request, 'images.html', context)
 
 def imageDelete(request, image_id):
-    if templatetags.tags.inGroup(request.user, 'editor'):
+    if groups.inGroup(request.user, 'editor'):
         try:
             image = Image.objects.get(pk=image_id)
             image.delete()
@@ -104,7 +104,7 @@ def imageDelete(request, image_id):
     return HttpResponseRedirect('/files/images')
 
 def imageEdit(request, image_id):
-    if request.method == 'POST' and templatetags.tags.inGroup(request.user, 'editor'):
+    if request.method == 'POST' and groups.inGroup(request.user, 'editor'):
         form = ImageEdit(request.POST)
         if form.is_valid():
             try:
