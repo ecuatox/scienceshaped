@@ -1,7 +1,10 @@
+body {
+  background-color: var(--background-color);
+}
 #submit {
   width: 100%;
 }
-#editForm {
+form {
   width: 90%;
   max-width: 600px;
   margin: 100px auto;
