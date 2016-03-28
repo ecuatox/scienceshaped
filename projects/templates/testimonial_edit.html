@@ -18,16 +18,16 @@
     <form id="editForm" action="" method="post">
         {% csrf_token %}
 
-        {{ form.title.errors }}
-        <div class="input-field">
-          <label for="{{ form.title.id_for_label }}">Title</label>
-          <input id="{{ form.title.id_for_label }}" name="title" type="text" maxlength="{{ form.title.maxlength }}" value="{{ form.title.value }}">
-        </div>
-
         {{ form.person.errors }}
         <div class="input-field">
           <label for="{{ form.person.id_for_label }}">Person</label>
           <input id="{{ form.person.id_for_label }}" name="person" type="text" maxlength="{{ form.person.maxlength }}" value="{{ form.person.value }}">
+        </div>
+
+        {{ form.job.errors }}
+        <div class="input-field">
+          <label for="{{ form.job.id_for_label }}">Job</label>
+          <textarea id="{{ form.job.id_for_label }}" name="job" class="materialize-textarea" maxlength="{{ form.job.maxlength }}">{{ form.job.value }}</textarea>
         </div>
 
         {{ form.message.errors }}

@@ -97,7 +97,7 @@ def testimonialDelete(request, testimonial_id):
         try:
             testimonial = Testimonial.objects.get(pk=testimonial_id)
             testimonial.delete()
-            admin_history.log_deletion(request, testimonial)
+            admin_history.log_deletion(request, testimonial, testimonial.person)
         except Testimonial.DoesNotExist:
             pass
 
@@ -112,21 +112,21 @@ def testimonialEdit(request, testimonial_id):
                 testimonial = Testimonial()
             else:
                 testimonial = Testimonial.objects.get(pk=testimonial_id)
-            testimonial.title = form.cleaned_data['title']
             testimonial.person = form.cleaned_data['person']
+            testimonial.job = form.cleaned_data['job']
             testimonial.message = form.cleaned_data['message']
             testimonial.thumbnail = form.cleaned_data['thumbnail']
             testimonial.save()
             if int(testimonial_id) == 0:
-                admin_history.log_addition(request, testimonial)
+                admin_history.log_addition(request, testimonial, testimonial.person)
             else:
-                admin_history.log_change(request, testimonial)
+                admin_history.log_change(request, testimonial, testimonial.person)
             return HttpResponseRedirect('/#testimonials')
     else:
         if int(testimonial_id) == 0:
             form = TestimonialEdit(initial={
-                'title': '',
                 'person': '',
+                'job': '',
                 'message': '',
                 'thumbnail': '/static/img/click_to_select.png',
             })
@@ -137,8 +137,8 @@ def testimonialEdit(request, testimonial_id):
                 return HttpResponseRedirect('/projects/testimonial/0/edit')
 
             form = TestimonialEdit(initial={
-                'title': testimonial.title,
                 'person': testimonial.person,
+                'job': testimonial.job,
                 'message': testimonial.message,
                 'thumbnail': testimonial.thumbnail,
             })

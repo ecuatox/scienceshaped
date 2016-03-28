@@ -21,7 +21,8 @@
       <div class="testimonialText">
         <img class="quote" src="{% static "img/ic_format_quote_black_24px.svg" %}" />
         <p class="testimonialMessage">{{ testimonial.message }}</p>
-        <p class="testimonialPerson">- {{ testimonial.person }}</p>
+        <p class="testimonialPerson">- {{ testimonial.person }}{% if testimonial.job != '' %}, {{ testimonial.job }}{% endif %}
+        </p>
       </div>
     </div>
   {% endfor %}

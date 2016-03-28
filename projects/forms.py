@@ -12,7 +12,7 @@ class IllustrationEdit(forms.Form):
     thumbnail_size = forms.CharField(max_length=4, label='Thumbnail size (%)')
 
 class TestimonialEdit(forms.Form):
-    title = forms.CharField(max_length=100, label="Title")
     person = forms.CharField(max_length=100, label="Person")
-    message = forms.CharField(max_length=500, label="Message")
+    job = forms.CharField(max_length=300, required=False, label="Job")
+    message = forms.CharField(max_length=1000, label="Message")
     thumbnail = forms.CharField(max_length=100, label="Thumbnail")
