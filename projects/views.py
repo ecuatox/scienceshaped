@@ -30,7 +30,6 @@ def getIllustrationTags():
     tags = []
     for illustration in illustrations:
         tags.extend(illustration.tags.split(", "))
-    print(tags)
     return tags
 
 def illustrationEdit(request, illustration_id):
