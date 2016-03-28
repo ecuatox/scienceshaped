@@ -11,3 +11,6 @@ main {
   flex: 1 0 auto;
   background: var(--background-color)
 }
+footer {
+  margin: 0 !important;
+}
