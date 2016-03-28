@@ -17,9 +17,9 @@
     <div id="categoriesDiv">
       <ul id="categories" class="dropdown-content">
         <li><a class="filterItem">All</a></li>
-        <li><a class="filterItem">Logo</a></li>
-        <li><a class="filterItem">Grant Application</a></li>
-        <li><a class="filterItem">Doctoral Thesis</a></li>
+        {% for tag in tags %}
+        <li><a class="filterItem">{{ tag|title }}</a></li>
+        {% endfor %}
       </ul>
     </div>
 

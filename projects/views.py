@@ -25,6 +25,14 @@ def illustration(request, illustration_id):
 
     return render(request, 'illustration.html', context)
 
+def getIllustrationTags():
+    illustrations = Illustration.objects.all()
+    tags = []
+    for illustration in illustrations:
+        tags.extend(illustration.tags.split(", "))
+    print(tags)
+    return tags
+
 def illustrationEdit(request, illustration_id):
     new = True
     if request.method == 'POST' and groups.inGroup(request.user, 'editor'):

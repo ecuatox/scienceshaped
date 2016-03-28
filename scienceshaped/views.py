@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.mail import EmailMessage
 from .forms import Mail
 from django.conf import settings
+import projects.views
 
 def index(request):
     illustrations = Illustration.objects.order_by('-date')
@@ -30,11 +31,13 @@ def index(request):
 
     filterForm = IllustrationFilter()
     mailForm = Mail()
+    tags = projects.views.getIllustrationTags()
     context = {
         'illustrations': illustrations,
         'testimonials': testimonials,
         'filterForm': filterForm,
         'mailForm': mailForm,
+        'tags': tags,
     }
 
     return render(request, 'index.html', context)
