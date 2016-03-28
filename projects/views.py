@@ -32,6 +32,22 @@ def getIllustrationTags():
         tags.update(illustration.tags.split(", "))
     return tags
 
+def illustrationTagDelete(request, tag):
+    if groups.inGroup(request.user, 'editor'):
+        illustrations = Illustration.objects.all()
+        for illustration in illustrations:
+            tags = illustration.tags.split(', ')
+            while tag in tags:
+                tags.remove(tag)
+            newTags = ''
+            for t in tags:
+                newTags += t + ', '
+            if newTags.endswith(', '):
+                newTags = newTags[:-2]
+            illustration.tags = newTags
+            illustration.save()
+    return HttpResponseRedirect('/')
+
 def illustrationEdit(request, illustration_id):
     new = True
     if request.method == 'POST' and groups.inGroup(request.user, 'editor'):
