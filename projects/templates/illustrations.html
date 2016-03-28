@@ -12,6 +12,9 @@
 
     <div id="categoriesButtonDiv">
       <a id="categoriesButton" class='dropdown-button btn blue' data-beloworigin="true" data-activates='categories'>Categories</a>
+      {% if request.user|inGroup:"editor" %}
+      <a id="categoriesDeleteButton" class='dropdown-button btn red' data-beloworigin="true" data-activates='categoriesDelete'>Delete</a>
+      {% endif %}
     </div>
 
     <div id="categoriesDiv">
@@ -22,6 +25,16 @@
         {% endfor %}
       </ul>
     </div>
+
+    {% if request.user|inGroup:"editor" %}
+    <div id="categoriesDeleteDiv">
+      <ul id="categoriesDelete" class="dropdown-content">
+        {% for tag in tags %}
+        <li><a url="/projects/illustrations/tag/{{ tag }}/delete" class="filterItem delete">{{ tag|title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
   </div>
 
   <br><br>
