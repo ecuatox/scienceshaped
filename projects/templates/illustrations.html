@@ -16,9 +16,9 @@
 
     <div id="categoriesDiv">
       <ul id="categories" class="dropdown-content">
-        <li><a href="/">All</a></li>
+        <li><a href="/" class="filterItem">All</a></li>
         {% for tag in tags %}
-        <li><a href="/filter/{{ tag }}">{{ tag|title }}</a></li>
+        <li><a href="/filter/{{ tag }}" class="filterItem">{{ tag|title }}</a></li>
         {% endfor %}
       </ul>
     </div>
