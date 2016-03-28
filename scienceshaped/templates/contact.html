@@ -3,29 +3,27 @@
 
 <section id="contact">
   <h3>Contact</h3>
-  <form id="contactForm" class="col s12">
-   <div class="row">
-     <div class="input-field col s6">
-       <input id="first_name" type="text" class="validate">
-       <label for="first_name">First Name</label>
-     </div>
-     <div class="input-field col s6">
-       <input id="last_name" type="text" class="validate">
-       <label for="last_name">Last Name</label>
-     </div>
-   </div>
-   <div class="row">
-     <div class="input-field col s12">
-       <input id="email" type="email" class="validate">
-       <label for="email">Email</label>
-     </div>
-   </div>
-   <div class="row">
-      <div class="input-field col s12">
-        <textarea id="textarea1" class="materialize-textarea"></textarea>
-        <label for="textarea1">Message</label>
-      </div>
+  <form id="contactForm" action="/" method="post">
+    {% csrf_token %}
+
+    {{ mailForm.email.errors }}
+    <div class="input-field">
+      <label for="{{ mailForm.email.id_for_label }}">{{ mailForm.email.label }}</label>
+      <input id="{{ mailForm.email.id_for_label }}" name="{{ mailForm.email.name }}" type="text" maxlength="{{ mailForm.email.maxlength }}">
     </div>
+
+    {{ mailForm.subject.errors }}
+    <div class="input-field">
+      <label for="{{ mailForm.subject.id_for_label }}">{{ mailForm.subject.label }}</label>
+      <input id="{{ mailForm.subject.id_for_label }}" name="{{ mailForm.subject.name }}" type="text" maxlength="{{ mailForm.subject.maxlength }}">
+    </div>
+
+    {{ mailForm.message.errors }}
+    <div class="input-field">
+      <label for="{{ mailForm.message.id_for_label }}">{{ mailForm.message.label }}</label>
+      <textarea id="{{ mailForm.message.id_for_label }}" name="{{ mailForm.message.name }}" class="materialize-textarea" maxlength="{{ mailForm.message.maxlength }}"></textarea>
+    </div>
+
     <button id="submit" class="btn waves-effect waves-light blue" type="submit" name="action">Send
       <img src="{% static "img/ic_send_white_24px.svg" %}">
     </button>
