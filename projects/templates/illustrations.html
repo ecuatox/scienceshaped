@@ -16,24 +16,12 @@
 
     <div id="categoriesDiv">
       <ul id="categories" class="dropdown-content">
-        <li><a class="filterItem">All</a></li>
+        <li><a href="/">All</a></li>
         {% for tag in tags %}
-        <li><a class="filterItem">{{ tag|title }}</a></li>
+        <li><a href="/filter/{{ tag }}">{{ tag|title }}</a></li>
         {% endfor %}
       </ul>
     </div>
-
-    <form action="/" method="post">
-      {% csrf_token %}
-      {{ filterForm }}
-    </form>
-
-    <script>
-      $(".filterItem").click(function() {
-        $("#id_search").val($(this).html());
-        $("form").submit();
-      });
-    </script>
   </div>
 
   <br><br>

@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^files/', include('files.urls')),
     url(r'^authentication/', include('authentication.urls')),
     url(r'^login/', views.login, name='login'),
+    url(r'^filter/(?P<tag>.*)/', views.index, name='filter'),
 ]

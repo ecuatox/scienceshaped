@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from .models import Illustration, Testimonial
-from .forms import IllustrationFilter, IllustrationEdit, TestimonialEdit
+from .forms import IllustrationEdit, TestimonialEdit
 from scienceshaped import admin_history
 from authentication.templatetags import authentication_groups as groups
 from django.utils import timezone
