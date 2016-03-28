@@ -29,6 +29,11 @@ h3 {
 }
 .testimonialPerson {
   font-size: 14px;
+  font-weight: bold;
+}
+.testimonialJob {
+  font-size: 14px;
+  margin-top: -14px;
 }
 .testimonialLeft {
   float: left;
