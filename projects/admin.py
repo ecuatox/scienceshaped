@@ -17,7 +17,7 @@ class IllustrationAdmin(admin.ModelAdmin):
                 'thumbnail_size',
             ]
         }),
-        ('Published', {
+        ('Meta', {
             'fields': [
                 'date',
             ]
@@ -42,7 +42,7 @@ class TestimonialAdmin(admin.ModelAdmin):
                 'thumbnail',
             ]
         }),
-        ('Published', {
+        ('Meta', {
             'fields': [
                 'pub_date',
             ]
