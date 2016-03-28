@@ -27,9 +27,9 @@ def illustration(request, illustration_id):
 
 def getIllustrationTags():
     illustrations = Illustration.objects.all()
-    tags = []
+    tags = set([])
     for illustration in illustrations:
-        tags.extend(illustration.tags.split(", "))
+        tags.update(illustration.tags.split(", "))
     return tags
 
 def illustrationEdit(request, illustration_id):
