@@ -4,7 +4,7 @@ from projects.forms import IllustrationFilter
 from django.http import HttpResponseRedirect, HttpResponse
 
 def index(request):
-    illustrations = Illustration.objects.order_by('-pub_date')
+    illustrations = Illustration.objects.order_by('-date')
     testimonials = Testimonial.objects.order_by('-pub_date')
     if request.method == 'POST':
         form = IllustrationFilter(request.POST)
@@ -12,7 +12,7 @@ def index(request):
             search = str(form.cleaned_data['search']).lower()
             if search != "all":
                 illustrations = []
-                for illustration in Illustration.objects.order_by('-pub_date'):
+                for illustration in Illustration.objects.order_by('-date'):
                     if search in illustration.tags.lower():
                         illustrations.append(illustration)
     form = IllustrationFilter()

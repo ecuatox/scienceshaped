@@ -10,7 +10,7 @@ class Illustration(models.Model):
     thumbnail = models.CharField(max_length=200, blank=True, verbose_name='Thumbnail')
     thumbnail_size = models.CharField(max_length=4, default=100, verbose_name='Thumbnail size (%)')
 
-    pub_date = models.DateTimeField(default=timezone.now, verbose_name='Publication date')
+    date = models.DateTimeField(default=timezone.now, verbose_name='Date')
 
     def __str__(self):
         return self.title

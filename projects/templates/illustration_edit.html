@@ -65,6 +65,19 @@
           <input id="{{ form.thumbnail_size.id_for_label }}" name="thumbnail_size" type="text" maxlength="{{ form.thumbnail_size.maxlength }}" value="{{ form.thumbnail_size.value }}">
         </div>
 
+        {{ form.date.errors }}
+        <div class="input-field">
+          <label for="{{ form.date.id_for_label }}">Date</label>
+          <input id="{{ form.date.id_for_label }}" class="datepicker" name="date" type="date" value="{{ form.date.value }}">
+        </div>
+
+        <script>
+          $('.datepicker').pickadate({
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 15 // Creates a dropdown of 15 years to control year
+          });
+        </script>
+
         <button id="submit" class="btn waves-effect waves-light" type="submit" name="action">Save
           <img src="{% static "img/ic_save_white_24px.svg" %}">
         </button>

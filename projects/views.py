@@ -4,9 +4,11 @@ from .models import Illustration, Testimonial
 from .forms import IllustrationFilter, IllustrationEdit, TestimonialEdit
 from scienceshaped import admin_history
 from authentication.templatetags import authentication_groups as groups
+from django.utils import timezone
+from datetime import datetime, timedelta
 
 def illustrations(request):
-    illustrations = Illustration.objects.order_by('-pub_date')
+    illustrations = Illustration.objects.order_by('-date')
     form = IllustrationFilter()
     context = {
         'illustrations': illustrations,
@@ -37,6 +39,7 @@ def illustrationEdit(request, illustration_id):
             illustration.tags = form.cleaned_data['tags']
             illustration.thumbnail = form.cleaned_data['thumbnail']
             illustration.thumbnail_size = form.cleaned_data['thumbnail_size']
+            illustration.date = datetime.strptime(form.cleaned_data['date'], '%d %B, %Y').date()
             illustration.save()
             if int(illustration_id) == 0:
                 admin_history.log_addition(request, illustration)
@@ -51,6 +54,7 @@ def illustrationEdit(request, illustration_id):
                 'tags': '',
                 'thumbnail': '/static/img/click_to_select.png',
                 'thumbnail_size': 100,
+                'date': datetime.strftime(timezone.now(), '%-d %B, %Y'),
             })
         else:
             try:
@@ -64,6 +68,7 @@ def illustrationEdit(request, illustration_id):
                 'tags': illustration.tags,
                 'thumbnail': illustration.thumbnail,
                 'thumbnail_size': illustration.thumbnail_size,
+                'date': datetime.strftime(illustration.date + timedelta(days=1), '%-d %B, %Y'),
             })
             new = False
     context = {

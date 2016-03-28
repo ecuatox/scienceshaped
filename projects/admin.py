@@ -19,7 +19,7 @@ class IllustrationAdmin(admin.ModelAdmin):
         }),
         ('Published', {
             'fields': [
-                'pub_date',
+                'date',
             ]
         })
     ]
