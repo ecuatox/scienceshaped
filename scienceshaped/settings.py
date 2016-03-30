@@ -14,8 +14,7 @@ MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'static/media')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['127.0.0.1', DOMAIN]
 
 # Application definition
 
