@@ -25,11 +25,11 @@
           <!-- <label>Title or tag:</label> -->
           {% csrf_token %}
           <input id="id_search" name="search" maxlength="100" value="{{ searchText }}">
-          <button id="submit" class="btn waves-effect waves-light" type="submit" name="action">Search
+          <button id="submit" class="btn waves-effect waves-light blue" type="submit" name="action">Search
             <img src="{% static "img/ic_search_white_24px.svg" %}">
           </button>
         </form>
-        <a id="upload" class="waves-effect waves-light btn">Upload<img src="{% static "img/ic_file_upload_white_24px.svg" %}"></a>
+        <a id="upload" class="waves-effect waves-light btn blue">Upload<img src="{% static "img/ic_file_upload_white_24px.svg" %}"></a>
         </top>
 
         <form id="selectForm" action="" method="post" style="display: none;">
