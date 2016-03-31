@@ -4,6 +4,8 @@ from django.conf.urls import include, url
 from django.contrib import admin
 import authentication
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -14,3 +16,6 @@ urlpatterns = [
     url(r'^login/', views.login, name='login'),
     url(r'^filter/(?P<tag>.*)/', views.index, name='filter'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

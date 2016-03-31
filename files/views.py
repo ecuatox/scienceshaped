@@ -35,7 +35,7 @@ def renameImage(instance, title):
         title = title.replace(' ', '_')
     instance.number = findId(title)
     oldpath = instance.file.name
-    directory = settings.PROJECT_ROOT+'/static/media/'
+    directory = settings.BASE_DIR+'/static/media/'
     print(instance.file.name)
     if instance.number > 1:
         instance.file.name = 'images/'+title.lower()+'_'+str(instance.number)+'.'+fileExt(instance.file.name)

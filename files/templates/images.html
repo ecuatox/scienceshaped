@@ -37,11 +37,10 @@
           <input id="id_defaultImage" name="defaultImage">
         </form>
       </div>
-
       <div id="images">
         {% for image in images %}
-        <div class="imageItem card" image="/static/media/{{ image.file }}">
-          <div class="card-image" style="background-image: url(/static/media/{{ image.file }});"></div>
+        <div class="imageItem card" image="/media/{{ image.file }}">
+          <div class="card-image" style="background-image: url(/media/{{ image.file }});"></div>
           <div class="card-content">
             <p>
               {% if image.title|length > 18 %}
@@ -59,8 +58,8 @@
           </div>
           <div class="card actions">
             <div class="relative">
-              <a class="waves-effect waves-light btn previewButton blue" previewImage="/static/media/{{ image.file }}">Preview</a>
-              <a class="waves-effect waves-light btn selectButton green" selectImage="/static/media/{{ image.file }}">Select</a>
+              <a class="waves-effect waves-light btn previewButton blue" previewImage="/media/{{ image.file }}">Preview</a>
+              <a class="waves-effect waves-light btn selectButton green" selectImage="/media/{{ image.file }}">Select</a>
               <a class="waves-effect waves-light btn editButton orange" href="/files/image/{{ image.id }}/edit">Edit</a>
               <a url="/files/image/{{ image.id }}/delete/" class="waves-effect waves-light btn delete deleteButton red">Delete</a>
             </div>
@@ -115,8 +114,8 @@
     }
 
     $(function(){
-      $("[image='/static/media/images/{{ defaultImage }}']").addClass("selected");
-      $("[image='/static/media/images/{{ defaultImage }}']").children(".actions").css("display", "inline");
+      $("[image='/media/images/{{ defaultImage }}']").addClass("selected");
+      $("[image='/media/images/{{ defaultImage }}']").children(".actions").css("display", "inline");
     });
 
     $(".delete").click(function() {
