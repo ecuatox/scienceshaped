@@ -1,3 +1,6 @@
+body {
+  background: var(--background-color);
+}
 #submit {
   width: 100%;
 }
