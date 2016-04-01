@@ -38,11 +38,11 @@ def renameImage(instance, title):
     directory = settings.MEDIA_ROOT
     print(instance.file.name)
     if instance.number > 1:
-        instance.file.name = '/images/'+title.lower()+'_'+str(instance.number)+'.'+fileExt(instance.file.name)
+        instance.file.name = 'images/'+title.lower()+'_'+str(instance.number)+'.'+fileExt(instance.file.name)
     else:
-        instance.file.name = '/images/'+title.lower()+'.'+fileExt(instance.file.name)
+        instance.file.name = 'images/'+title.lower()+'.'+fileExt(instance.file.name)
     #try:
-    os.rename(directory+oldpath, directory+instance.file.name)
+    os.rename(directory+'/'+oldpath, directory+'/'+instance.file.name)
     #except FileNotFoundError:
     #    pass
     instance.save()
