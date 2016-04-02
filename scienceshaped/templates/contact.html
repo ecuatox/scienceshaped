@@ -17,19 +17,19 @@
     {{ mailForm.email.errors }}
     <div class="input-field">
       <label for="{{ mailForm.email.id_for_label }}">{{ mailForm.email.label }}</label>
-      <input id="{{ mailForm.email.id_for_label }}" name="{{ mailForm.email.name }}" type="text" maxlength="{{ mailForm.email.maxlength }}">
+      <input id="{{ mailForm.email.id_for_label }}" name="{{ mailForm.email.name }}" type="text" maxlength="{{ mailForm.email.maxlength }}" value="{{ mailForm.email.value }}">
     </div>
 
     {{ mailForm.subject.errors }}
     <div class="input-field">
       <label for="{{ mailForm.subject.id_for_label }}">{{ mailForm.subject.label }}</label>
-      <input id="{{ mailForm.subject.id_for_label }}" name="{{ mailForm.subject.name }}" type="text" maxlength="{{ mailForm.subject.maxlength }}">
+      <input id="{{ mailForm.subject.id_for_label }}" name="{{ mailForm.subject.name }}" type="text" maxlength="{{ mailForm.subject.maxlength }}" value="{{ mailForm.subject.value }}">
     </div>
 
     {{ mailForm.message.errors }}
     <div class="input-field">
       <label for="{{ mailForm.message.id_for_label }}">{{ mailForm.message.label }}</label>
-      <textarea id="{{ mailForm.message.id_for_label }}" name="{{ mailForm.message.name }}" class="materialize-textarea" maxlength="{{ mailForm.message.maxlength }}"></textarea>
+      <textarea id="{{ mailForm.message.id_for_label }}" name="{{ mailForm.message.name }}" class="materialize-textarea" maxlength="{{ mailForm.message.maxlength }}">{{ mailForm.message.value }}</textarea>
     </div>
 
     <button id="submit" class="btn waves-effect waves-light blue" type="submit" name="action">Send

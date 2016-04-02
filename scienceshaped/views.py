@@ -26,7 +26,11 @@ def index(request, tag='all'):
             message += mailForm.cleaned_data['message']
             EmailMessage(subject, message, email, [settings.CONTACT_EMAIL], reply_to=[email], headers={'From': 'ScienceShaped Contactform'}).send()
     else:
-        mailForm = Mail()
+        mailForm = Mail(initial={
+            'email': '',
+            'subject': '',
+            'message': ''
+        })
 
     context = {
         'illustrations': illustrations,
