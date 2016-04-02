@@ -13,11 +13,6 @@
 
     {% include 'delete.html' %}
 
-    <div id="popup">
-      <a id="closeIco" class="btn-floating btn-large waves-effect waves-light red"><img class="floatIcoImg" src="{% static "img/ic_clear_white_24px.svg" %}"></a>
-      <img id="popupImg">
-    </div>
-
     <div id="content">
 
       <div id="top">
@@ -68,6 +63,7 @@
         {% endfor %}
       </div>
 
+      {% include 'imagepopup.html' %}
     </div>
 
   </body>
@@ -87,19 +83,6 @@
 
     $("#upload").click(function() {
       uploadWindow = window.open('/files/image-upload/');
-    });
-
-    $("#closeIco").click(function() {
-      $("#popup").css("display", "none");
-    });
-    $("#popup").click(function() {
-      $("#popup").css("display", "none");
-    });
-
-    $(".previewButton").click(function() {
-      var src = $(this).attr("previewImage");
-      $("#popupImg").attr("src", src);
-      $("#popup").css("display", "inline");
     });
 
     $(".selectButton").click(function() {
