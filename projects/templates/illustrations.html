@@ -43,7 +43,7 @@
   {% for illustration in illustrations %}
     <div class="extraDivToFixSlider">
     <div class="illustration card">
-      <div class="card-image">
+      <div class="card-image previewButton" previewImage="{{ illustration.thumbnail }}">
         <img src="{{ illustration.thumbnail }}" style="max-width: calc({{ illustration.thumbnail_size }} / 100 * 350px); max-height: calc({{ illustration.thumbnail_size }} / 100 * 300px);">
       </div>
       <div class="card-content">
