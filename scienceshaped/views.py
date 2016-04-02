@@ -7,6 +7,7 @@ from django.conf import settings
 import projects.views
 
 def index(request, tag='all'):
+    toast = ''
     testimonials = Testimonial.objects.order_by('-pub_date')
     if tag == 'all':
         illustrations = Illustration.objects.order_by('-date')
@@ -25,6 +26,14 @@ def index(request, tag='all'):
             message += 'The users email adress: ' + email + '\n\n'
             message += mailForm.cleaned_data['message']
             EmailMessage(subject, message, email, [settings.CONTACT_EMAIL], reply_to=[email], headers={'From': 'ScienceShaped Contactform'}).send()
+            mailForm = Mail(initial={
+                'email': '',
+                'subject': '',
+                'message': ''
+            })
+            toast = 'Your message was submitted successfully!'
+        else:
+            toast = 'Please correct the error(s)'
     else:
         mailForm = Mail(initial={
             'email': '',
@@ -37,6 +46,7 @@ def index(request, tag='all'):
         'testimonials': testimonials,
         'mailForm': mailForm,
         'tags': tags,
+        'toast': toast,
     }
     return render(request, 'index.html', context)
 

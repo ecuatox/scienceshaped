@@ -1,6 +1,14 @@
 {% load staticfiles %}
 <link href="{% static "css/contact.css" %}" rel="stylesheet">
 
+{% if toast != '' %}
+<script>
+  $(function(){
+    Materialize.toast('{{ toast }}', 3000, 'rounded');
+  });
+</script>
+{% endif %}
+
 {% if mailForm.errors %}
 <script>
   $(function(){
