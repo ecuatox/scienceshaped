@@ -12,7 +12,7 @@
 
     <div id="categoriesButtonDiv">
       <a id="categoriesButton" class='dropdown-button btn blue' data-beloworigin="true" data-activates='categories'>Categories</a>
-      {% if request.user|inGroup:"editor" %}
+      {% if request.user|inGroup:"editor" and tags %}
       <a id="categoriesDeleteButton" class='dropdown-button btn red' data-beloworigin="true" data-activates='categoriesDelete'>Delete</a>
       {% endif %}
     </div>
