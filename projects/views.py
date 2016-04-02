@@ -30,6 +30,8 @@ def getIllustrationTags():
     tags = set([])
     for illustration in illustrations:
         tags.update(illustration.tags.split(", "))
+    while '' in tags:
+        tags.remove('')
     return tags
 
 def illustrationTagDelete(request, tag):
