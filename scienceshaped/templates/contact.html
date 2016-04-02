@@ -1,6 +1,14 @@
 {% load staticfiles %}
 <link href="{% static "css/contact.css" %}" rel="stylesheet">
 
+{% if mailForm.errors %}
+<script>
+  $(function(){
+    $('a[href="#contact"]').click();
+  });
+</script>
+{% endif %}
+
 <section id="contact">
   <h3>Contact</h3>
   <form id="contactForm" action="/" method="post">
