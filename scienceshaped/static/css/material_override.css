@@ -6,3 +6,18 @@ input[type=text]:focus:not([readonly]) {
   border-bottom: 1px solid var(--accent-color);
   box-shadow: 0 1px 0 0 var(--accent-color);
 }
+.picker__date-display {
+  background: var(--accent-color);
+}
+.picker__weekday-display {
+  background: var(--accent-color-dk);
+}
+.picker__day--selected, .picker--focused .picker__day--selected {
+  background-color: var(--accent-color-dk);
+}
+.picker__close, .picker__today {
+  color: var(--accent-color);
+}
+.picker__input.picker__input--active {
+  border-color: var(--accent-color);
+}
