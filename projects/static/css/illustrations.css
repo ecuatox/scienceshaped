@@ -14,7 +14,7 @@
   transform: translate(0, -50%);
   z-index: 10;
 }
-#illustrations h3 {
+#illustrations h1 {
   float: left;
 }
 .illustration {
