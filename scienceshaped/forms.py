@@ -7,4 +7,4 @@ class Mail(forms.Form):
     message = forms.CharField(max_length=1000, label='Message')
 
 class ContentBoxEdit(forms.Form):
-    content = forms.CharField(widget=CKEditorWidget())
+    content = forms.CharField(widget=CKEditorWidget(), required=False)
