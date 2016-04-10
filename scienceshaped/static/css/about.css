@@ -1,0 +1,26 @@
+#aboutContent {
+  width: 90%;
+  max-width: 1000px;
+  margin: 50px auto;
+}
+#about .btn-flat {
+  display: inline-block;
+  margin-bottom: 24px;
+}
+#about h1 {
+  display: inline-block;
+}
+#aboutTop {
+  height: 50px;
+  text-align: center;
+}
+#aboutForm {
+  text-align: center;
+  margin-top: 50px;
+}
+#aboutForm label {
+  display: none;
+}
+#aboutForm #submit {
+  width: 840px;
+}

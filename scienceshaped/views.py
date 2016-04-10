@@ -2,11 +2,12 @@ from django.shortcuts import render
 from projects.models import Illustration, Testimonial
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.mail import EmailMessage
-from .forms import Mail
+from .forms import Mail, ContentBoxEdit
+from .models import ContentBox
 from django.conf import settings
 import projects.views
 
-def index(request, tag='all'):
+def index(request, tag='all', action=''):
     toast = ''
     testimonials = Testimonial.objects.order_by('-pub_date')
     if tag == 'all':
@@ -40,15 +41,40 @@ def index(request, tag='all'):
             'subject': '',
             'message': ''
         })
+        try:
+            aboutContent = ContentBox.objects.get(title='About').content
+        except ContentBox.DoesNotExist:
+            ContentBox(title='About', content='').save()
+            aboutContent = ''
+        aboutForm = ContentBoxEdit(initial={
+            'content': aboutContent,
+        })
 
     context = {
         'illustrations': illustrations,
         'testimonials': testimonials,
         'mailForm': mailForm,
+        'aboutForm': aboutForm,
+        'aboutContent': aboutContent,
         'tags': tags,
         'toast': toast,
+        'action': action,
     }
     return render(request, 'index.html', context)
 
 def login(request):
     return HttpResponseRedirect('/authentication/login')
+
+def aboutEdit(request):
+    if request.method == 'POST':
+        aboutForm = ContentBoxEdit(request.POST)
+        if aboutForm.is_valid():
+            try:
+                contentBox = ContentBox.objects.get(title='About')
+            except ContentBox.DoesNotExist:
+                contentBox = ContentBox(title='About', content='').save()
+            contentBox.content = aboutForm.cleaned_data['content']
+            contentBox.save()
+        return HttpResponseRedirect('/')
+    else:
+        return index(request, action='aboutEdit')

@@ -14,6 +14,29 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 ALLOWED_HOSTS = ['127.0.0.1', DOMAIN]
 
+CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
+
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Undo', 'Redo'],
+            ['Format', 'Styles', 'Font', 'FontSize'],
+            ['Bold', 'Italic', 'Underline'],
+            ['HorizontalRule', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'],
+            ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['Link', 'Unlink'],
+            ['TextColor', 'BGColor', 'Smiley'],
+            ['RemoveFormat', 'ShowBlocks', 'Maximize'],
+            ['Source']
+        ],
+        'width': 840,
+        'height': 300,
+        'toolbarCanCollapse': False,
+    }
+}
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -28,6 +51,7 @@ INSTALLED_APPS = [
     'django_cleanup',
     'authentication',
     'scienceshaped',
+    'ckeditor',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -126,3 +150,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
