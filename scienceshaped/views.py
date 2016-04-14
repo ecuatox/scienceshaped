@@ -6,6 +6,7 @@ from .forms import Mail, ContentBoxEdit
 from .models import ContentBox
 from django.conf import settings
 import projects.views
+from authentication.templatetags import authentication_groups as groups
 
 def index(request, tag='all', action=''):
     toast = ''
@@ -77,29 +78,35 @@ def login(request):
     return HttpResponseRedirect('/authentication/login')
 
 def aboutEdit(request):
-    if request.method == 'POST':
-        aboutForm = ContentBoxEdit(request.POST)
-        if aboutForm.is_valid():
-            try:
-                contentBox = ContentBox.objects.get(title='About')
-            except ContentBox.DoesNotExist:
-                contentBox = ContentBox(title='About', content='').save()
-            contentBox.content = aboutForm.cleaned_data['content']
-            contentBox.save()
-        return HttpResponseRedirect('/')
+    if groups.inGroup(request.user, 'editor'):
+        if request.method == 'POST':
+            aboutForm = ContentBoxEdit(request.POST)
+            if aboutForm.is_valid():
+                try:
+                    contentBox = ContentBox.objects.get(title='About')
+                except ContentBox.DoesNotExist:
+                    contentBox = ContentBox(title='About', content='').save()
+                contentBox.content = aboutForm.cleaned_data['content']
+                contentBox.save()
+            return HttpResponseRedirect('/')
+        else:
+            return index(request, action='aboutEdit')
     else:
-        return index(request, action='aboutEdit')
+        return HttpResponseRedirect('/')
 
 def infoEdit(request):
-    if request.method == 'POST':
-        infoForm = ContentBoxEdit(request.POST)
-        if infoForm.is_valid():
-            try:
-                contentBox = ContentBox.objects.get(title='Info')
-            except ContentBox.DoesNotExist:
-                contentBox = ContentBox(title='Info', content='').save()
-            contentBox.content = infoForm.cleaned_data['content']
-            contentBox.save()
-        return HttpResponseRedirect('/')
+    if groups.inGroup(request.user, 'editor'):
+        if request.method == 'POST':
+            infoForm = ContentBoxEdit(request.POST)
+            if infoForm.is_valid():
+                try:
+                    contentBox = ContentBox.objects.get(title='Info')
+                except ContentBox.DoesNotExist:
+                    contentBox = ContentBox(title='Info', content='').save()
+                contentBox.content = infoForm.cleaned_data['content']
+                contentBox.save()
+            return HttpResponseRedirect('/')
+        else:
+            return index(request, action='infoEdit')
     else:
-        return index(request, action='infoEdit')
+        return HttpResponseRedirect('/')
