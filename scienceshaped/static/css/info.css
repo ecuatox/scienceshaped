@@ -1,0 +1,26 @@
+#infoContent {
+  width: 90%;
+  max-width: 1000px;
+  margin: 50px auto;
+}
+#info .btn-flat {
+  display: inline-block;
+  margin-bottom: 24px;
+}
+#info h1 {
+  display: inline-block;
+}
+#infoTop {
+  height: 50px;
+  text-align: center;
+}
+#infoForm {
+  text-align: center;
+  margin-top: 50px;
+}
+#infoForm label {
+  display: none;
+}
+#infoForm #submit {
+  width: 840px;
+}

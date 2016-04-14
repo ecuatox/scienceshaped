@@ -41,14 +41,23 @@ def index(request, tag='all', action=''):
             'subject': '',
             'message': ''
         })
-        try:
-            aboutContent = ContentBox.objects.get(title='About').content
-        except ContentBox.DoesNotExist:
-            ContentBox(title='About', content='').save()
-            aboutContent = ''
-        aboutForm = ContentBoxEdit(initial={
-            'content': aboutContent,
-        })
+    try:
+        aboutContent = ContentBox.objects.get(title='About').content
+    except ContentBox.DoesNotExist:
+        ContentBox(title='About', content='').save()
+        aboutContent = ''
+    aboutForm = ContentBoxEdit(initial={
+        'content': aboutContent,
+    })
+
+    try:
+        infoContent = ContentBox.objects.get(title='Info').content
+    except ContentBox.DoesNotExist:
+        ContentBox(title='Info', content='').save()
+        infoContent = ''
+    infoForm = ContentBoxEdit(initial={
+        'content': infoContent,
+    })
 
     context = {
         'illustrations': illustrations,
@@ -56,6 +65,8 @@ def index(request, tag='all', action=''):
         'mailForm': mailForm,
         'aboutForm': aboutForm,
         'aboutContent': aboutContent,
+        'infoForm': infoForm,
+        'infoContent': infoContent,
         'tags': tags,
         'toast': toast,
         'action': action,
@@ -78,3 +89,17 @@ def aboutEdit(request):
         return HttpResponseRedirect('/')
     else:
         return index(request, action='aboutEdit')
+
+def infoEdit(request):
+    if request.method == 'POST':
+        infoForm = ContentBoxEdit(request.POST)
+        if infoForm.is_valid():
+            try:
+                contentBox = ContentBox.objects.get(title='Info')
+            except ContentBox.DoesNotExist:
+                contentBox = ContentBox(title='Info', content='').save()
+            contentBox.content = infoForm.cleaned_data['content']
+            contentBox.save()
+        return HttpResponseRedirect('/')
+    else:
+        return index(request, action='infoEdit')

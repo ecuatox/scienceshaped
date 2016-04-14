@@ -16,6 +16,7 @@ urlpatterns = [
     url(r'^login/', views.login, name='login'),
     url(r'^filter/(?P<tag>.*)/', views.index, name='filter'),
     url(r'^aboutEdit', views.aboutEdit, name='about-edit'),
+    url(r'^infoEdit', views.infoEdit, name='info-edit'),
 ]
 
 if settings.DEBUG:
