@@ -53,11 +53,11 @@
 }
 .headerLarge #logo {
   height: 80px;
-  top: 30px;
+  top: 20px;
 }
 .headerSmall #logo {
   height: 40px;
-  top: 8px;
+  top: 5px;
 }
 .headerLarge #menu {
   top: 0px;
