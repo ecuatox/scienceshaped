@@ -12,8 +12,6 @@
 
   <body>
 
-    {% include 'delete.html' %}
-
     <div id="content">
 
       <div id="top">
@@ -102,5 +100,7 @@
       $("[image='/media/images/{{ defaultImage }}']").children(".actions").css("display", "inline");
     });
   </script>
+
+  {% include 'delete.html' %}
 
 </html>
