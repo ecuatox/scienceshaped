@@ -71,6 +71,7 @@ def index(request, tag='all', action=''):
         'tags': tags,
         'toast': toast,
         'action': action,
+        'hidden': settings.HIDDEN,
     }
     return render(request, 'index.html', context)
 

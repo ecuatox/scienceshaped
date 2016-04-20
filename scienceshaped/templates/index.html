@@ -1,5 +1,7 @@
 {% load staticfiles %}
+{% load authentication_groups %}
 <html>
+  {% if request.user|inGroup:"editor" or not hidden %}
   <head>
     <link href="{% static "css/style.css" %}" rel="stylesheet">
     <link href="{% static "css/colors.css" %}" rel="stylesheet">
@@ -34,5 +36,9 @@
   </body>
 
   {% include 'footer.html' %}
+
+  {% else %}
+  <img style="display: block; margin: 200px auto; max-width: 800px; width: 90%;" src="/static/img/card.png">
+  {% endif %}
 
 </html>
