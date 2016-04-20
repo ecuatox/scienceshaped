@@ -101,11 +101,6 @@
       $("[image='/media/images/{{ defaultImage }}']").addClass("selected");
       $("[image='/media/images/{{ defaultImage }}']").children(".actions").css("display", "inline");
     });
-
-    $(".delete").click(function() {
-      $("#deletePopup").css("display", "inline");
-      $("#deleteButton").attr("href", $(this).attr("url"));
-    });
   </script>
 
 </html>
