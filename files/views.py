@@ -49,49 +49,55 @@ def renameImage(instance, title):
     return instance
 
 def imageUpload(request):
-    if request.method == 'POST' and groups.inGroup(request.user, 'editor'):
-        form = ImageUpload(request.POST, request.FILES)
-        if form.is_valid():
-            img = saveImage(request.FILES['file'], str(form.cleaned_data['title']), str(form.cleaned_data['tags']))
-            context = {
-                'src': img.file.name,
-            }
-            return render(request, 'image_upload_done.html', context)
-    else:
-        form = ImageUpload()
+    if groups.inGroup(request.user, 'editor'):
+        if request.method == 'POST':
+            form = ImageUpload(request.POST, request.FILES)
+            if form.is_valid():
+                img = saveImage(request.FILES['file'], str(form.cleaned_data['title']), str(form.cleaned_data['tags']))
+                context = {
+                    'src': img.file.name,
+                }
+                return render(request, 'image_upload_done.html', context)
+        else:
+            form = ImageUpload()
 
-    context = {
-        'form': form,
-    }
-    return render(request, 'image_upload.html', context)
+        context = {
+            'form': form,
+        }
+        return render(request, 'image_upload.html', context)
+    else:
+        return HttpResponseRedirect('/login')
 
 def images(request):
-    searchText = ""
-    defaultImage = ""
-    if request.method == 'POST':
-        form = ImageSearch(request.POST)
-        images = []
-        if form.is_valid():
-            searchText = str(form.cleaned_data['search'])
-            search = searchText.lower()
-            for image in Image.objects.order_by('-time'):
-                if search in image.title.lower() or search in image.tags.lower():
-                    images.append(image)
+    if groups.inGroup(request.user, 'editor'):
+        searchText = ""
+        defaultImage = ""
+        if request.method == 'POST':
+            form = ImageSearch(request.POST)
+            images = []
+            if form.is_valid():
+                searchText = str(form.cleaned_data['search'])
+                search = searchText.lower()
+                for image in Image.objects.order_by('-time'):
+                    if search in image.title.lower() or search in image.tags.lower():
+                        images.append(image)
+            else:
+                images = Image.objects.order_by('-time')
+                form = ImageSelect(request.POST)
+                if form.is_valid():
+                    defaultImage = str(form.cleaned_data['defaultImage'])
         else:
             images = Image.objects.order_by('-time')
-            form = ImageSelect(request.POST)
-            if form.is_valid():
-                defaultImage = str(form.cleaned_data['defaultImage'])
+        form = ImageSearch()
+        context = {
+            'images': images,
+            'form': form,
+            'searchText': searchText,
+            'defaultImage': defaultImage,
+        }
+        return render(request, 'images.html', context)
     else:
-        images = Image.objects.order_by('-time')
-    form = ImageSearch()
-    context = {
-        'images': images,
-        'form': form,
-        'searchText': searchText,
-        'defaultImage': defaultImage,
-    }
-    return render(request, 'images.html', context)
+        return HttpResponseRedirect('/login')
 
 def imageDelete(request, image_id):
     if groups.inGroup(request.user, 'editor'):
@@ -101,38 +107,42 @@ def imageDelete(request, image_id):
             admin_history.log_deletion(request, image)
         except Image.DoesNotExist:
             pass
-
-    return HttpResponseRedirect('/files/images')
+        return HttpResponseRedirect('/files/images')
+    else:
+        return HttpResponseRedirect('/login')
 
 def imageEdit(request, image_id):
-    if request.method == 'POST' and groups.inGroup(request.user, 'editor'):
-        form = ImageEdit(request.POST)
-        if form.is_valid():
+    if groups.inGroup(request.user, 'editor'):
+        if request.method == 'POST':
+            form = ImageEdit(request.POST)
+            if form.is_valid():
+                try:
+                    image = Image.objects.get(pk=image_id)
+                    title = str(form.cleaned_data['title'])
+                    if title != image.title:
+                        image = renameImage(image, str(form.cleaned_data['title']))
+                    image.title = title
+                    image.tags = str(form.cleaned_data['tags'])
+                    image.save()
+                    admin_history.log_change(request, image)
+                except Image.DoesNotExist:
+                    pass
+                return HttpResponseRedirect('/files/images')
+        else:
             try:
                 image = Image.objects.get(pk=image_id)
-                title = str(form.cleaned_data['title'])
-                if title != image.title:
-                    image = renameImage(image, str(form.cleaned_data['title']))
-                image.title = title
-                image.tags = str(form.cleaned_data['tags'])
-                image.save()
-                admin_history.log_change(request, image)
             except Image.DoesNotExist:
-                pass
-            return HttpResponseRedirect('/files/images')
+                return HttpResponseRedirect('/files/images')
+
+            form = ImageEdit(initial={
+                'title': image.title,
+                'tags': image.tags,
+                'file': image.file,
+            })
+        context = {
+            'form': form,
+        }
+
+        return render(request, 'image_edit.html', context)
     else:
-        try:
-            image = Image.objects.get(pk=image_id)
-        except Image.DoesNotExist:
-            return HttpResponseRedirect('/files/images')
-
-        form = ImageEdit(initial={
-            'title': image.title,
-            'tags': image.tags,
-            'file': image.file,
-        })
-    context = {
-        'form': form,
-    }
-
-    return render(request, 'image_edit.html', context)
+        return HttpResponseRedirect('/login')
