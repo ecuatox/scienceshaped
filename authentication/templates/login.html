@@ -20,13 +20,13 @@
         {{ form.username.errors }}
         <div class="input-field">
           <label for="{{ form.username.id_for_label }}">Username</label>
-          <input id="{{ form.username.id_for_label }}" name="username" type="text" maxlength="{{ form.username.maxlength }}">
+          <input id="{{ form.username.id_for_label }}" name="username" type="text" maxlength="{{ form.fields.username.max_length }}">
         </div>
 
         {{ form.password.errors }}
         <div class="input-field">
           <label for="{{ form.password.id_for_label }}">Password</label>
-          <input id="{{ form.password.id_for_label }}" name="password" type="password" type="text" maxlength="{{ form.password.maxlength }}">
+          <input id="{{ form.password.id_for_label }}" name="password" type="password" type="text" maxlength="{{ form.fields.password.max_length }}">
         </div>
 
         <button id="submit" class="btn waves-effect waves-light blue" type="submit" name="action">Log in

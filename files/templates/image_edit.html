@@ -17,13 +17,13 @@
         {{ form.title.errors }}
         <div class="input-field">
           <label for="{{ form.title.id_for_label }}">Title</label>
-          <input id="id_title" name="title" type="text" maxlength="{{ form.title.maxlength }}" value="{{ form.title.value }}">
+          <input id="id_title" name="title" type="text" maxlength="{{ form.fields.title.max_length }}" value="{{ form.title.value }}">
         </div>
 
         {{ form.tags.errors }}
         <div class="input-field">
           <label for="{{ form.tags.id_for_label }}">Tags</label>
-          <input id="id_tags" name="tags" type="text" maxlength="{{ form.tags.maxlength }}" value="{{ form.tags.value }}">
+          <input id="id_tags" name="tags" type="text" maxlength="{{ form.fields.tags.max_length }}" value="{{ form.tags.value }}">
         </div>
 
         {{ form.file.errors }}

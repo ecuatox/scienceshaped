@@ -21,25 +21,25 @@
         {{ form.title.errors }}
         <div class="input-field">
           <label for="{{ form.title.id_for_label }}">Title</label>
-          <input id="{{ form.title.id_for_label }}" name="title" type="text" maxlength="{{ form.title.maxlength }}" value="{{ form.title.value }}">
+          <input id="{{ form.title.id_for_label }}" name="title" type="text" maxlength="{{ form.fields.title.max_length }}" value="{{ form.title.value }}">
         </div>
 
         {{ form.description.errors }}
         <div class="input-field">
           <label for="{{ form.description.id_for_label }}">Description</label>
-          <textarea id="{{ form.description.id_for_label }}" name="description" class="materialize-textarea" maxlength="{{ form.description.maxlength }}">{{ form.description.value }}</textarea>
+          <textarea id="{{ form.description.id_for_label }}" name="description" class="materialize-textarea" maxlength="{{ form.field.description.max_length }}">{{ form.description.value }}</textarea>
         </div>
 
         {{ form.tags.errors }}
         <div class="input-field">
           <label for="{{ form.tags.id_for_label }}">Tags</label>
-          <input id="{{ form.tags.id_for_label }}" name="tags" type="text" maxlength="{{ form.tags.maxlength }}" value="{{ form.tags.value }}">
+          <input id="{{ form.tags.id_for_label }}" name="tags" type="text" maxlength="{{ form.fields.tags.max_length }}" value="{{ form.tags.value }}">
         </div>
 
         {{ form.thumbnail.errors }}
         <div class="input-field">
           <label for="{{ form.thumbnail.id_for_label }}">Thumbnail</label>
-          <input id="{{ form.thumbnail.id_for_label }}" name="thumbnail" type="text" maxlength="{{ form.thumbnail.maxlength }}" value="{{ form.thumbnail.value }}">
+          <input id="{{ form.thumbnail.id_for_label }}" name="thumbnail" type="text" maxlength="{{ form.fields.thumbnail.max_length }}" value="{{ form.thumbnail.value }}">
         </div>
 
         <img id="thumbnailPicker" src="{{ form.thumbnail.value }}"></img>
@@ -63,7 +63,7 @@
         {{ form.thumbnail_size.errors }}
         <div class="input-field">
           <label for="{{ form.thumbnail_size.id_for_label }}">Thumbnail size (%)</label>
-          <input id="{{ form.thumbnail_size.id_for_label }}" name="thumbnail_size" type="text" maxlength="{{ form.thumbnail_size.maxlength }}" value="{{ form.thumbnail_size.value }}">
+          <input id="{{ form.thumbnail_size.id_for_label }}" name="thumbnail_size" type="text" maxlength="{{ form.fields.thumbnail_size.max_length }}" value="{{ form.thumbnail_size.value }}">
         </div>
 
         {{ form.date.errors }}

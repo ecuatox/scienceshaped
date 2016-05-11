@@ -21,25 +21,25 @@
         {{ form.person.errors }}
         <div class="input-field">
           <label for="{{ form.person.id_for_label }}">Person</label>
-          <input id="{{ form.person.id_for_label }}" name="person" type="text" maxlength="{{ form.person.maxlength }}" value="{{ form.person.value }}">
+          <input id="{{ form.person.id_for_label }}" name="person" type="text" maxlength="{{ form.fields.person.max_length }}" value="{{ form.person.value }}">
         </div>
 
         {{ form.job.errors }}
         <div class="input-field">
           <label for="{{ form.job.id_for_label }}">Job</label>
-          <textarea id="{{ form.job.id_for_label }}" name="job" class="materialize-textarea" maxlength="{{ form.job.maxlength }}">{{ form.job.value }}</textarea>
+          <textarea id="{{ form.job.id_for_label }}" name="job" class="materialize-textarea" maxlength="{{ form.fields.job.max_length }}">{{ form.job.value }}</textarea>
         </div>
 
         {{ form.message.errors }}
         <div class="input-field">
           <label for="{{ form.message.id_for_label }}">Message</label>
-          <textarea id="{{ form.message.id_for_label }}" name="message" class="materialize-textarea" maxlength="{{ form.message.maxlength }}">{{ form.message.value }}</textarea>
+          <textarea id="{{ form.message.id_for_label }}" name="message" class="materialize-textarea" maxlength="{{ form.fields.message.max_length }}">{{ form.message.value }}</textarea>
         </div>
 
         {{ form.thumbnail.errors }}
         <div class="input-field">
           <label for="{{ form.thumbnail.id_for_label }}">Thumbnail</label>
-          <input id="{{ form.thumbnail.id_for_label }}" name="thumbnail" type="text" maxlength="{{ form.thumbnail.maxlength }}" value="{{ form.thumbnail.value }}">
+          <input id="{{ form.thumbnail.id_for_label }}" name="thumbnail" type="text" maxlength="{{ form.fields.thumbnail.max_length }}" value="{{ form.thumbnail.value }}">
         </div>
 
         <img id="thumbnailPicker" src="{{ form.thumbnail.value }}"></img>
