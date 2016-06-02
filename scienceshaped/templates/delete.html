@@ -2,28 +2,23 @@
 
 <link href="{% static "css/delete.css" %}" rel="stylesheet">
 
-<div id="deletePopup">
-  <div class="card">
-    <div class="card-content">
-      <h5>Are you sure?</h5>
-      <p>It will be permanently deleted!</p>
-    </div>
-    <div class="card-action cardActions">
-      <a id="deleteButton" href="" class="waves-effect waves-light btn red">Delete</a>
-      <a id="cancelButton" class="waves-effect waves-light btn blue">Cancel</a>
-    </div>
+<div id="deleteModal" style="width: 600px;" class="modal">
+  <div class="modal-content">
+    <h4>Are you sure?</h4>
+    <p>It will be permanently deleted!</p>
+  </div>
+  <div class="modal-footer">
+    <a id="deleteButton" href="" class="modal-action modal-close waves-effect waves-blue btn-flat">Delete</a>
+    <a id="cancelButton" class="modal-action modal-close waves-effect waves-blue btn-flat">Cancel</a>
   </div>
 </div>
 
 <script>
-  $("#deletePopup").click(function() {
-    $("#deletePopup").css("display", "none");
-  });
-  $("#cancelButton").click(function() {
-    $("#deletePopup").css("display", "none");
+  $("#deleteModal").click(function() {
+    $('#deleteModal').closeModal();
   });
   $(".delete").click(function() {
-    $("#deletePopup").css("display", "inline");
+    $('#deleteModal').openModal();
     $("#deleteButton").attr("href", $(this).attr("url"));
   });
 </script>
