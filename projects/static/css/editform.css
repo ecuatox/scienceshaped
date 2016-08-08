@@ -9,7 +9,12 @@ form {
   max-width: 600px;
   margin: 100px auto;
 }
-#thumbnailPicker {
+.thumbnailPicker {
+  margin-bottom: 20px;
+  margin-left: 70px;
   max-width: 360px;
   max-height: 300px;
+}
+.collapsible-body {
+  padding: 20px 50px;
 }

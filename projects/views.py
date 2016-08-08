@@ -63,6 +63,10 @@ def illustrationEdit(request, illustration_id):
             illustration.description = form.cleaned_data['description']
             illustration.tags = form.cleaned_data['tags']
             illustration.thumbnail = form.cleaned_data['thumbnail']
+            illustration.numberOfImages = form.cleaned_data['numberOfImages']
+            illustration.image1 = form.cleaned_data['image1']
+            illustration.image2 = form.cleaned_data['image2']
+            illustration.image3 = form.cleaned_data['image3']
             illustration.thumbnail_size = form.cleaned_data['thumbnail_size']
             illustration.date = datetime.strptime(form.cleaned_data['date'], '%d %B, %Y').date()
             illustration.save()
@@ -78,6 +82,10 @@ def illustrationEdit(request, illustration_id):
                 'description': '',
                 'tags': '',
                 'thumbnail': '/static/img/click_to_select.png',
+                'numberOfImages': '0',
+                'image1': '/static/img/click_to_select.png',
+                'image2': '/static/img/click_to_select.png',
+                'image3': '/static/img/click_to_select.png',
                 'thumbnail_size': 100,
                 'date': datetime.strftime(timezone.now(), '%-d %B, %Y'),
             })
@@ -92,6 +100,10 @@ def illustrationEdit(request, illustration_id):
                 'description': illustration.description,
                 'tags': illustration.tags,
                 'thumbnail': illustration.thumbnail,
+                'numberOfImages': illustration.numberOfImages,
+                'image1': illustration.image1,
+                'image2': illustration.image2,
+                'image3': illustration.image3,
                 'thumbnail_size': illustration.thumbnail_size,
                 'date': datetime.strftime(illustration.date + timedelta(days=1), '%-d %B, %Y'),
             })

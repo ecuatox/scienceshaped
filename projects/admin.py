@@ -17,6 +17,14 @@ class IllustrationAdmin(admin.ModelAdmin):
                 'thumbnail_size',
             ]
         }),
+        ('Images', {
+            'fields': [
+                'numberOfImages',
+                'image1',
+                'image2',
+                'image3',
+            ]
+        }),
         ('Meta', {
             'fields': [
                 'date',

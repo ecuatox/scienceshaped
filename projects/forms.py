@@ -10,6 +10,12 @@ class IllustrationEdit(forms.Form):
 
     date = forms.CharField(max_length=100, label='Date')
 
+    numberOfImages = forms.IntegerField()
+
+    image1 = forms.CharField(max_length=200, required=False, label='Image')
+    image2 = forms.CharField(max_length=200, required=False, label='Image')
+    image3 = forms.CharField(max_length=200, required=False, label='Image')
+
 class TestimonialEdit(forms.Form):
     person = forms.CharField(max_length=100, label="Person")
     job = forms.CharField(max_length=300, required=False, label="Job")
