@@ -49,62 +49,59 @@
           <input id="{{ form.thumbnail_size.id_for_label }}" name="thumbnail_size" type="text" maxlength="{{ form.fields.thumbnail_size.max_length }}" value="{{ form.thumbnail_size.value }}">
         </div>
 
+        <div style="display: none">
+          {{ form.thumbnail.errors }}
+          <div class="input-field">
+            <label for="{{ form.thumbnail.id_for_label }}">Thumbnail</label>
+            <input id="{{ form.thumbnail.id_for_label }}" class="imageField" imageID=0 name="thumbnail" type="number" value="{{ form.thumbnail.value }}">
+          </div>
+
+          {{ form.image1.errors }}
+          <div class="input-field">
+            <label for="{{ form.image1.id_for_label }}">Image</label>
+            <input id="{{ form.image1.id_for_label }}" class="imageField" imageID=1 name="image1" type="number" value="{{ form.image1.value }}">
+          </div>
+
+          {{ form.image2.errors }}
+          <div class="input-field">
+            <label for="{{ form.image2.id_for_label }}">Image</label>
+            <input id="{{ form.image2.id_for_label }}" class="imageField" imageID=2 name="image2" type="number" value="{{ form.image2.value }}">
+          </div>
+
+          {{ form.image3.errors }}
+          <div class="input-field">
+            <label for="{{ form.image3.id_for_label }}">Image</label>
+            <input id="{{ form.image3.id_for_label }}" class="imageField" imageID=3 name="image3" type="number" value="{{ form.image3.value }}">
+          </div>
+        </div>
+
+        <label>Thumbnail</label><br>
+        <div class="imageItem card thumbnailPicker" imageID=0>
+          <div class="card-image previewButton" style="background-image: url(/files/image/{{ form.thumbnail.value }}/view);"></div>
+        </div>
+
         <div class="input-field imageNumberSelector">
           <select>
-            <option value="0" {% if form.numberOfImages.value == 0 %}selected{% endif %}>0</option>
-            <option value="1" {% if form.numberOfImages.value == 1 %}selected{% endif %}>1</option>
-            <option value="2" {% if form.numberOfImages.value == 2 %}selected{% endif %}>2</option>
-            <option value="3" {% if form.numberOfImages.value == 3 %}selected{% endif %}>3</option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
           </select>
           <label>Number of images</label>
         </div>
 
-        <ul class="collapsible" data-collapsible="accordion">
-          <li>
-            <div class="collapsible-header active">Thumbnail</div>
-            <div class="collapsible-body" imageID=0>
-              {{ form.thumbnail.errors }}
-              <div class="input-field">
-                <label for="{{ form.thumbnail.id_for_label }}">Thumbnail</label>
-                <input id="{{ form.thumbnail.id_for_label }}" class="imageField" imageID=0 name="thumbnail" type="text" maxlength="{{ form.fields.thumbnail.max_length }}" value="{{ form.thumbnail.value }}">
-              </div>
-              <img class="thumbnailPicker" imageID=0 src="{{ form.thumbnail.value }}"></img>
-            </div>
-          </li>
-          <li>
-            <div class="collapsible-header" imageID=1>Image 1</div>
-            <div class="collapsible-body">
-              {{ form.image1.errors }}
-              <div class="input-field">
-                <label for="{{ form.image1.id_for_label }}">Image</label>
-                <input id="{{ form.image1.id_for_label }}" class="imageField" imageID=1 name="image1" type="text" maxlength="{{ form.fields.image1.max_length }}" value="{{ form.image1.value }}">
-              </div>
-              <img class="thumbnailPicker" imageID=1 src="{{ form.image1.value }}"></img>
-            </div>
-          </li>
-          <li>
-            <div class="collapsible-header" imageID=2>Image 2</div>
-            <div class="collapsible-body">
-              {{ form.image2.errors }}
-              <div class="input-field">
-                <label for="{{ form.image2.id_for_label }}">Image</label>
-                <input id="{{ form.image2.id_for_label }}" class="imageField" imageID=2 name="image2" type="text" maxlength="{{ form.fields.image2.max_length }}" value="{{ form.image2.value }}">
-              </div>
-              <img class="thumbnailPicker" imageID=2 src="{{ form.image2.value }}"></img>
-            </div>
-          </li>
-          <li>
-            <div class="collapsible-header" imageID=3>Image 3</div>
-            <div class="collapsible-body">
-              {{ form.image3.errors }}
-              <div class="input-field">
-                <label for="{{ form.image3.id_for_label }}">Image</label>
-                <input id="{{ form.image3.id_for_label }}" class="imageField" imageID=3 name="image3" type="text" maxlength="{{ form.fields.image3.max_length }}" value="{{ form.image3.value }}">
-              </div>
-              <img class="thumbnailPicker" imageID=3 src="{{ form.image3.value }}"></img>
-            </div>
-          </li>
-        </ul>
+        <label class="image" imageID=1>Images</label><br>
+        <div class="imageItem card thumbnailPicker image" imageID=1>
+          <div class="card-image previewButton" style="background-image: url(/files/image/{{ form.image1.value }}/view);"></div>
+        </div>
+
+        <div class="imageItem card thumbnailPicker image" imageID=2>
+          <div class="card-image previewButton" style="background-image: url(/files/image/{{ form.image2.value }}/view);"></div>
+        </div>
+
+        <div class="imageItem card thumbnailPicker image" imageID=3>
+          <div class="card-image previewButton" style="background-image: url(/files/image/{{ form.image3.value }}/view);"></div>
+        </div>
 
         <script>
           $(function(){
@@ -119,14 +116,18 @@
 
             $('select').material_select();
 
-            $(".collapsible-header").each(function(index) {
-              if (index > {{ form.numberOfImages.value }}) {
+            $(".imageNumberSelector").find('input').attr("name", "numberOfImages");
+            $(".imageNumberSelector").find('input').attr("id", "id_numberOfImages");
+            $(".imageNumberSelector").find('input').val({{ form.numberOfImages.value }});
+
+            images = $(".imageNumberSelector").find('input').val();
+            $(".image").each(function(index) {
+              if ($(this).attr("imageID") <= images) {
+                $(this).css("display", "inline-block");
+              } else {
                 $(this).css("display", "none");
               }
             });
-
-            $(".imageNumberSelector").find('input').attr("name", "numberOfImages");
-            $(".imageNumberSelector").find('input').attr("id", "id_numberOfImages");
           });
 
           $(".thumbnailPicker").click(function() {
@@ -134,10 +135,12 @@
               thumbWindow = window.open('/files/images');
           });
 
-          function selectThumnail(thumb) {
+          function selectThumnail(src, id) {
               thumbWindow.close();
-              $("input[imageID^=" + imageID + "]").val(thumb);
-              $(".thumbnailPicker[imageID^=" + imageID + "]").attr("src", thumb);
+              console.log(src);
+              console.log(id);
+              $("input[imageID^=" + imageID + "]").val(id);
+              $(".thumbnailPicker[imageID^=" + imageID + "]").find("div").css("background-image", "url("+src+")");
           }
 
           $(".imageField").change(function() {
@@ -146,9 +149,9 @@
 
           $(".imageNumberSelector").change(function() {
             images = $(this).find('input').val();
-            $(".collapsible-header").each(function(index) {
-              if (index <= images) {
-                $(this).css("display", "block");
+            $(".image").each(function(index) {
+              if ($(this).attr("imageID") <= images) {
+                $(this).css("display", "inline-block");
               } else {
                 $(this).css("display", "none");
               }

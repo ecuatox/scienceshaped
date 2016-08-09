@@ -25,16 +25,12 @@
         </form>
         <a id="upload" class="waves-effect waves-light btn blue">Upload<img src="{% static "img/ic_file_upload_white_24px.svg" %}"></a>
         </top>
-
-        <form id="selectForm" action="" method="post" style="display: none;">
-          {% csrf_token %}
-          <input id="id_defaultImage" name="defaultImage">
-        </form>
       </div>
+
       <div id="images">
         {% for image in images %}
-        <div class="imageItem card" image="/media/{{ image.file }}">
-          <div class="card-image" style="background-image: url(/media/{{ image.file }});"></div>
+        <div class="imageItem card" image="{{ image.url }}">
+          <div class="card-image" style="background-image: url({{ image.url }});"></div>
           <div class="card-content">
             <p>
               {% if image.title|length > 18 %}
@@ -52,8 +48,8 @@
           </div>
           <div class="card actions">
             <div class="relative">
-              <a class="waves-effect waves-light btn previewButton blue" previewImage="/media/{{ image.file }}">Preview</a>
-              <a class="waves-effect waves-light btn selectButton green" selectImage="/media/{{ image.file }}">Select</a>
+              <a class="waves-effect waves-light btn previewButton blue" previewImage="{{ image.url }}">Preview</a>
+              <a class="waves-effect waves-light btn selectButton green" selectID={{ image.id }} selectImage="{{ image.url }}">Select</a>
               <a class="waves-effect waves-light btn editButton orange" href="/files/image/{{ image.id }}/edit">Edit</a>
               <a url="/files/image/{{ image.id }}/delete/" class="waves-effect waves-light btn delete deleteButton red">Delete</a>
             </div>
@@ -86,19 +82,14 @@
 
     $(".selectButton").click(function() {
       var src = $(this).attr("selectImage");
-      window.opener.selectThumnail(src);
+      var id = $(this).attr("selectID");
+      window.opener.selectThumnail(src, id);
     });
 
     function doneUploading(src) {
       uploadWindow.close();
-      $("#id_defaultImage").val(src);
-      $("#selectForm").submit();
+      location.reload();
     }
-
-    $(function(){
-      $("[image='/media/images/{{ defaultImage }}']").addClass("selected");
-      $("[image='/media/images/{{ defaultImage }}']").children(".actions").css("display", "inline");
-    });
   </script>
 
   {% include 'delete.html' %}

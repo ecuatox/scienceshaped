@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from .models import Illustration, Testimonial
+from files.models import Image
 from .forms import IllustrationEdit, TestimonialEdit
 from scienceshaped import admin_history
 from authentication.templatetags import authentication_groups as groups
 from django.utils import timezone
 from datetime import datetime, timedelta
+from django.core.exceptions import ObjectDoesNotExist
 
 def illustrations(request):
     illustrations = Illustration.objects.order_by('-date')
@@ -62,11 +64,35 @@ def illustrationEdit(request, illustration_id):
             illustration.title = form.cleaned_data['title']
             illustration.description = form.cleaned_data['description']
             illustration.tags = form.cleaned_data['tags']
-            illustration.thumbnail = form.cleaned_data['thumbnail']
+            thumbnail_raw = form.cleaned_data['thumbnail']
+            print(Image.objects.all())
+            try:
+                thumb_id = int(thumbnail_raw)
+                print(thumb_id)
+                illustration.thumbnail = Image.objects.get(id=thumb_id)
+            except (TypeError, ObjectDoesNotExist):
+                illustration.thumbnail = None
             illustration.numberOfImages = form.cleaned_data['numberOfImages']
-            illustration.image1 = form.cleaned_data['image1']
-            illustration.image2 = form.cleaned_data['image2']
-            illustration.image3 = form.cleaned_data['image3']
+
+            image1_raw = form.cleaned_data['image1']
+            image2_raw = form.cleaned_data['image2']
+            image3_raw = form.cleaned_data['image3']
+            try:
+                image1_id = int(image1_raw)
+                illustration.image1 = Image.objects.get(pk=image1_id)
+            except (TypeError, ObjectDoesNotExist):
+                illustration.image1 = None
+            try:
+                image2_id = int(image2_raw)
+                illustration.image2 = Image.objects.get(pk=image2_id)
+            except (TypeError, ObjectDoesNotExist):
+                illustration.image2 = None
+            try:
+                image3_id = int(image3_raw)
+                illustration.image3 = Image.objects.get(pk=image3_id)
+            except (TypeError, ObjectDoesNotExist):
+                illustration.image3 = None
+
             illustration.thumbnail_size = form.cleaned_data['thumbnail_size']
             illustration.date = datetime.strptime(form.cleaned_data['date'], '%d %B, %Y').date()
             illustration.save()
@@ -81,11 +107,11 @@ def illustrationEdit(request, illustration_id):
                 'title': '',
                 'description': '',
                 'tags': '',
-                'thumbnail': '/static/img/click_to_select.png',
+                'thumbnail': '0',
                 'numberOfImages': '0',
-                'image1': '/static/img/click_to_select.png',
-                'image2': '/static/img/click_to_select.png',
-                'image3': '/static/img/click_to_select.png',
+                'image1': '0',
+                'image2': '0',
+                'image3': '0',
                 'thumbnail_size': 100,
                 'date': datetime.strftime(timezone.now(), '%-d %B, %Y'),
             })
@@ -95,15 +121,32 @@ def illustrationEdit(request, illustration_id):
             except Illustration.DoesNotExist:
                 return HttpResponseRedirect('/projects/illustration/0/edit')
 
+            try:
+                id0 = illustration.thumbnail.id
+            except AttributeError:
+                id0 = 0
+            try:
+                id1 = illustration.image1.id
+            except AttributeError:
+                id1 = 0
+            try:
+                id2 = illustration.image2.id
+            except AttributeError:
+                id2 = 0
+            try:
+                id3 = illustration.image3.id
+            except AttributeError:
+                id3 = 0
+
             form = IllustrationEdit(initial={
                 'title': illustration.title,
                 'description': illustration.description,
                 'tags': illustration.tags,
-                'thumbnail': illustration.thumbnail,
+                'thumbnail': id0,
                 'numberOfImages': illustration.numberOfImages,
-                'image1': illustration.image1,
-                'image2': illustration.image2,
-                'image3': illustration.image3,
+                'image1': id1,
+                'image2': id2,
+                'image3': id3,
                 'thumbnail_size': illustration.thumbnail_size,
                 'date': datetime.strftime(illustration.date + timedelta(days=1), '%-d %B, %Y'),
             })

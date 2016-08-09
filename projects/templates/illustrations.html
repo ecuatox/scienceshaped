@@ -43,9 +43,9 @@
     {% for illustration in illustrations %}
       <div class="extraDivToFixSlider">
       <div class="illustration card">
-        <div class="card-image previewButton" previewImage="{{ illustration.thumbnail }}">
+        <div class="card-image previewButton" previewImage="{{ illustration.thumbnail.url }}">
           <!--<a class="modal-trigger" href="#modal-image{{ illustration.id }}">-->
-            <img src="{{ illustration.thumbnail }}" style="max-width: calc({{ illustration.thumbnail_size }} / 100 * 350px); max-height: calc({{ illustration.thumbnail_size }} / 100 * 300px);">
+            <img src="{{ illustration.thumbnail.url }}" style="max-width: calc({{ illustration.thumbnail_size }} / 100 * 350px); max-height: calc({{ illustration.thumbnail_size }} / 100 * 300px);">
           <!--</a>-->
         </div>
         <div class="card-content">
@@ -73,17 +73,17 @@
         <p>{{ illustration.description }}</p>
         {% if illustration.numberOfImages >= 1 %}
           <div class="imageItem card">
-            <div class="card-image previewButton" style="background-image: url({{ illustration.image1 }});" previewImage="{{ illustration.image1 }}"></div>
+            <div class="card-image previewButton" style="background-image: url({{ illustration.image1.url }});" previewImage="{{ illustration.image1.url }}"></div>
           </div>
         {% endif %}
         {% if illustration.numberOfImages >= 2 %}
           <div class="imageItem card">
-            <div class="card-image previewButton" style="background-image: url({{ illustration.image2 }});" previewImage="{{ illustration.image2 }}"></div>
+            <div class="card-image previewButton" style="background-image: url({{ illustration.image2.url }});" previewImage="{{ illustration.image2.url }}"></div>
           </div>
         {% endif %}
         {% if illustration.numberOfImages >= 3 %}
           <div class="imageItem card">
-            <div class="card-image previewButton" style="background-image: url({{ illustration.image3 }});" previewImage="{{ illustration.image3 }}"></div>
+            <div class="card-image previewButton" style="background-image: url({{ illustration.image3.url }});" previewImage="{{ illustration.image3.url }}"></div>
           </div>
         {% endif %}
       </div>

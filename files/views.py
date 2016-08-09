@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Image
-from .forms import ImageUpload, ImageSearch, ImageSelect, ImageEdit
+from .forms import ImageUpload, ImageSearch, ImageEdit
 from django.utils import timezone
 from django.http import HttpResponseRedirect, HttpResponse
 from scienceshaped import admin_history
@@ -18,7 +18,7 @@ def findId(title):
 def fileExt(name):
     return name.split(".")[-1:][0]
 
-def saveImage(file, title, tags):
+def saveImage(file, title, description, tags):
     while " " in title:
         title = title.replace(" ", "_")
     number = findId(title)
@@ -26,7 +26,7 @@ def saveImage(file, title, tags):
         file.name = title.lower()+"_"+str(number)+"."+fileExt(file.name)
     else:
         file.name = title.lower()+"."+fileExt(file.name)
-    instance = Image(file=file, title=title, tags=tags, time=timezone.now(), number=number)
+    instance = Image(file=file, title=title, description=description, tags=tags, time=timezone.now(), number=number)
     instance.save()
     return instance
 
@@ -53,13 +53,15 @@ def imageUpload(request):
         if request.method == 'POST':
             form = ImageUpload(request.POST, request.FILES)
             if form.is_valid():
-                img = saveImage(request.FILES['file'], str(form.cleaned_data['title']), str(form.cleaned_data['tags']))
+                img = saveImage(request.FILES['file'], form.cleaned_data['title'], form.cleaned_data['description'],form.cleaned_data['tags'])
                 context = {
                     'src': img.file.name,
                 }
                 return render(request, 'image_upload_done.html', context)
         else:
-            form = ImageUpload()
+            form = ImageUpload(initial={
+                'description': '',
+            })
 
         context = {
             'form': form,
@@ -70,22 +72,18 @@ def imageUpload(request):
 
 def images(request):
     if groups.inGroup(request.user, 'editor'):
-        searchText = ""
-        defaultImage = ""
+        searchText = ''
         if request.method == 'POST':
             form = ImageSearch(request.POST)
             images = []
             if form.is_valid():
-                searchText = str(form.cleaned_data['search'])
+                searchText = form.cleaned_data['search']
                 search = searchText.lower()
                 for image in Image.objects.order_by('-time'):
                     if search in image.title.lower() or search in image.tags.lower():
                         images.append(image)
             else:
                 images = Image.objects.order_by('-time')
-                form = ImageSelect(request.POST)
-                if form.is_valid():
-                    defaultImage = str(form.cleaned_data['defaultImage'])
         else:
             images = Image.objects.order_by('-time')
         form = ImageSearch()
@@ -93,7 +91,6 @@ def images(request):
             'images': images,
             'form': form,
             'searchText': searchText,
-            'defaultImage': defaultImage,
         }
         return render(request, 'images.html', context)
     else:
@@ -111,6 +108,13 @@ def imageDelete(request, image_id):
     else:
         return HttpResponseRedirect('/login')
 
+def imageView(request, image_id):
+    try:
+        image = Image.objects.get(pk=image_id)
+        return HttpResponseRedirect('/media/'+str(image.file))
+    except Image.DoesNotExist:
+        return HttpResponseRedirect('/')
+
 def imageEdit(request, image_id):
     if groups.inGroup(request.user, 'editor'):
         if request.method == 'POST':
@@ -118,11 +122,12 @@ def imageEdit(request, image_id):
             if form.is_valid():
                 try:
                     image = Image.objects.get(pk=image_id)
-                    title = str(form.cleaned_data['title'])
+                    title = form.cleaned_data['title']
                     if title != image.title:
-                        image = renameImage(image, str(form.cleaned_data['title']))
+                        image = renameImage(image, form.cleaned_data['title'])
                     image.title = title
-                    image.tags = str(form.cleaned_data['tags'])
+                    image.description = form.cleaned_data['description']
+                    image.tags = form.cleaned_data['tags']
                     image.save()
                     admin_history.log_change(request, image)
                 except Image.DoesNotExist:
@@ -136,6 +141,7 @@ def imageEdit(request, image_id):
 
             form = ImageEdit(initial={
                 'title': image.title,
+                'description': image.description,
                 'tags': image.tags,
                 'file': image.file,
             })
