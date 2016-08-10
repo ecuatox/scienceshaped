@@ -18,7 +18,7 @@
         <form id="searchForm" action="/files/images/" method="post">
           <!-- <label>Title or tag:</label> -->
           {% csrf_token %}
-          <input id="id_search" name="search" maxlength="100" value="{{ searchText }}">
+          <input id="id_search" name="search" type="text" maxlength="100" value="{{ searchText }}">
           <button id="submit" class="btn waves-effect waves-light blue" type="submit" name="action">Search
             <img src="{% static "img/ic_search_white_24px.svg" %}">
           </button>
