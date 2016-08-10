@@ -36,7 +36,6 @@ def renameImage(instance, title):
     instance.number = findId(title)
     oldpath = instance.file.name
     directory = settings.MEDIA_ROOT
-    print(instance.file.name)
     if instance.number > 1:
         instance.file.name = 'images/'+title.lower()+'_'+str(instance.number)+'.'+fileExt(instance.file.name)
     else:
@@ -61,6 +60,8 @@ def imageUpload(request):
         else:
             form = ImageUpload(initial={
                 'description': '',
+                'title': '',
+                'tags': '',
             })
 
         context = {
