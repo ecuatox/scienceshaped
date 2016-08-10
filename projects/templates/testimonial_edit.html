@@ -36,28 +36,29 @@
           <textarea id="{{ form.message.id_for_label }}" name="message" class="materialize-textarea" maxlength="{{ form.fields.message.max_length }}">{{ form.message.value }}</textarea>
         </div>
 
-        {{ form.thumbnail.errors }}
-        <div class="input-field">
-          <label for="{{ form.thumbnail.id_for_label }}">Thumbnail</label>
-          <input id="{{ form.thumbnail.id_for_label }}" name="thumbnail" type="text" maxlength="{{ form.fields.thumbnail.max_length }}" value="{{ form.thumbnail.value }}">
+        <div style="display: none;">
+          {{ form.thumbnail.errors }}
+          <div class="input-field">
+            <label for="{{ form.thumbnail.id_for_label }}">Thumbnail</label>
+            <input id="{{ form.thumbnail.id_for_label }}" name="thumbnail" type="text" value="{{ form.thumbnail.value }}">
+          </div>
         </div>
 
-        <img id="thumbnailPicker" src="{{ form.thumbnail.value }}"></img>
+        <label>Thumbnail</label><br>
+        <div class="imageItem card thumbnailPicker">
+          <div class="card-image" style="background-image: url(/files/image/{{ form.thumbnail.value }}/view);"></div>
+        </div>
 
         <script>
-          $("#thumbnailPicker").click(function() {
+          $(".thumbnailPicker").click(function() {
               thumbWindow = window.open('/files/images');
           });
 
-          function selectThumnail(thumb) {
+          function selectThumnail(src, id) {
               thumbWindow.close();
-              $("#id_thumbnail").val(thumb);
-              $("#thumbnailPicker").attr("src", thumb);
+              $("input[name^=thumbnail]").val(id);
+              $(".thumbnailPicker").find("div").css("background-image", "url("+src+")");
           }
-
-          $("#id_thumbnail").change(function() {
-            $("#thumbnailPicker").attr("src", $("#id_thumbnail").val());
-          });
         </script>
 
         <br><br>

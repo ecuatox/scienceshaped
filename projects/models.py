@@ -26,7 +26,7 @@ class Testimonial(models.Model):
     person = models.CharField(max_length=100, verbose_name='Person')
     job = models.CharField(max_length=300, verbose_name='Job')
     message = models.CharField(max_length=1000, verbose_name='Message')
-    thumbnail = models.CharField(max_length=100, verbose_name='Thumbnail')
+    thumbnail = models.ForeignKey(Image, blank=True, null=True)
     pub_date = models.DateTimeField(default=timezone.now, verbose_name='Publication date')
 
     def __str__(self):

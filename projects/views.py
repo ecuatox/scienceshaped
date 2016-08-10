@@ -200,7 +200,12 @@ def testimonialEdit(request, testimonial_id):
             testimonial.person = form.cleaned_data['person']
             testimonial.job = form.cleaned_data['job']
             testimonial.message = form.cleaned_data['message']
-            testimonial.thumbnail = form.cleaned_data['thumbnail']
+            thumbnail_raw = form.cleaned_data['thumbnail']
+            try:
+                thumb_id = int(thumbnail_raw)
+                testimonial.thumbnail = Image.objects.get(id=thumb_id)
+            except (TypeError, ObjectDoesNotExist):
+                testimonial.thumbnail = None
             testimonial.save()
             if int(testimonial_id) == 0:
                 admin_history.log_addition(request, testimonial, testimonial.person)
@@ -213,19 +218,22 @@ def testimonialEdit(request, testimonial_id):
                 'person': '',
                 'job': '',
                 'message': '',
-                'thumbnail': '/static/img/click_to_select.png',
+                'thumbnail': '0',
             })
         else:
             try:
                 testimonial = Testimonial.objects.get(pk=testimonial_id)
             except Testimonial.DoesNotExist:
                 return HttpResponseRedirect('/projects/testimonial/0/edit')
-
+            try:
+                thumb_id = testimonial.thumbnail.id
+            except AttributeError:
+                thumb_id = 0
             form = TestimonialEdit(initial={
                 'person': testimonial.person,
                 'job': testimonial.job,
                 'message': testimonial.message,
-                'thumbnail': testimonial.thumbnail,
+                'thumbnail': thumb_id,
             })
             new = False
     context = {

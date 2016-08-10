@@ -10,7 +10,7 @@
   {% for testimonial in testimonials %}
     <div class="testimonial">
       <div class="testimonialLeft">
-        <img class="testimonialImage" src="{{ testimonial.thumbnail }}" />
+        <img class="testimonialImage" src="{{ testimonial.thumbnail.url }}" />
         {% if request.user|inGroup:"editor" %}
         <div id="testimonialEditor">
           <a href="/projects/testimonial/{{ testimonial.id }}/edit" class="waves-effect waves-blue btn-flat editorButton">Edit</a>
