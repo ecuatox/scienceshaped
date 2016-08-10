@@ -65,10 +65,8 @@ def illustrationEdit(request, illustration_id):
             illustration.description = form.cleaned_data['description']
             illustration.tags = form.cleaned_data['tags']
             thumbnail_raw = form.cleaned_data['thumbnail']
-            print(Image.objects.all())
             try:
                 thumb_id = int(thumbnail_raw)
-                print(thumb_id)
                 illustration.thumbnail = Image.objects.get(id=thumb_id)
             except (TypeError, ObjectDoesNotExist):
                 illustration.thumbnail = None

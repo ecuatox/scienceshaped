@@ -92,15 +92,15 @@
 
         <label class="image" imageID=1>Images</label><br>
         <div class="imageItem card thumbnailPicker image" imageID=1>
-          <div class="card-image previewButton" style="background-image: url(/files/image/{{ form.image1.value }}/view);"></div>
+          <div class="card-image" style="background-image: url(/files/image/{{ form.image1.value }}/view);"></div>
         </div>
 
         <div class="imageItem card thumbnailPicker image" imageID=2>
-          <div class="card-image previewButton" style="background-image: url(/files/image/{{ form.image2.value }}/view);"></div>
+          <div class="card-image" style="background-image: url(/files/image/{{ form.image2.value }}/view);"></div>
         </div>
 
         <div class="imageItem card thumbnailPicker image" imageID=3>
-          <div class="card-image previewButton" style="background-image: url(/files/image/{{ form.image3.value }}/view);"></div>
+          <div class="card-image" style="background-image: url(/files/image/{{ form.image3.value }}/view);"></div>
         </div>
 
         <script>
@@ -137,15 +137,9 @@
 
           function selectThumnail(src, id) {
               thumbWindow.close();
-              console.log(src);
-              console.log(id);
               $("input[imageID^=" + imageID + "]").val(id);
               $(".thumbnailPicker[imageID^=" + imageID + "]").find("div").css("background-image", "url("+src+")");
           }
-
-          $(".imageField").change(function() {
-            $(".thumbnailPicker[imageID^=" + $(this).attr("imageID") + "]").attr("src", $(this).val());
-          });
 
           $(".imageNumberSelector").change(function() {
             images = $(this).find('input').val();
