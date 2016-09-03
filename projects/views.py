@@ -68,7 +68,7 @@ def illustrationEdit(request, illustration_id):
             try:
                 thumb_id = int(thumbnail_raw)
                 illustration.thumbnail = Image.objects.get(id=thumb_id)
-            except (TypeError, ObjectDoesNotExist):
+            except (TypeError, ValueError, Image.DoesNotExist):
                 illustration.thumbnail = None
             illustration.numberOfImages = form.cleaned_data['numberOfImages']
 
@@ -78,17 +78,17 @@ def illustrationEdit(request, illustration_id):
             try:
                 image1_id = int(image1_raw)
                 illustration.image1 = Image.objects.get(pk=image1_id)
-            except (TypeError, ObjectDoesNotExist):
+            except (TypeError, ValueError, Image.DoesNotExist):
                 illustration.image1 = None
             try:
                 image2_id = int(image2_raw)
                 illustration.image2 = Image.objects.get(pk=image2_id)
-            except (TypeError, ObjectDoesNotExist):
+            except (TypeError, ValueError, Image.DoesNotExist):
                 illustration.image2 = None
             try:
                 image3_id = int(image3_raw)
                 illustration.image3 = Image.objects.get(pk=image3_id)
-            except (TypeError, ObjectDoesNotExist):
+            except (TypeError, ValueError, Image.DoesNotExist):
                 illustration.image3 = None
 
             illustration.thumbnail_size = form.cleaned_data['thumbnail_size']
@@ -202,7 +202,7 @@ def testimonialEdit(request, testimonial_id):
             try:
                 thumb_id = int(thumbnail_raw)
                 testimonial.thumbnail = Image.objects.get(id=thumb_id)
-            except (TypeError, ObjectDoesNotExist):
+            except (TypeError, ValueError, Image.DoesNotExist):
                 testimonial.thumbnail = None
             testimonial.save()
             if int(testimonial_id) == 0:
