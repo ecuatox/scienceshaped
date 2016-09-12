@@ -71,21 +71,23 @@
       <div class="modal-content">
         <h5>{{ illustration.title }}</h5>
         <p>{{ illustration.description }}</p>
-        {% if illustration.numberOfImages >= 1 %}
-          <div class="imageItem card">
-            <div class="card-image previewButton" style="background-image: url({{ illustration.image1.url }});" previewImage="{{ illustration.image1.url }}"></div>
-          </div>
-        {% endif %}
-        {% if illustration.numberOfImages >= 2 %}
-          <div class="imageItem card">
-            <div class="card-image previewButton" style="background-image: url({{ illustration.image2.url }});" previewImage="{{ illustration.image2.url }}"></div>
-          </div>
-        {% endif %}
-        {% if illustration.numberOfImages >= 3 %}
-          <div class="imageItem card">
-            <div class="card-image previewButton" style="background-image: url({{ illustration.image3.url }});" previewImage="{{ illustration.image3.url }}"></div>
-          </div>
-        {% endif %}
+        <div class="modal-images">
+          {% if illustration.numberOfImages >= 1 %}
+            <div class="imageItem card">
+              <div class="card-image previewButton" style="background-image: url({{ illustration.image1.url }});" previewImage="{{ illustration.image1.url }}"></div>
+            </div>
+          {% endif %}
+          {% if illustration.numberOfImages >= 2 %}
+            <div class="imageItem card">
+              <div class="card-image previewButton" style="background-image: url({{ illustration.image2.url }});" previewImage="{{ illustration.image2.url }}"></div>
+            </div>
+          {% endif %}
+          {% if illustration.numberOfImages >= 3 %}
+            <div class="imageItem card">
+              <div class="card-image previewButton" style="background-image: url({{ illustration.image3.url }});" previewImage="{{ illustration.image3.url }}"></div>
+            </div>
+          {% endif %}
+        </div>
       </div>
       <div class="modal-footer">
         <a onclick="$('#modal-readmore{{ illustration.id }}').closeModal();" class="waves-effect waves-blue btn-flat">Close</a>
