@@ -27,6 +27,8 @@
   height: 300px;
 }
 .illustration .card-image img {
+  width: auto;
+  height: auto;
   position: absolute;
   left: 50%;
   top: 50%;
