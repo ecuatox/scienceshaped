@@ -38,7 +38,7 @@
 }
 .illustration .card-content p {
   word-wrap: break-word;
-  max-height: 60px;
+  max-height: 105px;
   overflow: hidden;
 }
 .illustration .cardActions {
