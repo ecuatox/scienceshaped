@@ -103,3 +103,11 @@
 .modal-images {
   text-align: center;
 }
+.modal-footer {
+  position: absolute;
+}
+.modal-footer .date {
+  position: absolute;
+  top: 3px;
+  left: 15px;
+}
