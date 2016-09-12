@@ -63,6 +63,7 @@ def illustrationEdit(request, illustration_id):
                 illustration = Illustration.objects.get(pk=illustration_id)
             illustration.title = form.cleaned_data['title']
             illustration.description = form.cleaned_data['description']
+            illustration.short = form.cleaned_data['short']
             illustration.tags = form.cleaned_data['tags']
             thumbnail_raw = form.cleaned_data['thumbnail']
             try:
@@ -104,6 +105,7 @@ def illustrationEdit(request, illustration_id):
             form = IllustrationEdit(initial={
                 'title': '',
                 'description': '',
+                'short': '',
                 'tags': '',
                 'thumbnail': '0',
                 'numberOfImages': '0',
@@ -139,6 +141,7 @@ def illustrationEdit(request, illustration_id):
             form = IllustrationEdit(initial={
                 'title': illustration.title,
                 'description': illustration.description,
+                'short': illustration.short,
                 'tags': illustration.tags,
                 'thumbnail': id0,
                 'numberOfImages': illustration.numberOfImages,

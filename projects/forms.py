@@ -2,6 +2,7 @@ from django import forms
 
 class IllustrationEdit(forms.Form):
     title = forms.CharField(max_length=100, label='Title')
+    short = forms.CharField(widget=forms.Textarea, max_length=200, required=False, label='Short Description')
     description = forms.CharField(widget=forms.Textarea, max_length=500, required=False, label='Description')
     tags = forms.CharField(max_length=500, required=False, label='Tags')
 

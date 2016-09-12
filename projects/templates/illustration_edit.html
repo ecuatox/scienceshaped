@@ -25,6 +25,12 @@
           <input id="{{ form.title.id_for_label }}" name="title" type="text" maxlength="{{ form.fields.title.max_length }}" value="{{ form.title.value }}">
         </div>
 
+        {{ form.short.errors }}
+        <div class="input-field">
+          <label for="{{ form.short.id_for_label }}">Short Description</label>
+          <textarea id="{{ form.short.id_for_label }}" name="short" class="materialize-textarea" maxlength="{{ form.field.short.max_length }}">{{ form.short.value }}</textarea>
+        </div>
+
         {{ form.description.errors }}
         <div class="input-field">
           <label for="{{ form.description.id_for_label }}">Description</label>

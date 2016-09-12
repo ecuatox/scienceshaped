@@ -5,6 +5,7 @@ from files.models import Image
 
 class Illustration(models.Model):
     title = models.CharField(max_length=100, verbose_name='Title')
+    short = models.TextField(max_length=200, blank=True, verbose_name='Short Description')
     description = models.TextField(max_length=500, blank=True, verbose_name='Description')
     tags = models.CharField(max_length=500, blank=True, verbose_name='Tags')
 
