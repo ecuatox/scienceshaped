@@ -33,7 +33,7 @@
   transform: translate(-50%, -50%);
 }
 .illustration .card-content {
-  height: 145px;
+  height: 200px;
   margin-top: -30px;
 }
 .illustration .card-content p {
@@ -72,7 +72,7 @@
   top: 0;
 }
 #illustrationSlider {
-  height: 550px;
+  height: 600px;
 }
 .filterItem {
   color: var(--accent-color) !important;
