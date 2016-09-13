@@ -14,6 +14,7 @@ def index(request, tag='all', action=''):
     if tag == 'all':
         illustrations = Illustration.objects.order_by('-date')
     else:
+        tag = tag.lower()
         illustrations = []
         for illustration in Illustration.objects.order_by('-date'):
             if tag in illustration.tags.lower():
