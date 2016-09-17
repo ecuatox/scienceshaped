@@ -3,31 +3,36 @@
 <link href="{% static "css/about.css" %}" rel="stylesheet">
 
 <section id="about">
-  <div id="aboutTop">
-    <h1>About</h1>
-    {% if request.user|inGroup:"editor" %}
-      <a href="/aboutEdit" class="waves-effect waves-blue btn-flat editorButton">Edit</a>
-    {% endif %}
+  <h1>About</h1>
+  <div id="why">
+    <h3>WHY</h3>
+    <p>
+      High-quality illustrations are valuable assets, giving professional impressions and supporting your message in unique ways:
+    </p>
+    <ul>
+      <li>A - attention-evoking</li>
+      <li>S - story telling</li>
+      <li>S - swift information</li>
+      <li>E - essential message</li>
+      <li>T - tutoring</li>
+    </ul>
   </div>
-  {% if action == 'aboutEdit' %}
-  <script>
-    $(function(){
-      $('a[href="#about"]').click();
-    });
-  </script>
-  <form id="aboutForm" action="/aboutEdit" method="post">
-    {% csrf_token %}
-    {{ aboutForm.media }}
-    {{ aboutForm.as_p }}
-    <button id="submit" class="btn waves-effect waves-light blue" type="submit" name="action">Save
-      <img src="{% static "img/ic_save_white_24px.svg" %}">
-    </button>
-  </form>
-  {% else %}
-    <div id="aboutContent">
-    {% autoescape off %}
-        {{ aboutContent }}
-    {% endautoescape %}
-    </div>
-  {% endif %}
+  <div id="how">
+    <h3>WHO</h3>
+    <p>
+      I founded Science Shaped in Jan 2015 after years experiencing that my graphical assistance made my colleagues very pleased. I have a MSc in cell biology (1993, University of Trondheim), a PhD in stem cell biology (2010, University of Oslo) and education in media design (2005, Idéfagskolen, Nøtterøy). Currently, I work as a post.doc at Department of Tumor Biology at the Institute for Cancer Research at Oslo University Hospital, where I have also worked at Department of Immunolgy.
+    </p>
+    <h4>Former working places</h4>
+    <ul>
+      <li>The Norwegian <c class="accdk">Medicines Agency</c></li>
+      <li>Norwegian Institute of <c class="accdk">Public Health</c></li>
+      <li>Vestfold <c class="accdk">University College</c> (now University College of Southeast Norway)</li>
+      <li>Tønsberg <c class="accdk">Chiropractor’s</c> clinic</li>
+      <li>T - tutoring</li>
+    </ul>
+  </div>
+  <p id="mission">My mission is to serve both senders and recipients of knowledge by creating graphical<br>
+    representations that renders concepts, ideas and results in an immediate and appealing way.</p>
+  <p>Learn more about my professional background and experience at <a id="linkedin" href="https://www.linkedin.com/in/ellen-tenstad-5b3b0631">LinkedIn</a></p>
+  </div>
 </section>

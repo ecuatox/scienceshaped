@@ -1,26 +1,23 @@
-#aboutContent {
-  width: 90%;
-  max-width: 1000px;
-  margin: 50px auto;
-}
-#about .btn-flat {
-  display: inline-block;
-  margin-bottom: 24px;
-}
-#about h1 {
-  display: inline-block;
-}
-#aboutTop {
-  height: 50px;
+h1 {
   text-align: center;
 }
-#aboutForm {
+#about {
   text-align: center;
-  margin-top: 50px;
 }
-#aboutForm label {
-  display: none;
+#why, #how, {
+  vertical-align: top;
+  text-align: left;
+  display: inline-block;
+  margin: 20px;
 }
-#aboutForm #submit {
-  width: 840px;
+#why {
+  width: 30%;
+  max-width: 300px;
+}
+#how {
+  width: 60%;
+  max-width: 600px;
+}
+#why li, #mission, c.accdk, #linkedin {
+  color: var(--accent-color-dk);
 }

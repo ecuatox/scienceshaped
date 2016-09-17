@@ -79,23 +79,6 @@ def index(request, tag='all', action=''):
 def login(request):
     return HttpResponseRedirect('/authentication/login')
 
-def aboutEdit(request):
-    if groups.inGroup(request.user, 'editor'):
-        if request.method == 'POST':
-            aboutForm = ContentBoxEdit(request.POST)
-            if aboutForm.is_valid():
-                try:
-                    contentBox = ContentBox.objects.get(title='About')
-                except ContentBox.DoesNotExist:
-                    contentBox = ContentBox(title='About', content='').save()
-                contentBox.content = aboutForm.cleaned_data['content']
-                contentBox.save()
-            return HttpResponseRedirect('/')
-        else:
-            return index(request, action='aboutEdit')
-    else:
-        return HttpResponseRedirect('/')
-
 def infoEdit(request):
     if groups.inGroup(request.user, 'editor'):
         if request.method == 'POST':
