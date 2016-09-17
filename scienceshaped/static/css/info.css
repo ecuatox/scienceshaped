@@ -1,7 +1,13 @@
+#info {
+  z-index: 10;
+}
 #infoContent {
   width: 90%;
   max-width: 1000px;
   margin: 50px auto;
+}
+.on-top {
+  z-index: -10;
 }
 #info .btn-flat {
   display: inline-block;
@@ -23,4 +29,48 @@
 }
 #infoForm #submit {
   width: 840px;
+}
+#info-para-container {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  background-color: var(--accent-color);
+  z-index: -10;
+}
+.para {
+  position: absolute;
+  display: block;
+  z-index: -10;
+}
+#info-para-container .para4 {
+  bottom: calc(50% - 80vh);
+  left: calc(50% - 50vw);
+  width: 20vw;
+  height: 200vh;
+  background-color: var(--accent-color-li);
+  transform: rotate(25deg);
+}
+#info-para-container .para3 {
+  top: calc(50% - 110vh);
+  right: calc(50% - 50vw);
+  width: 20vw;
+  height: 200vh;
+  background-color: var(--accent-color-li);
+  transform: rotate(-50deg);
+}
+#info-para-container .para1 {
+  bottom: calc(50% - 95vh);
+  right: calc(50% - 60vw);
+  width: 120vw;
+  height: 50vh;
+  background-color: var(--accent-color-dk);
+  transform: rotate(-10deg);
+}
+#info-para-container .para2 {
+  top: calc(50% - 70vh);
+  left: calc(50% - 60vw);
+  width: 120vw;
+  height: 50vh;
+  background-color: var(--accent-color-dk);
+  transform: rotate(-20deg);
 }

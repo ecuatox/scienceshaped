@@ -8,7 +8,7 @@
   <h1>Testimonials</h1>
   <div id="slider">
   {% for testimonial in testimonials %}
-    <div class="testimonial">
+    <div class="testimonial card">
       <div class="testimonialLeft">
         <img class="testimonialImage" src="{{ testimonial.thumbnail.url }}" />
         {% if request.user|inGroup:"editor" %}
@@ -31,7 +31,7 @@
   </div>
 
   {% if request.user|inGroup:"editor" %}
-  <a id="newTestimonial" href="/projects/testimonial/0/edit" class="btn-floating btn-large waves-effect waves-light blue"><img class="floatIcoImg" src="{% static "img/ic_add_white_24px.svg" %}"></a>
+  <a id="newTestimonial" href="/projects/testimonial/0/edit" class="btn-floating btn-large waves-effect waves-light white"><img class="floatIcoImg" src="{% static "img/ic_add_black_24px.svg" %}"></a>
   {% endif %}
 
   <script type="text/javascript" src="{% static "slick/slick.min.js" %}"></script>

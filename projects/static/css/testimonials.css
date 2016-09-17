@@ -1,5 +1,5 @@
 #testimonials {
-  background: #aaa;
+  background: var(--accent-color);
   width: 100%;
   margin: 0;
   padding-top: 10px;
@@ -10,14 +10,15 @@
   width: 60%;
   margin: auto;
 }
-h1 {
+#testimonials h1 {
   text-align: center;
+  color: #fff;
 }
 .testimonial {
   position: relative;
-  margin: 20px auto;
+  margin: 20px 100px;
   padding: 20px 30px;
-  height: inherit !important;
+  height: 300px !important;
   outline: 0;
 }
 .testimonialText {
