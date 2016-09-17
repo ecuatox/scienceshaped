@@ -7,7 +7,7 @@
   position: relative;
 }
 #slider {
-  width: 60%;
+  width: 80%;
   margin: auto;
 }
 #testimonials h1 {
@@ -18,7 +18,8 @@
   position: relative;
   margin: 20px 100px;
   padding: 20px 30px;
-  height: 300px !important;
+  height: 400px !important;
+  overflow-y: scroll;
   outline: 0;
 }
 .testimonialText {
