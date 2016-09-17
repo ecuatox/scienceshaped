@@ -33,7 +33,7 @@
 #info-para-container {
   position: relative;
   overflow: hidden;
-  height: 70%;
+  height: 620px;
   background-color: var(--accent-color);
   z-index: -10;
 }
