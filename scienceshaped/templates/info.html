@@ -9,16 +9,16 @@
     <div class="para para3"></div>
     <div class="para para4"></div>
 
-    <div style="height: 200px"></div>
+    <div style="height: 120px"></div>
 
     <div class="on-top">
-      <div id="infoTop">
-        <!--<h1>Info</h1>-->
-        {% if request.user|inGroup:"editor" %}
-          <a href="/infoEdit" class="waves-effect waves-blue btn-flat editorButton">Edit</a>
-        {% endif %}
-      </div>
+      {% if request.user|inGroup:"editor" %}
+        <a href="/infoEdit" class="waves-effect waves-blue btn-flat editorButton">Edit</a>
+      {% endif %}
       {% if action == 'infoEdit' %}
+        <style>
+          #info-para-container {height: 100%;}
+        </style>
         <form id="infoForm" action="/infoEdit" method="post">
           {% csrf_token %}
           {{ infoForm.media }}
