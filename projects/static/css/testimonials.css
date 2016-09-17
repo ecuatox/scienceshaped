@@ -2,8 +2,8 @@
   background: var(--accent-color);
   width: 100%;
   margin: 0;
-  padding-top: 10px;
-  padding-bottom: 60px;
+  padding-top: 60px;
+  padding-bottom: 100px;
   position: relative;
 }
 #slider {

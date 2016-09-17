@@ -3,6 +3,7 @@ h1 {
 }
 #about {
   text-align: center;
+  padding-top: 60px;
 }
 #why, #how, {
   vertical-align: top;
