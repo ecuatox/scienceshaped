@@ -78,6 +78,7 @@
 }
 .filterItem {
   color: var(--accent-color) !important;
+  padding: 15px;
 }
 .modal-content .imageItem {
   height: 100px;

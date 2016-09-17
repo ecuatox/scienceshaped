@@ -19,12 +19,24 @@
 
     <div id="categoriesDiv">
       <ul id="categories" class="dropdown-content">
-        <li><a href="/" class="filterItem">All</a></li>
+        <li tag="all" class="filterItem">All</li>
         {% for tag in tags %}
-        <li><a href="/filter/{{ tag }}" class="filterItem">{{ tag|title }}</a></li>
+        <li tag="{{ tag|lower }}" class="filterItem">{{ tag|title }}</li>
         {% endfor %}
       </ul>
     </div>
+
+    <script>
+      $(".filterItem").click(function() {
+        var tag = $(this).attr("tag");
+        if (tag == "all") {
+          $('#illustrationSlider').slick("slickUnfilter");
+        } else {
+          $('#illustrationSlider').slick("slickUnfilter");
+          $("#illustrationSlider").slick("slickFilter", "[tags*='" + tag + "']");
+        }
+      });
+    </script>
 
     {% if request.user|inGroup:"editor" %}
     <div id="categoriesDeleteDiv">
@@ -41,7 +53,7 @@
 
   <div id="illustrationSlider">
     {% for illustration in illustrations %}
-      <div class="extraDivToFixSlider">
+      <div class="extraDivToFixSlider" tags="{{ illustration.tags|lower }}">
       <div class="illustration card">
         <div class="card-image previewButton" previewImage="{{ illustration.thumbnail.url }}">
           <!--<a class="modal-trigger" href="#modal-image{{ illustration.id }}">-->
