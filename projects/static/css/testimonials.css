@@ -19,7 +19,7 @@
   margin: 20px 100px;
   padding: 20px 30px;
   height: 320px !important;
-  overflow-y: scroll;
+  overflow: hidden;
   outline: 0;
 }
 .testimonialText {
