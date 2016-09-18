@@ -83,6 +83,7 @@
 }
 .modal {
   width: 840px;
+  text-align: left;
 }
 .modal-content .imageItem {
   height: 100px;
