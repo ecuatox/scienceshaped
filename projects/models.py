@@ -23,6 +23,12 @@ class Illustration(models.Model):
     def __str__(self):
         return self.title
 
+    def short_lines(self):
+        return self.short.split('\n')
+
+    def description_lines(self):
+        return self.description.split('\n')
+
 class Testimonial(models.Model):
     person = models.CharField(max_length=100, verbose_name='Person')
     job = models.CharField(max_length=300, verbose_name='Job')
