@@ -94,6 +94,9 @@
         <div class="modal-images">
           {% if illustration.numberOfImages >= 1 %}
             <div class="imageItem card">
+              <div class="card-image previewButton" style="background-image: url({{ illustration.thumbnail.url }});" previewImage="{{ illustration.thumbnail.url }}"></div>
+            </div>
+            <div class="imageItem card">
               <div class="card-image previewButton" style="background-image: url({{ illustration.image1.url }});" previewImage="{{ illustration.image1.url }}"></div>
             </div>
           {% endif %}

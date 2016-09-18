@@ -80,6 +80,9 @@
   color: var(--accent-color) !important;
   padding: 15px;
 }
+.modal {
+  width: 840px;
+}
 .modal-content .imageItem {
   height: 100px;
   width: 100px;
