@@ -40,9 +40,14 @@ class TestimonialAdmin(admin.ModelAdmin):
     fieldsets = [
         ('Testimonial', {
             'fields': [
-                'title',
                 'person',
+                'job',
                 'message',
+            ]
+        }),
+        ('Meta', {
+            'fields': [
+                'date',
             ]
         }),
         ('Thumbnail', {
@@ -50,12 +55,7 @@ class TestimonialAdmin(admin.ModelAdmin):
                 'thumbnail',
             ]
         }),
-        ('Meta', {
-            'fields': [
-                'pub_date',
-            ]
-        })
     ]
     search_fields = [
-        'title',
+        'person',
     ]
