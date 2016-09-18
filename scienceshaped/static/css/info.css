@@ -67,8 +67,8 @@
   transform: rotate(-10deg);
 }
 #info-para-container .para2 {
-  top: calc(50% - 70vh);
-  left: calc(50% - 60vw);
+  top: calc(50% - 50vh);
+  left: calc(50% - 90vw);
   width: 120vw;
   height: 50vh;
   background-color: var(--accent-color-dk);
