@@ -21,4 +21,7 @@ class TestimonialEdit(forms.Form):
     person = forms.CharField(max_length=100, label="Person")
     job = forms.CharField(max_length=300, required=False, label="Job")
     message = forms.CharField(max_length=1000, label="Message")
+
+    date = forms.CharField(max_length=100, label='Date')
+    
     thumbnail = forms.IntegerField(required=False, label='Thumbnail')

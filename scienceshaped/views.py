@@ -10,7 +10,7 @@ from authentication.templatetags import authentication_groups as groups
 
 def index(request, tag='all', action=''):
     toast = ''
-    testimonials = Testimonial.objects.order_by('-pub_date')
+    testimonials = Testimonial.objects.order_by('-date')
     if tag == 'all':
         illustrations = Illustration.objects.order_by('-date')
     else:

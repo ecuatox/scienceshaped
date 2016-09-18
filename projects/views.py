@@ -171,7 +171,7 @@ def illustrationDelete(request, illustration_id):
     return HttpResponseRedirect('/#illustrations')
 
 def testimonials(request):
-    testimonials = Testimonial.objects.order_by('-pub_date')
+    testimonials = Testimonial.objects.order_by('-date')
     context = {
         'testimonials': testimonials,
     }
@@ -201,6 +201,7 @@ def testimonialEdit(request, testimonial_id):
             testimonial.person = form.cleaned_data['person']
             testimonial.job = form.cleaned_data['job']
             testimonial.message = form.cleaned_data['message']
+            testimonial.date = datetime.strptime(form.cleaned_data['date'], '%d %B, %Y').date()
             thumbnail_raw = form.cleaned_data['thumbnail']
             try:
                 thumb_id = int(thumbnail_raw)
@@ -220,6 +221,7 @@ def testimonialEdit(request, testimonial_id):
                 'job': '',
                 'message': '',
                 'thumbnail': '0',
+                'date': datetime.strftime(timezone.now(), '%-d %B, %Y'),
             })
         else:
             try:
@@ -235,6 +237,7 @@ def testimonialEdit(request, testimonial_id):
                 'job': testimonial.job,
                 'message': testimonial.message,
                 'thumbnail': thumb_id,
+                'date': datetime.strftime(testimonial.date + timedelta(days=1), '%-d %B, %Y'),
             })
             new = False
     context = {

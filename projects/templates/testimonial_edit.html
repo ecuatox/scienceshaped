@@ -36,6 +36,12 @@
           <textarea id="{{ form.message.id_for_label }}" name="message" class="materialize-textarea" maxlength="{{ form.fields.message.max_length }}">{{ form.message.value }}</textarea>
         </div>
 
+        {{ form.date.errors }}
+        <div class="input-field">
+          <label for="{{ form.date.id_for_label }}">Date</label>
+          <input id="{{ form.date.id_for_label }}" class="datepicker" name="date" type="date" value="{{ form.date.value }}">
+        </div>
+
         <div style="display: none;">
           {{ form.thumbnail.errors }}
           <div class="input-field">
@@ -50,6 +56,13 @@
         </div>
 
         <script>
+          $(function(){
+            $('.datepicker').pickadate({
+              selectMonths: true, // Creates a dropdown to control month
+              selectYears: 15 // Creates a dropdown of 15 years to control year
+            });
+          });
+
           $(".thumbnailPicker").click(function() {
               thumbWindow = window.open('/files/images');
           });

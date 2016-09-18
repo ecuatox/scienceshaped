@@ -24,7 +24,7 @@
           </div>
           <div class="testimonialText">
             <img class="quote" src="{% static "img/ic_format_quote_black_24px.svg" %}" />
-            <p class="testimonialMessage">{{ testimonial.message }}</p>
+            <p class="testimonialMessage">{{ testimonial.message }} {{ testimonial.date|date:"M Y"}}</p>
             <p class="testimonialPerson">{{ testimonial.person }}</p>
             {% if testimonial.job != '' %}
             <p class="testimonialJob">{{ testimonial.job }}</p>
