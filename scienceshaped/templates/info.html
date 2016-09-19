@@ -13,7 +13,7 @@
 
     <div class="on-top">
       {% if request.user|inGroup:"editor" %}
-        <a href="/infoEdit" class="waves-effect waves-blue btn-flat editorButton">Edit</a>
+        <a id="infoEditButton" href="/infoEdit" class="waves-effect waves-blue btn-flat editorButton">Edit</a>
       {% endif %}
       {% if action == 'infoEdit' %}
         <style>

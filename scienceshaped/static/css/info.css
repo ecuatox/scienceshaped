@@ -27,6 +27,11 @@
 #infoForm label {
   display: none;
 }
+#infoEditButton {
+  position: absolute;
+  top: 140px;
+  left: 10px;
+}
 #infoForm #submit {
   width: 840px;
 }
