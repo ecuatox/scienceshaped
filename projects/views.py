@@ -34,7 +34,7 @@ def getIllustrationTags():
         tags.update(illustration.tags.split(", "))
     while '' in tags:
         tags.remove('')
-    return tags
+    return sorted(tags)
 
 def illustrationTagDelete(request, tag):
     if groups.inGroup(request.user, 'editor'):
