@@ -33,7 +33,7 @@
 #info-para-container {
   position: relative;
   overflow: hidden;
-  height: 620px;
+  height: 520px;
   background-color: var(--accent-color);
   z-index: -10;
 }
@@ -59,7 +59,7 @@
   transform: rotate(-50deg);
 }
 #info-para-container .para1 {
-  bottom: calc(50% - 95vh);
+  bottom: calc(50% - 85vh);
   right: calc(50% - 60vw);
   width: 120vw;
   height: 50vh;
