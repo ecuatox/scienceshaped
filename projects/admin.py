@@ -25,6 +25,12 @@ class IllustrationAdmin(admin.ModelAdmin):
                 'image3',
             ]
         }),
+        ('Article', {
+            'fields': [
+                'url',
+                'pdf',
+            ]
+        }),
         ('Meta', {
             'fields': [
                 'date',

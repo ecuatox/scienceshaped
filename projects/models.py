@@ -1,4 +1,5 @@
 from __future__ import unicode_literals
+import os
 from django.db import models
 from django.utils import timezone
 from files.models import Image
@@ -8,6 +9,9 @@ class Illustration(models.Model):
     short = models.TextField(max_length=200, blank=True, verbose_name='Short Description')
     description = models.TextField(max_length=500, blank=True, verbose_name='Description')
     tags = models.CharField(max_length=500, blank=True, verbose_name='Tags')
+
+    url = models.CharField(max_length=500, blank=True, null=True, verbose_name='URL')
+    pdf = models.FileField(upload_to='pdfs', blank=True, null=True, verbose_name='PDF')
 
     thumbnail = models.ForeignKey(Image, on_delete=models.SET_NULL, blank=True, null=True, related_name='%(app_label)s_%(class)s_related_thumb')
     thumbnail_size = models.CharField(max_length=4, default=100, verbose_name='Thumbnail size (%)')
@@ -28,6 +32,9 @@ class Illustration(models.Model):
 
     def description_lines(self):
         return self.description.split('\n')
+
+    def pdf_getname(self):
+        return os.path.basename(self.pdf.name)
 
 class Testimonial(models.Model):
     person = models.CharField(max_length=100, verbose_name='Person')

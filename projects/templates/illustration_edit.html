@@ -16,7 +16,7 @@
   </head>
 
   <body>
-    <form id="editForm" action="" method="post">
+    <form id="editForm" action="" enctype="multipart/form-data" method="post">
         {% csrf_token %}
 
         {{ form.title.errors }}
@@ -41,6 +41,24 @@
         <div class="input-field">
           <label for="{{ form.tags.id_for_label }}">Tags</label>
           <input id="{{ form.tags.id_for_label }}" name="tags" type="text" maxlength="{{ form.fields.tags.max_length }}" value="{{ form.tags.value }}">
+        </div>
+
+        {{ form.url.errors }}
+        <div class="input-field">
+          <label for="{{ form.url.id_for_label }}">Url</label>
+          <input id="{{ form.url.id_for_label }}" name="url" type="text" maxlength="{{ form.fields.url.max_length }}" value="{{ form.url.value }}">
+        </div>
+
+        {{ form.pdf.errors }}
+        <div class="file-field input-field">
+          <div class="btn blue">
+            <span>PDF</span>
+            <input id="id_pdf" type="file" name="pdf">
+          </div>
+          <div id="pdfclear" class="btn waves-effect waves-light red">Clear</div>
+          <div class="file-path-wrapper">
+            <input id="pdf_path" class="file-path validate" type="text" name="path" value="{{ form.pdf.value }}">
+          </div>
         </div>
 
         {{ form.date.errors }}
@@ -109,56 +127,63 @@
           <div class="card-image" style="background-image: url(/files/image/{{ form.image3.value }}/view);"></div>
         </div>
 
-        <script>
-          $(function(){
-            $('.datepicker').pickadate({
-              selectMonths: true, // Creates a dropdown to control month
-              selectYears: 15 // Creates a dropdown of 15 years to control year
-            });
-
-            $('select').material_select();
-
-            $(".imageNumberSelector").find('input').attr("name", "numberOfImages");
-            $(".imageNumberSelector").find('input').attr("id", "id_numberOfImages");
-            $(".imageNumberSelector").find('input').val({{ form.numberOfImages.value }});
-
-            images = $(".imageNumberSelector").find('input').val();
-            $(".image").each(function(index) {
-              if ($(this).attr("imageID") <= images) {
-                $(this).css("display", "inline-block");
-              } else {
-                $(this).css("display", "none");
-              }
-            });
-          });
-
-          $(".thumbnailPicker").click(function() {
-              imageID = $(this).attr("imageID");
-              thumbWindow = window.open('/files/images');
-          });
-
-          function selectThumnail(src, id) {
-              thumbWindow.close();
-              $("input[imageID^=" + imageID + "]").val(id);
-              $(".thumbnailPicker[imageID^=" + imageID + "]").find("div").css("background-image", "url("+src+")");
-          }
-
-          $(".imageNumberSelector").change(function() {
-            images = $(this).find('input').val();
-            $(".image").each(function(index) {
-              if ($(this).attr("imageID") <= images) {
-                $(this).css("display", "inline-block");
-              } else {
-                $(this).css("display", "none");
-              }
-            });
-          });
-        </script>
-
         <button id="submit" class="btn waves-effect waves-light blue" type="submit" name="action">Save
           <img src="{% static "img/ic_save_white_24px.svg" %}">
         </button>
+
     </form>
+
+    <script>
+      $(function(){
+        $('.datepicker').pickadate({
+          selectMonths: true, // Creates a dropdown to control month
+          selectYears: 15 // Creates a dropdown of 15 years to control year
+        });
+
+        $('select').material_select();
+
+        $(".imageNumberSelector").find('input').attr("name", "numberOfImages");
+        $(".imageNumberSelector").find('input').attr("id", "id_numberOfImages");
+        $(".imageNumberSelector").find('input').val({{ form.numberOfImages.value }});
+
+        images = $(".imageNumberSelector").find('input').val();
+        $(".image").each(function(index) {
+          if ($(this).attr("imageID") <= images) {
+            $(this).css("display", "inline-block");
+          } else {
+            $(this).css("display", "none");
+          }
+        });
+
+        $(".thumbnailPicker").click(function() {
+            imageID = $(this).attr("imageID");
+            thumbWindow = window.open('/files/images');
+        });
+
+        $("#pdfclear").click(function() {
+          $("#id_pdf").val("");
+          $("#pdf_path").val("");
+        });
+      });
+
+      function selectThumnail(src, id) {
+          thumbWindow.close();
+          $("input[imageID^=" + imageID + "]").val(id);
+          $(".thumbnailPicker[imageID^=" + imageID + "]").find("div").css("background-image", "url("+src+")");
+      }
+
+      $(".imageNumberSelector").change(function() {
+        images = $(this).find('input').val();
+        $(".image").each(function(index) {
+          if ($(this).attr("imageID") <= images) {
+            $(this).css("display", "inline-block");
+          } else {
+            $(this).css("display", "none");
+          }
+        });
+      });
+    </script>
+
   </body>
 
 </html>

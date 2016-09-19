@@ -65,6 +65,11 @@ def illustrationEdit(request, illustration_id):
             illustration.description = form.cleaned_data['description']
             illustration.short = form.cleaned_data['short']
             illustration.tags = form.cleaned_data['tags']
+            illustration.url = form.cleaned_data['url']
+            if form.cleaned_data['path'] and 'pdf' in request.FILES:
+                illustration.pdf = request.FILES['pdf']
+            else:
+                illustration.pdf = None
             thumbnail_raw = form.cleaned_data['thumbnail']
             try:
                 thumb_id = int(thumbnail_raw)
@@ -107,6 +112,8 @@ def illustrationEdit(request, illustration_id):
                 'description': '',
                 'short': '',
                 'tags': '',
+                'url': '',
+                'pdf': '',
                 'thumbnail': '0',
                 'numberOfImages': '0',
                 'image1': '0',
@@ -143,6 +150,8 @@ def illustrationEdit(request, illustration_id):
                 'description': illustration.description,
                 'short': illustration.short,
                 'tags': illustration.tags,
+                'url': illustration.url,
+                'pdf': illustration.pdf_getname,
                 'thumbnail': id0,
                 'numberOfImages': illustration.numberOfImages,
                 'image1': id1,

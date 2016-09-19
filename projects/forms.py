@@ -6,6 +6,10 @@ class IllustrationEdit(forms.Form):
     description = forms.CharField(widget=forms.Textarea, max_length=500, required=False, label='Description')
     tags = forms.CharField(max_length=500, required=False, label='Tags')
 
+    url = forms.CharField(max_length=500, required=False, label='URL')
+    pdf = forms.FileField(required=False, label='PDF')
+    path = forms.CharField(max_length=500, required=False, label='PDF name')
+
     thumbnail = forms.IntegerField(required=False, label='Thumbnail')
     thumbnail_size = forms.CharField(max_length=4, label='Thumbnail size (%)')
 
@@ -23,5 +27,5 @@ class TestimonialEdit(forms.Form):
     message = forms.CharField(max_length=1000, label="Message")
 
     date = forms.CharField(max_length=100, label='Date')
-    
+
     thumbnail = forms.IntegerField(required=False, label='Thumbnail')
