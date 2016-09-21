@@ -6,6 +6,9 @@
   padding-bottom: 80px;
   text-align: center;
 }
+#illustrations .slick-prev:before, #illustrations .slick-next:before {
+  color: var(--accent-color);
+}
 .extraDivToFixSlider {
   outline: none;
 }
