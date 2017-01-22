@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  background: var(--background-color);
+  background: #eee;
 }
 #content {
   margin: 50px;
@@ -46,9 +46,9 @@ body {
   background: #fff;
   top: 207px;
   z-index: 100;
-  border-left: 3px solid var(--accent-color);
-  border-right: 3px solid var(--accent-color);
-  border-bottom: 3px solid var(--accent-color);
+  border-left: 3px solid #2196F3;
+  border-right: 3px solid #2196F3;
+  border-bottom: 3px solid #2196F3;
   animation-name: cardDown;
   animation-duration: .5s;
 }
@@ -101,9 +101,9 @@ body {
   font-size: 12px;
 }
 .selected {
-  border-left: 3px solid var(--accent-color);
-  border-right: 3px solid var(--accent-color);
-  border-top: 3px solid var(--accent-color);
+  border-left: 3px solid #2196F3;
+  border-right: 3px solid #2196F3;
+  border-top: 3px solid #2196F3;
 }
 @keyframes cardDown {
     from {height: 0;}

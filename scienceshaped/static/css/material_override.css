@@ -1,23 +1,26 @@
 textarea.materialize-textarea:focus:not([readonly]) {
-  border-bottom: 1px solid var(--accent-color);
-  box-shadow: 0 1px 0 0 var(--accent-color);
+  border-bottom: 1px solid #2196F3;
+  box-shadow: 0 1px 0 0 #2196F3;
 }
 input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly]) {
-  border-bottom: 1px solid var(--accent-color);
-  box-shadow: var(--accent-color) 0 1px 0 0;
+  border-bottom: 1px solid #2196F3;
+  box-shadow: #2196F3 0 1px 0 0;
 }
 .picker__date-display {
-  background: var(--accent-color);
+  background: #2196F3;
 }
 .picker__weekday-display {
-  background: var(--accent-color-dk);
+  background: #1E88E5;
 }
 .picker__day--selected, .picker--focused .picker__day--selected {
-  background-color: var(--accent-color-dk);
+  background-color: #1E88E5;
 }
 .picker__close, .picker__today {
-  color: var(--accent-color);
+  color: #2196F3;
 }
 .picker__input.picker__input--active {
-  border-color: var(--accent-color);
+  border-color: #2196F3;
+}
+.waves-effect.waves-blue .waves-ripple {
+  background-color: rgba(33, 150, 243, 0.65);
 }

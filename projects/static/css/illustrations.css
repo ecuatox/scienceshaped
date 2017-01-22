@@ -7,7 +7,7 @@
   text-align: center;
 }
 #illustrations .slick-prev:before, #illustrations .slick-next:before {
-  color: var(--accent-color);
+  color: #2196F3;
 }
 .extraDivToFixSlider {
   outline: none;
@@ -81,7 +81,7 @@
   height: 600px;
 }
 .filterItem {
-  color: var(--accent-color) !important;
+  color: #2196F3 !important;
   padding: 15px;
 }
 .modal {

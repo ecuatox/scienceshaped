@@ -39,7 +39,7 @@
   position: relative;
   overflow: hidden;
   height: 520px;
-  background-color: var(--accent-color);
+  background-color: #2196F3;
   z-index: -10;
 }
 .para {
@@ -52,7 +52,7 @@
   left: calc(50% - 50vw);
   width: 20vw;
   height: 200vh;
-  background-color: var(--accent-color-li);
+  background-color: #42A5F5;
   transform: rotate(25deg);
 }
 #info-para-container .para3 {
@@ -60,7 +60,7 @@
   right: calc(50% - 50vw);
   width: 20vw;
   height: 200vh;
-  background-color: var(--accent-color-li);
+  background-color: #42A5F5;
   transform: rotate(-50deg);
 }
 #info-para-container .para1 {
@@ -68,7 +68,7 @@
   right: calc(50% - 60vw);
   width: 120vw;
   height: 50vh;
-  background-color: var(--accent-color-dk);
+  background-color: #1E88E5;
   transform: rotate(-10deg);
 }
 #info-para-container .para2 {
@@ -76,6 +76,6 @@
   left: calc(50% - 90vw);
   width: 120vw;
   height: 50vh;
-  background-color: var(--accent-color-dk);
+  background-color: #1E88E5;
   transform: rotate(-20deg);
 }

@@ -1,10 +1,7 @@
-:root{
-    --accent-color: #2196F3;
-    --accent-color-li: #42A5F5;
-    --accent-color-dk: #1E88E5;
-    --accent-color-dk2: #1976D2;
-    --background-color: #eee;
-}
-.waves-effect.waves-blue .waves-ripple {
-  background-color: rgba(33, 150, 243, 0.65);
-}
+/*
+accent-color: #2196F3;
+accent-color-li: #42A5F5;
+accent-color-dk: #1E88E5;
+accent-color-dk2: #1976D2;
+background-color: #eee;
+*/

@@ -1,5 +1,5 @@
 body {
-  background: var(--background-color);
+  background: #eee;
 }
 #imageUploadForm {
   margin: 100px auto;
