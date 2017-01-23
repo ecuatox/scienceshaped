@@ -1,7 +1,7 @@
-/*
-accent-color: #2196F3;
-accent-color-li: #42A5F5;
-accent-color-dk: #1E88E5;
-accent-color-dk2: #1976D2;
-background-color: #eee;
-*/
+:root {
+  --accent-color: #2196F3;
+  --accent-color-li: #42A5F5;
+  --accent-color-dk: #1E88E5;
+  --accent-color-dk2: #1976D2;
+  --background-color: #eee;
+}
