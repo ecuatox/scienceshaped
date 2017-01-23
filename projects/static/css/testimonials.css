@@ -5,14 +5,17 @@
   position: relative;
   z-index: 10;
 }
+
 #slider {
   width: 80%;
   margin: auto;
 }
+
 #testimonials h1 {
   text-align: center;
   color: #fff;
 }
+
 .testimonial {
   position: relative;
   margin: 20px 100px;
@@ -21,24 +24,30 @@
   overflow: hidden;
   outline: 0;
 }
+
 .testimonialText {
   width: calc(90% - 200px);
   float: right;
 }
+
 .testimonialMessage {
   font-size: 16px;
 }
+
 .testimonialPerson {
   font-size: 14px;
   font-weight: bold;
 }
+
 .testimonialJob {
   font-size: 14px;
   margin-top: -14px;
 }
+
 .testimonialLeft {
   float: left;
 }
+
 .testimonialImage {
   width: 150px;
   height: 150px;
@@ -46,20 +55,24 @@
   margin-left: 50px;
   margin-top: 65px;
 }
+
 .quote {
   float: left;
   margin-top: 10px;
   margin-left: -5px;
 }
+
 #newTestimonial {
   position: absolute;
   top: 50px;
   left: 3%;
 }
+
 #testimonialEditor {
   margin-left: 20px;
   margin-top: 20px;
 }
+
 #testimonial-para-container {
   position: relative;
   overflow: hidden;
@@ -68,6 +81,7 @@
   padding-top: 60px;
   padding-bottom: 100px;
 }
+
 #testimonial-para-container .para4 {
   bottom: calc(50% - 80vh);
   left: calc(50% - 50vw);
@@ -76,6 +90,7 @@
   background-color: #42A5F5;
   transform: rotate(40deg);
 }
+
 #testimonial-para-container .para3 {
   top: calc(50% - 110vh);
   right: calc(50% - 50vw);
@@ -84,6 +99,7 @@
   background-color: #42A5F5;
   transform: rotate(-50deg);
 }
+
 #testimonial-para-container .para2 {
   top: calc(50% - 20vh);
   left: calc(50% - 120vw);

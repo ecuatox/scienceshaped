@@ -1,40 +1,50 @@
 #info {
   z-index: 10;
 }
+
 #infoContent {
   width: 90%;
   max-width: 1000px;
   margin: 50px auto;
 }
+
 .on-top {
   z-index: -10;
 }
+
 #info .btn-flat {
   display: inline-block;
   margin-bottom: 24px;
 }
+
 #info h1 {
   display: inline-block;
 }
+
 #infoTop {
   height: 50px;
   text-align: center;
 }
+
 #infoForm {
   text-align: center;
   margin-top: 50px;
 }
+
 #infoForm label {
   display: none;
 }
+
 #infoEditButton {
   position: absolute;
   top: 140px;
   left: 10px;
 }
+
 #infoForm #submit {
   width: 840px;
 }
+
 #info-para-container {
   position: relative;
   overflow: hidden;
@@ -42,11 +52,13 @@
   background-color: #2196F3;
   z-index: -10;
 }
+
 .para {
   position: absolute;
   display: block;
   z-index: -10;
 }
+
 #info-para-container .para4 {
   bottom: calc(50% - 80vh);
   left: calc(50% - 50vw);
@@ -55,6 +67,7 @@
   background-color: #42A5F5;
   transform: rotate(25deg);
 }
+
 #info-para-container .para3 {
   top: calc(50% - 110vh);
   right: calc(50% - 50vw);
@@ -63,6 +76,7 @@
   background-color: #42A5F5;
   transform: rotate(-50deg);
 }
+
 #info-para-container .para1 {
   bottom: calc(50% - 85vh);
   right: calc(50% - 60vw);
@@ -71,6 +85,7 @@
   background-color: #1E88E5;
   transform: rotate(-10deg);
 }
+
 #info-para-container .para2 {
   top: calc(50% - 50vh);
   left: calc(50% - 90vw);

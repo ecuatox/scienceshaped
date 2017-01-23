@@ -1,6 +1,7 @@
 html {
   background: #fff;
 }
+
 body {
   margin: 0;
   display: flex;
@@ -8,24 +9,31 @@ body {
   flex-direction: column;
   background: #eee;
 }
+
 #footerSpacer {
   flex: 1 0 auto;
 }
+
 footer {
   margin: 0 !important;
 }
+
 h1 {
   font-size: 48px !important;
 }
+
 h2 {
   font-size: 28px !important;
 }
+
 h3 {
   font-size: 24px !important;
 }
+
 h4 {
   font-size: 20px !important;
 }
+
 h5 {
   font-size: 16px !important;
 }

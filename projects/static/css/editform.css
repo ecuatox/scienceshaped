@@ -1,22 +1,26 @@
 body {
   background-color: #eee;
 }
+
 #submit {
   width: 100%;
   margin-top: 30px;
 }
+
 form {
   width: 90%;
   max-width: 600px;
   margin: 100px auto;
 }
+
 .imageItem {
   width: 180px;
   height: 180px;
   position: relative;
   margin: 6px 8px;
-  border: 3px solid rgba(0,0,0,0);
+  border: 3px solid rgba(0, 0, 0, 0);
 }
+
 .card-image {
   position: relative;
   height: 165px;
@@ -26,12 +30,15 @@ form {
   background-size: cover;
   border-radius: 3px;
 }
+
 .image {
   display: none;
 }
+
 .collapsible-body {
   padding: 20px 50px;
 }
+
 .imageNumberSelector {
   margin-top: 50px;
 }

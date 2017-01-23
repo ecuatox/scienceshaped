@@ -6,31 +6,38 @@
   padding-bottom: 80px;
   text-align: center;
 }
+
 #illustrations .slick-prev:before, #illustrations .slick-next:before {
   color: #2196F3;
 }
+
 .extraDivToFixSlider {
   outline: none;
 }
+
 #illustrationsTop {
   position: absolute;
   left: 40%;
   transform: translate(0, -50%);
   z-index: 10;
 }
+
 #illustrations h1 {
   float: left;
 }
+
 .illustration {
   width: 360px;
   margin: 7px 5px;
   display: inline-block;
   text-align: left;
 }
+
 .illustration .card-image {
   position: relative;
   height: 300px;
 }
+
 .illustration .card-image img {
   width: auto;
   height: auto;
@@ -39,67 +46,83 @@
   top: 50%;
   transform: translate(-50%, -50%);
 }
+
 .illustration .card-content {
   height: 160px;
   margin-top: -30px;
 }
+
 .illustration .card-content p {
   word-wrap: break-word;
   max-height: 105px;
   overflow: hidden;
 }
+
 .illustration .cardActions {
   height: 50px;
 }
+
 .illustration .cardActions .btn-flat {
   margin-top: -14px;
 }
+
 .adminActions {
   text-align: center;
   height: 45px;
 }
+
 .adminActions .btn-flat {
   margin-top: -20px;
 }
+
 .illustration .readmore, .editorButton {
   color: #000 !important;
 }
+
 #categoriesButtonDiv {
   float: left;
   margin-top: 36px;
   margin-left: 20px;
 }
+
 #categoriesDiv {
   margin-top: 100px;
 }
+
 #newIco {
   position: absolute;
   left: 35px;
   top: 110px;
 }
+
 #illustrationSlider {
   height: 600px;
 }
+
 .filterItem {
   color: #2196F3 !important;
   padding: 15px;
 }
+
 .modal {
   width: 840px;
   text-align: left;
 }
+
 .modal-content .imageItem {
   height: 100px;
   width: 100px;
 }
+
 .modal-content .imageItem {
   width: 180px;
   height: 180px;
   position: relative;
   margin: 6px 4px;
-  display: inline-block;;
-  border: 3px solid rgba(0,0,0,0);
+  display: inline-block;
+  border: 3px solid rgba(0, 0, 0, 0);
 }
+
 .modal-content .card-image {
   position: relative;
   height: 165px;
@@ -109,12 +132,15 @@
   background-size: cover;
   border-radius: 3px;
 }
+
 .modal-images {
   text-align: center;
 }
+
 .modal-footer {
   position: absolute;
 }
+
 .modal-footer .date {
   position: absolute;
   top: 3px;

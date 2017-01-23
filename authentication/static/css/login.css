@@ -1,9 +1,11 @@
 body {
   background: #eee;
 }
+
 #submit {
   width: 100%;
 }
+
 #loginForm {
   width: 90%;
   max-width: 400px;

@@ -11,6 +11,7 @@
   -moz-transition: 0.3s ease-in;
   -webkit-transition: 0.3s ease-in;
 }
+
 #logo {
   position: absolute;
   left: 30px;
@@ -19,6 +20,7 @@
   -moz-transition: 0.3s ease-in;
   -webkit-transition: 0.3s ease-in;
 }
+
 #menu {
   position: absolute;
   right: 40px;
@@ -27,6 +29,7 @@
   -moz-transition: 0.3s ease-in;
   -webkit-transition: 0.3s ease-in;
 }
+
 #menu li {
   display: inline-block;
   transition: 0.3s ease-in;
@@ -34,6 +37,7 @@
   -moz-transition: 0.3s ease-in;
   -webkit-transition: 0.3s ease-in;
 }
+
 #user {
   position: absolute;
   right: 6px;
@@ -42,38 +46,49 @@
   -moz-transition: 0.3s ease-in;
   -webkit-transition: 0.3s ease-in;
 }
+
 #user .btn-flat {
   padding: 0 4px;
 }
+
 #header.headerLarge {
   height: 120px;
 }
+
 #header.headerSmall {
   height: 50px;
 }
+
 .headerLarge #logo {
   height: 80px;
   top: 20px;
 }
+
 .headerSmall #logo {
   height: 40px;
   top: 5px;
 }
+
 .headerLarge #menu {
   top: 0px;
 }
+
 .headerSmall #menu {
   top: -10px;
 }
+
 .headerLarge #menu li {
   margin: 10px;
 }
+
 .headerSmall #menu li {
   margin: 0 10px;
 }
+
 .headerLarge #user {
   top: 2px;
 }
+
 .headerSmall #user {
   top: -20px;
 }

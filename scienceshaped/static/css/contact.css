@@ -2,11 +2,13 @@
   margin: 100px 0;
   text-align: center;
 }
+
 #contactForm {
   width: 90%;
   max-width: 800px;
   margin: 0 auto;
 }
+
 #submit {
   width: 100%;
 }
