@@ -1,20 +1,26 @@
-<div id="deleteModal" style="width: 600px;" class="modal">
-  <div class="modal-content">
-    <h4>Are you sure?</h4>
+<div class="ui small modal delete">
+  <div class="header">
+    Are you sure?
+  </div>
+  <div class="content">
     <p>It will be permanently deleted!</p>
   </div>
-  <div class="modal-footer">
-    <a id="deleteButton" href="" class="modal-action modal-close waves-effect waves-blue btn-flat">Delete</a>
-    <a id="cancelButton" class="modal-action modal-close waves-effect waves-blue btn-flat">Cancel</a>
+  <div class="actions">
+    <div class="ui button cancel">
+      Cancel
+    </div>
+    <a href="/" class="ui icon red button delete approve">
+      Delete
+      <i class="trash icon"></i>
+    </a>
   </div>
 </div>
 
+
+
 <script>
-  $("#deleteModal").click(function() {
-    $('#deleteModal').closeModal();
-  });
-  $(".delete").click(function() {
-    $('#deleteModal').openModal();
-    $("#deleteButton").attr("href", $(this).attr("url"));
+  $(".delete.openmodal").click(function() {
+    $('.delete.modal').modal('show');
+    $(".delete.button").attr("href", $(this).attr("url"));
   });
 </script>

@@ -74,10 +74,10 @@
         {% if request.user|inGroup:"editor" %}
           <div class="card-action adminActions">
             <a href="/projects/illustration/{{ illustration.id }}/edit" class="waves-effect waves-blue btn-flat editorButton">Edit</a>
-            <a url="/projects/illustration/{{ illustration.id }}/delete/" class="waves-effect waves-blue btn-flat editorButton delete">Delete</a>
           </div>
         {% endif %}
       </div>
+              <a url="/projects/illustration/{{ illustration.id }}/delete/" class="waves-effect waves-blue btn-flat editorButton delete modalopen">Delete</a>
       </div>
     {% endfor %}
   </div>

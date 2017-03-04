@@ -18,7 +18,7 @@
             {% if request.user|inGroup:"editor" %}
             <div id="testimonialEditor">
               <a href="/projects/testimonial/{{ testimonial.id }}/edit" class="waves-effect waves-blue btn-flat editorButton">Edit</a>
-              <a url="/projects/testimonial/{{ testimonial.id }}/delete/" class="waves-effect waves-blue btn-flat editorButton delete">Delete</a>
+              <a url="/projects/testimonial/{{ testimonial.id }}/delete/" class="waves-effect waves-blue btn-flat editorButton delete openmodal">Delete</a>
             </div>
             {% endif %}
           </div>
