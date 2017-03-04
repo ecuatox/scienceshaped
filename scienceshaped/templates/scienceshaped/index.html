@@ -1,0 +1,19 @@
+{% load staticfiles %}
+
+{% block head %}
+  <link href="{% static "scienceshaped/css/about.css" %}" rel="stylesheet">
+  <link href="{% static "scienceshaped/css/header.css" %}" rel="stylesheet">
+  <link href="{% static "scienceshaped/css/contact.css" %}" rel="stylesheet">
+{% endblock head %}
+
+{% block content %}
+
+  {% include 'info.html' %}
+  {% include 'illustrations.html' %}
+  {% include 'testimonials.html' %}
+  {% include 'imagepopup.html' %}
+  {% include 'delete.html' %}
+  {% include 'about.html' %}
+  {% include 'contact.html' %}
+
+{% endblock content %}

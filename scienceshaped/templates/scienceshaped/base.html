@@ -1,0 +1,58 @@
+{% load staticfiles %}
+{% load authentication_groups %}
+
+<html>
+
+  {% if request.user|inGroup:"editor" or not hidden %}
+    <head>
+
+      <title>
+        {% block title %}
+          ScienceShaped
+        {% endblock title %}
+      </title>
+      <link rel="shortcut icon" type="image/ico" href="{% static "img/favicon.ico" %}"/>
+      <link href="{% static "scienceshaped/css/semantic.min.css" %}" rel="stylesheet">
+      <link href="{% static "scienceshaped/css/style.css" %}" rel="stylesheet">
+
+      <script src="{% static "scienceshaped/js/jquery.min.js" %}"></script>
+      <script src="{% static "scienceshaped/js/semantic.min.js" %}"></script>
+      <script src="{% static "scienceshaped/js/scroll.js" %}"></script>
+
+      <script src="{% static "scienceshaped/js/analytics.js" %}"></script>
+
+      {% block head %}
+
+
+      {% endblock head %}
+
+    </head>
+
+    {% block header %}
+
+      {% include 'scienceshaped/header.html' %}
+
+    {% endblock header %}
+
+
+    <body>
+
+      {% block content %}
+
+      {% endblock content %}
+
+    </body>
+
+
+    {% block footer %}
+
+      {% include 'scienceshaped/footer.html' %}
+
+    {% endblock footer %}
+
+
+  {% else %}
+    <img style="display: block; margin: 200px auto; max-width: 800px; width: 90%;" src="/static/img/card.png">
+  {% endif %}
+
+</html>
