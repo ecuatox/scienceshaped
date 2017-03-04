@@ -155,6 +155,6 @@ def imageEdit(request, image_id):
             'form': form,
         }
 
-        return render(request, 'image_edit.html', context)
+        return render(request, 'files/image_edit.html', context)
     else:
         return HttpResponseRedirect('/login')
