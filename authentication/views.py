@@ -31,7 +31,7 @@ def login(request):
         'message': message,
     }
 
-    return render(request, 'login.html', context)
+    return render(request, 'authentication/login.html', context)
 
 def logout(request):
     if request.user.is_authenticated():
