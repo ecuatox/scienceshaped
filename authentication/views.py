@@ -6,6 +6,10 @@ from django.contrib.auth import login as auth_login, logout as auth_logout
 
 def login(request):
     message = ''
+    form = Login(initial={
+        'username': '',
+    })
+
     if request.method == 'POST':
         form = Login(request.POST)
         if form.is_valid():
@@ -17,11 +21,10 @@ def login(request):
                     auth_login(request, user)
                     return HttpResponseRedirect('/')
                 else:
-                    message = 'Your account has been disabled!'
+                    message = 'Account disabled'
             else:
-                message = 'The password was incorrect or the user does not exist.'
-    else:
-        form = Login()
+                message = 'Wrong password'
+
 
     context = {
         'form': form,

@@ -1,37 +1,80 @@
+{% extends 'scienceshaped/base.html' %}
 {% load staticfiles %}
-<html>
 
-  <head>
-    <title>Log in</title>
-    {% include 'material_design_links.html' %}
-    <link href="{% static "css/button_image.css" %}" rel="stylesheet">
-    <link href="{% static "css/login.css" %}" rel="stylesheet">
-    <link rel="shortcut icon" type="image/ico" href="{% static "img/favicon.ico" %}"/>
-  </head>
+{% block title %}
+  Login
+{% endblock title %}
 
-  <body>
+{% block head %}
+  <link href="{% static "authentication/css/login.css" %}" rel="stylesheet">
+{% endblock head %}
 
-    <form id="loginForm" action="" method="post">
-        <p>{{ message }}</p>
+{% block header %}
+{% endblock header %}
+
+{% block footer %}
+{% endblock footer %}
+
+
+{% block content %}
+
+  <div class="ui middle aligned center aligned grid">
+    <div class="column">
+      <h2 class="ui header blue">
+        Login
+      </h2>
+      <form class="ui large form" action="" method="post">
 
         {% csrf_token %}
 
-        {{ form.username.errors }}
-        <div class="input-field">
-          <label for="{{ form.username.id_for_label }}">Username</label>
-          <input id="{{ form.username.id_for_label }}" name="username" type="text" maxlength="{{ form.fields.username.max_length }}">
+        <div class="ui segment">
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="user icon"></i>
+              <input id="{{ form.username.id_for_label }}"
+                name="username"
+                placeholder="username"
+                type="text"
+                maxlength="{{ form.fields.username.max_length }}"
+                value="{{ form.username.value }}">
+            </div>
+
+            {% if form.username.errors %}
+              <div class="ui blue pointing label">
+                {{ form.username.errors.0 }}
+              </div>
+            {% endif %}
+          </div>
+
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="lock icon"></i>
+              <input id="{{ form.password.id_for_label }}"
+                name="password"
+                placeholder="password"
+                type="password"
+                maxlength="{{ form.fields.password.max_length }}">
+            </div>
+
+            {% if form.password.errors %}
+              <div class="ui blue pointing label">
+                {{ form.password.errors.0 }}
+              </div>
+            {% endif %}
+          </div>
+
+          {% if message %}
+            <div class="ui tiny red message">
+              <p>{{ message }}</p>
+            </div>
+          {% endif %}
+
+          <div class="ui fluid large submit button blue">Login</div>
+          <script src="{% static "authentication/js/login.js" %}"></script>
+
         </div>
+      </form>
+    </div>
+  </div>
 
-        {{ form.password.errors }}
-        <div class="input-field">
-          <label for="{{ form.password.id_for_label }}">Password</label>
-          <input id="{{ form.password.id_for_label }}" name="password" type="password" type="text" maxlength="{{ form.fields.password.max_length }}">
-        </div>
-
-        <button id="submit" class="btn waves-effect waves-light blue" type="submit" name="action">Log in
-          <img src="{% static "img/ic_face_white_24px.svg" %}">
-        </button>
-    </form>
-  </body>
-
-</html>
+{% endblock content %}
