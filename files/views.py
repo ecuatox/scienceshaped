@@ -19,7 +19,7 @@ def findId(title):
     return number
 
 def fileExt(name):
-    return name.split('.')[-1:][0]
+    return str(name.split('.')[-1:][0].lower)
 
 def saveImage(file, title, description, tags):
     savename = title.lower()
@@ -98,7 +98,7 @@ def images(request):
             'form': form,
             'searchText': searchText,
         }
-        return render(request, 'images.html', context)
+        return render(request, 'files/images.html', context)
     else:
         return HttpResponseRedirect('/login')
 
@@ -151,6 +151,7 @@ def imageEdit(request, image_id):
                 'tags': image.tags,
                 'file': image.file,
             })
+
         context = {
             'form': form,
         }

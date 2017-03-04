@@ -12,84 +12,84 @@
 {% endblock %}
 
 {% block head %}
-  <link href="{% static "css/images.css" %}" rel="stylesheet">
+  <link href="{% static "files/css/images.css" %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
 
-  <form id="searchForm" action="/files/images/" method="post">
-    <!-- <label>Title or tag:</label> -->
-    {% csrf_token %}
-    <input id="id_search" name="search" type="text" maxlength="100" value="{{ searchText }}">
-    <button id="submit" class="btn waves-effect waves-light blue" type="submit" name="action">Search
-      <img src="{% static "img/ic_search_white_24px.svg" %}">
-    </button>
-  </form>
-  <a id="upload" class="waves-effect waves-light btn blue">Upload<img src="{% static "img/ic_file_upload_white_24px.svg" %}"></a>
+  <div class="images section">
+    <form class="ui form" action="/files/images/" method="post">
+      {% csrf_token %}
+      <div class="field">
+        <input type="text"
+        name="search"
+        maxlength="100"
+        value="{{ searchText }}">
+      </div>
+      <button class="ui button blue submit" name="action">
+        <i class="search icon"></i>
+        Search
+      </button>
+      <a class="ui button blue upload" href="/files/image-upload">
+        <i class="upload icon"></i>
+        Upload
+      </a>
+    </form>
 
-  {% for image in images %}
-    <div class="ui card">
-      <div class="image">
-        <img src="{{ image.url }}">
-      </div>
-      <div class="content">
-        <a class="header">
-          {% if image.title|length > 18 %}
-            {{ image.title|slice:":15"|capfirst }}...
-          {% else %}
-            {{ image.title|capfirst }}
-            {% if image.number > 1 %}
-              {{ image.number }}
-            {% endif %}
-          {% endif %}
-        </a>
-        <div class="meta">
-          <span class="date">{{ image.time|date:"M d, Y, H:i:s" }}</span>
+
+    <div class="gallery">
+      {% for image in images %}
+        <div class="ui card">
+          <div class="image">
+            <img src="{{ image.url }}">
+          </div>
+          <div class="content txt">
+            <p class="title">
+              {% if image.title|length > 18 %}
+                {{ image.title|slice:":15"|capfirst }}...
+              {% else %}
+                {{ image.title|capfirst }}
+                {% if image.number > 1 %}
+                  {{ image.number }}
+                {% endif %}
+              {% endif %}
+            </p>
+            <div class="meta">
+              <span class="date">{{ image.time|date:"M d, Y, H:i:s" }}</span>
+            </div>
+          </div>
+          <div class="content btns">
+            <div class="ui small icon buttons">
+              <div class="ui blue icon button previewButton" data-content="Preview"
+                previewImage="{{ image.url }}">
+                <i class="image icon"></i>
+              </div>
+              <div class="ui green icon button selectButton" data-content="Select"
+                selectID={{ image.id }}
+                selectImage="{{ image.url }}">
+                <i class="hand pointer icon"></i>
+              </div>
+              <a class="ui yellow icon button editButton" data-content="Edit"
+                href="/files/image/{{ image.id }}/edit">
+                <i class="write icon"></i>
+              </a>
+              <div class="ui red icon button delete openmodal" data-content="Delete"
+                url="/files/image/{{ image.id }}/delete/">
+                <i class="trash icon"></i>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="extra content">
-        <div class="ui small icon buttons">
-          <div class="ui blue icon button previewButton" data-content="Preview"
-            previewImage="{{ image.url }}">
-            <i class="image icon"></i>
-          </div>
-          <div class="ui green icon button selectButton" data-content="Select"
-            selectID={{ image.id }}
-            selectImage="{{ image.url }}">
-            <i class="hand pointer icon"></i>
-          </div>
-          <a class="ui yellow icon button editButton" data-content="Edit"
-            href="/files/image/{{ image.id }}/edit">
-            <i class="write icon"></i>
-          </a>
-          <div class="ui red icon button delete openmodal" data-content="Delete"
-            url="/files/image/{{ image.id }}/delete/">
-            <i class="trash icon"></i>
-          </div>
-        </div>
+        {% endfor %}
       </div>
     </div>
-  {% endfor %}
+  </div>
 
   {% include 'scienceshaped/delete.html' %}
 
   {% include 'files/imagepopup.html' %}
 
-  <script>
-    $("#upload").click(function() {
-      uploadWindow = window.open('/files/image-upload/');
-    });
-
-    $(".selectButton").click(function() {
-      var src = $(this).attr("selectImage");
-      var id = $(this).attr("selectID");
-      window.opener.selectThumnail(src, id);
-    });
-
-    function doneUploading(src) {
-      uploadWindow.close();
-      location.reload();
-    }
-  </script>
+  <script src="{% static "scienceshaped/js/masonry.min.js" %}"></script>
+  <script src="{% static "files/js/images.js" %}"></script>
 
 {% endblock content %}
