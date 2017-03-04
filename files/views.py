@@ -61,7 +61,7 @@ def imageUpload(request):
                 context = {
                     'src': img.file.name,
                 }
-                return render(request, 'image_upload_done.html', context)
+                return render(request, 'files/image_upload_done.html', context)
         else:
             form = ImageUpload(initial={
                 'description': '',
@@ -72,7 +72,7 @@ def imageUpload(request):
         context = {
             'form': form,
         }
-        return render(request, 'image_upload.html', context)
+        return render(request, 'files/image_upload.html', context)
     else:
         return HttpResponseRedirect('/login')
 

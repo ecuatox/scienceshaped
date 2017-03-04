@@ -1,50 +1,123 @@
+{% extends 'scienceshaped/base.html' %}
 {% load staticfiles %}
-<html>
 
-  <head>
-    <title>Upload new image</title>
-    <link href="{% static "css/image_upload.css" %}" rel="stylesheet">
-    <link href="{% static "css/button_image.css" %}" rel="stylesheet">
-    <link rel="shortcut icon" type="image/ico" href="{% static "img/favicon.ico" %}"/>
-  </head>
+{% block title %}
+  Upload new image
+{% endblock title %}
 
-  <body>
-    <form id="imageUploadForm" action="/files/image-upload/" enctype="multipart/form-data" method="post">
-        {% csrf_token %}
+{% block header %}
+{% endblock header %}
 
-        {{ form.title.errors }}
-        <div class="input-field">
-          <label for="{{ form.title.id_for_label }}">Title</label>
-          <input id="id_title" name="title" type="text" maxlength="{{ form.fields.title.max_length }}" value="{{ form.title.value }}">
-        </div>
+{% block footer %}
+{% endblock footer %}
 
-        {{ form.description.errors }}
-        <div class="input-field">
-          <label for="{{ form.description.id_for_label }}">Description</label>
-          <textarea id="{{ form.description.id_for_label }}" name="description" class="materialize-textarea" maxlength="{{ form.field.description.max_length }}">{{ form.description.value }}</textarea>
-        </div>
+{% block head %}
+  <link href="{% static "files/css/image_upload.css" %}" rel="stylesheet">
+{% endblock head %}
 
-        {{ form.tags.errors }}
-        <div class="input-field">
-          <label for="{{ form.tags.id_for_label }}">Tags</label>
-          <input id="id_tags" name="tags" type="text" maxlength="{{ form.fields.tags.max_length }}" value="{{ form.tags.value }}">
-        </div>
+{% block content %}
 
-        {{ form.file.errors }}
-        <div class="file-field input-field">
-          <div class="btn blue">
-            <span>File</span>
-            <input id="id_file" type="file" name="file">
+<div class="ui middle aligned center aligned grid">
+  <div class="column">
+    <h2 class="ui header blue">
+      Upload new image
+    </h2>
+    <form class="ui large form" action="/files/image-upload/" enctype="multipart/form-data" method="post">
+      {% csrf_token %}
+
+      <div class="ui segment">
+        <div class="field">
+          <label for="{{ form.title.id_for_label }}">
+            Title
+          </label>
+          <div class="ui left input">
+            <input id="{{ form.title.id_for_label }}"
+              name="title"
+              placeholder=""
+              type="text"
+              maxlength="{{ form.fields.title.max_length }}"
+              value="{{ form.title.value }}">
           </div>
-          <div class="file-path-wrapper">
-            <input class="file-path validate" type="text">
-          </div>
+
+          {% if form.title.errors %}
+            <div class="ui blue pointing label">
+              {{ form.title.errors.0 }}
+            </div>
+          {% endif %}
         </div>
 
-        <button id="submit" class="btn waves-effect waves-light blue" type="submit" name="action">Submit
-          <img src="{% static "img/ic_send_white_24px.svg" %}">
-        </button>
+        <div class="field">
+          <label for="{{ form.description.id_for_label }}">
+            Description
+          </label>
+          <div class="ui left input">
+            <textarea id="{{ form.description.id_for_label }}"
+              name="description"
+              placeholder=""
+              type="text"
+              maxlength="{{ form.fields.description.max_length }}"
+            >{{ form.description.value }}</textarea>
+          </div>
+
+          {% if form.description.errors %}
+            <div class="ui blue pointing label">
+              {{ form.description.errors.0 }}
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="ui fluid multiple search normal selection dropdown">
+          <input id="{{ form.tags.id_for_label }}"
+            type="hiddel"
+            name="tags"
+            type="text"
+            maxlength="{{ form.fields.tags.max_length }}"
+            value="{{ form.tags.value }}">
+          <i class="dropdown icon"></i>
+          <div class="default text">Select Tags</div>
+          <div class="menu">
+            {% for tag in tags %}
+              <div class="item" data-value="{{ tag }}">{{ tag|title }}</div>
+            {% endfor %}
+          </div>
+
+          {% if form.tags.errors %}
+            <div class="ui blue pointing label">
+              {{ form.tags.errors.0 }}
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="field file">
+          <div class="disabled field">
+            <input id="file_dummy" type="text" disabled="" tabindex="-1" value="{{ form.file.value }}">
+          </div>
+
+          <label for="id_file" class="ui icon button upload blue">
+            <i class="file icon"></i>
+            File
+          </label>
+          <input id="id_file" type="file" name="file">
+
+          {% if form.file.errors %}
+            <div class="ui blue pointing label">
+              {{ form.file.errors.0 }}
+            </div>
+          {% endif %}
+        </div>
+
+        {% if message %}
+          <div class="ui tiny red message">
+            <p>{{ message }}</p>
+          </div>
+        {% endif %}
+
+        <div class="ui fluid large submit button blue">Save</div>
+
+      </div>
     </form>
-  </body>
+    <script src="{% static "files/js/image_upload.js" %}"></script>
+  </div>
+</div>
 
-</html>
+{% endblock content %}
