@@ -1,8 +1,7 @@
 {% load staticfiles %}
-<link href="{% static "css/header.css" %}" rel="stylesheet">
 
 <div id="header" class="headerLarge">
-  <a href="#top"><img id="logo" src="{% static "img/logo.png" %}" /></a>
+  <a href="#top"><img id="logo" src="{% static "scienceshaped/img/logo.png" %}" /></a>
   {% if request.user.is_authenticated %}
     <div id="user">
       Logged in as {{ request.user.first_name }}. <a href="/authentication/logout">Log out</a>
