@@ -90,3 +90,18 @@ form a.upload {
   width: 202px !important;
   display: inline-block !important;
 }
+
+@media only screen and (max-width: 500px) {
+  a.upload, button.submit {
+    position: relative !important;
+    left: 0 !important;
+  }
+
+  a.upload {
+    margin: 6px 0 !important;
+  }
+
+  .card, form a.upload, form button.submit, form input {
+    width: 95% !important;
+  }
+}

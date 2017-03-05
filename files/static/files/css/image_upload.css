@@ -1,6 +1,7 @@
 .column {
   max-width: 800px;
-  margin-top: 100px;
+  width: 90% !important;
+  margin-top: 30px;
 }
 
 #id_file {

@@ -67,6 +67,7 @@ def imageUpload(request):
                 'description': '',
                 'title': '',
                 'tags': '',
+                'file': '',
             })
 
         context = {
