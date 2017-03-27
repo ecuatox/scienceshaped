@@ -1,0 +1,79 @@
+{% extends 'scienceshaped/base.html' %}
+
+{% block header %}
+{% endblock header %}
+
+{% block footer %}
+{% endblock footer %}
+
+{% block content %}
+<div class="ui middle aligned center aligned grid">
+  <div class="column">
+    <h2 class="ui header blue">
+      Edit content
+    </h2>
+    <div class="ui theme buttons">
+      <div class="ui button blue dark">Dark</div>
+      <div class="ui button blue light">Light</div>
+    </div>
+    <form action="" method="post">
+      {% csrf_token %}
+      {{ form.media }}
+      {{ form.as_p }}
+    </form>
+    <div class="ui fluid large submit button blue">Save</div>
+  </div>
+</div>
+
+<style>
+  .column {
+    margin-top: 100px;
+    width: 842px !important;
+    padding: 0 !important;
+  }
+  .submit.button {
+    width: 100% !important;
+  }
+  .theme.buttons {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+</style>
+
+<script>
+  $('.submit').click(function() {
+    $('form').submit();
+  });
+
+  light = true;
+
+  function lighten() {
+    $('.cke_wysiwyg_frame').contents().find('.cke_editable').css('background-color', '#fff');
+  }
+  function darken() {
+    $('.cke_wysiwyg_frame').contents().find('.cke_editable').css('background-color', '#444');
+  }
+
+  $('.dark').click(function() {
+    light = false;
+    darken();
+  });
+  $('.light').click(function() {
+    light = true;
+    lighten();
+  });
+  $(function() {
+    setTimeout(function() {
+      $('.cke_button__source').click(function() {
+        if (light) {
+          setTimeout(function() {lighten();}, 50);
+        } else {
+          setTimeout(function() {darken();}, 50);
+        }
+      });
+    }, 500);
+  });
+
+</script>
+{% endblock content %}

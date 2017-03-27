@@ -13,9 +13,9 @@ urlpatterns = [
     url(r'^projects/', include('projects.urls')),
     url(r'^files/', include('files.urls')),
     url(r'^authentication/', include('authentication.urls')),
+    url(r'^contentbox/', include('contentbox.urls')),
     url(r'^login/', views.login, name='login'),
     url(r'^filter/(?P<tag>.*)/', views.index, name='filter'),
-    url(r'^infoEdit', views.infoEdit, name='info-edit'),
 ]
 
 if settings.DEBUG:
