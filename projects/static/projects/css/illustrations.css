@@ -7,10 +7,6 @@
   text-align: center;
 }
 
-#illustrations .slick-prev:before, #illustrations .slick-next:before {
-  color: #2196F3;
-}
-
 .extraDivToFixSlider {
   outline: none;
 }

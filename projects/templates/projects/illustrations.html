@@ -1,0 +1,153 @@
+{% load staticfiles %}
+{% load authentication_groups %}
+
+<section id="illustrations">
+  <div id="illustrationsTop">
+    <h1>Illustrations</h1>
+
+    <div class="ui floating dropdown labeled icon button">
+      <i class="filter icon"></i>
+      <span class="text">Filter Posts</span>
+      <div class="menu">
+        <div class="ui icon search input">
+          <i class="search icon"></i>
+          <input type="text" placeholder="Search tags...">
+        </div>
+        <div class="divider"></div>
+        <div class="header">
+          <i class="tags icon"></i>
+          Tag Label
+        </div>
+        <div class="scrolling menu">
+          <div class="item" tag="all">
+            <div class="ui empty circular label"></div>
+            All
+          </div>
+          {% for tag in tags %}
+            <div class="item" tag="{{ tag|lower }}">
+              <div class="ui empty circular label"></div>
+              { tag|title }}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <script>
+      $(".filterItem").click(function() {
+        var tag = $(this).attr("tag");
+        if (tag == "all") {
+
+        } else {
+
+        }
+      });
+    </script>
+  </div>
+
+  <br><br>
+
+  <div id="gallery">
+    <div class="grid">
+
+    {% for illustration in illustrations %}
+      <div class="grid-item">
+        <div class="illustration ui card" tags="{{ illustration.tags|lower }}">
+          <div class="previewButton" previewImage="{{ illustration.thumbnail.url }}">
+            <!--<a class="modal-trigger" href="#modal-image{{ illustration.id }}">-->
+              <img src="{{ illustration.thumbnail.url }}" style="max-width: calc({{ illustration.thumbnail_size }} / 100 * 350px); max-height: calc({{ illustration.thumbnail_size }} / 100 * 300px);">
+            <!--</a>-->
+          </div>
+          <div class="content">
+            <h4>{{ illustration.title }}</h4>
+            <p>
+              {% for line in illustration.short_lines %}
+                {{ line }}<br>
+              {% endfor %}
+            </p>
+          </div>
+          <div class="extra content">
+            <a class="modal-trigger waves-effect waves-blue btn-flat readmore" href="#modal-readmore{{ illustration.id }}">More</a>
+          </div>
+          {% if request.user|inGroup:"editor" %}
+            <div class="extra content adminActions">
+              <a href="/projects/illustration/{{ illustration.id }}/edit" class="waves-effect waves-blue btn-flat editorButton">Edit</a>
+              <a url="/projects/illustration/{{ illustration.id }}/delete/" class="waves-effect waves-blue btn-flat editorButton delete modalopen">Delete</a>
+            </div>
+          {% endif %}
+          <div class="ui active dimmer">
+            <div class="ui loader"></div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  {% for illustration in illustrations %}
+    <div id="modal-readmore{{ illustration.id }}" class="modal modal-fixed-footer">
+      <div class="modal-content">
+        <h2>{{ illustration.title }}</h2>
+        <p>
+          {% for line in illustration.description_lines %}
+            {{ line }}<br>
+          {% endfor %}
+        </p>
+        {% if illustration.url %}
+          <p>
+            More information <a href="{{ illustration.url }}" target="_blank">here</a>.
+          </p>
+        {% endif %}
+        {% if illustration.pdf %}
+          <p>
+            Read article <a href="/media/{{ illustration.pdf }}" target="_blank">here</a>.
+          </p>
+        {% endif %}
+        <div class="modal-images">
+          {% if illustration.numberOfImages >= 1 %}
+            <div class="imageItem card">
+              <div class="card-image previewButton" style="background-image: url({{ illustration.thumbnail.url }});" previewImage="{{ illustration.thumbnail.url }}"></div>
+            </div>
+            <div class="imageItem card">
+              <div class="card-image previewButton" style="background-image: url({{ illustration.image1.url }});" previewImage="{{ illustration.image1.url }}"></div>
+            </div>
+          {% endif %}
+          {% if illustration.numberOfImages >= 2 %}
+            <div class="imageItem card">
+              <div class="card-image previewButton" style="background-image: url({{ illustration.image2.url }});" previewImage="{{ illustration.image2.url }}"></div>
+            </div>
+          {% endif %}
+          {% if illustration.numberOfImages >= 3 %}
+            <div class="imageItem card">
+              <div class="card-image previewButton" style="background-image: url({{ illustration.image3.url }});" previewImage="{{ illustration.image3.url }}"></div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+      <div class="modal-footer">
+        <p class="date">{{ illustration.date|date:"M d, Y"}}</p>
+        <a onclick="$('#modal-readmore{{ illustration.id }}').closeModal();" class="waves-effect waves-blue btn-flat">Close</a>
+      </div>
+    </div>
+  {% endfor %}
+
+  <!--<div id="modal-image{{ illustration.id }}" class="modal">
+    <div class="modal-content">
+      <img src="{{ illustration.thumbnail }}">
+    </div>
+  </div>-->
+
+  <script>
+    $(".illustration img").on("load", function() {
+      $(this).siblings(".dimmer").remove();
+    }).each(function() {
+      if ($(this).prop('complete')) {
+        $(this).parent().siblings(".dimmer").remove();
+      }
+    });
+  </script>
+
+  {% if request.user|inGroup:"editor" %}
+  <a id="newIco" href="/projects/illustration/0/edit" class="btn-floating btn-large waves-effect waves-light blue"></a>
+  {% endif %}
+
+</section>

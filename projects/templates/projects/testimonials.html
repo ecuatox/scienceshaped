@@ -1,8 +1,5 @@
 {% load staticfiles %}
 {% load authentication_groups %}
-<link rel="stylesheet" type="text/css" href="{% static "css/testimonials.css" %}"/>
-<link rel="stylesheet" type="text/css" href="{% static "slick/slick.css" %}"/>
-<link rel="stylesheet" type="text/css" href="{% static "slick/slick-theme.css" %}"/>
 
 <section id="testimonials">
   <div id="testimonial-para-container">
@@ -23,7 +20,6 @@
             {% endif %}
           </div>
           <div class="testimonialText">
-            <img class="quote" src="{% static "img/ic_format_quote_black_24px.svg" %}" />
             <p class="testimonialMessage">{{ testimonial.message }} {{ testimonial.date|date:"M Y"}}</p>
             <p class="testimonialPerson">{{ testimonial.person }}</p>
             {% if testimonial.job != '' %}
@@ -36,23 +32,8 @@
   </div>
 
   {% if request.user|inGroup:"editor" %}
-  <a id="newTestimonial" href="/projects/testimonial/0/edit" class="btn-floating btn-large waves-effect waves-light white"><img class="floatIcoImg" src="{% static "img/ic_add_black_24px.svg" %}"></a>
+  <a id="newTestimonial" href="/projects/testimonial/0/edit" class="btn-floating btn-large waves-effect waves-light white"></a>
   {% endif %}
-
-  <script type="text/javascript" src="{% static "slick/slick.min.js" %}"></script>
-  <script>
-    $(document).ready(function(){
-      $('#slider').slick({
-        dots: true,
-        infinite: true,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        speed: 500,
-        autoplay: true,
-        autoplaySpeed: 10000,
-      });
-    });
-  </script>
 
 </section>
 
