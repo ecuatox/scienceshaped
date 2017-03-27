@@ -1,51 +1,37 @@
-#info {
-  z-index: 10;
+section.info {
+  position: relative;
 }
 
-#infoContent {
-  width: 90%;
-  max-width: 1000px;
-  margin: 50px auto;
-}
-
-.on-top {
-  z-index: -10;
-}
-
-#info .btn-flat {
-  display: inline-block;
-  margin-bottom: 24px;
-}
-
-#info h1 {
-  display: inline-block;
-}
-
-#infoTop {
-  height: 50px;
-  text-align: center;
-}
-
-#infoForm {
-  text-align: center;
-  margin-top: 50px;
-}
-
-#infoForm label {
-  display: none;
-}
-
-#infoEditButton {
+.info.container {
   position: absolute;
-  top: 140px;
+  display: table;
+  width: 100%;
+  height: 400px;
+  top: 120px;
+  text-align: center;
+  text-align: left;
+}
+
+.info.content {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.info.content p {
+  line-height: 250%;
+}
+
+.info.edit.button {
+  position: absolute;
+  top: 10px;
   left: 10px;
 }
 
-#infoForm #submit {
-  width: 840px;
+.info.edit.button:hover {
+  cursor: pointer;
 }
 
-#info-para-container {
+.info.parallax {
   position: relative;
   overflow: hidden;
   height: 520px;
@@ -59,7 +45,7 @@
   z-index: -10;
 }
 
-#info-para-container .para4 {
+.info.parallax .para4 {
   bottom: calc(50% - 80vh);
   left: calc(50% - 50vw);
   width: 20vw;
@@ -68,7 +54,7 @@
   transform: rotate(25deg);
 }
 
-#info-para-container .para3 {
+.info.parallax .para3 {
   top: calc(50% - 110vh);
   right: calc(50% - 50vw);
   width: 20vw;
@@ -77,7 +63,7 @@
   transform: rotate(-50deg);
 }
 
-#info-para-container .para1 {
+.info.parallax .para1 {
   bottom: calc(50% - 85vh);
   right: calc(50% - 60vw);
   width: 120vw;
@@ -86,7 +72,7 @@
   transform: rotate(-10deg);
 }
 
-#info-para-container .para2 {
+.info.parallax .para2 {
   top: calc(50% - 50vh);
   left: calc(50% - 90vw);
   width: 120vw;

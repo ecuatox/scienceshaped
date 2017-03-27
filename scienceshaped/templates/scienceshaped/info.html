@@ -1,45 +1,36 @@
 {% load staticfiles %}
 {% load authentication_groups %}
-<link href="{% static "css/info.css" %}" rel="stylesheet">
 
-<section id="info">
-  <div id="info-para-container">
+<section class="info">
+  <div class="info parallax">
     <div class="para para1"></div>
     <div class="para para2"></div>
     <div class="para para3"></div>
     <div class="para para4"></div>
+  </div>
 
-    <div style="height: 120px"></div>
-
-    <div class="on-top">
-      {% if request.user|inGroup:"editor" %}
-        <a id="infoEditButton" href="/infoEdit" class="waves-effect waves-blue btn-flat editorButton">Edit</a>
-      {% endif %}
-      {% if action == 'infoEdit' %}
-        <style>
-          #info-para-container {height: 100%;}
-        </style>
-        <form id="infoForm" action="/infoEdit" method="post">
-          {% csrf_token %}
-          {{ infoForm.media }}
-          {{ infoForm.as_p }}
-          <button id="submit" class="btn waves-effect waves-light blue" type="submit" name="action">Save
-            <img src="{% static "img/ic_save_white_24px.svg" %}">
-          </button>
-        </form>
-      {% else %}
-        <div id="infoContent">
-        {% autoescape off %}
-            {{ infoContent }}
-        {% endautoescape %}
-        </div>
-      {% endif %}
+  <div class="info container">
+    {% if request.user|inGroup:"editor" %}
+      <a class="ui inverted button info edit" href="/contentbox/info/edit">Edit</a>
+    {% endif %}
+    <div class="info content">
+      {% autoescape off %}
+        {{ infoContent }}
+      {% endautoescape %}
     </div>
   </div>
+
 </section>
 
 
 <script>
+  function para() {
+    var scroll = $(window).scrollTop();
+    $(".info.parallax .para1").css("transform", "rotate(-10deg) translate(-" + 0 + "px, " + scroll*0.3 + "px)");
+    $(".info.parallax .para2").css("transform", "rotate(-20deg) translate(" + scroll*0.2 + "px, " + scroll*0.4 + "px)");
+    $(".info.parallax .para3").css("transform", "rotate(-50deg) translate(" + scroll*0.3 + "px, " + scroll*0.2 + "px)");
+    $(".info.parallax .para4").css("transform", "rotate(25deg) translate(-" + scroll*0.3 + "px, " + scroll*0.2 + "px)");
+  }
   $(function() {
     para();
   });
@@ -49,11 +40,4 @@
   $(document).scroll(function() {
     para();
   });
-  function para() {
-    var scroll = $(window).scrollTop();
-    $("#info-para-container .para1").css("transform", "rotate(-10deg) translate(-" + 0 + "px, " + scroll*0.3 + "px)");
-    $("#info-para-container .para2").css("transform", "rotate(-20deg) translate(" + scroll*0.2 + "px, " + scroll*0.4 + "px)");
-    $("#info-para-container .para3").css("transform", "rotate(-50deg) translate(" + scroll*0.3 + "px, " + scroll*0.2 + "px)");
-    $("#info-para-container .para4").css("transform", "rotate(25deg) translate(-" + scroll*0.3 + "px, " + scroll*0.2 + "px)");
-  }
 </script>
