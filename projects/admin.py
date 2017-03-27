@@ -7,6 +7,7 @@ class IllustrationAdmin(admin.ModelAdmin):
         ('Illustration', {
             'fields': [
                 'title',
+                'short',
                 'description',
                 'tags',
             ]
@@ -19,10 +20,7 @@ class IllustrationAdmin(admin.ModelAdmin):
         }),
         ('Images', {
             'fields': [
-                'numberOfImages',
-                'image1',
-                'image2',
-                'image3',
+                'images'
             ]
         }),
         ('Article', {

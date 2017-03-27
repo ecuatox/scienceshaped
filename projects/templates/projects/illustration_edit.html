@@ -1,0 +1,313 @@
+{% extends 'scienceshaped/base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+  {% if new %}
+    Create new illustration
+  {% else %}
+    Edit illustration
+  {% endif %}
+{% endblock title %}
+
+{% block header %}
+  <link rel="stylesheet" type="text/css" href="{% static "projects/css/editform.css" %}">
+  <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/calendar.min.css" %}">
+  <script src="{% static "scienceshaped/js/calendar.min.js" %}"></script>
+{% endblock header %}
+
+{% block footer %}
+{% endblock footer %}
+
+{% block head %}
+{% endblock head %}
+
+{% block content %}
+
+<div class="ui middle aligned center aligned grid">
+  <div class="column">
+    <h2 class="ui header blue">
+      {% if new %}
+        Create new illustration
+      {% else %}
+        Edit illustration
+      {% endif %}
+    </h2>
+    <form class="ui large form"  action="" enctype="multipart/form-data" method="post">
+      {% csrf_token %}
+
+      <div class="ui segment">
+        <div class="field">
+          <label for="{{ form.title.id_for_label }}">
+            Title
+          </label>
+          <div class="ui left input">
+            <input id="{{ form.title.id_for_label }}"
+              name="title"
+              type="text"
+              maxlength="{{ form.fields.title.max_length }}"
+              value="{{ form.title.value }}">
+          </div>
+
+          {% if form.title.errors %}
+            <div class="ui blue pointing label">
+              {{ form.title.errors.0 }}
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="field">
+          <label for="{{ form.short.id_for_label }}">
+            Short Description
+          </label>
+          <div class="ui left input">
+            <textarea id="{{ form.short.id_for_label }}"
+              name="short"
+              type="text"
+              maxlength="{{ form.fields.short.max_length }}"
+            >{{ form.short.value }}</textarea>
+          </div>
+
+          {% if form.short.errors %}
+            <div class="ui blue pointing label">
+              {{ form.short.errors.0 }}
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="field">
+          <label for="{{ form.description.id_for_label }}">
+            Description
+          </label>
+          <div class="ui left input">
+            <textarea id="{{ form.description.id_for_label }}"
+              name="description"
+              type="text"
+              maxlength="{{ form.fields.description.max_length }}"
+            >{{ form.description.value }}</textarea>
+          </div>
+
+          {% if form.description.errors %}
+            <div class="ui blue pointing label">
+              {{ form.description.errors.0 }}
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="field">
+          <label for="{{ form.tags.id_for_label }}">
+            Tags
+          </label>
+          <div class="ui fluid multiple search normal selection dropdown">
+            <input id="{{ form.tags.id_for_label }}"
+              type="hiddel"
+              name="tags"
+              type="text"
+              maxlength="{{ form.fields.tags.max_length }}"
+              value="{{ form.tags.value }}">
+            <i class="dropdown icon"></i>
+            <div class="default text">Select Tags</div>
+            <div class="menu">
+              {% for tag in tags %}
+                <div class="item" data-value="{{ tag }}">{{ tag|title }}</div>
+              {% endfor %}
+            </div>
+
+            {% if form.tags.errors %}
+              <div class="ui blue pointing label">
+                {{ form.tags.errors.0 }}
+              </div>
+            {% endif %}
+          </div>
+        <div>
+
+        <div class="field url">
+          <label for="{{ form.url.id_for_label }}">
+            Url
+          </label>
+          <div class="ui left input">
+            <input id="{{ form.url.id_for_label }}"
+              name="url"
+              type="text"
+              maxlength="{{ form.fields.url.max_length }}"
+              value="{{ form.url.value }}">
+          </div>
+
+          {% if form.url.errors %}
+            <div class="ui blue pointing label">
+              {{ form.url.errors.0 }}
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="field file">
+          <div class="disabled field">
+            <input id="pdf_dummy" type="text" disabled="" tabindex="-1" value="{{ form.pdf.value }}">
+          </div>
+
+          <label for="{{ form.pdf.id_for_label }}" class="ui icon button upload blue">
+            <i class="file icon"></i>
+            File
+          </label>
+          <label id="pdfclear" for="" class="ui icon button upload red">
+            <i class="trash icon"></i>
+            Clear
+          </label>
+          <input id="{{ form.pdf.id_for_label }}" type="file" name="file" style="display: none;">
+
+          {% if form.pdf.errors %}
+            <div class="ui blue pointing label">
+              {{ form.pdf.errors.0 }}
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="field">
+          <label for="{{ form.url.id_for_label }}">
+            Date
+          </label>
+          <div class="ui calendar date">
+            <div class="ui input left icon">
+              <i class="calendar icon"></i>
+              <input id="{{ form.date.id_for_label }}" type="text" placeholder="Date" name="date" value="{{ form.date.value }}">
+            </div>
+            {% if form.date.errors %}
+              <div class="ui blue pointing label">
+                {{ form.date.errors.0 }}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="{{ form.thumbnail_size.id_for_label }}">
+            Thumbnail size
+          </label>
+          <div class="ui left input">
+            <input id="{{ form.thumbnail_size.id_for_label }}"
+              name="thumbnail_size"
+              type="text"
+              maxlength="{{ form.fields.thumbnail_size.max_length }}"
+              value="{{ form.thumbnail_size.value }}">
+          </div>
+
+          {% if form.thumbnail_size.errors %}
+            <div class="ui blue pointing label">
+              {{ form.thumbnail_size.errors.0 }}
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="field image">
+          <label for="{{ form.thumbnail.id_for_label }}">Thumbnail</label>
+          <input id="{{ form.thumbnail.id_for_label }}" style="display: none;" name="thumbnail" type="number" value="{{ form.thumbnail.value }}">
+          <div class="ui card image">
+            <div class="image select">
+              {% if form.thumbnail.value > 0 %}
+                <img src="/files/image/{{ form.thumbnail.value }}/view">
+              {% else %}
+                <img src="{% static "projects/img/click_to_select.png" %}">
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        <a class="ui blue button add image">Add image</a>
+        <div class="field">
+          <label id="images_label">Images</label>
+        </div>
+        <div class="images add">
+          {% for image in images %}
+            <div class="field image">
+              <input style="display: none;" name="image" type="number" value="{{ image }}">
+              <div class="ui card image">
+                <i class="close icon"></i>
+                <div class="image select">
+                  <img src="/files/image/{{ image }}/view">
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+        <div class="ui fluid large submit button blue">Save</div>
+
+    </form>
+
+    <script>
+      {% if form.imagenum %}
+        image_id = {{ form.imagenum }};
+      {% else %}
+        image_id = 0;
+      {% endif %}
+
+      function addImage() {
+        $('.images.add').append(
+          `<div class="field image">
+            <input style="display: none;" name="image" type="number">
+            <div class="ui card image">
+              <i class="close icon"></i>
+              <div class="image select">
+                <img src="{% static "projects/img/click_to_select.png" %}">
+              </div>
+            </div>
+          </div>`
+        );
+        image_id += 1;
+      }
+
+      $(function(){
+
+        $('.add.image').click(function() {
+          addImage();
+          $('.image.select').unbind();
+          $('.image.select').click(function() {
+              imageCard = $(this).parent().parent();
+              thumbWindow = window.open('/files/images');
+          });
+          $('.card.image .close.icon').unbind();
+          $('.card.image .close.icon').click(function() {
+            $(this).parent().parent().remove();
+          });
+        });
+
+        $('.image.select').click(function() {
+          imageCard = $(this).parent().parent();
+          thumbWindow = window.open('/files/images');
+        });
+
+        $('.card.image .close.icon').click(function() {
+          $(this).parent().parent().remove();
+        });
+
+        $('.submit.button').click(function(){
+          $('form').submit();
+        });
+
+        $('#{{ form.pdf.id_for_label }}').change(function(event) {
+          var path = $('#{{ form.pdf.id_for_label }}').val();
+          if (path.includes('C:\\fakepath\\')) {
+            path = path.replace('C:\\fakepath\\', '')
+          }
+          $('#pdf_dummy').val(path);
+        });
+
+        $('.ui.calendar.date').calendar({
+          type: 'date',
+          firstDayOfWeek: 1,
+        });
+
+        $('#pdfclear').click(function() {
+          $('#{{ form.pdf.id_for_label }}').val('');
+          $('#pdf_dummy').val('');
+        });
+      });
+
+      function selectThumnail(id) {
+        thumbWindow.close();
+        imageCard.find('input').val(id);
+        imageCard.find('img').attr('src', '/files/image/' + id + '/view');
+      }
+    </script>
+
+
+{% endblock content %}

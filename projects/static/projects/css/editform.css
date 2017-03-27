@@ -1,0 +1,79 @@
+
+.card.image {
+  position: relative;
+  height: 150px;
+  width: 200px;
+}
+
+.card img {
+  object-fit: contain;
+  object-position: center;
+  height: 150px !important;
+  width: 100% !important;
+}
+
+.column {
+  max-width: 800px;
+  width: 90% !important;
+  margin-top: 30px;
+}
+
+form {
+  text-align: left;
+}
+
+.url.field {
+  margin-top: 15px !important;
+}
+
+.disabled.field {
+  width: 60%;
+  display: inline-block !important;
+  vertical-align: top;
+}
+
+.upload.button {
+  width: 19%;
+  height: 38px;
+  display: inline-block !important;
+  color: #fff !important;
+  padding-top: 12px !important;
+  vertical-align: top;
+}
+
+.field.image {
+  display: inline-block;
+  margin: 0 !important;
+}
+
+.image.card {
+  margin: 5px !important;
+}
+
+.close.icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.close.icon:hover {
+  cursor: pointer;
+}
+
+.card.image.select:hover {
+  cursor: pointer;
+}
+
+.add.image.button {
+  float: right;
+  margin-top: 20px;
+}
+
+#images_label {
+  margin-top: 10px;
+}
+
+.submit {
+  margin-top: 15px !important;
+}

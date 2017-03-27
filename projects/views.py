@@ -17,7 +17,7 @@ def illustrations(request):
         'form': form,
     }
 
-    return render(request, 'illustrations.html', context)
+    return render(request, 'projects/illustrations.html', context)
 
 def illustration(request, illustration_id):
     illustration = Illustration.objects.get(pk=illustration_id)
@@ -25,7 +25,7 @@ def illustration(request, illustration_id):
         'illustration': illustration,
     }
 
-    return render(request, 'illustration.html', context)
+    return render(request, 'projects/illustration.html', context)
 
 def getIllustrationTags():
     illustrations = Illustration.objects.all()
@@ -54,8 +54,15 @@ def illustrationTagDelete(request, tag):
 
 def illustrationEdit(request, illustration_id):
     new = True
+    images = []
     if request.method == 'POST' and groups.inGroup(request.user, 'editor'):
         form = IllustrationEdit(request.POST)
+
+        raw_images = dict(request.POST)['image']
+        while '' in raw_images:
+            raw_images.remove('')
+        images.extend(raw_images)
+
         if form.is_valid():
             if int(illustration_id) == 0:
                 illustration = Illustration()
@@ -66,7 +73,7 @@ def illustrationEdit(request, illustration_id):
             illustration.short = form.cleaned_data['short']
             illustration.tags = form.cleaned_data['tags']
             illustration.url = form.cleaned_data['url']
-            if form.cleaned_data['path'] and 'pdf' in request.FILES:
+            if 'pdf' in request.FILES:
                 illustration.pdf = request.FILES['pdf']
             else:
                 illustration.pdf = None
@@ -76,29 +83,17 @@ def illustrationEdit(request, illustration_id):
                 illustration.thumbnail = Image.objects.get(id=thumb_id)
             except (TypeError, ValueError, Image.DoesNotExist):
                 illustration.thumbnail = None
-            illustration.numberOfImages = form.cleaned_data['numberOfImages']
 
-            image1_raw = form.cleaned_data['image1']
-            image2_raw = form.cleaned_data['image2']
-            image3_raw = form.cleaned_data['image3']
-            try:
-                image1_id = int(image1_raw)
-                illustration.image1 = Image.objects.get(pk=image1_id)
-            except (TypeError, ValueError, Image.DoesNotExist):
-                illustration.image1 = None
-            try:
-                image2_id = int(image2_raw)
-                illustration.image2 = Image.objects.get(pk=image2_id)
-            except (TypeError, ValueError, Image.DoesNotExist):
-                illustration.image2 = None
-            try:
-                image3_id = int(image3_raw)
-                illustration.image3 = Image.objects.get(pk=image3_id)
-            except (TypeError, ValueError, Image.DoesNotExist):
-                illustration.image3 = None
+            illustration.images.clear()
+            for image in images:
+                try:
+                    image_id = int(image)
+                    illustration.images.add(Image.objects.get(id=image_id))
+                except (TypeError, ValueError, Image.DoesNotExist):
+                    pass
 
             illustration.thumbnail_size = form.cleaned_data['thumbnail_size']
-            illustration.date = datetime.strptime(form.cleaned_data['date'], '%d %B, %Y').date()
+            illustration.date = datetime.strptime(form.cleaned_data['date'], '%B %d, %Y').date()
             illustration.save()
             if int(illustration_id) == 0:
                 admin_history.log_addition(request, illustration)
@@ -115,12 +110,8 @@ def illustrationEdit(request, illustration_id):
                 'url': '',
                 'pdf': '',
                 'thumbnail': '0',
-                'numberOfImages': '0',
-                'image1': '0',
-                'image2': '0',
-                'image3': '0',
                 'thumbnail_size': 100,
-                'date': datetime.strftime(timezone.now(), '%-d %B, %Y'),
+                'date': datetime.strftime(timezone.now(), '%B %-d, %Y'),
             })
         else:
             try:
@@ -128,22 +119,12 @@ def illustrationEdit(request, illustration_id):
             except Illustration.DoesNotExist:
                 return HttpResponseRedirect('/projects/illustration/0/edit')
 
+            images.extend([image.id for image in illustration.images.all()])
+
             try:
-                id0 = illustration.thumbnail.id
+                thumb = illustration.thumbnail.id
             except AttributeError:
-                id0 = 0
-            try:
-                id1 = illustration.image1.id
-            except AttributeError:
-                id1 = 0
-            try:
-                id2 = illustration.image2.id
-            except AttributeError:
-                id2 = 0
-            try:
-                id3 = illustration.image3.id
-            except AttributeError:
-                id3 = 0
+                thumb = 0
 
             form = IllustrationEdit(initial={
                 'title': illustration.title,
@@ -151,22 +132,20 @@ def illustrationEdit(request, illustration_id):
                 'short': illustration.short,
                 'tags': illustration.tags,
                 'url': illustration.url,
-                'pdf': illustration.pdf_getname,
-                'thumbnail': id0,
-                'numberOfImages': illustration.numberOfImages,
-                'image1': id1,
-                'image2': id2,
-                'image3': id3,
+                'pdf': illustration.pdf_getname(),
+                'thumbnail': thumb,
                 'thumbnail_size': illustration.thumbnail_size,
-                'date': datetime.strftime(illustration.date + timedelta(days=1), '%-d %B, %Y'),
+                'date': datetime.strftime(illustration.date + timedelta(days=1), '%B %-d, %Y'),
             })
             new = False
+
     context = {
         'form': form,
+        'images': images,
         'new': new,
     }
 
-    return render(request, 'illustration_edit.html', context)
+    return render(request, 'projects/illustration_edit.html', context)
 
 def illustrationDelete(request, illustration_id):
     if groups.inGroup(request.user, 'editor'):
@@ -185,7 +164,7 @@ def testimonials(request):
         'testimonials': testimonials,
     }
 
-    return render(request, 'testimonials.html', context)
+    return render(request, 'projects/testimonials.html', context)
 
 def testimonialDelete(request, testimonial_id):
     if groups.inGroup(request.user, 'editor'):
@@ -210,7 +189,7 @@ def testimonialEdit(request, testimonial_id):
             testimonial.person = form.cleaned_data['person']
             testimonial.job = form.cleaned_data['job']
             testimonial.message = form.cleaned_data['message']
-            testimonial.date = datetime.strptime(form.cleaned_data['date'], '%d %B, %Y').date()
+            testimonial.date = datetime.strptime(form.cleaned_data['date'], '%B %d, %Y').date()
             thumbnail_raw = form.cleaned_data['thumbnail']
             try:
                 thumb_id = int(thumbnail_raw)
@@ -230,7 +209,7 @@ def testimonialEdit(request, testimonial_id):
                 'job': '',
                 'message': '',
                 'thumbnail': '0',
-                'date': datetime.strftime(timezone.now(), '%-d %B, %Y'),
+                'date': datetime.strftime(timezone.now(), '%B %-d, %Y'),
             })
         else:
             try:
@@ -246,7 +225,7 @@ def testimonialEdit(request, testimonial_id):
                 'job': testimonial.job,
                 'message': testimonial.message,
                 'thumbnail': thumb_id,
-                'date': datetime.strftime(testimonial.date + timedelta(days=1), '%-d %B, %Y'),
+                'date': datetime.strftime(testimonial.date + timedelta(days=1), '%B %-d, %Y'),
             })
             new = False
     context = {
@@ -254,4 +233,4 @@ def testimonialEdit(request, testimonial_id):
         'new': new,
     }
 
-    return render(request, 'testimonial_edit.html', context)
+    return render(request, 'projects/testimonial_edit.html', context)

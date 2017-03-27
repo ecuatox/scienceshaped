@@ -18,11 +18,7 @@ class Illustration(models.Model):
 
     date = models.DateTimeField(default=timezone.now, verbose_name='Date')
 
-    numberOfImages = models.IntegerField(verbose_name="Images")
-
-    image1 = models.ForeignKey(Image, on_delete=models.SET_NULL, blank=True, null=True, related_name='%(app_label)s_%(class)s_related_img1', verbose_name='Image 1')
-    image2 = models.ForeignKey(Image, on_delete=models.SET_NULL, blank=True, null=True, related_name='%(app_label)s_%(class)s_related_img2', verbose_name='Image 2')
-    image3 = models.ForeignKey(Image, on_delete=models.SET_NULL, blank=True, null=True, related_name='%(app_label)s_%(class)s_related_img3', verbose_name='Image 3')
+    images = models.ManyToManyField(Image, blank=True)
 
     def __str__(self):
         return self.title

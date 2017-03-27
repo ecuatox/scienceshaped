@@ -8,18 +8,18 @@ class IllustrationEdit(forms.Form):
 
     url = forms.CharField(max_length=500, required=False, label='URL')
     pdf = forms.FileField(required=False, label='PDF')
-    path = forms.CharField(max_length=500, required=False, label='PDF name')
 
     thumbnail = forms.IntegerField(required=False, label='Thumbnail')
     thumbnail_size = forms.CharField(max_length=4, label='Thumbnail size (%)')
 
     date = forms.CharField(max_length=100, label='Date')
 
-    numberOfImages = forms.IntegerField()
+    image = forms.CharField(max_length=100, label='Image')
 
-    image1 = forms.IntegerField(required=False, label='Image')
-    image2 = forms.IntegerField(required=False, label='Image')
-    image3 = forms.IntegerField(required=False, label='Image')
+    def clean(self):
+        form_data = self.cleaned_data
+        return form_data
+
 
 class TestimonialEdit(forms.Form):
     person = forms.CharField(max_length=100, label="Person")
