@@ -13,8 +13,12 @@
         {% endblock title %}
       </title>
       <link rel="shortcut icon" type="image/ico" href="{% static "img/favicon.ico" %}"/>
-      <link href="{% static "scienceshaped/css/semantic.min.css" %}" rel="stylesheet">
-      <link href="{% static "scienceshaped/css/style.css" %}" rel="stylesheet">
+
+      <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/semantic.min.css" %}">
+      <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/alertify.min.css" %}">
+      <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/alertify.semantic.min.css" %}">
+
+      <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/style.css" %}">
 
       <script src="{% static "scienceshaped/js/jquery.min.js" %}"></script>
       <script src="{% static "scienceshaped/js/semantic.min.js" %}"></script>
@@ -44,6 +48,15 @@
 
     </body>
 
+    {% if messages %}
+      <script>
+        $(function() {
+          {% for message in messages %}
+            alertify.message("{{ message }}");
+          {% endfor %}
+        });
+      </script>
+    {% endif %}
 
     {% block footer %}
 
