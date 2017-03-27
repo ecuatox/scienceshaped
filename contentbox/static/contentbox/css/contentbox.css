@@ -1,0 +1,15 @@
+.column {
+  margin-top: 100px;
+  width: 842px !important;
+  padding: 0 !important;
+}
+
+.submit.button {
+  width: 100% !important;
+}
+
+.theme.buttons {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
