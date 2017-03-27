@@ -1,0 +1,155 @@
+{% extends 'scienceshaped/base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+  {% if new %}
+    Create new testimonial
+  {% else %}
+    Edit testimonial
+  {% endif %}
+{% endblock title %}
+
+{% block header %}
+  <link rel="stylesheet" type="text/css" href="{% static "projects/css/editform.css" %}">
+  <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/calendar.min.css" %}">
+  <script src="{% static "scienceshaped/js/calendar.min.js" %}"></script>
+{% endblock header %}
+
+{% block footer %}
+{% endblock footer %}
+
+{% block head %}
+{% endblock head %}
+
+{% block content %}
+
+<div class="ui middle aligned center aligned grid">
+  <div class="column">
+    <h2 class="ui header blue">
+      {% if new %}
+        Create testimonial
+      {% else %}
+        Edit testimonial
+      {% endif %}
+    </h2>
+    <div class="ui segment">
+      <form class="ui large form" action="" enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+
+        <div class="field">
+          <label for="{{ form.person.id_for_label }}">
+            Person
+          </label>
+          <div class="ui left input">
+            <input id="{{ form.person.id_for_label }}"
+              name="person"
+              type="text"
+              maxlength="{{ form.fields.person.max_length }}"
+              value="{{ form.person.value }}">
+          </div>
+
+          {% if form.person.errors %}
+            <div class="ui blue pointing label">
+              {{ form.person.errors.0 }}
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="field">
+          <label for="{{ form.job.id_for_label }}">
+            Job
+          </label>
+          <div class="ui left input">
+            <textarea id="{{ form.job.id_for_label }}"
+              name="message"
+              type="text"
+              maxlength="{{ form.fields.job.max_length }}"
+            >{{ form.job.value }}</textarea>
+          </div>
+
+          {% if form.job.errors %}
+            <div class="ui blue pointing label">
+              {{ form.job.errors.0 }}
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="field">
+          <label for="{{ form.message.id_for_label }}">
+            Message
+          </label>
+          <div class="ui left input">
+            <textarea id="{{ form.message.id_for_label }}"
+              name="message"
+              type="text"
+              maxlength="{{ form.fields.message.max_length }}"
+            >{{ form.message.value }}</textarea>
+          </div>
+
+          {% if form.message.errors %}
+            <div class="ui blue pointing label">
+              {{ form.message.errors.0 }}
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="field">
+          <label for="{{ form.url.id_for_label }}">
+            Date
+          </label>
+          <div class="ui calendar date">
+            <div class="ui input left icon">
+              <i class="calendar icon"></i>
+              <input id="{{ form.date.id_for_label }}" type="text" placeholder="Date" name="date" value="{{ form.date.value }}">
+            </div>
+            {% if form.date.errors %}
+              <div class="ui blue pointing label">
+                {{ form.date.errors.0 }}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="field image">
+          <label for="{{ form.thumbnail.id_for_label }}">Thumbnail</label>
+          <input id="{{ form.thumbnail.id_for_label }}" style="display: none;" name="thumbnail" type="number" value="{{ form.thumbnail.value }}">
+          <div class="ui card image">
+            <div class="image select">
+              {% if form.thumbnail.value > 0 %}
+                <img src="/files/image/{{ form.thumbnail.value }}/view">
+              {% else %}
+                <img src="{% static "projects/img/click_to_select.png" %}">
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        <div class="ui fluid large submit button blue">Save</div>
+
+      </form>
+    </div>
+    <script src="{% static "files/js/image_upload.js" %}"></script>
+
+    <script>
+      $(function() {
+        $('.image.select').click(function() {
+          imageCard = $(this).parent().parent();
+          thumbWindow = window.open('/files/images');
+        });
+
+        $('.ui.calendar.date').calendar({
+          type: 'date',
+          firstDayOfWeek: 1,
+        });
+      });
+
+      function selectThumnail(id) {
+        thumbWindow.close();
+        imageCard.find('input').val(id);
+        imageCard.find('img').attr('src', '/files/image/' + id + '/view');
+      }
+    </script>
+  </div>
+</div>
+
+{% endblock content %}
