@@ -6,6 +6,7 @@ from .forms import Mail
 from contentbox.models import ContentBox
 from django.conf import settings
 import projects.views
+from django.contrib import messages
 from authentication.templatetags import authentication_groups as groups
 
 def index(request, tag='all'):
@@ -37,14 +38,13 @@ def index(request, tag='all'):
                 'subject': '',
                 'message': ''
             })
-            toast = 'Your message was submitted successfully!'
+            messages.add_message(request, messages.SUCCESS, 'Your message was submitted successfully!')
         else:
-            toast = 'Please correct the error(s)'
+            messages.add_message(request, messages.ERROR, 'Please correct the error(s)')
     else:
         mailForm = Mail(initial={
             'email': '',
             'subject': '',
-            'message': ''
         })
 
     context = {
@@ -54,9 +54,8 @@ def index(request, tag='all'):
         'aboutContent': ContentBox.getContent('about'),
         'infoContent': ContentBox.getContent('info'),
         'tags': tags,
-        'toast': toast,
     }
-    return render(request, 'index.html', context)
+    return render(request, 'scienceshaped/index.html', context)
 
 def login(request):
     return HttpResponseRedirect('/authentication/login')
