@@ -234,80 +234,8 @@
     </form>
 
     <script>
-      {% if form.imagenum %}
-        image_id = {{ form.imagenum }};
-      {% else %}
-        image_id = 0;
-      {% endif %}
-
-      function addImage() {
-        $('.images.add').append(
-          `<div class="field image">
-            <input style="display: none;" name="image" type="number">
-            <div class="ui card image">
-              <i class="close icon"></i>
-              <div class="image select">
-                <img src="{% static "projects/img/click_to_select.png" %}">
-              </div>
-            </div>
-          </div>`
-        );
-        image_id += 1;
-      }
-
-      $(function(){
-
-        $('.add.image').click(function() {
-          addImage();
-          $('.image.select').unbind();
-          $('.image.select').click(function() {
-              imageCard = $(this).parent().parent();
-              thumbWindow = window.open('/files/images');
-          });
-          $('.card.image .close.icon').unbind();
-          $('.card.image .close.icon').click(function() {
-            $(this).parent().parent().remove();
-          });
-        });
-
-        $('.image.select').click(function() {
-          imageCard = $(this).parent().parent();
-          thumbWindow = window.open('/files/images');
-        });
-
-        $('.card.image .close.icon').click(function() {
-          $(this).parent().parent().remove();
-        });
-
-        $('.submit.button').click(function(){
-          $('form').submit();
-        });
-
-        $('#{{ form.pdf.id_for_label }}').change(function(event) {
-          var path = $('#{{ form.pdf.id_for_label }}').val();
-          if (path.includes('C:\\fakepath\\')) {
-            path = path.replace('C:\\fakepath\\', '')
-          }
-          $('#pdf_dummy').val(path);
-        });
-
-        $('.ui.calendar.date').calendar({
-          type: 'date',
-          firstDayOfWeek: 1,
-        });
-
-        $('#pdfclear').click(function() {
-          $('#{{ form.pdf.id_for_label }}').val('');
-          $('#pdf_dummy').val('');
-        });
-      });
-
-      function selectThumnail(id) {
-        thumbWindow.close();
-        imageCard.find('input').val(id);
-        imageCard.find('img').attr('src', '/files/image/' + id + '/view');
-      }
+      defaultThumbnail = "{% static "projects/img/click_to_select.png" %}";
     </script>
-
+    <script src="{% static "projects/js/illustration_edit.js" %}"></script>
 
 {% endblock content %}
