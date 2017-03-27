@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block head %}
-  <link href="{% static "files/css/images.css" %}" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{% static "files/css/images.css" %}">
 {% endblock %}
 
 {% block content %}
@@ -64,8 +64,8 @@
                 previewImage="{{ image.url }}">
                 <i class="image icon"></i>
               </div>
-              <div class="ui green icon button selectButton" data-content="Select"
-                selectID={{ image.id }}
+              <div class="ui green icon button select" data-content="Select"
+                imageID="{{ image.id }}"
                 selectImage="{{ image.url }}">
                 <i class="hand pointer icon"></i>
               </div>
@@ -89,7 +89,6 @@
 
   {% include 'files/imagepopup.html' %}
 
-  <script src="{% static "scienceshaped/js/masonry.min.js" %}"></script>
   <script src="{% static "files/js/images.js" %}"></script>
 
 {% endblock content %}

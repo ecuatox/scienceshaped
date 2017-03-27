@@ -12,7 +12,7 @@
 {% endblock footer %}
 
 {% block head %}
-  <link href="{% static "files/css/image_upload.css" %}" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{% static "files/css/image_upload.css" %}">
 {% endblock head %}
 
 {% block content %}
@@ -66,26 +66,31 @@
           {% endif %}
         </div>
 
-        <div class="ui fluid multiple search normal selection dropdown">
-          <input id="{{ form.tags.id_for_label }}"
-            type="hiddel"
-            name="tags"
-            type="text"
-            maxlength="{{ form.fields.tags.max_length }}"
-            value="{{ form.tags.value }}">
-          <i class="dropdown icon"></i>
-          <div class="default text">Select Tags</div>
-          <div class="menu">
-            {% for tag in tags %}
-              <div class="item" data-value="{{ tag }}">{{ tag|title }}</div>
-            {% endfor %}
-          </div>
-
-          {% if form.tags.errors %}
-            <div class="ui blue pointing label">
-              {{ form.tags.errors.0 }}
+        <div class="field">
+          <label for="{{ form.tags.id_for_label }}">
+            Tags
+          </label>
+          <div class="ui fluid multiple search normal selection dropdown">
+            <input id="{{ form.tags.id_for_label }}"
+              type="hiddel"
+              name="tags"
+              type="text"
+              maxlength="{{ form.fields.tags.max_length }}"
+              value="{{ form.tags.value }}">
+            <i class="dropdown icon"></i>
+            <div class="default text">Select Tags</div>
+            <div class="menu">
+              {% for tag in tags %}
+                <div class="item" data-value="{{ tag }}">{{ tag|title }}</div>
+              {% endfor %}
             </div>
-          {% endif %}
+
+            {% if form.tags.errors %}
+              <div class="ui blue pointing label">
+                {{ form.tags.errors.0 }}
+              </div>
+            {% endif %}
+          </div>
         </div>
 
         <div class="field file">
@@ -97,7 +102,7 @@
             <i class="file icon"></i>
             File
           </label>
-          <input id="id_file" type="file" name="file">
+          <input id="id_file" type="file" name="file" style="display: none;">
 
           {% if form.file.errors %}
             <div class="ui blue pointing label">

@@ -2,10 +2,9 @@ $("#upload").click(function() {
   uploadWindow = window.open('/files/image-upload/');
 });
 
-$(".selectButton").click(function() {
-  var src = $(this).attr("selectImage");
-  var id = $(this).attr("selectID");
-  window.opener.selectThumnail(src, id);
+$(".select.button").click(function() {
+  var id = $(this).attr("imageID");
+  window.opener.selectThumnail(id);
 });
 
 function doneUploading(src) {
