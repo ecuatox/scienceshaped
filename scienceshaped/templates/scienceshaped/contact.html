@@ -1,13 +1,5 @@
 {% load staticfiles %}
 
-{% if toast != '' %}
-<script>
-  $(function(){
-    Materialize.toast('{{ toast }}', 3000, 'rounded');
-  });
-</script>
-{% endif %}
-
 {% if mailForm.errors %}
 <script>
   $(function(){
@@ -17,30 +9,68 @@
 {% endif %}
 
 <section id="contact">
-  <h1>Contact</h1>
-  <form id="contactForm" action="/" method="post">
-    {% csrf_token %}
+  <div class="ui text container">
+    <h1>Contact</h1>
+    <form class="ui form contact" action="" method="post">
+      {% csrf_token %}
 
-    {{ mailForm.email.errors }}
-    <div class="input-field">
-      <label for="{{ mailForm.email.id_for_label }}">{{ mailForm.email.label }}</label>
-      <input id="{{ mailForm.email.id_for_label }}" name="{{ mailForm.email.name }}" type="text" value="{{ mailForm.email.value }}" required>
-    </div>
+      <div class="field">
+        <label for="{{ mailForm.email.id_for_label }}">
+          Email
+        </label>
+        <input id="{{ mailForm.email.id_for_label }}"
+          name="title"
+          type="text"
+          maxlength="{{ mailForm.fields.email.max_length }}"
+          value="{{ formailFormm.email.value }}">
 
-    {{ mailForm.subject.errors }}
-    <div class="input-field">
-      <label for="{{ mailForm.subject.id_for_label }}">{{ mailForm.subject.label }}</label>
-      <input id="{{ mailForm.subject.id_for_label }}" name="{{ mailForm.subject.name }}" type="text" value="{{ mailForm.subject.value }}" required>
-    </div>
+        {% if mailForm.email.errors %}
+          <div class="ui blue pointing label">
+            {{ mailForm.email.errors.0 }}
+          </div>
+        {% endif %}
+      </div>
 
-    {{ mailForm.message.errors }}
-    <div class="input-field">
-      <label for="{{ mailForm.message.id_for_label }}">{{ mailForm.message.label }}</label>
-      <textarea id="{{ mailForm.message.id_for_label }}" name="{{ mailForm.message.name }}" class="materialize-textarea" required>{{ mailForm.message.value }}</textarea>
-    </div>
+      <div class="field">
+        <label for="{{ mailForm.subject.id_for_label }}">
+          Subject
+        </label>
+        <input id="{{ mailForm.subject.id_for_label }}"
+          name="title"
+          type="text"
+          maxlength="{{ mailForm.fields.subject.max_length }}"
+          value="{{ formailFormm.subject.value }}">
 
-    <button id="submit" class="btn waves-effect waves-light blue" type="submit" name="action">Send
-      <img src="{% static "img/ic_send_white_24px.svg" %}">
-    </button>
-  </form>
+        {% if mailForm.subject.errors %}
+          <div class="ui blue pointing label">
+            {{ mailForm.subject.errors.0 }}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="field">
+        <label for="{{ mailForm.message.id_for_label }}">
+          Message
+        </label>
+        <textarea id="{{ mailForm.message.id_for_label }}"
+          name="message"
+          type="text"
+          maxlength="{{ mailForm.fields.message.max_length }}"
+        >{{ mailForm.message.value }}</textarea>
+
+        {% if mailForm.message.errors %}
+          <div class="ui blue pointing label">
+            {{ mailForm.message.errors.0 }}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="ui fluid large submit button blue contact">Send</div>
+      <script>
+        $('.contact.submit').click(function() {
+          $('form.contact').submit();
+        });
+      </script>
+    </form>
+  </div>
 </section>

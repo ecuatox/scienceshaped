@@ -45,6 +45,7 @@ def index(request, tag='all'):
         mailForm = Mail(initial={
             'email': '',
             'subject': '',
+            'message': '',
         })
 
     context = {
