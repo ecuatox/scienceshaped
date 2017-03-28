@@ -1,4 +1,4 @@
-#header {
+.headerbar {
   width: 100%;
   background: #fff;
   box-shadow: 0px 2px 20px #888888;
@@ -12,7 +12,7 @@
   -webkit-transition: 0.3s ease-in;
 }
 
-#logo {
+.logo {
   position: absolute;
   left: 30px;
   transition: 0.3s ease-in;
@@ -21,7 +21,7 @@
   -webkit-transition: 0.3s ease-in;
 }
 
-#menu {
+.headerbar .menu {
   position: absolute;
   right: 40px;
   transition: 0.3s ease-in;
@@ -30,7 +30,7 @@
   -webkit-transition: 0.3s ease-in;
 }
 
-#menu li {
+.headerbar .menu li {
   display: inline-block;
   transition: 0.3s ease-in;
   -ms-transition: 0.3s ease-in;
@@ -38,7 +38,7 @@
   -webkit-transition: 0.3s ease-in;
 }
 
-#user {
+.headerbar .user {
   position: absolute;
   right: 6px;
   transition: 0.3s ease-in;
@@ -47,48 +47,115 @@
   -webkit-transition: 0.3s ease-in;
 }
 
-#user .btn-flat {
-  padding: 0 4px;
-}
-
-#header.headerLarge {
+.headerbar.headerLarge {
   height: 120px;
 }
 
-#header.headerSmall {
+.headerbar.headerSmall {
   height: 50px;
 }
 
-.headerLarge #logo {
+.headerLarge .logo {
   height: 80px;
   top: 20px;
 }
 
-.headerSmall #logo {
+.headerSmall .logo {
   height: 40px;
   top: 5px;
 }
 
-.headerLarge #menu {
+.headerLarge .menu {
+  top: 50px;
+}
+
+.headerSmall .menu {
   top: 0px;
 }
 
-.headerSmall #menu {
-  top: -10px;
-}
-
-.headerLarge #menu li {
+.headerLarge .menu li {
   margin: 10px;
 }
 
-.headerSmall #menu li {
+.headerSmall .menu li {
   margin: 0 10px;
 }
 
-.headerLarge #user {
+.headerLarge .user {
   top: 2px;
 }
 
-.headerSmall #user {
+.headerSmall .user {
   top: -20px;
+}
+
+.headerbar .item {
+  text-transform: uppercase;
+  color: #333;
+  font-size: 16px;
+}
+
+.mobile {
+  display: none;
+}
+
+.desktop {
+  display: inline;
+}
+
+@media screen and (max-device-width: 480px), screen and (max-width: 720px) {
+  .mobile {
+    display: inline;
+  }
+
+  .desktop {
+    display: none;
+  }
+
+  .mobile .logo {
+    height: 60px;
+    top: 30px;
+    left: 15px;
+  }
+
+  .ui.top .item {
+    height: 140px;
+    font-size: 50px;
+  }
+
+  .sidebar .item {
+    font-size: 18px;
+  }
+
+  .material-icons {
+    font-size: 80px;
+    margin-top: 20px;
+    margin-right: 20px;
+  }
+
+  .mobile.sidetoggle {
+    height: 100% !important;
+  }
+
+  .sidebar {
+    width: 200px !important;
+  }
+
+  .sidetoggle {
+    position: absolute !important;
+    right: 0 !important;
+  }
+
+  .item::before {
+    width: 0 !important;
+  }
+
+}
+
+@media screen and (max-device-width: 400px), screen and (max-width: 500px) {
+  .top .logo, .top .material-icons {
+    font-size: 18vw;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
 }
