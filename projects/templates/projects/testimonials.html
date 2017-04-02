@@ -9,23 +9,27 @@
     <h1>Testimonials</h1>
     <div id="slider">
       {% for testimonial in testimonials %}
-        <div class="testimonial card">
-          <div class="testimonialLeft">
-            <img class="testimonialImage" src="{{ testimonial.thumbnail.url }}" />
-            {% if request.user|inGroup:"editor" %}
-            <div id="testimonialEditor">
-              <a href="/projects/testimonial/{{ testimonial.id }}/edit" class="waves-effect waves-blue btn-flat editorButton">Edit</a>
-              <a url="/projects/testimonial/{{ testimonial.id }}/delete/" class="waves-effect waves-blue btn-flat editorButton delete openmodal">Delete</a>
+        <div class="ui segment container">
+          {% if request.user|inGroup:"editor" %}
+            <div class="editor buttons">
+              <a class="ui green right ribbon label" href="/projects/testimonial/{{ testimonial.id }}/edit">Edit</a>
+              <br>
+              <a class="ui red right ribbon label delete openmodal" url="/projects/testimonial/{{ testimonial.id }}/delete/">Delete</a>
             </div>
-            {% endif %}
+          {% endif %}
+          <div class="ui stackable grid">
+            <div class="five wide column left">
+              <img class="testimonial image" src="{{ testimonial.thumbnail.url }}">
+            </div>
+            <div class="ten wide column right">
+              <p class="testimonial message"><i class="icon quote left"></i> {{ testimonial.message }} <i class="icon quote right"></i></p>
+              <p class="testimonial person"><strong>{{ testimonial.person }}</strong></p>
+              {% if testimonial.job != '' %}
+                <p class="testimonial job">{{ testimonial.job }}</p>
+              {% endif %}
+            </div>
           </div>
-          <div class="testimonialText">
-            <p class="testimonialMessage">{{ testimonial.message }} {{ testimonial.date|date:"M Y"}}</p>
-            <p class="testimonialPerson">{{ testimonial.person }}</p>
-            {% if testimonial.job != '' %}
-            <p class="testimonialJob">{{ testimonial.job }}</p>
-            {% endif %}
-          </div>
+          <p class="testimonial date">{{ testimonial.date|date:"M Y"}}</p>
         </div>
       {% endfor %}
     </div>
