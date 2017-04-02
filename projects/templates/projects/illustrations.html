@@ -2,6 +2,9 @@
 {% load authentication_groups %}
 
 <section id="illustrations">
+  {% if request.user|inGroup:"editor" %}
+    <a class="ui button blue new" href="/projects/illustration/0/edit">New</a>
+  {% endif %}
   <div id="illustrationsTop">
     <h1>Illustrations</h1>
 

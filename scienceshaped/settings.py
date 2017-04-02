@@ -1,5 +1,10 @@
 import os
 
+# Default values
+DOMAIN = '*'
+DB = 'sqlite'
+SECRET_KEY = 'SECRET_KEY'
+
 try:
     from .local_settings import *
 except ImportError as e:
