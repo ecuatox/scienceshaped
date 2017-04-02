@@ -1,7 +1,7 @@
 #illustrations {
   position: relative;
   margin: 0 auto;
-  padding-top: 130px;
+  padding-top: 80px;
   padding-bottom: 80px;
 }
 
@@ -28,6 +28,10 @@
 
 #illustrations h1, .dropdown {
   display: inline-block;
+}
+
+#illustrations .card {
+  margin: 10px 0;
 }
 
 .dropdown {
