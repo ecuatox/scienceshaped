@@ -1,18 +1,18 @@
-$("#upload").click(function() {
-  uploadWindow = window.open('/files/image-upload/');
-});
-
-$(".select.button").click(function() {
-  var id = $(this).attr("imageID");
-  window.opener.selectThumnail(id);
-});
-
-function doneUploading(src) {
+function doneUploading() {
   uploadWindow.close();
   location.reload();
 }
 
 $(function() {
+
+  $('.select.button').click(function() {
+    var id = $(this).attr("imageID");
+    window.opener.selectThumnail(id);
+  });
+
+  $('.button.upload').click(function() {
+    uploadWindow = window.open('/files/image-upload/');
+  });
 
   $('.card').click(function(e) {
     e.stopPropagation();

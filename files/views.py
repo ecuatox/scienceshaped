@@ -19,7 +19,7 @@ def findId(title):
     return number
 
 def fileExt(name):
-    return str(name.split('.')[-1:][0].lower)
+    return str(name.split('.')[-1:][0].lower())
 
 def saveImage(file, title, description, tags):
     savename = title.lower()
@@ -57,11 +57,8 @@ def imageUpload(request):
         if request.method == 'POST':
             form = ImageUpload(request.POST, request.FILES)
             if form.is_valid():
-                img = saveImage(request.FILES['file'], form.cleaned_data['title'], form.cleaned_data['description'], form.cleaned_data['tags'])
-                context = {
-                    'src': img.file.name,
-                }
-                return render(request, 'files/image_upload_done.html', context)
+                saveImage(request.FILES['file'], form.cleaned_data['title'], form.cleaned_data['description'], form.cleaned_data['tags'])
+                return render(request, 'files/image_upload_done.html')
         else:
             form = ImageUpload(initial={
                 'description': '',

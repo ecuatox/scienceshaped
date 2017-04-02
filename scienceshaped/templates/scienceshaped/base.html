@@ -43,22 +43,22 @@
       {% block content %}
       {% endblock content %}
 
+      {% if messages %}
+        <script>
+          $(function() {
+            {% for message in messages %}
+              alertify.message("{{ message }}");
+            {% endfor %}
+          });
+        </script>
+      {% endif %}
+      {% include 'scienceshaped/delete.html' %}
+
+      {% block footer %}
+        {% include 'scienceshaped/footer.html' %}
+      {% endblock footer %}
+
     </body>
-
-    {% if messages %}
-      <script>
-        $(function() {
-          {% for message in messages %}
-            alertify.message("{{ message }}");
-          {% endfor %}
-        });
-      </script>
-    {% endif %}
-
-    {% block footer %}
-      {% include 'scienceshaped/footer.html' %}
-    {% endblock footer %}
-
 
   {% else %}
     <img style="display: block; margin: 200px auto; max-width: 800px; width: 90%;" src="/static/img/card.png">
