@@ -36,11 +36,13 @@
       <form class="ui large form" action="" enctype="multipart/form-data" method="post">
         {% csrf_token %}
 
-        <div class="field">
+        <div class="field" style="margin-bottom: 0px;">
           <label for="{{ form.person.id_for_label }}">
             Person
           </label>
-          <div class="ui left input">
+        </div>
+        <div class="field inline">
+          <div class="ui left input leftofhidden">
             <input id="{{ form.person.id_for_label }}"
               name="person"
               type="text"
@@ -51,6 +53,17 @@
           {% if form.person.errors %}
             <div class="ui blue pointing label">
               {{ form.person.errors.0 }}
+            </div>
+          {% endif %}
+
+          <div class="ui input toggle checkbox">
+            <input type="checkbox" tabindex="0" class="hidden" name="hidden">
+            <label>Hidden</label>
+          </div>
+
+          {% if form.hidden.errors %}
+            <div class="ui blue pointing label">
+              {{ form.hidden.errors.0 }}
             </div>
           {% endif %}
         </div>
@@ -128,27 +141,17 @@
 
       </form>
     </div>
-    <script src="{% static "files/js/image_upload.js" %}"></script>
-
     <script>
-      $(function() {
-        $('.image.select').click(function() {
-          imageCard = $(this).parent().parent();
-          thumbWindow = window.open('/files/images');
-        });
-
-        $('.ui.calendar.date').calendar({
-          type: 'date',
-          firstDayOfWeek: 1,
+      $(function () {
+        {% if form.hidden.value %}
+          $('.toggle').checkbox('toggle');
+        {% endif %}
+        $('.toggle').click(function () {
+          $(this).val(!$(this).hasClass('checked'));
         });
       });
-
-      function selectThumnail(id) {
-        thumbWindow.close();
-        imageCard.find('input').val(id);
-        imageCard.find('img').attr('src', '/files/image/' + id + '/view');
-      }
     </script>
+    <script src="{% static "projects/js/testimonial_edit.js" %}"></script>
   </div>
 </div>
 

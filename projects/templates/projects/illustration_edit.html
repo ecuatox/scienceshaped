@@ -36,11 +36,13 @@
       {% csrf_token %}
 
       <div class="ui segment">
-        <div class="field">
+        <div class="field" style="margin-bottom: 0px;">
           <label for="{{ form.title.id_for_label }}">
             Title
           </label>
-          <div class="ui left input">
+        </div>
+        <div class="inline field">
+          <div class="ui left input leftofhidden">
             <input id="{{ form.title.id_for_label }}"
               name="title"
               type="text"
@@ -53,6 +55,21 @@
               {{ form.title.errors.0 }}
             </div>
           {% endif %}
+
+          <div class="ui input toggle checkbox">
+            <input type="checkbox" tabindex="0" class="hidden" name="hidden">
+            <label>Hidden</label>
+          </div>
+
+          {% if form.hidden.errors %}
+            <div class="ui blue pointing label">
+              {{ form.hidden.errors.0 }}
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="inline field">
+
         </div>
 
         <div class="field">
@@ -235,6 +252,14 @@
 
     <script>
       defaultThumbnail = "{% static "projects/img/click_to_select.png" %}";
+      $(function () {
+        {% if form.hidden.value %}
+          $('.toggle').checkbox('toggle');
+        {% endif %}
+        $('.toggle').click(function () {
+          $(this).val(!$(this).hasClass('checked'));
+        });
+      });
     </script>
     <script src="{% static "projects/js/illustration_edit.js" %}"></script>
 

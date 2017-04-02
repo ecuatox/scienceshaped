@@ -77,3 +77,27 @@ form {
 .submit {
   margin-top: 15px !important;
 }
+
+.ui.toggle.checkbox label::after {
+  background-color: #1678c2;
+}
+
+.ui.toggle.checkbox .box:before, .ui.toggle.checkbox label:before {
+  background-color: #ccc !important;
+}
+
+.ui.toggle.checkbox input:focus:checked~.box:before,
+.ui.toggle.checkbox input:focus:checked~label:before,
+.ui.toggle.checkbox input:checked~.box:before,
+.ui.toggle.checkbox input:checked~label:before {
+  background-color: #82abc9 !important;
+}
+
+.leftofhidden {
+  width: calc( 100% - 150px ) !important;
+  margin-right: 25px !important;
+}
+
+label {
+  font-size: 15px !important;
+}

@@ -1,6 +1,6 @@
 function addImage() {
   $('.images.add').append(
-    `<div class="field image">
+      `<div class="field image">
       <input style="display: none;" name="image" type="number">
       <div class="ui card image">
         <i class="close icon"></i>
@@ -18,35 +18,37 @@ function selectThumnail(id) {
   imageCard.find('img').attr('src', '/files/image/' + id + '/view');
 }
 
-$(function(){
+$(function () {
 
-  $('.add.image').click(function() {
+  $('.ui.checkbox.toggle').checkbox();
+
+  $('.add.image').click(function () {
     addImage();
     $('.image.select').unbind();
-    $('.image.select').click(function() {
-        imageCard = $(this).parent().parent();
-        thumbWindow = window.open('/files/images');
+    $('.image.select').click(function () {
+      imageCard = $(this).parent().parent();
+      thumbWindow = window.open('/files/images');
     });
     $('.card.image .close.icon').unbind();
-    $('.card.image .close.icon').click(function() {
+    $('.card.image .close.icon').click(function () {
       $(this).parent().parent().remove();
     });
   });
 
-  $('.image.select').click(function() {
+  $('.image.select').click(function () {
     imageCard = $(this).parent().parent();
     thumbWindow = window.open('/files/images');
   });
 
-  $('.card.image .close.icon').click(function() {
+  $('.card.image .close.icon').click(function () {
     $(this).parent().parent().remove();
   });
 
-  $('.submit.button').click(function(){
+  $('.submit.button').click(function () {
     $('form').submit();
   });
 
-  $('#id_pdf').change(function(event) {
+  $('#id_pdf').change(function (event) {
     var path = $('#id_pdf').val();
     if (path.includes('C:\\fakepath\\')) {
       path = path.replace('C:\\fakepath\\', '')
@@ -59,7 +61,7 @@ $(function(){
     firstDayOfWeek: 1,
   });
 
-  $('#pdfclear').click(function() {
+  $('#pdfclear').click(function () {
     $('#id_pdf').val('');
     $('#pdf_dummy').val('');
   });

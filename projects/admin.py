@@ -10,6 +10,7 @@ class IllustrationAdmin(admin.ModelAdmin):
                 'short',
                 'description',
                 'tags',
+                'hidden',
             ]
         }),
         ('Thumbnail', {
@@ -47,6 +48,7 @@ class TestimonialAdmin(admin.ModelAdmin):
                 'person',
                 'job',
                 'message',
+                'hidden',
             ]
         }),
         ('Meta', {

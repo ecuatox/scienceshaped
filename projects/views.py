@@ -76,6 +76,7 @@ def illustrationEdit(request, illustration_id):
             illustration.short = form.cleaned_data['short']
             illustration.tags = form.cleaned_data['tags']
             illustration.url = form.cleaned_data['url']
+            illustration.hidden = form.cleaned_data['hidden']
             if 'pdf' in request.FILES:
                 illustration.pdf = request.FILES['pdf']
             else:
@@ -134,6 +135,7 @@ def illustrationEdit(request, illustration_id):
                 'description': illustration.description,
                 'short': illustration.short,
                 'tags': illustration.tags,
+                'hidden': illustration.hidden,
                 'url': illustration.url,
                 'pdf': illustration.pdf_getname(),
                 'thumbnail': thumb,
@@ -192,6 +194,7 @@ def testimonialEdit(request, testimonial_id):
             testimonial.person = form.cleaned_data['person']
             testimonial.job = form.cleaned_data['job']
             testimonial.message = form.cleaned_data['message']
+            testimonial.hidden = form.cleaned_data['hidden']
             testimonial.date = datetime.strptime(form.cleaned_data['date'], '%B %d, %Y').date()
             thumbnail_raw = form.cleaned_data['thumbnail']
             try:
@@ -227,6 +230,7 @@ def testimonialEdit(request, testimonial_id):
                 'person': testimonial.person,
                 'job': testimonial.job,
                 'message': testimonial.message,
+                'hidden': testimonial.hidden,
                 'thumbnail': thumb_id,
                 'date': datetime.strftime(testimonial.date + timedelta(days=1), '%B %d, %Y'),
             })
