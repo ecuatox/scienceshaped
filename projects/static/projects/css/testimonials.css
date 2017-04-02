@@ -6,6 +6,16 @@
   z-index: 10;
 }
 
+#testimonials .new.button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+#testimonials .new.button:hover {
+  cursor: pointer;
+}
+
 #slider {
   width: 80%;
   margin: auto;

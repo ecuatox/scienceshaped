@@ -2,6 +2,9 @@
 {% load authentication_groups %}
 
 <section id="testimonials">
+  {% if request.user|inGroup:"editor" %}
+    <a class="ui button inverted new" href="/projects/testimonial/0/edit">New</a>
+  {% endif %}
   <div id="testimonial-para-container">
     <div class="para para2"></div>
     <div class="para para3"></div>

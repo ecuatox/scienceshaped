@@ -1,14 +1,19 @@
 #illustrations {
   position: relative;
-  width: 95%;
   margin: 0 auto;
   padding-top: 130px;
   padding-bottom: 80px;
   text-align: center;
 }
 
-.extraDivToFixSlider {
-  outline: none;
+#illustrations .new.button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+#illustrations .new.button:hover {
+  cursor: pointer;
 }
 
 #illustrationsTop {
