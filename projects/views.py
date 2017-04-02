@@ -57,14 +57,18 @@ def illustrationEdit(request, illustration_id):
     if request.method == 'POST' and groups.inGroup(request.user, 'editor'):
         form = IllustrationEdit(request.POST)
 
-        raw_images = dict(request.POST)['image']
-        while '' in raw_images:
-            raw_images.remove('')
-        images.extend(raw_images)
+        try:
+            raw_images = dict(request.POST)['image']
+            while '' in raw_images:
+                raw_images.remove('')
+            images.extend(raw_images)
+        except KeyError:
+            pass
 
         if form.is_valid():
             if int(illustration_id) == 0:
                 illustration = Illustration()
+                illustration.save()
             else:
                 illustration = Illustration.objects.get(pk=illustration_id)
             illustration.title = form.cleaned_data['title']

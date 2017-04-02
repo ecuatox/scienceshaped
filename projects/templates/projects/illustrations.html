@@ -35,100 +35,81 @@
         </div>
       </div>
     </div>
-
-    <script>
-      $(".filterItem").click(function() {
-        var tag = $(this).attr("tag");
-        if (tag == "all") {
-
-        } else {
-
-        }
-      });
-    </script>
   </div>
 
   <br><br>
 
-  <div id="gallery">
-    <div class="grid">
-
-    {% for illustration in illustrations %}
-      <div class="grid-item">
-        <div class="illustration ui card" tags="{{ illustration.tags|lower }}">
-          <div class="previewButton" previewImage="{{ illustration.thumbnail.url }}">
-            <!--<a class="modal-trigger" href="#modal-image{{ illustration.id }}">-->
-              <img src="{{ illustration.thumbnail.url }}" style="max-width: calc({{ illustration.thumbnail_size }} / 100 * 350px); max-height: calc({{ illustration.thumbnail_size }} / 100 * 300px);">
-            <!--</a>-->
-          </div>
-          <div class="content">
-            <h4>{{ illustration.title }}</h4>
-            <p>
-              {% for line in illustration.short_lines %}
-                {{ line }}<br>
-              {% endfor %}
-            </p>
-          </div>
-          <div class="extra content">
-            <a class="modal-trigger waves-effect waves-blue btn-flat readmore" href="#modal-readmore{{ illustration.id }}">More</a>
-          </div>
-          {% if request.user|inGroup:"editor" %}
-            <div class="extra content adminActions">
-              <a href="/projects/illustration/{{ illustration.id }}/edit" class="waves-effect waves-blue btn-flat editorButton">Edit</a>
-              <a url="/projects/illustration/{{ illustration.id }}/delete/" class="waves-effect waves-blue btn-flat editorButton delete modalopen">Delete</a>
+  <div id="gallery" class="ui container">
+    <div class="ui grid">
+      {% for illustration in illustrations %}
+        <div class="grid-item">
+          <div class="ui card" tags="{{ illustration.tags|lower }}">
+            {% if request.user|inGroup:"editor" %}
+              <div class="editor buttons">
+                <a class="ui green right ribbon label" href="/projects/illustration/{{ illustration.id }}/edit">Edit</a>
+                <br>
+                <a class="ui red right ribbon label delete openmodal" url="/projects/illustration/{{ illustration.id }}/delete/" class="delete openmodal">Delete</a>
+              </div>
+            {% endif %}
+            <div class="image">
+              <img class="removeloader" src="{{ illustration.thumbnail.url }}">
+              <div class="ui active dimmer">
+                <div class="ui loader"></div>
+              </div>
             </div>
-          {% endif %}
-          <div class="ui active dimmer">
-            <div class="ui loader"></div>
+            <div class="content">
+              <a class="header">{{ illustration.title }}</a>
+              <div class="meta">
+                <span class="date">{{ illustration.date|date:"M d, Y" }}</span>
+              </div>
+              <div class="description">
+                <p>
+                  {% for line in illustration.short_lines %}
+                    {{ line }}<br>
+                  {% endfor %}
+                </p>
+              </div>
+            </div>
+            <div class="extra content">
+              <a class="readmore" illustration="{{ illustration.id }}">
+                <i class="info icon"></i>
+                Read more
+              </a>
+            </div>
           </div>
         </div>
-      </div>
-    {% endfor %}
+      {% endfor %}
+    </div>
   </div>
 
   {% for illustration in illustrations %}
-    <div id="modal-readmore{{ illustration.id }}" class="modal modal-fixed-footer">
-      <div class="modal-content">
-        <h2>{{ illustration.title }}</h2>
-        <p>
-          {% for line in illustration.description_lines %}
-            {{ line }}<br>
+    <div class="ui modal {{ illustration.id }}">
+      <i class="close icon"></i>
+      <!--div class="header">
+        {{ illustration.title }}
+      </div-->
+      <div class="image content">
+        <div class="ui medium image previewButton" previewImage="{{ illustration.thumbnail.url }}">
+          <img src="{{ illustration.thumbnail.url }}">
+        </div>
+        <div class="description">
+          <div class="ui header">{{ illustration.title }}</div>
+          <p>
+            {% for line in illustration.description_lines %}
+              {{ line }}<br>
+            {% endfor %}
+          </p>
+          {% for image in illustration.images.all %}
+            <div class="imageItem card">
+              <div class="card-image previewButton" style="background-image: url({{ image.url }});" previewImage="{{ image.url }}"></div>
+            </div>
           {% endfor %}
-        </p>
-        {% if illustration.url %}
-          <p>
-            More information <a href="{{ illustration.url }}" target="_blank">here</a>.
-          </p>
-        {% endif %}
-        {% if illustration.pdf %}
-          <p>
-            Read article <a href="/media/{{ illustration.pdf }}" target="_blank">here</a>.
-          </p>
-        {% endif %}
-        <div class="modal-images">
-          {% if illustration.numberOfImages >= 1 %}
-            <div class="imageItem card">
-              <div class="card-image previewButton" style="background-image: url({{ illustration.thumbnail.url }});" previewImage="{{ illustration.thumbnail.url }}"></div>
-            </div>
-            <div class="imageItem card">
-              <div class="card-image previewButton" style="background-image: url({{ illustration.image1.url }});" previewImage="{{ illustration.image1.url }}"></div>
-            </div>
-          {% endif %}
-          {% if illustration.numberOfImages >= 2 %}
-            <div class="imageItem card">
-              <div class="card-image previewButton" style="background-image: url({{ illustration.image2.url }});" previewImage="{{ illustration.image2.url }}"></div>
-            </div>
-          {% endif %}
-          {% if illustration.numberOfImages >= 3 %}
-            <div class="imageItem card">
-              <div class="card-image previewButton" style="background-image: url({{ illustration.image3.url }});" previewImage="{{ illustration.image3.url }}"></div>
-            </div>
-          {% endif %}
         </div>
       </div>
-      <div class="modal-footer">
-        <p class="date">{{ illustration.date|date:"M d, Y"}}</p>
-        <a onclick="$('#modal-readmore{{ illustration.id }}').closeModal();" class="waves-effect waves-blue btn-flat">Close</a>
+      <div class="actions">
+        <div class="date">
+          <p>{{ illustration.date|date:"M d, Y"}}</p>
+        </div>
       </div>
     </div>
   {% endfor %}
@@ -140,12 +121,16 @@
   </div>-->
 
   <script>
-    $(".illustration img").on("load", function() {
-      $(this).siblings(".dimmer").remove();
+    $('.dropdown').dropdown();
+    $('.removeloader').on('load', function() {
+      $(this).siblings('.dimmer').remove();
     }).each(function() {
       if ($(this).prop('complete')) {
-        $(this).parent().siblings(".dimmer").remove();
+        $(this).siblings('.dimmer').remove();
       }
+    });
+    $('.readmore').click(function () {
+        $('.modal.' + $(this).attr('illustration')).modal('show');
     });
   </script>
 

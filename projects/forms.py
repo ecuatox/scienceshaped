@@ -14,7 +14,7 @@ class IllustrationEdit(forms.Form):
 
     date = forms.CharField(max_length=100, label='Date')
 
-    image = forms.CharField(max_length=100, label='Image')
+    image = forms.CharField(max_length=100, label='Image', required=False)
 
     def clean(self):
         form_data = self.cleaned_data
