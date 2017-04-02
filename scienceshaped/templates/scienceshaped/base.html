@@ -21,6 +21,7 @@
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
       <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/style.css" %}">
+      <link rel="stylesheet" type="text/css" href="{% static "files/css/imagepopup.css" %}">
 
       <script src="{% static "scienceshaped/js/jquery.min.js" %}"></script>
       <script src="{% static "scienceshaped/js/semantic.min.js" %}"></script>
@@ -33,32 +34,34 @@
 
     </head>
 
-    {% block header %}
-      {% include 'scienceshaped/header.html' %}
-    {% endblock header %}
-
-
     <body>
+      <div class="pusher">
 
-      {% block content %}
-      {% endblock content %}
+        {% block header %}
+          {% include 'scienceshaped/header.html' %}
+        {% endblock header %}
 
-      {% if messages %}
-        <script>
-          $(function() {
-            {% for message in messages %}
-              alertify.message("{{ message }}");
-            {% endfor %}
-          });
-        </script>
-      {% endif %}
-      {% include 'scienceshaped/delete.html' %}
+        {% block content %}
+        {% endblock content %}
 
-      {% block footer %}
-        {% include 'scienceshaped/footer.html' %}
-      {% endblock footer %}
+        {% if messages %}
+          <script>
+            $(function() {
+              {% for message in messages %}
+                alertify.message("{{ message }}");
+              {% endfor %}
+            });
+          </script>
+        {% endif %}
 
+        {% block footer %}
+          {% include 'scienceshaped/footer.html' %}
+        {% endblock footer %}
+      </div>
     </body>
+
+    {% include 'scienceshaped/delete.html' %}
+    {% include 'files/imagepopup.html' %}
 
   {% else %}
     <img style="display: block; margin: 200px auto; max-width: 800px; width: 90%;" src="/static/img/card.png">

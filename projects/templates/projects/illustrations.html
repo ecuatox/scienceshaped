@@ -10,7 +10,7 @@
 
     <div class="ui floating dropdown labeled icon button">
       <i class="filter icon"></i>
-      <span class="text">Filter Posts</span>
+      <span class="text">Filter</span>
       <div class="menu">
         <div class="ui icon search input">
           <i class="search icon"></i>
@@ -51,7 +51,7 @@
                 <a class="ui red right ribbon label delete openmodal" url="/projects/illustration/{{ illustration.id }}/delete/" class="delete openmodal">Delete</a>
               </div>
             {% endif %}
-            <div class="image">
+            <div class="image previewButton" previewImage="{{ illustration.thumbnail.url }}">
               <img class="removeloader" src="{{ illustration.thumbnail.url }}">
               <div class="ui active dimmer">
                 <div class="ui loader"></div>
@@ -88,23 +88,26 @@
       <!--div class="header">
         {{ illustration.title }}
       </div-->
-      <div class="image content">
-        <div class="ui medium image previewButton" previewImage="{{ illustration.thumbnail.url }}">
-          <img src="{{ illustration.thumbnail.url }}">
-        </div>
-        <div class="description">
-          <div class="ui header">{{ illustration.title }}</div>
-          <p>
-            {% for line in illustration.description_lines %}
-              {{ line }}<br>
-            {% endfor %}
-          </p>
-          {% for image in illustration.images.all %}
-            <div class="imageItem card">
-              <div class="card-image previewButton" style="background-image: url({{ image.url }});" previewImage="{{ image.url }}"></div>
-            </div>
+
+      <div class="description">
+        <div class="ui header">{{ illustration.title }}</div>
+        <p>
+          {% for line in illustration.description_lines %}
+            {{ line }}<br>
           {% endfor %}
-        </div>
+        </p>
+        <!--div class="ui card">
+          <div class="image modalimg previewButton" previewImage="{{ illustration.thumbnail.url }}">
+            <img src="{{ illustration.thumbnail.url }}">
+          </div>
+        </div-->
+        {% for image in illustration.images.all %}
+          <div class="ui card">
+            <div class="image modalimg previewButton" previewImage="{{ image.url }}">
+              <img src="{{ image.url }}">
+            </div>
+          </div>
+        {% endfor %}
       </div>
       <div class="actions">
         <div class="date">
@@ -114,28 +117,6 @@
     </div>
   {% endfor %}
 
-  <!--<div id="modal-image{{ illustration.id }}" class="modal">
-    <div class="modal-content">
-      <img src="{{ illustration.thumbnail }}">
-    </div>
-  </div>-->
-
-  <script>
-    $('.dropdown').dropdown();
-    $('.removeloader').on('load', function() {
-      $(this).siblings('.dimmer').remove();
-    }).each(function() {
-      if ($(this).prop('complete')) {
-        $(this).siblings('.dimmer').remove();
-      }
-    });
-    $('.readmore').click(function () {
-        $('.modal.' + $(this).attr('illustration')).modal('show');
-    });
-  </script>
-
-  {% if request.user|inGroup:"editor" %}
-  <a id="newIco" href="/projects/illustration/0/edit" class="btn-floating btn-large waves-effect waves-light blue"></a>
-  {% endif %}
+  <script src="{% static "projects/js/illustrations.js" %}"></script>
 
 </section>

@@ -29,3 +29,25 @@
 #illustrations h1, .dropdown {
   display: inline-block;
 }
+
+.dropdown {
+  margin-left: 20px !important;
+  top: -10px;
+}
+
+.modal .card {
+  display: inline-block !important;
+  width: 150px !important;
+  height: 100px !important;
+}
+
+.modal .description {
+  padding: 30px;
+}
+
+.modal .card img {
+  object-fit: cover;
+  object-position: center;
+  height: 150px !important;
+  width: 100% !important;
+}
