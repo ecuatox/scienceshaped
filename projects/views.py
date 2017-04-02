@@ -7,7 +7,6 @@ from scienceshaped import admin_history
 from authentication.templatetags import authentication_groups as groups
 from django.utils import timezone
 from datetime import datetime, timedelta
-from django.core.exceptions import ObjectDoesNotExist
 
 def illustrations(request):
     illustrations = Illustration.objects.order_by('-date')
@@ -111,7 +110,7 @@ def illustrationEdit(request, illustration_id):
                 'pdf': '',
                 'thumbnail': '0',
                 'thumbnail_size': 100,
-                'date': datetime.strftime(timezone.now(), '%B %-d, %Y'),
+                'date': datetime.strftime(timezone.now(), '%B %d, %Y'),
             })
         else:
             try:
@@ -135,7 +134,7 @@ def illustrationEdit(request, illustration_id):
                 'pdf': illustration.pdf_getname(),
                 'thumbnail': thumb,
                 'thumbnail_size': illustration.thumbnail_size,
-                'date': datetime.strftime(illustration.date + timedelta(days=1), '%B %-d, %Y'),
+                'date': datetime.strftime(illustration.date + timedelta(days=1), '%B %d, %Y'),
             })
             new = False
 
@@ -209,7 +208,7 @@ def testimonialEdit(request, testimonial_id):
                 'job': '',
                 'message': '',
                 'thumbnail': '0',
-                'date': datetime.strftime(timezone.now(), '%B %-d, %Y'),
+                'date': datetime.strftime(timezone.now(), '%B %d, %Y'),
             })
         else:
             try:
@@ -225,7 +224,7 @@ def testimonialEdit(request, testimonial_id):
                 'job': testimonial.job,
                 'message': testimonial.message,
                 'thumbnail': thumb_id,
-                'date': datetime.strftime(testimonial.date + timedelta(days=1), '%B %-d, %Y'),
+                'date': datetime.strftime(testimonial.date + timedelta(days=1), '%B %d, %Y'),
             })
             new = False
     context = {
