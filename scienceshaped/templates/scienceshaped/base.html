@@ -1,10 +1,9 @@
 {% load staticfiles %}
-{% load authentication_groups %}
 {% load scienceshaped_settings %}
 
 <html>
 
-  {% if request.user|inGroup:"editor" or not "HIDDEN"|settings_value %}
+  {% if request.user.is_staff or request.user.is_superuser or not "HIDDEN"|settings_value %}
     <head>
 
       <title>

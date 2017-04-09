@@ -9,6 +9,11 @@ class Image(models.Model):
     file = models.FileField(upload_to='images')
     number = models.IntegerField(default=0)
 
+    class Meta:
+        permissions = (
+            ("view_image_control_panel", "Can view image control panel"),
+        )
+
     def __str__(self):
         if self.number > 1:
             return self.title + ' (' + str(self.number) + ')'

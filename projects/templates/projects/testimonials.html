@@ -1,8 +1,7 @@
 {% load staticfiles %}
-{% load authentication_groups %}
 
 <section id="testimonials">
-  {% if request.user|inGroup:"editor" %}
+  {% if perms.projects.add_testimonial %}
     <a class="ui button inverted new" href="/projects/testimonial/0/edit">New</a>
   {% endif %}
   <div id="testimonial-para-container">
@@ -13,11 +12,15 @@
     <div id="slider">
       {% for testimonial in testimonials %}
         <div class="ui segment container">
-          {% if request.user|inGroup:"editor" %}
+          {% if perms.projects.change_testimonial or perms.projects.delete_testimonial %}
             <div class="editor buttons">
-              <a class="ui green right ribbon label" href="/projects/testimonial/{{ testimonial.id }}/edit">Edit</a>
+              {% if perms.projects.change_testimonial %}
+                <a class="ui green right ribbon label" href="/projects/testimonial/{{ testimonial.id }}/edit">Edit</a>
+              {% endif %}
               <br>
-              <a class="ui red right ribbon label delete openmodal" url="/projects/testimonial/{{ testimonial.id }}/delete/">Delete</a>
+              {% if perms.projects.delete_testimonial %}
+                <a class="ui red right ribbon label delete openmodal" url="/projects/testimonial/{{ testimonial.id }}/delete/">Delete</a>
+              {% endif %}
             </div>
           {% endif %}
           <div class="ui stackable grid">
@@ -32,32 +35,28 @@
               {% endif %}
             </div>
           </div>
-          <p class="testimonial date">{{ testimonial.date|date:"M Y"}}</p>
+          <p class="testimonial date">{{ testimonial.date|date:"M Y" }}</p>
         </div>
       {% endfor %}
     </div>
   </div>
 
-  {% if request.user|inGroup:"editor" %}
-  <a id="newTestimonial" href="/projects/testimonial/0/edit" class="btn-floating btn-large waves-effect waves-light white"></a>
-  {% endif %}
-
 </section>
 
 <script>
-  $(function() {
+  $(function () {
     testimonialpara();
   });
-  $(window).resize(function() {
+  $(window).resize(function () {
     testimonialpara();
   });
-  $(document).scroll(function() {
+  $(document).scroll(function () {
     testimonialpara();
   });
   function testimonialpara() {
     var scroll = $(window).scrollTop() - 1000;
-    $("#testimonial-para-container .para2").css("transform", "rotate(-20deg) translate(" + scroll*0.05 + "px, " + scroll*0.5 + "px)");
-    $("#testimonial-para-container .para3").css("transform", "rotate(-50deg) translate(" + scroll*0.1 + "px, " + scroll*0.1 + "px)");
-    $("#testimonial-para-container .para4").css("transform", "rotate(25deg) translate(-" + scroll*0.1 + "px, " + scroll*0.1 + "px)");
+    $("#testimonial-para-container .para2").css("transform", "rotate(-20deg) translate(" + scroll * 0.05 + "px, " + scroll * 0.5 + "px)");
+    $("#testimonial-para-container .para3").css("transform", "rotate(-50deg) translate(" + scroll * 0.1 + "px, " + scroll * 0.1 + "px)");
+    $("#testimonial-para-container .para4").css("transform", "rotate(25deg) translate(-" + scroll * 0.1 + "px, " + scroll * 0.1 + "px)");
   }
 </script>

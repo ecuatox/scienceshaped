@@ -30,10 +30,12 @@
         <i class="search icon"></i>
         Search
       </button>
-      <a id="upload" class="ui button blue upload">
-        <i class="upload icon"></i>
-        Upload
-      </a>
+      {% if perms.files.add_image %}
+        <a id="upload" class="ui button blue upload">
+          <i class="upload icon"></i>
+          Upload
+        </a>
+      {% endif %}
     </form>
 
 
@@ -69,14 +71,18 @@
                 selectImage="{{ image.url }}">
                 <i class="hand pointer icon"></i>
               </div>
-              <a class="ui yellow icon button editButton" data-content="Edit"
-                href="/files/image/{{ image.id }}/edit">
-                <i class="write icon"></i>
-              </a>
-              <div class="ui red icon button delete openmodal" data-content="Delete"
-                url="/files/image/{{ image.id }}/delete/">
-                <i class="trash icon"></i>
-              </div>
+              {% if perms.files.change_image %}
+                <a class="ui yellow icon button editButton" data-content="Edit"
+                  href="/files/image/{{ image.id }}/edit">
+                  <i class="write icon"></i>
+                </a>
+              {% endif %}
+              {% if perms.files.delete_image %}
+                <div class="ui red icon button delete openmodal" data-content="Delete"
+                  url="/files/image/{{ image.id }}/delete/">
+                  <i class="trash icon"></i>
+                </div>
+              {% endif %}
             </div>
           </div>
         </div>

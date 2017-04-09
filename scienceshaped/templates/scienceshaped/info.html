@@ -1,5 +1,4 @@
 {% load staticfiles %}
-{% load authentication_groups %}
 
 <section id="info">
   <div class="info parallax">
@@ -12,7 +11,7 @@
   </div>
 
   <div class="info container">
-    {% if request.user|inGroup:"editor" %}
+    {% if perms.contentbox.add_contentbox and perms.contentbox.change_contentbox %}
       <a class="ui inverted button info edit" href="/contentbox/info/edit">Edit</a>
     {% endif %}
     <div class="info content">

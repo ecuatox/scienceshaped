@@ -1,8 +1,7 @@
 {% load staticfiles %}
-{% load authentication_groups %}
 
 <section id="illustrations">
-  {% if request.user|inGroup:"editor" %}
+  {% if perms.projects.add_illustration %}
     <a class="ui button blue new" href="/projects/illustration/0/edit">New</a>
   {% endif %}
   <div id="illustrationsTop">
@@ -44,11 +43,15 @@
       {% for illustration in illustrations %}
         <div class="grid-item">
           <div class="ui card" tags="{{ illustration.tags|lower }}">
-            {% if request.user|inGroup:"editor" %}
+            {% if perms.projects.edit_illustration or perms.projects.delete_illustration%}
               <div class="editor buttons">
+                {% if perms.projects.add_illustration %}
                 <a class="ui green right ribbon label" href="/projects/illustration/{{ illustration.id }}/edit">Edit</a>
+                {% endif %}
                 <br>
+                {% if perms.projects.delete_illustration %}
                 <a class="ui red right ribbon label delete openmodal" url="/projects/illustration/{{ illustration.id }}/delete/" class="delete openmodal">Delete</a>
+                {% endif %}
               </div>
             {% endif %}
             <div class="image previewButton" previewImage="{{ illustration.thumbnail.url }}">

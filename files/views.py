@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import permission_required
 from django.shortcuts import render
 from .models import Image
 from .forms import ImageUpload, ImageSearch, ImageEdit
@@ -6,7 +7,6 @@ from django.http import HttpResponseRedirect, HttpResponse
 from scienceshaped import admin_history
 import os
 from django.conf import settings
-from authentication.templatetags import authentication_groups as groups
 
 def findId(title):
     number = 1
@@ -52,65 +52,60 @@ def renameImage(instance, title):
     instance.save()
     return instance
 
+@permission_required('files.add_image')
 def imageUpload(request):
-    if groups.inGroup(request.user, 'editor'):
-        if request.method == 'POST':
-            form = ImageUpload(request.POST, request.FILES)
-            if form.is_valid():
-                saveImage(request.FILES['file'], form.cleaned_data['title'], form.cleaned_data['description'], form.cleaned_data['tags'])
-                return render(request, 'files/image_upload_done.html')
-        else:
-            form = ImageUpload(initial={
-                'description': '',
-                'title': '',
-                'tags': '',
-                'file': '',
-            })
-
-        context = {
-            'form': form,
-        }
-        return render(request, 'files/image_upload.html', context)
+    if request.method == 'POST':
+        form = ImageUpload(request.POST, request.FILES)
+        if form.is_valid():
+            saveImage(request.FILES['file'], form.cleaned_data['title'], form.cleaned_data['description'], form.cleaned_data['tags'])
+            return render(request, 'files/image_upload_done.html')
     else:
-        return HttpResponseRedirect('/login')
+        form = ImageUpload(initial={
+            'description': '',
+            'title': '',
+            'tags': '',
+            'file': '',
+        })
 
+    context = {
+        'form': form,
+    }
+    return render(request, 'files/image_upload.html', context)
+
+@permission_required('files.view_image_control_panel')
 def images(request):
-    if groups.inGroup(request.user, 'editor'):
-        searchText = ''
-        if request.method == 'POST':
-            form = ImageSearch(request.POST)
-            images = []
-            if form.is_valid():
-                searchText = form.cleaned_data['search']
-                search = searchText.lower()
-                for image in Image.objects.order_by('-time'):
-                    if search in image.title.lower() or search in image.tags.lower():
-                        images.append(image)
-            else:
-                images = Image.objects.order_by('-time')
+    searchText = ''
+    if request.method == 'POST':
+        form = ImageSearch(request.POST)
+        images = []
+        if form.is_valid():
+            searchText = form.cleaned_data['search']
+            search = searchText.lower()
+            for image in Image.objects.order_by('-time'):
+                if search in image.title.lower() or search in image.tags.lower():
+                    images.append(image)
         else:
             images = Image.objects.order_by('-time')
-        form = ImageSearch()
-        context = {
-            'images': images,
-            'form': form,
-            'searchText': searchText,
-        }
-        return render(request, 'files/images.html', context)
     else:
-        return HttpResponseRedirect('/login')
+        images = Image.objects.order_by('-time')
+    form = ImageSearch()
+    context = {
+        'images': images,
+        'form': form,
+        'searchText': searchText,
+    }
+    return render(request, 'files/images.html', context)
 
+
+@permission_required('files.delete_image')
 def imageDelete(request, image_id):
-    if groups.inGroup(request.user, 'editor'):
-        try:
-            image = Image.objects.get(pk=image_id)
-            image.delete()
-            admin_history.log_deletion(request, image)
-        except Image.DoesNotExist:
-            pass
-        return HttpResponseRedirect('/files/images')
-    else:
-        return HttpResponseRedirect('/login')
+    try:
+        image = Image.objects.get(pk=image_id)
+        image.delete()
+        admin_history.log_deletion(request, image)
+    except Image.DoesNotExist:
+        pass
+    return HttpResponseRedirect('/files/images')
 
 def imageView(request, image_id):
     try:
@@ -119,41 +114,39 @@ def imageView(request, image_id):
     except Image.DoesNotExist:
         return HttpResponseRedirect('/')
 
+@permission_required('files.change_image')
 def imageEdit(request, image_id):
-    if groups.inGroup(request.user, 'editor'):
-        if request.method == 'POST':
-            form = ImageEdit(request.POST)
-            if form.is_valid():
-                try:
-                    image = Image.objects.get(pk=image_id)
-                    title = form.cleaned_data['title']
-                    if title != image.title:
-                        image = renameImage(image, title)
-                    image.title = title
-                    image.description = form.cleaned_data['description']
-                    image.tags = form.cleaned_data['tags']
-                    image.save()
-                    admin_history.log_change(request, image)
-                except Image.DoesNotExist:
-                    pass
-                return HttpResponseRedirect('/files/images')
-        else:
+    if request.method == 'POST':
+        form = ImageEdit(request.POST)
+        if form.is_valid():
             try:
                 image = Image.objects.get(pk=image_id)
+                title = form.cleaned_data['title']
+                if title != image.title:
+                    image = renameImage(image, title)
+                image.title = title
+                image.description = form.cleaned_data['description']
+                image.tags = form.cleaned_data['tags']
+                image.save()
+                admin_history.log_change(request, image)
             except Image.DoesNotExist:
-                return HttpResponseRedirect('/files/images')
-
-            form = ImageEdit(initial={
-                'title': image.title,
-                'description': image.description,
-                'tags': image.tags,
-                'file': image.file,
-            })
-
-        context = {
-            'form': form,
-        }
-
-        return render(request, 'files/image_edit.html', context)
+                pass
+            return HttpResponseRedirect('/files/images')
     else:
-        return HttpResponseRedirect('/login')
+        try:
+            image = Image.objects.get(pk=image_id)
+        except Image.DoesNotExist:
+            return HttpResponseRedirect('/files/images')
+
+        form = ImageEdit(initial={
+            'title': image.title,
+            'description': image.description,
+            'tags': image.tags,
+            'file': image.file,
+        })
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'files/image_edit.html', context)

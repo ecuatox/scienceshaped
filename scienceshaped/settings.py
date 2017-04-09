@@ -21,7 +21,6 @@ ALLOWED_HOSTS = ['127.0.0.1', DOMAIN]
 
 CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
 
-
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'Custom',
@@ -57,6 +56,7 @@ INSTALLED_APPS = [
     'authentication',
     'scienceshaped',
     'contentbox',
+    'tags',
     'ckeditor',
 ]
 
@@ -156,3 +156,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
+LOGIN_URL = '/'
