@@ -1,0 +1,72 @@
+{% extends 'scienceshaped/base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+Edit tags
+{% endblock title %}
+
+{% block header %}
+{% endblock header %}
+
+{% block footer %}
+{% endblock footer %}
+
+{% block head %}
+  <link rel="stylesheet" type="text/css" href="{% static "tags/css/edit.css" %}">
+{% endblock head %}
+
+{% block content %}
+
+  <div class="ui middle aligned center aligned grid">
+    <div class="column">
+      <h2 class="ui header blue">
+        Edit tags
+      </h2>
+      <div class="ui segment">
+
+        <div class="ui inline field">
+          <label for="id_group" id="grouplabel">Category</label>
+          <div class="ui selection dropdown search scrolling field group">
+            <input id="id_group" class="dummy" name="group" type="hidden">
+            <i class="dropdown icon"></i>
+            <div class="default text">Group</div>
+            <div class="menu">
+              {% for group in groups %}
+                <a class="item" href="/tags/{{ group.id }}/edit">{{ group.title }}</a>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+        <div class="tags">
+          {% for tag in tags %}
+            <a class="ui label blue">
+              {{ tag }}<i class="delete icon delete ajax" pk="{{ tag.id }}"></i>
+            </a>
+          {% endfor %}
+        </div>
+
+        {% if group %}
+          <div class="ui form">
+            <div class="ui inline field add">
+              <input class="newtag" type="text" name="tag">
+              <div class="ui fluid submit button blue">Add</div>
+            </div>
+          </div>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+
+  <script src="{% static "tags/js/edit.js" %}"></script>
+  <script>
+    {% if group %}
+      $('.group.dropdown').dropdown('set exactly', '{{ group.title }}');
+    {% else %}
+      $('.group.dropdown').dropdown();
+    {% endif %}
+
+    csrf_token = '{{ csrf_token }}';
+  </script>
+{% endblock content %}

@@ -1,4 +1,5 @@
 from django import forms
+from tags.models import Tag
 
 class IllustrationEdit(forms.Form):
     title = forms.CharField(max_length=100, label='Title')
@@ -19,6 +20,7 @@ class IllustrationEdit(forms.Form):
 
     def clean(self):
         form_data = self.cleaned_data
+        form_data['tags'] = Tag.clean_tags(form_data['tags'])
         return form_data
 
 

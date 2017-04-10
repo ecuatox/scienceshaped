@@ -2,13 +2,15 @@ from __future__ import unicode_literals
 import os
 from django.db import models
 from django.utils import timezone
+
 from files.models import Image
+from tags.models import Tag
 
 class Illustration(models.Model):
     title = models.CharField(max_length=100, verbose_name='Title')
     short = models.TextField(max_length=200, blank=True, verbose_name='Short Description')
     description = models.TextField(max_length=500, blank=True, verbose_name='Description')
-    tags = models.CharField(max_length=500, blank=True, verbose_name='Tags')
+    tags = models.ManyToManyField(Tag, verbose_name='Tags')
     hidden = models.BooleanField(default=False, verbose_name='Hidden')
 
     url = models.CharField(max_length=500, blank=True, null=True, verbose_name='URL')

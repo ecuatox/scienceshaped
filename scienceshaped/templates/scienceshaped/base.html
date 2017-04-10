@@ -3,67 +3,70 @@
 
 <html>
 
-  {% if request.user.is_staff or request.user.is_superuser or not "HIDDEN"|settings_value %}
-    <head>
+{% if request.user.is_staff or request.user.is_superuser or not "HIDDEN"|settings_value %}
+  <head>
 
-      <title>
-        {% block title %}
-          ScienceShaped
-        {% endblock title %}
-      </title>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="shortcut icon" type="image/ico" href="{% static "img/favicon.ico" %}"/>
+    <title>
+      {% block title %}
+        ScienceShaped
+      {% endblock title %}
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/ico" href="{% static "img/favicon.ico" %}"/>
 
-      <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/semantic.min.css" %}">
-      <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/alertify.min.css" %}">
-      <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/alertify.semantic.min.css" %}">
-      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/semantic.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/alertify.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/alertify.semantic.min.css" %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-      <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/style.css" %}">
-      <link rel="stylesheet" type="text/css" href="{% static "files/css/imagepopup.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/style.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "files/css/imagepopup.css" %}">
 
-      <script src="{% static "scienceshaped/js/jquery.min.js" %}"></script>
-      <script src="{% static "scienceshaped/js/semantic.min.js" %}"></script>
-      <script src="{% static "scienceshaped/js/scroll.js" %}"></script>
+    {% block head %}
+    {% endblock head %}
 
-      <script src="{% static "scienceshaped/js/analytics.js" %}"></script>
+    <script src="{% static "scienceshaped/js/jquery.min.js" %}"></script>
+    <script src="{% static "scienceshaped/js/semantic.min.js" %}"></script>
+    <script src="{% static "scienceshaped/js/alertify.min.js" %}"></script>
+    <script src="{% static "scienceshaped/js/scroll.js" %}"></script>
 
-      {% block head %}
-      {% endblock head %}
+    <script src="{% static "scienceshaped/js/analytics.js" %}"></script>
 
-    </head>
+  </head>
 
-    <body>
-      <div class="pusher">
+  <body>
+    <div class="pusher">
 
-        {% block header %}
-          {% include 'scienceshaped/header.html' %}
-        {% endblock header %}
+      {% block header %}
+        {% include 'scienceshaped/header.html' %}
+      {% endblock header %}
 
-        {% block content %}
-        {% endblock content %}
+      {% block content %}
+      {% endblock content %}
 
-        {% if messages %}
-          <script>
-            $(function() {
-              {% for message in messages %}
+      {% block footer %}
+        {% include 'scienceshaped/footer.html' %}
+      {% endblock footer %}
+    </div>
+  </body>
+
+  {% include 'scienceshaped/delete.html' %}
+  {% include 'files/imagepopup.html' %}
+
+{% else %}
+  <img style="display: block; margin: 200px auto; max-width: 800px; width: 90%;" src="/static/img/card.png">
+{% endif %}
+
+{% block messages %}
+  {% if messages %}
+    <script>
+        $(function () {
+            {% for message in messages %}
                 alertify.message("{{ message }}");
-              {% endfor %}
-            });
-          </script>
-        {% endif %}
-
-        {% block footer %}
-          {% include 'scienceshaped/footer.html' %}
-        {% endblock footer %}
-      </div>
-    </body>
-
-    {% include 'scienceshaped/delete.html' %}
-    {% include 'files/imagepopup.html' %}
-
-  {% else %}
-    <img style="display: block; margin: 200px auto; max-width: 800px; width: 90%;" src="/static/img/card.png">
+            {% endfor %}
+        });
+    </script>
   {% endif %}
+{% endblock messages %}
 
 </html>

@@ -65,4 +65,6 @@ $(function () {
     $('#id_pdf').val('');
     $('#pdf_dummy').val('');
   });
+
+  $('.dropdown').dropdown();
 });

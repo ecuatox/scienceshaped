@@ -1,12 +1,14 @@
 from django.contrib.auth.decorators import permission_required
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
-from .models import Illustration, Testimonial
-from files.models import Image
-from .forms import IllustrationEdit, TestimonialEdit
 from scienceshaped import admin_history
 from django.utils import timezone
 from datetime import datetime, timedelta
+
+from .forms import IllustrationEdit, TestimonialEdit
+from .models import Illustration, Testimonial
+from files.models import Image
+from tags.models import Tag
 
 
 @permission_required('projects.change_illustration')
@@ -34,7 +36,9 @@ def illustrationEdit(request, illustration_id):
             illustration.title = form.cleaned_data['title']
             illustration.description = form.cleaned_data['description']
             illustration.short = form.cleaned_data['short']
-            illustration.tags = form.cleaned_data['tags']
+            illustration.tags.clear()
+            for tag in form.cleaned_data['tags']:
+                illustration.tags.add(tag)
             illustration.url = form.cleaned_data['url']
             illustration.hidden = form.cleaned_data['hidden']
             if 'pdf' in request.FILES:
@@ -67,14 +71,6 @@ def illustrationEdit(request, illustration_id):
     else:
         if int(illustration_id) == 0:
             form = IllustrationEdit(initial={
-                'title': '',
-                'description': '',
-                'short': '',
-                'tags': '',
-                'url': '',
-                'pdf': '',
-                'thumbnail': '0',
-                'thumbnail_size': 100,
                 'date': datetime.strftime(timezone.now(), '%B %d, %Y'),
             })
         else:
@@ -94,7 +90,7 @@ def illustrationEdit(request, illustration_id):
                 'title': illustration.title,
                 'description': illustration.description,
                 'short': illustration.short,
-                'tags': illustration.tags,
+                'tags': illustration.tags.all(),
                 'hidden': illustration.hidden,
                 'url': illustration.url,
                 'pdf': illustration.pdf_getname(),
@@ -108,6 +104,7 @@ def illustrationEdit(request, illustration_id):
         'form': form,
         'images': images,
         'new': new,
+        'illustration_tags': Tag.objects.filter(group__title='Illustrations'),
     }
 
     return render(request, 'projects/illustration_edit.html', context)

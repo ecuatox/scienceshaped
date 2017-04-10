@@ -1,0 +1,34 @@
+.column {
+    max-width: 600px;
+    margin-top: 30px;
+    width: 90% !important;
+}
+
+.newtag, .submit.button {
+    display: inline-block !important;
+    vertical-align: top;
+}
+
+.newtag {
+    width: calc( 90% - 100px ) !important;
+}
+
+.submit.button {
+    width: 100px !important;
+}
+
+.tags {
+    margin: 30px !important;
+}
+
+.ui.label {
+    margin: 3px;
+}
+
+#grouplabel {
+    margin-right: 10px !important;
+}
+
+.button.blue {
+    height: 38px;
+}

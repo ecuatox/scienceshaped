@@ -2,6 +2,8 @@ from django.shortcuts import render
 from projects.models import Illustration, Testimonial
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.mail import EmailMessage
+
+from tags.models import Tag
 from .forms import Mail
 from contentbox.models import ContentBox
 from django.conf import settings
@@ -51,7 +53,7 @@ def index(request, tag='all'):
         'mailForm': mailForm,
         'aboutContent': ContentBox.getContent('about'),
         'infoContent': ContentBox.getContent('info'),
-        #'tags': tags,
+        'illustration_tags': Tag.objects.filter(group__title='Illustrations'),
     }
     return render(request, 'scienceshaped/index.html', context)
 

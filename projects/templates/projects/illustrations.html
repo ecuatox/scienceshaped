@@ -25,10 +25,10 @@
             <div class="ui empty circular label"></div>
             All
           </div>
-          {% for tag in tags %}
+          {% for tag in illustration_tags %}
             <div class="item" tag="{{ tag|lower }}">
               <div class="ui empty circular label"></div>
-              { tag|title }}
+              {{ tag|title }}
             </div>
           {% endfor %}
         </div>
