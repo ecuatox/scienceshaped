@@ -36,7 +36,7 @@
                 placeholder="username"
                 type="text"
                 maxlength="{{ form.fields.username.max_length }}"
-                value="{{ form.username.value }}">
+                value="{{ form.username.value|default:'' }}">
             </div>
 
             {% if form.username.errors %}
