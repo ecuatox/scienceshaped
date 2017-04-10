@@ -104,7 +104,7 @@ def illustrationEdit(request, illustration_id):
         'form': form,
         'images': images,
         'new': new,
-        'illustration_tags': Tag.objects.filter(group__title='Illustrations'),
+        'illustration_tags': Tag.objects.filter(group__title='illustrations'),
     }
 
     return render(request, 'projects/illustration_edit.html', context)

@@ -66,10 +66,12 @@
             {% endif %}
           </div>
 
-          <div class="field">
+          <div class="ui field taglabel">
             <label for="{{ form.tags.id_for_label }}">
               Tags
             </label>
+          </div>
+          <div class="ui inline field">
             <div class="ui fluid multiple search normal selection dropdown tags">
               <input id="{{ form.tags.id_for_label }}"
                      type="hidden"
@@ -90,6 +92,7 @@
                 </div>
               {% endif %}
             </div>
+            <a class="ui fluid button blue manage" href="/tags/edit/name/images/" target="_blank">Manage Tags</a>
           </div>
 
           <div class="field file">
@@ -120,6 +123,7 @@
 
         </div>
       </form>
+
       <script src="{% static "files/js/image_upload.js" %}"></script>
       <script>
           $(function () {

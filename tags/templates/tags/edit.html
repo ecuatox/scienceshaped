@@ -20,7 +20,7 @@ Edit tags
   <div class="ui middle aligned center aligned grid">
     <div class="column">
       <h2 class="ui header blue">
-        Edit tags
+        Manage tags
       </h2>
       <div class="ui segment">
 
@@ -32,7 +32,7 @@ Edit tags
             <div class="default text">Group</div>
             <div class="menu">
               {% for group in groups %}
-                <a class="item" href="/tags/{{ group.id }}/edit">{{ group.title }}</a>
+                <a class="item" href="/tags/{{ group.id }}/edit">{{ group.title|title }}</a>
               {% endfor %}
             </div>
           </div>
@@ -62,7 +62,7 @@ Edit tags
   <script src="{% static "tags/js/edit.js" %}"></script>
   <script>
     {% if group %}
-      $('.group.dropdown').dropdown('set exactly', '{{ group.title }}');
+      $('.group.dropdown').dropdown('set exactly', '{{ group.title|title }}');
     {% else %}
       $('.group.dropdown').dropdown();
     {% endif %}

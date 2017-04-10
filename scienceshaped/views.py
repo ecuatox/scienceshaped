@@ -53,7 +53,7 @@ def index(request, tag='all'):
         'mailForm': mailForm,
         'aboutContent': ContentBox.getContent('about'),
         'infoContent': ContentBox.getContent('info'),
-        'illustration_tags': Tag.objects.filter(group__title='Illustrations'),
+        'illustration_tags': Tag.objects.filter(group__title='illustrations'),
     }
     return render(request, 'scienceshaped/index.html', context)
 

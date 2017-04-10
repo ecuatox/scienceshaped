@@ -83,7 +83,7 @@ def imageUpload(request):
 
     context = {
         'form': form,
-        'image_tags': Tag.objects.filter(group__title='Images'),
+        'image_tags': Tag.objects.filter(group__title='images'),
     }
     return render(request, 'files/image_upload.html', context)
 
@@ -167,7 +167,7 @@ def imageEdit(request, image_id):
 
     context = {
         'form': form,
-        'image_tags': Tag.objects.filter(group__title='Images'),
+        'image_tags': Tag.objects.filter(group__title='images'),
     }
 
     return render(request, 'files/image_edit.html', context)

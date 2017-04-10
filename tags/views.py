@@ -67,3 +67,11 @@ def delete(request, tag_id):
             'success': False,
             'error': 'Cannot delete nonexisting tag',
         })
+
+@permission_required('tags.view_tag_control_panel')
+def name(request, name):
+    try:
+        group = TagGroup.objects.get(title=name)
+        return HttpResponseRedirect('/tags/%r/edit/' % group.id)
+    except TagGroup.DoesNotExist:
+        return HttpResponseRedirect('/tags/edit/')
