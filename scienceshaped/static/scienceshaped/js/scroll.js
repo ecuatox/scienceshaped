@@ -1,18 +1,18 @@
-$(function() {
-  $('a[href*="#"]:not([href="#"]):not([href^="#modal"])').click(function() {
-    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-      var target = $(this.hash);
-      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-      if (target.length) {
-        $('html, body').clearQueue();
-        $('html, body').animate({
-          scrollTop: target.offset().top - 80,
-        }, {
-          easing: "swing",
-          duration: 500,
-        });
-        return false;
-      }
-    }
-  });
+$(function () {
+    $('a[href*="#"]:not([href="#"]):not([href^="#modal"])').click(function () {
+        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+            var target = $(this.hash);
+            target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+            if (target.length) {
+                $('html, body').clearQueue();
+                $('html, body').animate({
+                    scrollTop: target.offset().top - 80,
+                }, {
+                    easing: "swing",
+                    duration: 500,
+                });
+                return false;
+            }
+        }
+    });
 });

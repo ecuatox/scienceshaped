@@ -19,10 +19,10 @@
           Email
         </label>
         <input id="{{ mailForm.email.id_for_label }}"
-          name="title"
+          name="email"
           type="text"
           maxlength="{{ mailForm.fields.email.max_length }}"
-          value="{{ formailFormm.email.value }}">
+          value="{{ mailForm.email.value|default:'' }}">
 
         {% if mailForm.email.errors %}
           <div class="ui blue pointing label">
@@ -36,10 +36,10 @@
           Subject
         </label>
         <input id="{{ mailForm.subject.id_for_label }}"
-          name="title"
+          name="subject"
           type="text"
           maxlength="{{ mailForm.fields.subject.max_length }}"
-          value="{{ formailFormm.subject.value }}">
+          value="{{ mailForm.subject.value|default:'' }}">
 
         {% if mailForm.subject.errors %}
           <div class="ui blue pointing label">
@@ -56,7 +56,7 @@
           name="message"
           type="text"
           maxlength="{{ mailForm.fields.message.max_length }}"
-        >{{ mailForm.message.value }}</textarea>
+        >{{ mailForm.message.value|default:'' }}</textarea>
 
         {% if mailForm.message.errors %}
           <div class="ui blue pointing label">

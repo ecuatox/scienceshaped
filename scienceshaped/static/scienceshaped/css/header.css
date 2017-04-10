@@ -1,161 +1,161 @@
 .headerbar {
-  width: 100%;
-  background: #fff;
-  box-shadow: 0px 2px 20px #888888;
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 1000;
-  transition: 0.3s ease-in;
-  -ms-transition: 0.3s ease-in;
-  -moz-transition: 0.3s ease-in;
-  -webkit-transition: 0.3s ease-in;
+    width: 100%;
+    background: #fff;
+    box-shadow: 0px 2px 20px #aaa;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+    transition: 0.3s ease-in;
+    -ms-transition: 0.3s ease-in;
+    -moz-transition: 0.3s ease-in;
+    -webkit-transition: 0.3s ease-in;
 }
 
 .logo {
-  position: absolute;
-  left: 30px;
-  transition: 0.3s ease-in;
-  -ms-transition: 0.3s ease-in;
-  -moz-transition: 0.3s ease-in;
-  -webkit-transition: 0.3s ease-in;
+    position: absolute;
+    left: 30px;
+    transition: 0.3s ease-in;
+    -ms-transition: 0.3s ease-in;
+    -moz-transition: 0.3s ease-in;
+    -webkit-transition: 0.3s ease-in;
 }
 
 .headerbar .menu {
-  position: absolute;
-  right: 40px;
-  transition: 0.3s ease-in;
-  -ms-transition: 0.3s ease-in;
-  -moz-transition: 0.3s ease-in;
-  -webkit-transition: 0.3s ease-in;
+    position: absolute;
+    right: 40px;
+    transition: 0.3s ease-in;
+    -ms-transition: 0.3s ease-in;
+    -moz-transition: 0.3s ease-in;
+    -webkit-transition: 0.3s ease-in;
 }
 
 .headerbar .menu li {
-  display: inline-block;
-  transition: 0.3s ease-in;
-  -ms-transition: 0.3s ease-in;
-  -moz-transition: 0.3s ease-in;
-  -webkit-transition: 0.3s ease-in;
+    display: inline-block;
+    transition: 0.3s ease-in;
+    -ms-transition: 0.3s ease-in;
+    -moz-transition: 0.3s ease-in;
+    -webkit-transition: 0.3s ease-in;
 }
 
 .headerbar .user {
-  position: absolute;
-  right: 6px;
-  transition: 0.3s ease-in;
-  -ms-transition: 0.3s ease-in;
-  -moz-transition: 0.3s ease-in;
-  -webkit-transition: 0.3s ease-in;
+    position: absolute;
+    right: 6px;
+    transition: 0.3s ease-in;
+    -ms-transition: 0.3s ease-in;
+    -moz-transition: 0.3s ease-in;
+    -webkit-transition: 0.3s ease-in;
 }
 
 .headerbar.headerLarge {
-  height: 120px;
+    height: 120px;
 }
 
 .headerbar.headerSmall {
-  height: 50px;
+    height: 50px;
 }
 
 .headerLarge .logo {
-  height: 80px;
-  top: 20px;
+    height: 80px;
+    top: 20px;
 }
 
 .headerSmall .logo {
-  height: 40px;
-  top: 5px;
+    height: 40px;
+    top: 5px;
 }
 
 .headerLarge .menu {
-  top: 50px;
+    top: 50px;
 }
 
 .headerSmall .menu {
-  top: 0px;
+    top: 0px;
 }
 
 .headerLarge .menu li {
-  margin: 10px;
+    margin: 10px;
 }
 
 .headerSmall .menu li {
-  margin: 0 10px;
+    margin: 0 10px;
 }
 
 .headerLarge .user {
-  top: 2px;
+    top: 2px;
 }
 
 .headerSmall .user {
-  top: -20px;
+    top: -20px;
 }
 
 .headerbar .item {
-  text-transform: uppercase;
-  color: #333;
-  font-size: 16px;
+    text-transform: uppercase;
+    color: #333;
+    font-size: 16px;
 }
 
 .mobile {
-  display: none;
+    display: none;
 }
 
 .desktop {
-  display: inline;
+    display: inline;
 }
 
 @media screen and (max-device-width: 480px), screen and (max-width: 720px) {
-  .mobile {
-    display: inline;
-  }
+    .mobile {
+        display: inline;
+    }
 
-  .desktop {
-    display: none;
-  }
+    .desktop {
+        display: none;
+    }
 
-  .mobile .logo {
-    height: 60px;
-    top: 30px;
-    left: 15px;
-  }
+    .mobile .logo {
+        height: 60px;
+        top: 30px;
+        left: 15px;
+    }
 
-  .ui.top .item {
-    height: 140px;
-    font-size: 50px;
-  }
+    .ui.top .item {
+        height: 140px;
+        font-size: 50px;
+    }
 
-  .sidebar .item {
-    font-size: 18px;
-  }
+    .sidebar .item {
+        font-size: 18px;
+    }
 
-  .material-icons {
-    font-size: 80px;
-    margin-top: 20px;
-    margin-right: 20px;
-  }
+    .material-icons {
+        font-size: 80px;
+        margin-top: 20px;
+        margin-right: 20px;
+    }
 
-  .mobile.sidetoggle {
-    height: 100% !important;
-  }
+    .mobile.sidetoggle {
+        height: 100% !important;
+    }
 
-  .sidebar {
-    width: 200px !important;
-  }
+    .sidebar {
+        width: 200px !important;
+    }
 
-  .sidetoggle {
-    position: absolute !important;
-    right: 0 !important;
-  }
+    .sidetoggle {
+        position: absolute !important;
+        right: 0 !important;
+    }
 
-  .item::before {
-    width: 0 !important;
-  }
+    .item::before {
+        width: 0 !important;
+    }
 
 }
 
 @media screen and (max-device-width: 400px), screen and (max-width: 500px) {
-  .top .logo, .top .material-icons {
-    font-size: 18vw;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
+    .top .logo, .top .material-icons {
+        font-size: 18vw;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
 }

@@ -1,57 +1,57 @@
 #illustrations {
-  position: relative;
-  margin: 0 auto;
-  padding-top: 80px;
-  padding-bottom: 80px;
+    position: relative;
+    margin: 0 auto;
+    padding-top: 80px;
+    padding-bottom: 80px;
 }
 
 #illustrations .new.button {
-  position: absolute;
-  top: 10px;
-  left: 10px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
 }
 
 #illustrations .new.button:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 #illustrations .editor.buttons {
-  position: absolute;
-  top: 3px;
-  right: 15px;
-  z-index: 10;
+    position: absolute;
+    top: 3px;
+    right: 15px;
+    z-index: 10;
 }
 
 #illustrationsTop {
-  text-align: center;
+    text-align: center;
 }
 
 #illustrations h1, .dropdown {
-  display: inline-block;
+    display: inline-block;
 }
 
 #illustrations .card {
-  margin: 10px 0;
+    margin: 10px 0;
 }
 
 .dropdown {
-  margin-left: 20px !important;
-  top: -10px;
+    margin-left: 20px !important;
+    top: -10px;
 }
 
 .modal .card {
-  display: inline-block !important;
-  width: 150px !important;
-  height: 100px !important;
+    display: inline-block !important;
+    width: 150px !important;
+    height: 100px !important;
 }
 
 .modal .description {
-  padding: 30px;
+    padding: 30px;
 }
 
 .modal .card img {
-  object-fit: cover;
-  object-position: center;
-  height: 150px !important;
-  width: 100% !important;
+    object-fit: cover;
+    object-position: center;
+    height: 150px !important;
+    width: 100% !important;
 }

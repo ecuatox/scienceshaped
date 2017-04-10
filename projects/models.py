@@ -23,6 +23,13 @@ class Illustration(models.Model):
 
     images = models.ManyToManyField(Image, blank=True)
 
+    @staticmethod
+    def filter_tag(tag):
+        if tag == 'all':
+            return Illustration.objects.all()
+        else:
+            return Illustration.objects.filter(tags__label=tag.lower())
+
     def __str__(self):
         return self.title
 

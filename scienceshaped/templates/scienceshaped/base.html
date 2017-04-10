@@ -12,7 +12,7 @@
       {% endblock title %}
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/ico" href="{% static "img/favicon.ico" %}"/>
+    <link rel="shortcut icon" type="image/ico" href="{% static "scienceshaped/img/favicon.ico" %}"/>
 
     <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/semantic.min.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/alertify.min.css" %}">
@@ -22,15 +22,14 @@
     <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/style.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "files/css/imagepopup.css" %}">
 
-    {% block head %}
-    {% endblock head %}
-
     <script src="{% static "scienceshaped/js/jquery.min.js" %}"></script>
     <script src="{% static "scienceshaped/js/semantic.min.js" %}"></script>
     <script src="{% static "scienceshaped/js/alertify.min.js" %}"></script>
     <script src="{% static "scienceshaped/js/scroll.js" %}"></script>
-
     <script src="{% static "scienceshaped/js/analytics.js" %}"></script>
+
+    {% block head %}
+    {% endblock head %}
 
   </head>
 
@@ -47,26 +46,27 @@
       {% block footer %}
         {% include 'scienceshaped/footer.html' %}
       {% endblock footer %}
+
     </div>
   </body>
 
   {% include 'scienceshaped/delete.html' %}
   {% include 'files/imagepopup.html' %}
 
-{% else %}
-  <img style="display: block; margin: 200px auto; max-width: 800px; width: 90%;" src="/static/img/card.png">
-{% endif %}
-
-{% block messages %}
-  {% if messages %}
-    <script>
-        $(function () {
-            {% for message in messages %}
-                alertify.message("{{ message }}");
-            {% endfor %}
-        });
-    </script>
+  {% else %}
+    <img style="display: block; margin: 200px auto; max-width: 800px; width: 90%;" src="{% static "scienceshaped/img/card.png" %}">
   {% endif %}
-{% endblock messages %}
+
+  {% block messages %}
+    {% if messages %}
+      <script>
+          $(function () {
+              {% for message in messages %}
+                  alertify.message("{{ message }}");
+              {% endfor %}
+          });
+      </script>
+    {% endif %}
+  {% endblock messages %}
 
 </html>

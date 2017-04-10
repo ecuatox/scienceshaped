@@ -1,107 +1,109 @@
 .images.section {
-  margin: 40px;
+    margin: 40px;
 }
 
 .small.buttons {
-  width: 100%;
+    width: 100%;
 }
 
 .card {
-  width: 200px !important;
-  display: inline-block !important;
-  margin: 5px !important;
+    width: 200px !important;
+    display: inline-block !important;
+    margin: 5px !important;
 }
 
 .content.btns {
-  display: none;
+    display: none;
 }
 
 .small.buttons .button {
-  width: calc( 25% - 0.5px );
+    width: calc(25% - 0.5px);
 }
 
 .card .content p.title {
-  font-size: 16px;
-  margin: 0;
-  margin-top: -5px;
-  margin-bottom: -3px;
+    font-size: 16px;
+    margin: 0;
+    margin-top: -5px;
+    margin-bottom: -3px;
 }
 
 .card .meta {
-  margin-bottom: -2px;
+    margin-bottom: -2px;
 }
 
 .card {
-  position: relative;
+    position: relative;
 }
 
 .gallery {
-  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome and Opera */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                                     supported by Chrome and Opera */
 }
 
 .card .content {
-  -webkit-touch-callout: auto; /* iOS Safari */
+    -webkit-touch-callout: auto; /* iOS Safari */
     -webkit-user-select: auto; /* Safari */
-     -khtml-user-select: auto; /* Konqueror HTML */
-       -moz-user-select: auto; /* Firefox */
-        -ms-user-select: auto; /* Internet Explorer/Edge */
-            user-select: auto; /* Non-prefixed version, currently
-                                  supported by Chrome and Opera */
+    -khtml-user-select: auto; /* Konqueror HTML */
+    -moz-user-select: auto; /* Firefox */
+    -ms-user-select: auto; /* Internet Explorer/Edge */
+    user-select: auto;
+    /* Non-prefixed version, currently
+                                     supported by Chrome and Opera */
 }
 
 .card:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .card img {
-  object-fit: contain;
-  object-position: center;
-  height: 150px !important;
-  width: 100% !important;
+    object-fit: contain;
+    object-position: center;
+    height: 150px !important;
+    width: 100% !important;
 }
 
 form {
-  margin-left: 4px;
+    margin-left: 4px;
 }
 
 form input {
-  width: 202px !important;
-  display: inline-block !important;
+    width: 202px !important;
+    display: inline-block !important;
 }
 
 form button.submit {
-  top: 0;
-  left: 213px;
-  position: absolute;
-  width: 202px !important;
-  display: inline-block !important;
+    top: 0;
+    left: 213px;
+    position: absolute;
+    width: 202px !important;
+    display: inline-block !important;
 }
 
 form a.upload {
-  top: 0;
-  left: 425px;
-  position: absolute;
-  width: 202px !important;
-  display: inline-block !important;
+    top: 0;
+    left: 425px;
+    position: absolute;
+    width: 202px !important;
+    display: inline-block !important;
 }
 
 @media only screen and (max-width: 500px) {
-  a.upload, button.submit {
-    position: relative !important;
-    left: 0 !important;
-  }
+    a.upload, button.submit {
+        position: relative !important;
+        left: 0 !important;
+    }
 
-  a.upload {
-    margin: 6px 0 !important;
-  }
+    a.upload {
+        margin: 6px 0 !important;
+    }
 
-  .card, form a.upload, form button.submit, form input {
-    width: 95% !important;
-  }
+    .card, form a.upload, form button.submit, form input {
+        width: 95% !important;
+    }
 }

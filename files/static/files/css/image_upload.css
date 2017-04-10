@@ -1,29 +1,29 @@
 .column {
-  max-width: 800px;
-  width: 90% !important;
-  margin-top: 30px;
+    max-width: 800px;
+    width: 90% !important;
+    margin-top: 30px;
 }
 
 .file.field {
-  margin-top: 20px !important;
+    margin-top: 20px !important;
 }
 
 .disabled.field {
-  width: 80%;
-  display: inline-block !important;
-  vertical-align: top;
+    width: 80%;
+    display: inline-block !important;
+    vertical-align: top;
 }
 
 .upload.button {
-  width: 19%;
-  height: 38px;
-  display: inline-block !important;
-  color: #fff !important;
-  padding-top: 12px !important;
+    width: 19%;
+    height: 38px;
+    display: inline-block !important;
+    color: #fff !important;
+    padding-top: 12px !important;
 }
 
 form {
-  text-align: left;
+    text-align: left;
 }
 
 .dropdown.tags, .manage.button {
@@ -32,7 +32,7 @@ form {
 }
 
 .dropdown.tags {
-    width: calc( 100% - 160px ) !important;
+    width: calc(100% - 160px) !important;
 }
 
 .manage.button {
