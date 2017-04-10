@@ -3,7 +3,8 @@ from ckeditor.fields import RichTextField
 
 class ContentBox(models.Model):
     title = models.CharField(max_length=100, verbose_name='Title', primary_key=True)
-    content = RichTextField(default='')
+    content = RichTextField(default='', verbose_name='Content')
+    light = models.BooleanField(default=True, verbose_name='Light theme')
 
     class Meta:
         verbose_name_plural = "contentboxes"

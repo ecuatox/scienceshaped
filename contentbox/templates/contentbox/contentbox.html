@@ -31,4 +31,9 @@
   </div>
 
   <script src="{% static "contentbox/js/contentbox.js" %}"></script>
+  <script>
+      {% if not form.light.value %}
+          CKEDITOR.on('instanceReady', function() {  darken(); });
+      {% endif %}
+  </script>
 {% endblock content %}

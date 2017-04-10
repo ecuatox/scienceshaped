@@ -1,31 +1,18 @@
-from django.contrib.auth.decorators import permission_required
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.views.generic import UpdateView
+
 from .models import ContentBox
-from .forms import ContentBoxForm
 
 
-@permission_required('contentbox.add_contentbox')
-@permission_required('contentbox.change_contentbox')
-def contentbox(request, title):
-    if request.method == 'POST':
+class ContentBoxEdit(UpdateView):
+    model = ContentBox
+    fields = ['title', 'content', 'light']
 
-        form = ContentBoxForm(request.POST)
-        if form.is_valid():
-            contentBox = ContentBox.get(title)
-            contentBox.content = form.cleaned_data['content']
-            contentBox.save()
-            # messages.add_message(request, messages.SUCCESS, 'Content of %s was successfully saved' % title)
+    template_name = 'contentbox/contentbox.html'
+    success_url = '/'
 
-        return HttpResponseRedirect('/')
+    def get_object(self, queryset=None):
+        return ContentBox.get(self.kwargs['title'])
 
-    else:
-        contentBox = ContentBox.get(title)
-        form = ContentBoxForm(initial={
-            'title': contentBox.title,
-            'content': contentBox.content,
-        })
-        context = {
-            'form': form,
-        }
-        return render(request, 'contentbox/contentbox.html', context)
+    # def form_valid(self, form):
+    #     messages.success(self.request, 'Content of "%s" was successfully saved' % form.cleaned_data['title'])
+    #     return super(ContentBoxEdit, self).form_valid(form)
