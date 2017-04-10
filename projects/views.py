@@ -41,8 +41,8 @@ def illustrationEdit(request, illustration_id):
                 illustration.tags.add(tag)
             illustration.url = form.cleaned_data['url']
             illustration.hidden = form.cleaned_data['hidden']
-            if 'pdf' in request.FILES:
-                illustration.pdf = request.FILES['pdf']
+            if 'file' in request.FILES:
+                illustration.pdf = request.FILES['file']
             else:
                 illustration.pdf = None
             thumbnail_raw = form.cleaned_data['thumbnail']

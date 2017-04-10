@@ -159,6 +159,9 @@
       </div>
 
       <div class="field file">
+        <label for="{{ form.file.id_for_label }}">
+          PDF
+        </label>
         <div class="disabled field">
           <input id="pdf_dummy" type="text" disabled="" tabindex="-1" value="{{ form.pdf.value|default:'' }}">
         </div>
