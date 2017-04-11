@@ -7,9 +7,11 @@
 
 {% block head %}
   <link rel="stylesheet" type="text/css" href="{% static "authentication/css/login.css" %}">
+  <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/header.css" %}">
 {% endblock head %}
 
 {% block header %}
+  {% include 'scienceshaped/header_simple.html' %}
 {% endblock header %}
 
 {% block footer %}

@@ -2,17 +2,19 @@
 {% load staticfiles %}
 
 {% block header %}
-{% endblock %}
+  {% include 'scienceshaped/header_simple.html' %}
+{% endblock header %}
 
 {% block footer %}
-{% endblock %}
+{% endblock footer %}
 
 {% block title %}
   Images
-{% endblock %}
+{% endblock title %}
 
 {% block head %}
   <link rel="stylesheet" type="text/css" href="{% static "files/css/images.css" %}">
+  <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/header.css" %}">
 {% endblock %}
 
 {% block content %}

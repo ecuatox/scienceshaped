@@ -10,175 +10,177 @@
 {% endblock title %}
 
 {% block header %}
-  <link rel="stylesheet" type="text/css" href="{% static "projects/css/editform.css" %}">
-  <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/calendar.min.css" %}">
-  <script src="{% static "scienceshaped/js/calendar.min.js" %}"></script>
+  {% include 'scienceshaped/header_simple.html' %}
 {% endblock header %}
 
 {% block footer %}
 {% endblock footer %}
 
 {% block head %}
+  <link rel="stylesheet" type="text/css" href="{% static "projects/css/editform.css" %}">
+  <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/calendar.min.css" %}">
+  <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/header.css" %}">
+  <script src="{% static "scienceshaped/js/calendar.min.js" %}"></script>
 {% endblock head %}
 
 {% block content %}
 
   <div class="ui middle aligned center aligned grid">
   <div class="column">
-  <h2 class="ui header blue">
-    {% if new %}
-      Create new illustration
-    {% else %}
-      Edit illustration
-    {% endif %}
-  </h2>
-  <form class="ui large form" action="" enctype="multipart/form-data" method="post">
-    {% csrf_token %}
-
-    <div class="ui segment">
-      <div class="field" style="margin-bottom: 0px;">
-        <label for="{{ form.title.id_for_label }}">
-          Title
-        </label>
-      </div>
-      <div class="inline field">
-        <div class="ui left input leftofhidden">
-          <input id="{{ form.title.id_for_label }}"
-                 name="title"
-                 type="text"
-                 maxlength="{{ form.fields.title.max_length }}"
-                 value="{{ form.title.value|default:'' }}">
-        </div>
-
-        <div class="ui input toggle checkbox">
-          <input type="checkbox" tabindex="0" class="hidden" name="hidden">
-          <label>Hidden</label>
-          {% if form.hidden.errors %}
-            <div class="ui blue pointing label">
-              {{ form.hidden.errors.0 }}
-            </div>
-          {% endif %}
-        </div>
-      </div>
-      {% if form.title.errors %}
-        <div class="ui blue pointing label" style="margin-top: 0; margin-bottom: 10px;">
-          {{ form.title.errors.0 }}
-        </div>
+    <h2 class="ui header blue">
+      {% if new %}
+        Create new illustration
+      {% else %}
+        Edit illustration
       {% endif %}
+    </h2>
+    <form class="ui large form" action="" enctype="multipart/form-data" method="post">
+      {% csrf_token %}
 
-      <div class="field">
-        <label for="{{ form.short.id_for_label }}">
-          Short Description
-        </label>
-        <div class="ui left input">
+      <div class="ui segment">
+        <div class="field" style="margin-bottom: 0px;">
+          <label for="{{ form.title.id_for_label }}">
+            Title
+          </label>
+        </div>
+        <div class="inline field">
+          <div class="ui left input leftofhidden">
+            <input id="{{ form.title.id_for_label }}"
+                   name="title"
+                   type="text"
+                   maxlength="{{ form.fields.title.max_length }}"
+                   value="{{ form.title.value|default:'' }}">
+          </div>
+
+          <div class="ui input toggle checkbox">
+            <input type="checkbox" tabindex="0" class="hidden" name="hidden">
+            <label>Hidden</label>
+            {% if form.hidden.errors %}
+              <div class="ui blue pointing label">
+                {{ form.hidden.errors.0 }}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+        {% if form.title.errors %}
+          <div class="ui blue pointing label" style="margin-top: 0; margin-bottom: 10px;">
+            {{ form.title.errors.0 }}
+          </div>
+        {% endif %}
+
+        <div class="field">
+          <label for="{{ form.short.id_for_label }}">
+            Short Description
+          </label>
+          <div class="ui left input">
             <textarea id="{{ form.short.id_for_label }}"
                       name="short"
                       type="text"
                       maxlength="{{ form.fields.short.max_length }}"
             >{{ form.short.value|default:'' }}</textarea>
+          </div>
+
+          {% if form.short.errors %}
+            <div class="ui blue pointing label">
+              {{ form.short.errors.0 }}
+            </div>
+          {% endif %}
         </div>
 
-        {% if form.short.errors %}
-          <div class="ui blue pointing label">
-            {{ form.short.errors.0 }}
-          </div>
-        {% endif %}
-      </div>
-
-      <div class="field">
-        <label for="{{ form.description.id_for_label }}">
-          Description
-        </label>
-        <div class="ui left input">
+        <div class="field">
+          <label for="{{ form.description.id_for_label }}">
+            Description
+          </label>
+          <div class="ui left input">
             <textarea id="{{ form.description.id_for_label }}"
                       name="description"
                       type="text"
                       maxlength="{{ form.fields.description.max_length }}"
             >{{ form.description.value|default:'' }}</textarea>
+          </div>
+
+          {% if form.description.errors %}
+            <div class="ui blue pointing label">
+              {{ form.description.errors.0 }}
+            </div>
+          {% endif %}
         </div>
 
-        {% if form.description.errors %}
-          <div class="ui blue pointing label">
-            {{ form.description.errors.0 }}
+        <div class="ui field taglabel">
+          <label for="{{ form.tags.id_for_label }}">
+            Tags
+          </label>
+        </div>
+        <select multiple="multiple" id="{{ form.tags.id_for_label }}" name="tags" style="display: none;">
+          {% for tag in illustration_tags %}
+            <option value="{{ tag.id }}">{{ tag|title }}</option>
+          {% endfor %}
+        </select>
+        <div class="ui inline field">
+          <div class="ui fluid multiple search normal selection dropdown tags">
+            <input id="id_tags_dummy"
+                   type="hidden"
+                   type="text"
+                   maxlength="{{ form.fields.tags.max_length }}">
+            <i class="dropdown icon"></i>
+            <div class="default text">Select Tags</div>
+            <div class="menu">
+              {% for tag in illustration_tags %}
+                <div class="item" data-value="{{ tag.id }}">{{ tag|title }}</div>
+              {% endfor %}
+            </div>
+          </div>
+          <a class="ui fluid button blue manage" href="/tags/edit/name/illustrations/" target="_blank">Manage Tags</a>
+        </div>
+        {% if form.tags.errors %}
+          <div class="ui blue pointing label" style="margin-top: 0;">
+            {{ form.tags.errors.0 }}
           </div>
         {% endif %}
-      </div>
 
-      <div class="ui field taglabel">
-        <label for="{{ form.tags.id_for_label }}">
-          Tags
-        </label>
-      </div>
-      <select multiple="multiple" id="{{ form.tags.id_for_label }}" name="tags" style="display: none;">
-        {% for tag in illustration_tags %}
-          <option value="{{ tag.id }}">{{ tag|title }}</option>
-        {% endfor %}
-      </select>
-      <div class="ui inline field">
-        <div class="ui fluid multiple search normal selection dropdown tags">
-          <input id="id_tags_dummy"
-                 type="hidden"
-                 type="text"
-                 maxlength="{{ form.fields.tags.max_length }}">
-          <i class="dropdown icon"></i>
-          <div class="default text">Select Tags</div>
-          <div class="menu">
-            {% for tag in illustration_tags %}
-              <div class="item" data-value="{{ tag.id }}">{{ tag|title }}</div>
-            {% endfor %}
+        <div class="field url">
+          <label for="{{ form.url.id_for_label }}">
+            Url
+          </label>
+          <div class="ui left input">
+            <input id="{{ form.url.id_for_label }}"
+                   name="url"
+                   type="text"
+                   maxlength="{{ form.fields.url.max_length }}"
+                   value="{{ form.url.value|default:'' }}">
           </div>
-        </div>
-        <a class="ui fluid button blue manage" href="/tags/edit/name/illustrations/" target="_blank">Manage Tags</a>
-      </div>
-      {% if form.tags.errors %}
-        <div class="ui blue pointing label" style="margin-top: 0;">
-          {{ form.tags.errors.0 }}
-        </div>
-      {% endif %}
 
-      <div class="field url">
-        <label for="{{ form.url.id_for_label }}">
-          Url
-        </label>
-        <div class="ui left input">
-          <input id="{{ form.url.id_for_label }}"
-                 name="url"
-                 type="text"
-                 maxlength="{{ form.fields.url.max_length }}"
-                 value="{{ form.url.value|default:'' }}">
+          {% if form.url.errors %}
+            <div class="ui blue pointing label">
+              {{ form.url.errors.0 }}
+            </div>
+          {% endif %}
         </div>
 
-        {% if form.url.errors %}
-          <div class="ui blue pointing label">
-            {{ form.url.errors.0 }}
+        <div class="field file">
+          <label for="{{ form.file.id_for_label }}">
+            PDF
+          </label>
+          <div class="disabled field">
+            <input id="pdf_dummy" type="text" disabled="" tabindex="-1" value="{{ form.pdf.value|default:'' }}">
           </div>
-        {% endif %}
-      </div>
 
-      <div class="field file">
-        <label for="{{ form.file.id_for_label }}">
-          PDF
-        </label>
-        <div class="disabled field">
-          <input id="pdf_dummy" type="text" disabled="" tabindex="-1" value="{{ form.pdf.value|default:'' }}">
-        </div>
-
-        <label for="{{ form.pdf.id_for_label }}" class="ui icon button upload blue">
-          <i class="file icon"></i>
-          File
-        </label>
-        <label id="pdfclear" for="" class="ui icon button upload red">
-          <i class="trash icon"></i>
-          Clear
-        </label>
-        <input id="{{ form.pdf.id_for_label }}" type="file" name="pdf"
-               style="display: none;" value="{{ form.pdf.value|default:'' }}'>
+          <label for="{{ form.pdf.id_for_label }}" class="ui icon button upload blue">
+            <i class="file icon"></i>
+            File
+          </label>
+          <label id="pdfclear" for="" class="ui icon button upload red">
+            <i class="trash icon"></i>
+            Clear
+          </label>
+          <input id="{{ form.pdf.id_for_label }}" type="file" name="pdf"
+                 style="display: none;" value="{{ form.pdf.value|default:'' }}'>
 
         {% if form.pdf.errors %}
           <div class="ui blue pointing label">
             {{ form.pdf.errors.0 }}
-          </div>
-        {% endif %}
+            </div>
+          {% endif %}
       </div>
 
       <div class="field">
@@ -264,7 +266,7 @@
       </div>
 
       <div class="ui fluid large submit button blue">Save</div>
-    </div>
+  </div>
   </form>
 
   <script>
