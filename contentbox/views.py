@@ -6,7 +6,7 @@ from .models import ContentBox
 
 class ContentBoxEdit(UpdateView):
     model = ContentBox
-    fields = ['title', 'content', 'light']
+    fields = '__all__'
 
     template_name = 'contentbox/contentbox.html'
     success_url = '/'
