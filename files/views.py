@@ -66,12 +66,13 @@ def imageUpload(request):
     if request.method == 'POST':
         form = ImageUpload(request.POST, request.FILES)
         if form.is_valid():
-            saveImage(
+            image = saveImage(
                 file=request.FILES['file'],
                 title=form.cleaned_data['title'],
                 description=form.cleaned_data['description'],
                 tags=form.cleaned_data['tags']
             )
+            admin_history.log_addition(request, image, image.title)
             return render(request, 'files/image_upload_done.html')
     else:
         form = ImageUpload(initial={

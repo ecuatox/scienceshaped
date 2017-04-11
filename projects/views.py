@@ -17,7 +17,7 @@ class IllustrationEdit(UpdateView, ContextMixin):
     success_url = '/'
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+        context = super(IllustrationEdit, self).get_context_data(**kwargs)
         context.update({
             'illustration_tags': Tag.objects.filter(group__title='illustrations'),
             'images': Image.objects.all(),
@@ -55,7 +55,7 @@ class TestimonialEdit(UpdateView, ContextMixin):
     success_url = '/'
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+        context = super(TestimonialEdit, self).get_context_data(**kwargs)
         context.update({
             'images': Image.objects.all(),
             'new': self.kwargs['testimonial_id'] is '0',

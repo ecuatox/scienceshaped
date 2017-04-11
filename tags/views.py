@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.contrib.auth.decorators import permission_required
 
+from scienceshaped import admin_history
 from .models import Tag, TagGroup
 
 @permission_required('tags.view_tag_control_panel')
@@ -38,6 +39,7 @@ def new(request, group_id):
         label = request.POST['tag'].strip().lower()
         try:
             tag = Tag.objects.create(label=label, group=group)
+            admin_history.log_addition(request, tag, tag.label)
             return JsonResponse({
                 'success': True,
                 'pk': tag.id,
@@ -57,7 +59,9 @@ def new(request, group_id):
 def delete(request, tag_id):
     tag_id = int(tag_id)
     try:
-        Tag.objects.get(pk=tag_id).delete()
+        tag = Tag.objects.get(pk=tag_id)
+        tag.delete()
+        admin_history.log_deletion(request, tag, tag.label)
         return JsonResponse({
             'success': True,
         })
