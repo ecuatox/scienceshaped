@@ -85,42 +85,41 @@
                   <div class="item" data-value="{{ tag.id }}">{{ tag|title }}</div>
                 {% endfor %}
               </div>
+            </div>
+            <a class="ui fluid button blue manage" href="/tags/edit/name/images/" target="_blank">Manage Tags</a>
+            {% if form.tags.errors %}
+              <div class="ui blue pointing label" style="margin-top: 0;">
+                {{ form.tags.errors.0 }}
+              </div>
+            {% endif %}
 
-              {% if form.tags.errors %}
+            <div class="field file">
+              <div class="disabled field">
+                <input id="file_dummy" type="text" disabled="" tabindex="-1" value="{{ form.file.value|default:'' }}">
+              </div>
+
+              <label for="id_file" class="ui icon button upload blue">
+                <i class="file icon"></i>
+                File
+              </label>
+              <input id="id_file" type="file" name="file" style="display: none;">
+
+              {% if form.file.errors %}
                 <div class="ui blue pointing label">
-                  {{ form.tags.errors.0 }}
+                  {{ form.file.errors.0 }}
                 </div>
               {% endif %}
             </div>
-            <a class="ui fluid button blue manage" href="/tags/edit/name/images/" target="_blank">Manage Tags</a>
-          </div>
 
-          <div class="field file">
-            <div class="disabled field">
-              <input id="file_dummy" type="text" disabled="" tabindex="-1" value="{{ form.file.value }}">
-            </div>
-
-            <label for="id_file" class="ui icon button upload blue">
-              <i class="file icon"></i>
-              File
-            </label>
-            <input id="id_file" type="file" name="file" style="display: none;">
-
-            {% if form.file.errors %}
-              <div class="ui blue pointing label">
-                {{ form.file.errors.0 }}
+            {% if message %}
+              <div class="ui tiny red message">
+                <p>{{ message }}</p>
               </div>
             {% endif %}
+
+            <div class="ui fluid large submit button blue">Save</div>
+
           </div>
-
-          {% if message %}
-            <div class="ui tiny red message">
-              <p>{{ message }}</p>
-            </div>
-          {% endif %}
-
-          <div class="ui fluid large submit button blue">Save</div>
-
         </div>
       </form>
 

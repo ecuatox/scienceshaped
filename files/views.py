@@ -35,10 +35,10 @@ def saveImage(file, title, description, tags):
     else:
         file.name = savename + '.' + fileExt(file.name)
     instance = Image(file=file, title=title, description=description, time=timezone.now(), number=number)
+    instance.save()
     instance.tags.clear()
     for tag in tags:
         instance.tags.add(tag)
-    instance.save()
     return instance
 
 
