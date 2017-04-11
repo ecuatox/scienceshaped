@@ -4,6 +4,7 @@ h1 {
 
 #about {
     padding-top: 80px;
+    position: relative;
 }
 
 #about h1 {
@@ -27,4 +28,20 @@ h1 {
     margin-top: 60px;
     text-align: center;
     font-size: 20px;
+}
+
+.who.edit.button:hover, .why.edit.button:hover {
+    cursor: pointer;
+}
+
+.who.edit.button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.why.edit.button {
+    position: absolute;
+    top: 50px;
+    left: 10px;
 }

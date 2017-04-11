@@ -26,6 +26,8 @@ def index(request, tag='all'):
         'mailForm': mailForm,
         'aboutContent': ContentBox.getContent('about'),
         'infoContent': ContentBox.getContent('info'),
+        'whoContent': ContentBox.getContent('who'),
+        'whyContent': ContentBox.getContent('why'),
         'illustration_tags': Tag.objects.filter(group__title='illustrations'),
     }
     return render(request, 'scienceshaped/index.html', context)

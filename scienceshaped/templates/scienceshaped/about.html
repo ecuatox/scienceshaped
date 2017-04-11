@@ -1,14 +1,18 @@
 {% load staticfiles %}
 
 <section id="about">
+  {% if perms.contentbox.add_contentbox and perms.contentbox.change_contentbox %}
+    <a class="ui button who edit blue" href="/contentbox/who/edit">Edit who</a>
+    <a class="ui button why edit blue" href="/contentbox/why/edit">Edit why</a>
+  {% endif %}
   <div class="ui text container">
     <h1 class="ui header">About</h1>
     <div class="ui stackable grid">
       <div id="why" class="six wide column">
         <h3 class="ui header">WHY</h3>
-        <p>
-          High-quality illustrations are valuable assets, giving professional impressions and supporting your message in unique ways:
-        </p>
+        {% autoescape off %}
+          {{ whyContent }}
+        {% endautoescape %}
         <ul>
           <li>A - attention-evoking</li>
           <li>S - story telling</li>
@@ -19,9 +23,9 @@
       </div>
       <div id="who" class="ten wide column">
         <h3 class="ui header">WHO</h3>
-        <p>Hello from Ellen Tenstad! I founded Science Shaped in Jan 2015 after years experiencing that my graphical assistance made my colleagues very pleased.</p>
-        <p>I have a MSc in cell biology (1993, University of Trondheim), a PhD in stem cell biology (2010, University of Oslo) and education in media design (2005, Idéfagskolen, Nøtterøy).</p>
-        <p>Currently, I work as a post.doc at Department of Tumor Biology at the Institute for Cancer Research at Oslo University Hospital, where I have also worked at Department of Immunolgy.</p>
+        {% autoescape off %}
+          {{ whoContent }}
+        {% endautoescape %}
         <br>
       </div>
     </div>
@@ -29,12 +33,25 @@
   <div class="ui text container">
     <h3 class="ui header">Former working places</h3>
     <ul>
-      <li>The Norwegian <c class="accdk">Medicines Agency</c></li>
-      <li>Norwegian Institute of <c class="accdk">Public Health</c></li>
-      <li>Vestfold <c class="accdk">University College</c> (now University College of Southeast Norway)</li>
-      <li>Tønsberg <c class="accdk">Chiropractor’s</c> clinic</li>
-      <li>Learn more about my professional background and experience at <a id="linkedin" href="https://www.linkedin.com/in/ellen-tenstad-5b3b0631">LinkedIn</a></li>
+      <li>The Norwegian
+        <c class="accdk">Medicines Agency</c>
+      </li>
+      <li>Norwegian Institute of
+        <c class="accdk">Public Health</c>
+      </li>
+      <li>Vestfold
+        <c class="accdk">University College</c>
+        (now University College of Southeast Norway)
+      </li>
+      <li>Tønsberg
+        <c class="accdk">Chiropractor’s</c>
+        clinic
+      </li>
+      <li>Learn more about my professional background and experience at <a id="linkedin"
+                                                                           href="https://www.linkedin.com/in/ellen-tenstad-5b3b0631">LinkedIn</a>
+      </li>
     </ul>
-    <p id="mission">My mission is to serve both senders and recipients of knowledge by creating graphical representations that render concepts, ideas and results in an immediate and appealing way.</p>
+    <p id="mission">My mission is to serve both senders and recipients of knowledge by creating graphical
+      representations that render concepts, ideas and results in an immediate and appealing way.</p>
   </div>
 </section>
