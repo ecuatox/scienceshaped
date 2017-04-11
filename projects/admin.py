@@ -10,7 +10,6 @@ class IllustrationAdmin(admin.ModelAdmin):
                 'short',
                 'description',
                 'tags',
-                'hidden',
             ]
         }),
         ('Thumbnail', {
@@ -33,6 +32,7 @@ class IllustrationAdmin(admin.ModelAdmin):
         ('Meta', {
             'fields': [
                 'date',
+                'hidden',
             ]
         })
     ]
@@ -48,17 +48,17 @@ class TestimonialAdmin(admin.ModelAdmin):
                 'person',
                 'job',
                 'message',
-                'hidden',
-            ]
-        }),
-        ('Meta', {
-            'fields': [
-                'date',
             ]
         }),
         ('Thumbnail', {
             'fields': [
                 'thumbnail',
+            ]
+        }),
+        ('Meta', {
+            'fields': [
+                'date',
+                'hidden',
             ]
         }),
     ]
