@@ -50,27 +50,21 @@
                  value="{{ form.title.value|default:'' }}">
         </div>
 
-        {% if form.title.errors %}
-          <div class="ui blue pointing label">
-            {{ form.title.errors.0 }}
-          </div>
-        {% endif %}
-
         <div class="ui input toggle checkbox">
           <input type="checkbox" tabindex="0" class="hidden" name="hidden">
           <label>Hidden</label>
+          {% if form.hidden.errors %}
+            <div class="ui blue pointing label">
+              {{ form.hidden.errors.0 }}
+            </div>
+          {% endif %}
         </div>
-
-        {% if form.hidden.errors %}
-          <div class="ui blue pointing label">
-            {{ form.hidden.errors.0 }}
-          </div>
-        {% endif %}
       </div>
-
-      <div class="inline field">
-
-      </div>
+      {% if form.title.errors %}
+        <div class="ui blue pointing label" style="margin-top: 0; margin-bottom: 10px;">
+          {{ form.title.errors.0 }}
+        </div>
+      {% endif %}
 
       <div class="field">
         <label for="{{ form.short.id_for_label }}">
@@ -115,11 +109,15 @@
           Tags
         </label>
       </div>
+      <select multiple="multiple" id="{{ form.tags.id_for_label }}" name="tags" style="display: none;">
+        {% for tag in illustration_tags %}
+          <option value="{{ tag.id }}">{{ tag|title }}</option>
+        {% endfor %}
+      </select>
       <div class="ui inline field">
         <div class="ui fluid multiple search normal selection dropdown tags">
-          <input id="{{ form.tags.id_for_label }}"
+          <input id="id_tags_dummy"
                  type="hidden"
-                 name="tags"
                  type="text"
                  maxlength="{{ form.fields.tags.max_length }}">
           <i class="dropdown icon"></i>
@@ -129,15 +127,14 @@
               <div class="item" data-value="{{ tag.id }}">{{ tag|title }}</div>
             {% endfor %}
           </div>
-
-          {% if form.tags.errors %}
-            <div class="ui blue pointing label">
-              {{ form.tags.errors.0 }}
-            </div>
-          {% endif %}
         </div>
         <a class="ui fluid button blue manage" href="/tags/edit/name/illustrations/" target="_blank">Manage Tags</a>
       </div>
+      {% if form.tags.errors %}
+        <div class="ui blue pointing label" style="margin-top: 0;">
+          {{ form.tags.errors.0 }}
+        </div>
+      {% endif %}
 
       <div class="field url">
         <label for="{{ form.url.id_for_label }}">
@@ -174,7 +171,8 @@
           <i class="trash icon"></i>
           Clear
         </label>
-        <input id="{{ form.pdf.id_for_label }}" type="file" name="file" style="display: none;">
+        <input id="{{ form.pdf.id_for_label }}" type="file" name="pdf"
+               style="display: none;" value="{{ form.pdf.value|default:'' }}'>
 
         {% if form.pdf.errors %}
           <div class="ui blue pointing label">
@@ -223,10 +221,10 @@
       <div class="field image">
         <label for="{{ form.thumbnail.id_for_label }}">Thumbnail</label>
         <input id="{{ form.thumbnail.id_for_label }}" style="display: none;" name="thumbnail" type="number"
-               value="{{ form.thumbnail.value|default:0 }}">
+               value="{{ form.thumbnail.value }}">
         <div class="ui card image">
           <div class="image select">
-            {% if form.thumbnail.value > 0 %}
+            {% if form.thumbnail.value and form.thumbnail.value != '0' %}
               <img src="/files/image/{{ form.thumbnail.value }}/view">
             {% else %}
               <img src="{% static "projects/img/click_to_select.png" %}">
@@ -235,14 +233,26 @@
         </div>
       </div>
 
+      {% if form.thumbnail.errors %}
+        <br>
+        <div class="ui blue pointing label">
+          {{ form.thumbnail.errors.0 }}
+        </div>
+      {% endif %}
+
       <a class="ui blue button add image">Add image</a>
       <div class="field">
         <label id="images_label">Images</label>
       </div>
-      <div class="images add">
+      <select multiple="multiple" id="{{ form.images.id_for_label }}" name="images" style="display: none;">
         {% for image in images %}
+          <option value="{{ image.id }}">{{ image.title|title }}</option>
+        {% endfor %}
+      </select>
+      <div class="images add">
+        {% for image in form.images.value %}
           <div class="field image">
-            <input style="display: none;" name="image" type="number" value="{{ image }}">
+            <input class="imagepk" style="display: none;" name="image" type="number" value="{{ image }}">
             <div class="ui card image">
               <i class="close icon"></i>
               <div class="image select">
@@ -254,7 +264,7 @@
       </div>
 
       <div class="ui fluid large submit button blue">Save</div>
-
+    </div>
   </form>
 
   <script>
@@ -267,7 +277,7 @@
               $(this).val(!$(this).hasClass('checked'));
           });
           {% if form.tags.value %}
-              $('.dropdown.tags').dropdown('set exactly',[
+              $('.dropdown.tags').dropdown('set exactly', [
                   {% for tag in form.tags.value %}
                       '{{ tag|title }}',
                   {% endfor %}

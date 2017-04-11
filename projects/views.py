@@ -1,113 +1,83 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import permission_required
-from django.shortcuts import render
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
+from django.views.generic import UpdateView
+from django.views.generic.base import ContextMixin
 from scienceshaped import admin_history
-from django.utils import timezone
-from datetime import datetime, timedelta
 
-from .forms import IllustrationEdit, TestimonialEdit
 from .models import Illustration, Testimonial
 from files.models import Image
 from tags.models import Tag
 
 
-@permission_required('projects.change_illustration')
-@permission_required('projects.add_illustration')
-def illustrationEdit(request, illustration_id):
-    new = True
-    images = []
-    if request.method == 'POST':
-        form = IllustrationEdit(request.POST)
+class IllustrationEdit(UpdateView, ContextMixin):
+    model = Illustration
+    fields = '__all__'
 
+    template_name = 'projects/illustration_edit.html'
+    success_url = '/'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'illustration_tags': Tag.objects.filter(group__title='illustrations'),
+            'images': Image.objects.all(),
+            'new': self.kwargs['illustration_id'] is '0',
+
+        })
+        return context
+
+    def get_initial(self):
         try:
-            raw_images = dict(request.POST)['image']
-            while '' in raw_images:
-                raw_images.remove('')
-            images.extend(raw_images)
-        except KeyError:
-            pass
+            return {'pdf': self.get_object().pdf_getname()}
+        except AttributeError:
+            return {}
 
-        if form.is_valid():
-            if int(illustration_id) == 0:
-                illustration = Illustration()
-                illustration.save()
-            else:
-                illustration = Illustration.objects.get(pk=illustration_id)
-            illustration.title = form.cleaned_data['title']
-            illustration.description = form.cleaned_data['description']
-            illustration.short = form.cleaned_data['short']
-            illustration.tags.clear()
-            for tag in form.cleaned_data['tags']:
-                illustration.tags.add(tag)
-            illustration.url = form.cleaned_data['url']
-            illustration.hidden = form.cleaned_data['hidden']
-            if 'file' in request.FILES:
-                illustration.pdf = request.FILES['file']
-            else:
-                illustration.pdf = None
-            thumbnail_raw = form.cleaned_data['thumbnail']
-            try:
-                thumb_id = int(thumbnail_raw)
-                illustration.thumbnail = Image.objects.get(id=thumb_id)
-            except (TypeError, ValueError, Image.DoesNotExist):
-                illustration.thumbnail = None
+    def get_object(self, queryset=None):
+        try:
+            return Illustration.objects.get(pk=self.kwargs['illustration_id'])
+        except Illustration.DoesNotExist:
+            return None
 
-            illustration.images.clear()
-            for image in images:
-                try:
-                    image_id = int(image)
-                    illustration.images.add(Image.objects.get(id=image_id))
-                except (TypeError, ValueError, Image.DoesNotExist):
-                    pass
-
-            illustration.thumbnail_size = form.cleaned_data['thumbnail_size']
-            illustration.date = datetime.strptime(form.cleaned_data['date'], '%Y-%m-%d').date()
-            illustration.save()
-            if int(illustration_id) == 0:
-                admin_history.log_addition(request, illustration)
-            else:
-                admin_history.log_change(request, illustration)
-            return HttpResponseRedirect('/#illustrations')
-    else:
-        if int(illustration_id) == 0:
-            form = IllustrationEdit(initial={
-                'date': datetime.strftime(timezone.now(), '%d %B %Y'),
-            })
+    def form_valid(self, form):
+        messages.success(self.request, 'Illustration "%s" was successfully saved' % form.cleaned_data['title'])
+        response = super(IllustrationEdit, self).form_valid(form)
+        if self.get_object():
+            admin_history.log_change(self.request, self.object, form.cleaned_data['title'])
         else:
-            try:
-                illustration = Illustration.objects.get(pk=illustration_id)
-            except Illustration.DoesNotExist:
-                return HttpResponseRedirect('/projects/illustration/0/edit')
+            admin_history.log_addition(self.request, self.object, form.cleaned_data['title'])
+        return response
 
-            images.extend([image.id for image in illustration.images.all()])
 
-            try:
-                thumb = illustration.thumbnail.id
-            except AttributeError:
-                thumb = 0
+class TestimonialEdit(UpdateView, ContextMixin):
+    model = Testimonial
+    fields = '__all__'
 
-            form = IllustrationEdit(initial={
-                'title': illustration.title,
-                'description': illustration.description,
-                'short': illustration.short,
-                'tags': illustration.tags.all(),
-                'hidden': illustration.hidden,
-                'url': illustration.url,
-                'pdf': illustration.pdf_getname(),
-                'thumbnail': thumb,
-                'thumbnail_size': illustration.thumbnail_size,
-                'date': datetime.strftime(illustration.date + timedelta(days=1), '%d %B %Y'),
-            })
-            new = False
+    template_name = 'projects/testimonial_edit.html'
+    success_url = '/'
 
-    context = {
-        'form': form,
-        'images': images,
-        'new': new,
-        'illustration_tags': Tag.objects.filter(group__title='illustrations'),
-    }
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'images': Image.objects.all(),
+            'new': self.kwargs['testimonial_id'] is '0',
+        })
+        return context
 
-    return render(request, 'projects/illustration_edit.html', context)
+    def get_object(self, queryset=None):
+        try:
+            return Testimonial.objects.get(pk=self.kwargs['testimonial_id'])
+        except Testimonial.DoesNotExist:
+            return None
+
+    def form_valid(self, form):
+        messages.success(self.request, 'Testimonial "%s" was successfully saved' % form.cleaned_data['person'])
+        response = super(TestimonialEdit, self).form_valid(form)
+        if self.get_object():
+            admin_history.log_change(self.request, self.object, form.cleaned_data['person'])
+        else:
+            admin_history.log_addition(self.request, self.object, form.cleaned_data['person'])
+        return response
 
 
 @permission_required('projects.delete_illustration')
@@ -115,7 +85,7 @@ def illustrationDelete(request, illustration_id):
     try:
         illustration = Illustration.objects.get(pk=illustration_id)
         illustration.delete()
-        admin_history.log_deletion(request, illustration)
+        admin_history.log_deletion(request, illustration, illustration.title)
     except Illustration.DoesNotExist:
         pass
 
@@ -132,66 +102,3 @@ def testimonialDelete(request, testimonial_id):
         pass
 
     return HttpResponseRedirect('/#testimonials')
-
-
-@permission_required('projects.change_testimonial')
-@permission_required('projects.add_testimonial')
-def testimonialEdit(request, testimonial_id):
-    new = True
-    if request.method == 'POST':
-        form = TestimonialEdit(request.POST)
-        if form.is_valid():
-            if int(testimonial_id) == 0:
-                testimonial = Testimonial()
-            else:
-                testimonial = Testimonial.objects.get(pk=testimonial_id)
-            testimonial.person = form.cleaned_data['person']
-            testimonial.job = form.cleaned_data['job']
-            testimonial.message = form.cleaned_data['message']
-            testimonial.hidden = form.cleaned_data['hidden']
-            testimonial.date = datetime.strptime(form.cleaned_data['date'], '%Y-%m-%d').date()
-            thumbnail_raw = form.cleaned_data['thumbnail']
-            try:
-                thumb_id = int(thumbnail_raw)
-                testimonial.thumbnail = Image.objects.get(id=thumb_id)
-            except (TypeError, ValueError, Image.DoesNotExist):
-                testimonial.thumbnail = None
-            testimonial.save()
-            if int(testimonial_id) == 0:
-                admin_history.log_addition(request, testimonial, testimonial.person)
-            else:
-                admin_history.log_change(request, testimonial, testimonial.person)
-            return HttpResponseRedirect('/#testimonials')
-    else:
-        if int(testimonial_id) == 0:
-            form = TestimonialEdit(initial={
-                'person': '',
-                'job': '',
-                'message': '',
-                'thumbnail': '0',
-                'date': datetime.strftime(timezone.now(), '%d %B %Y'),
-            })
-        else:
-            try:
-                testimonial = Testimonial.objects.get(pk=testimonial_id)
-            except Testimonial.DoesNotExist:
-                return HttpResponseRedirect('/projects/testimonial/0/edit')
-            try:
-                thumb_id = testimonial.thumbnail.id
-            except AttributeError:
-                thumb_id = 0
-            form = TestimonialEdit(initial={
-                'person': testimonial.person,
-                'job': testimonial.job,
-                'message': testimonial.message,
-                'hidden': testimonial.hidden,
-                'thumbnail': thumb_id,
-                'date': datetime.strftime(testimonial.date + timedelta(days=1), '%d %B %Y'),
-            })
-            new = False
-    context = {
-        'form': form,
-        'new': new,
-    }
-
-    return render(request, 'projects/testimonial_edit.html', context)

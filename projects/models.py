@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 import os
 from django.db import models
 from django.utils import timezone
@@ -6,11 +5,12 @@ from django.utils import timezone
 from files.models import Image
 from tags.models import Tag
 
+
 class Illustration(models.Model):
     title = models.CharField(max_length=100, verbose_name='Title')
     short = models.TextField(max_length=200, blank=True, verbose_name='Short Description')
     description = models.TextField(max_length=500, blank=True, verbose_name='Description')
-    tags = models.ManyToManyField(Tag, verbose_name='Tags')
+    tags = models.ManyToManyField(Tag, blank=True, verbose_name='Tags')
     hidden = models.BooleanField(default=False, verbose_name='Hidden')
 
     url = models.CharField(max_length=500, blank=True, null=True, verbose_name='URL')
@@ -19,7 +19,7 @@ class Illustration(models.Model):
     thumbnail = models.ForeignKey(Image, on_delete=models.SET_NULL, blank=True, null=True, related_name='%(app_label)s_%(class)s_related_thumb')
     thumbnail_size = models.CharField(max_length=4, default=100, verbose_name='Thumbnail size (%)')
 
-    date = models.DateTimeField(default=timezone.now, verbose_name='Date')
+    date = models.DateField(default=timezone.now, verbose_name='Date')
 
     images = models.ManyToManyField(Image, blank=True)
 
@@ -48,7 +48,7 @@ class Testimonial(models.Model):
     message = models.CharField(max_length=1000, verbose_name='Message')
     hidden = models.BooleanField(default=False, verbose_name='Hidden')
     thumbnail = models.ForeignKey(Image, on_delete=models.SET_NULL, blank=True, null=True)
-    date = models.DateTimeField(default=timezone.now, verbose_name='Date')
+    date = models.DateField(default=timezone.now, verbose_name='Date')
 
     def __str__(self):
         return self.person
