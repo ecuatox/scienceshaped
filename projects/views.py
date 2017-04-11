@@ -61,7 +61,7 @@ def illustrationEdit(request, illustration_id):
                     pass
 
             illustration.thumbnail_size = form.cleaned_data['thumbnail_size']
-            illustration.date = datetime.strptime(form.cleaned_data['date'], '%B %d, %Y').date()
+            illustration.date = datetime.strptime(form.cleaned_data['date'], '%Y-%m-%d').date()
             illustration.save()
             if int(illustration_id) == 0:
                 admin_history.log_addition(request, illustration)
@@ -71,7 +71,7 @@ def illustrationEdit(request, illustration_id):
     else:
         if int(illustration_id) == 0:
             form = IllustrationEdit(initial={
-                'date': datetime.strftime(timezone.now(), '%B %d, %Y'),
+                'date': datetime.strftime(timezone.now(), '%d %B %Y'),
             })
         else:
             try:
@@ -96,7 +96,7 @@ def illustrationEdit(request, illustration_id):
                 'pdf': illustration.pdf_getname(),
                 'thumbnail': thumb,
                 'thumbnail_size': illustration.thumbnail_size,
-                'date': datetime.strftime(illustration.date + timedelta(days=1), '%B %d, %Y'),
+                'date': datetime.strftime(illustration.date + timedelta(days=1), '%d %B %Y'),
             })
             new = False
 
@@ -149,7 +149,7 @@ def testimonialEdit(request, testimonial_id):
             testimonial.job = form.cleaned_data['job']
             testimonial.message = form.cleaned_data['message']
             testimonial.hidden = form.cleaned_data['hidden']
-            testimonial.date = datetime.strptime(form.cleaned_data['date'], '%B %d, %Y').date()
+            testimonial.date = datetime.strptime(form.cleaned_data['date'], '%Y-%m-%d').date()
             thumbnail_raw = form.cleaned_data['thumbnail']
             try:
                 thumb_id = int(thumbnail_raw)
@@ -169,7 +169,7 @@ def testimonialEdit(request, testimonial_id):
                 'job': '',
                 'message': '',
                 'thumbnail': '0',
-                'date': datetime.strftime(timezone.now(), '%B %d, %Y'),
+                'date': datetime.strftime(timezone.now(), '%d %B %Y'),
             })
         else:
             try:
@@ -186,7 +186,7 @@ def testimonialEdit(request, testimonial_id):
                 'message': testimonial.message,
                 'hidden': testimonial.hidden,
                 'thumbnail': thumb_id,
-                'date': datetime.strftime(testimonial.date + timedelta(days=1), '%B %d, %Y'),
+                'date': datetime.strftime(testimonial.date + timedelta(days=1), '%d %B %Y'),
             })
             new = False
     context = {

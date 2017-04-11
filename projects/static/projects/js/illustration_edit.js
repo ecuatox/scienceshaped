@@ -47,6 +47,20 @@ $(function () {
     });
 
     $('.submit.button').click(function () {
+        $('.ui.calendar.date').calendar({
+            type: 'date',
+            firstDayOfWeek: 1,
+            monthFirst: false,
+            formatter: {
+                date: function (date, settings) {
+                    if (!date) return '';
+                    var day = date.getDate();
+                    var month = date.getMonth()+1;
+                    var year = date.getFullYear();
+                    return year + '-' + month + '-' + day;
+                }
+            },
+        });
         $('form').submit();
     });
 
@@ -61,6 +75,16 @@ $(function () {
     $('.ui.calendar.date').calendar({
         type: 'date',
         firstDayOfWeek: 1,
+        monthFirst: false,
+        formatter: {
+            date: function (date, settings) {
+                if (!date) return '';
+                var day = date.getDate();
+                var month = date.getMonth();
+                var year = date.getFullYear();
+                return day + ' ' + settings['text']['months'][month] + ' ' + year;
+            }
+        },
     });
 
     $('#pdfclear').click(function () {
