@@ -1,4 +1,3 @@
-from django.contrib import messages
 from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponseRedirect
 from django.views.generic import UpdateView
@@ -40,7 +39,6 @@ class IllustrationEdit(UpdateView, ContextMixin):
             return None
 
     def form_valid(self, form):
-        messages.success(self.request, 'Illustration "%s" was successfully saved' % form.cleaned_data['title'])
         response = super(IllustrationEdit, self).form_valid(form)
         if self.get_object():
             admin_history.log_change(self.request, self.object, form.cleaned_data['title'])
@@ -71,7 +69,6 @@ class TestimonialEdit(UpdateView, ContextMixin):
             return None
 
     def form_valid(self, form):
-        messages.success(self.request, 'Testimonial "%s" was successfully saved' % form.cleaned_data['person'])
         response = super(TestimonialEdit, self).form_valid(form)
         if self.get_object():
             admin_history.log_change(self.request, self.object, form.cleaned_data['person'])

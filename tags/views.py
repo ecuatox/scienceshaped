@@ -1,8 +1,7 @@
 from django.db import IntegrityError
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
-from django.contrib import messages
-from django.contrib.auth.decorators import user_passes_test, permission_required
+from django.contrib.auth.decorators import permission_required
 
 from .models import Tag, TagGroup
 
