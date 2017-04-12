@@ -1,13 +1,5 @@
 {% load staticfiles %}
 
-{% if mailForm.errors %}
-<script>
-  $(function(){
-    $('a[href="#contact"]').click();
-  });
-</script>
-{% endif %}
-
 <section id="contact">
   <div class="ui text container">
     <h1>Contact</h1>
@@ -73,4 +65,12 @@
       </script>
     </form>
   </div>
+
+  {% if mailForm.errors %}
+    <script>
+      $(function(){
+        $('a[href="#contact"]').click();
+      });
+    </script>
+{% endif %}
 </section>

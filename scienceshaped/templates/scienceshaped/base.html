@@ -53,10 +53,6 @@
   {% include 'scienceshaped/delete.html' %}
   {% include 'files/imagepopup.html' %}
 
-  {% else %}
-    <img style="display: block; margin: 200px auto; max-width: 800px; width: 90%;" src="{% static "scienceshaped/img/card.png" %}">
-  {% endif %}
-
   {% block messages %}
     {% if messages %}
       <script>
@@ -68,5 +64,9 @@
       </script>
     {% endif %}
   {% endblock messages %}
+
+{% else %}
+  <img style="display: block; margin: 200px auto; max-width: 800px; width: 90%;" src="{% static "scienceshaped/img/card.png" %}">
+{% endif %}
 
 </html>
