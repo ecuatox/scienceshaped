@@ -28,7 +28,7 @@ class Illustration(models.Model):
         if tag == 'all':
             return Illustration.objects.all()
         else:
-            return Illustration.objects.filter(tags__label=tag.lower())
+            return Illustration.objects.filter(tags__label__contains=tag.lower())
 
     def __str__(self):
         return self.title

@@ -7,6 +7,7 @@ class IllustrationAdmin(admin.ModelAdmin):
         ('Image', {
             'fields': [
                 'title',
+                'slug',
                 'tags',
                 'file',
             ]

@@ -21,6 +21,3 @@ class ImageEdit(forms.Form):
         form_data = self.cleaned_data
         form_data['tags'] = Tag.clean_tags(form_data['tags'])
         return form_data
-
-class ImageSearch(forms.Form):
-    search = forms.CharField(max_length=100)
