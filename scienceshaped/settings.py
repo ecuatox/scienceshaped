@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'contentbox',
     'tags',
     'ckeditor',
+    'sorl.thumbnail',
 ]
 
 MIDDLEWARE_CLASSES = [

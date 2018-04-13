@@ -1,45 +1,51 @@
 {% load staticfiles %}
+{% load thumbnail %}
 
 <section id="testimonials">
-  {% if perms.projects.add_testimonial %}
-    <a class="ui button inverted new" href="/projects/testimonial/0/edit">New</a>
-  {% endif %}
-  <div id="testimonial-para-container">
-    <div class="para para2"></div>
-    <div class="para para3"></div>
-    <div class="para para4"></div>
-    <h1>Testimonials</h1>
-    <div id="slider">
-      {% for testimonial in testimonials %}
-        <div class="ui segment container">
-          {% if perms.projects.change_testimonial or perms.projects.delete_testimonial %}
-            <div class="editor buttons">
-              {% if perms.projects.change_testimonial %}
-                <a class="ui green right ribbon label" href="/projects/testimonial/{{ testimonial.id }}/edit">Edit</a>
-              {% endif %}
-              <br>
-              {% if perms.projects.delete_testimonial %}
-                <a class="ui red right ribbon label delete openmodal" url="/projects/testimonial/{{ testimonial.id }}/delete/">Delete</a>
-              {% endif %}
-            </div>
-          {% endif %}
-          <div class="ui stackable grid">
-            <div class="five wide column left">
-              <img class="testimonial image" src="{{ testimonial.thumbnail.url }}">
-            </div>
-            <div class="ten wide column right">
-              <p class="testimonial message"><i class="icon quote left"></i> {{ testimonial.message }} <i class="icon quote right"></i></p>
-              <p class="testimonial person"><strong>{{ testimonial.person }}</strong></p>
-              {% if testimonial.job != '' %}
-                <p class="testimonial job">{{ testimonial.job }}</p>
-              {% endif %}
-            </div>
-          </div>
-          <p class="testimonial date">{{ testimonial.date|date:"M Y" }}</p>
+    {% if perms.projects.add_testimonial %}
+        <a class="ui button inverted new" href="/projects/testimonial/0/edit">New</a>
+    {% endif %}
+    <div id="testimonial-para-container">
+        <div class="para para2"></div>
+        <div class="para para3"></div>
+        <div class="para para4"></div>
+        <h1>Testimonials</h1>
+        <div id="slider">
+            {% for testimonial in testimonials %}
+                <div class="ui segment container">
+                    {% if perms.projects.change_testimonial or perms.projects.delete_testimonial %}
+                        <div class="editor buttons">
+                            {% if perms.projects.change_testimonial %}
+                                <a class="ui green right ribbon label"
+                                   href="/projects/testimonial/{{ testimonial.id }}/edit">Edit</a>
+                            {% endif %}
+                            <br>
+                            {% if perms.projects.delete_testimonial %}
+                                <a class="ui red right ribbon label delete openmodal"
+                                   url="/projects/testimonial/{{ testimonial.id }}/delete/">Delete</a>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                    <div class="ui stackable grid">
+                        <div class="five wide column left">
+                            {% thumbnail testimonial.thumbnail "100x100" crop="center" as im %}
+                                <img class="testimonial image" src="{{ im.url }}">
+                            {% endthumbnail %}
+                        </div>
+                        <div class="ten wide column right">
+                            <p class="testimonial message"><i class="icon quote left"></i> {{ testimonial.message }} <i
+                                    class="icon quote right"></i></p>
+                            <p class="testimonial person"><strong>{{ testimonial.person }}</strong></p>
+                            {% if testimonial.job != '' %}
+                                <p class="testimonial job">{{ testimonial.job }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <p class="testimonial date">{{ testimonial.date|date:"M Y" }}</p>
+                </div>
+            {% endfor %}
         </div>
-      {% endfor %}
     </div>
-  </div>
-  <script src="{% static "projects/js/testimonials.js" %}"></script>
+    <script src="{% static "projects/js/testimonials.js" %}"></script>
 </section>
 
