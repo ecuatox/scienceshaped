@@ -21,7 +21,7 @@ def index(request, tag='all'):
         mailForm = Mail()
 
     context = {
-        'illustrations': Illustration.filter_tag(tag).order_by('-date'),
+        'illustrations': Illustration.filter_tag(tag).filter(hidden=False).order_by('-date'),
         'testimonials': Testimonial.objects.order_by('-date'),
         'mailForm': mailForm,
         'aboutContent': ContentBox.getContent('about'),
