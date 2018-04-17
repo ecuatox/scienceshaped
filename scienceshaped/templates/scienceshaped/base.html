@@ -1,72 +1,76 @@
 {% load staticfiles %}
 {% load scienceshaped_settings %}
 
+<!DOCTYPE html>
 <html>
 
 {% if request.user.is_staff or request.user.is_superuser or not "HIDDEN"|settings_value %}
-  <head>
+    <head>
 
-    <title>
-      {% block title %}
-        Science Shaped
-      {% endblock title %}
-    </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/ico" href="{% static "scienceshaped/img/favicon.ico" %}"/>
+        <title>
+            {% block title %}
+                Science Shaped
+            {% endblock title %}
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" type="image/ico" href="{% static "scienceshaped/img/favicon.ico" %}"/>
 
-    <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/semantic.min.css" %}">
-    <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/alertify.min.css" %}">
-    <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/alertify.semantic.min.css" %}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/semantic.min.css" %}">
+        <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/alertify.min.css" %}">
+        <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/alertify.semantic.min.css" %}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-    <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/style.css" %}">
-    <link rel="stylesheet" type="text/css" href="{% static "files/css/imagepopup.css" %}">
+        <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/style.css" %}">
+        <link rel="stylesheet" type="text/css" href="{% static "files/css/imagepopup.css" %}">
+        <link href="https://fonts.googleapis.com/css?family=Quicksand:300" rel="stylesheet">
 
-    <script src="{% static "scienceshaped/js/jquery.min.js" %}"></script>
-    <script src="{% static "scienceshaped/js/semantic.min.js" %}"></script>
-    <script src="{% static "scienceshaped/js/alertify.min.js" %}"></script>
-    <script src="{% static "scienceshaped/js/scroll.js" %}"></script>
-    <script src="{% static "scienceshaped/js/analytics.js" %}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/parallax.js/1.4.2/parallax.min.js"></script>
+        <script src="{% static "scienceshaped/js/semantic.min.js" %}"></script>
+        <script src="{% static "scienceshaped/js/alertify.min.js" %}"></script>
+        <script src="{% static "scienceshaped/js/scroll.js" %}"></script>
+        <script src="{% static "scienceshaped/js/analytics.js" %}"></script>
 
-    {% block head %}
-    {% endblock head %}
+        {% block head %}
+        {% endblock head %}
 
-  </head>
+    </head>
 
-  <body>
+    <body>
     <div class="pusher">
 
-      {% block header %}
-        {% include 'scienceshaped/header.html' %}
-      {% endblock header %}
+        {% block header %}
+            {% include 'scienceshaped/header.html' %}
+        {% endblock header %}
 
-      {% block content %}
-      {% endblock content %}
+        {% block content %}
+        {% endblock content %}
 
-      {% block footer %}
-        {% include 'scienceshaped/footer.html' %}
-      {% endblock footer %}
+        {% block footer %}
+            {% include 'scienceshaped/footer.html' %}
+        {% endblock footer %}
 
     </div>
-  </body>
+    </body>
 
-  {% include 'scienceshaped/delete.html' %}
-  {% include 'files/imagepopup.html' %}
+    {% include 'scienceshaped/delete.html' %}
+    {% include 'files/imagepopup.html' %}
 
-  {% block messages %}
-    {% if messages %}
-      <script>
-          $(function () {
-              {% for message in messages %}
-                  alertify.message("{{ message }}");
-              {% endfor %}
-          });
-      </script>
-    {% endif %}
-  {% endblock messages %}
+    {% block messages %}
+        {% if messages %}
+            <script>
+                $(function () {
+                    {% for message in messages %}
+                        alertify.message("{{ message }}");
+                    {% endfor %}
+                });
+            </script>
+        {% endif %}
+    {% endblock messages %}
 
 {% else %}
-  <img style="display: block; margin: 200px auto; max-width: 800px; width: 90%;" src="{% static "scienceshaped/img/card.png" %}">
+    <img style="display: block; margin: 200px auto; max-width: 800px; width: 90%;"
+         src="{% static "scienceshaped/img/card.png" %}">
 {% endif %}
 
 </html>

@@ -1,7 +1,7 @@
-body, .pusher {
+body.pushable {
     background-color: #eee !important;
 }
 
-body.pushable {
-    background-color: #fff !important;
+.pusher {
+    background-color: transparent !important;
 }

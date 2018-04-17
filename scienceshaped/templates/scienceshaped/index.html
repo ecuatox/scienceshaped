@@ -2,21 +2,21 @@
 {% load staticfiles %}
 
 {% block head %}
-  <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/about.css" %}">
-  <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/header.css" %}">
-  <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/footer.css" %}">
-  <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/contact.css" %}">
-  <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/info.css" %}">
-  <link rel="stylesheet" type="text/css" href="{% static "projects/css/illustrations.css" %}">
-  <link rel="stylesheet" type="text/css" href="{% static "projects/css/testimonials.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/about.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/header.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/footer.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/contact.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "scienceshaped/css/info.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "projects/css/illustrations.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "projects/css/testimonials.css" %}">
 {% endblock head %}
 
 {% block content %}
 
-  {% include 'scienceshaped/info.html' %}
-  {% include 'projects/illustrations.html' %}
-  {% include 'projects/testimonials.html' %}
-  {% include 'scienceshaped/about.html' %}
-  {% include 'scienceshaped/contact.html' %}
+    {% include 'scienceshaped/info.html' %}
+    {% include 'projects/illustrations.html' %}
+    {% include 'projects/testimonials.html' %}
+    {% include 'scienceshaped/about.html' %}
+    {% include 'scienceshaped/contact.html' %}
 
 {% endblock content %}

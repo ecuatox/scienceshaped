@@ -1,44 +1,11 @@
 {% load staticfiles %}
 
-<section id="info">
-  <div class="info parallax">
-    <div class="desktop">
-      <div class="para para1"></div>
-      <div class="para para2"></div>
-      <div class="para para3"></div>
-      <div class="para para4"></div>
-    </div>
-  </div>
-
-  <div class="info container">
-    {% if perms.contentbox.add_contentbox and perms.contentbox.change_contentbox %}
-      <a class="ui inverted button info edit" href="/contentbox/info/edit">Edit</a>
-    {% endif %}
-    <div class="info content">
-      {% autoescape off %}
+{% if perms.contentbox.add_contentbox and perms.contentbox.change_contentbox %}
+    <a class="ui inverted button info edit" href="/contentbox/info/edit">Edit</a>
+{% endif %}
+<img class="info image" src="{% static "scienceshaped/img/top.jpg" %}">
+<div class="ui text container info content">
+    {% autoescape off %}
         {{ infoContent }}
-      {% endautoescape %}
-    </div>
-  </div>
-
-</section>
-
-
-<script>
-  function para() {
-    var scroll = $(window).scrollTop();
-    $(".info.parallax .para1").css("transform", "rotate(-10deg) translate(-" + 0 + "px, " + scroll*0.3 + "px)");
-    $(".info.parallax .para2").css("transform", "rotate(-20deg) translate(" + scroll*0.2 + "px, " + scroll*0.4 + "px)");
-    $(".info.parallax .para3").css("transform", "rotate(-50deg) translate(" + scroll*0.3 + "px, " + scroll*0.2 + "px)");
-    $(".info.parallax .para4").css("transform", "rotate(25deg) translate(-" + scroll*0.3 + "px, " + scroll*0.2 + "px)");
-  }
-  $(function() {
-    para();
-  });
-  $(window).resize(function() {
-    para();
-  });
-  $(document).scroll(function() {
-    para();
-  });
-</script>
+    {% endautoescape %}
+</div>

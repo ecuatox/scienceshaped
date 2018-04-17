@@ -1,7 +1,7 @@
 {% load staticfiles %}
 {% load thumbnail %}
 
-<section id="testimonials">
+<div id="testimonials" class="parallax-window" data-parallax="scroll" data-image-src="{% static "scienceshaped/img/triangles.jpg" %}">
     {% if perms.projects.add_testimonial %}
         <a class="ui button inverted new" href="/projects/testimonial/0/edit">New</a>
     {% endif %}
@@ -43,5 +43,10 @@
             {% endfor %}
         </div>
     </div>
-</section>
+</div>
 
+<script>
+    $('.parallax-window').parallax({
+        imageSrc: '{% static "scienceshaped/img/triangles.jpg" %}',
+    });
+</script>
