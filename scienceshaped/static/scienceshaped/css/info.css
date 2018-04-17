@@ -9,9 +9,11 @@
 }
 
 .info.content {
-    text-align: center;
-    padding-top: 200px;
-    height: 500px !important;
+    padding-top: 120px;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 .info.content * {

@@ -1,4 +1,4 @@
-body.pushable {
+body, body.pushable {
     background-color: #eee !important;
 }
 
