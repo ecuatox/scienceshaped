@@ -5,10 +5,7 @@
     {% if perms.projects.add_testimonial %}
         <a class="ui button inverted new" href="/projects/testimonial/0/edit">New</a>
     {% endif %}
-    <div id="testimonial-para-container">
-        <div class="para para2"></div>
-        <div class="para para3"></div>
-        <div class="para para4"></div>
+    <div>
         <h1>Testimonials</h1>
         <div id="slider">
             {% for testimonial in testimonials %}
@@ -46,6 +43,5 @@
             {% endfor %}
         </div>
     </div>
-    <script src="{% static "projects/js/testimonials.js" %}"></script>
 </section>
 
