@@ -18,7 +18,23 @@
 }
 
 .display.message {
-    padding: 0;
+    font-size: 20px;
+    line-height: 28px;
+}
+
+.display.author {
+    margin-top: 10px;
+    margin-bottom: 0;
+    font-size: 18px;
+}
+
+.display.job {
+    margin: 2px;
+    font-size: 14px;
+}
+
+.quote.icon {
+    font-size: 30px;
 }
 
 .ui.small.image {
@@ -27,4 +43,12 @@
 
 .testimonial.image {
     margin: 8px;
+}
+
+.testimonial.container {
+    height: 300px;
+}
+
+.parallax-window {
+    height: 800px;
 }
