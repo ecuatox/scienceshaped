@@ -1,10 +1,13 @@
 {% load staticfiles %}
 
 <section id="about">
-    {% if perms.contentbox.add_contentbox and perms.contentbox.change_contentbox %}
-        <a class="ui button who edit blue" href="/contentbox/who/edit">Edit who</a>
-        <a class="ui button why edit blue" href="/contentbox/why/edit">Edit why</a>
+    {% if perms.contentbox.change_contentbox %}
+        <div class="admin buttons">
+            <a class="ui button who admin blue" href="/contentbox/who/edit">Edit who</a>
+            <a class="ui button why admin blue" href="/contentbox/why/edit">Edit why</a>
+        </div>
     {% endif %}
+
     <div class="ui text container">
         <h1 class="ui header">About</h1>
         <div class="ui stackable grid">

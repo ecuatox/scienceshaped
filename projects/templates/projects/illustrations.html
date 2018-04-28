@@ -2,8 +2,11 @@
 
 <div class="illustrations section">
     {% if perms.projects.add_illustration %}
-        <a class="ui button blue admin" href="/projects/illustration/0/edit">New</a>
+        <div class="admin buttons">
+            <a class="ui button blue admin" href="/projects/illustration/0/edit">New</a>
+        </div>
     {% endif %}
+
     <div id="illustrationsTop">
         <h1>Illustrations</h1>
 

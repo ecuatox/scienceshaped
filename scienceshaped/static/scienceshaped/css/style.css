@@ -8,10 +8,10 @@ body, body.pushable {
 
 .section {
     position: relative;
-    padding: 40px;
+    padding: 60px;
 }
 
-.modify.button {
+.admin.buttons {
     position: absolute;
     left: 10px;
     top: 10px;

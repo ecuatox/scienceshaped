@@ -4,16 +4,20 @@
 <div class="parallax-window" data-parallax="scroll" data-image-src="{% static "scienceshaped/img/triangles.jpg" %}">
 
     <div class="testimonials section">
-        {% if perms.projects.add_testimonial %}
-            <a class="ui inverted admin button" href="/projects/testimonial/0/edit">New</a>
-        {% endif %}
-        {% if perms.projects.change_testimonial %}
-            <a class="ui inverted admin edit button"
-               href="/projects/testimonial/{{ testimonials.first.id }}/edit">Edit</a>
-        {% endif %}
-        {% if perms.projects.delete_testimonial %}
-            <a class="ui inverted admin button delete openmodal"
-               url="/projects/testimonial/{{ testimonials.first.id }}/delete/">Delete</a>
+        {% if perms.projects.add_testimonial or perms.projects.change_testimonial or perms.projects.delete_testimonial %}
+            <div class="admin buttons">
+                {% if perms.projects.add_testimonial %}
+                    <a class="ui inverted admin button" href="/projects/testimonial/0/edit">New</a>
+                {% endif %}
+                {% if perms.projects.change_testimonial %}
+                    <a class="ui inverted admin edit button"
+                       href="/projects/testimonial/{{ testimonials.first.id }}/edit">Edit</a>
+                {% endif %}
+                {% if perms.projects.delete_testimonial %}
+                    <a class="ui inverted admin button delete openmodal"
+                       url="/projects/testimonial/{{ testimonials.first.id }}/delete/">Delete</a>
+                {% endif %}
+            </div>
         {% endif %}
 
         <div class="ui huge centered inverted header">Testimonials</div>

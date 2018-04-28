@@ -33,15 +33,3 @@ h1 {
 .who.edit.button:hover, .why.edit.button:hover {
     cursor: pointer;
 }
-
-.who.edit.button {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-}
-
-.why.edit.button {
-    position: absolute;
-    top: 50px;
-    left: 10px;
-}
