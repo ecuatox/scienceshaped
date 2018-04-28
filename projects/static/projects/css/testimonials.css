@@ -37,8 +37,18 @@
     font-size: 30px;
 }
 
-.ui.small.image {
-    width: 120px !important;
+.buttons.container {
+    height: 150px;
+}
+
+.testimonial.container {
+    position: relative;
+}
+
+.testimonial.item {
+    visibility: hidden;
+    position: absolute;
+    top: 0;
 }
 
 .testimonial.image:hover {
@@ -52,6 +62,7 @@
 }
 
 .testimonial.image.small {
+    width: 120px !important;
     animation-name: scaleUp;
     animation-duration: .2s;
     opacity: 1;
@@ -62,11 +73,7 @@
 }
 
 .testimonial.container {
-    min-height: 300px;
-}
-
-.parallax-window {
-    min-height: 640px;
+    height: auto;
 }
 
 @keyframes scaleUp {
@@ -88,5 +95,37 @@
     to {
         width: 80px;
         opacity: 0.6;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .testimonial.image.tiny {
+        width: 10vw !important;
+    }
+
+    .testimonial.image.small {
+        width: 15vw !important;
+    }
+
+    @keyframes scaleUp {
+        from {
+            width: 10vw;
+            opacity: 0.6;
+        }
+        to {
+            width: 15vw;
+            opacity: 1;
+        }
+    }
+
+    @keyframes scaleDown {
+        from {
+            width: 15vw;
+            opacity: 1;
+        }
+        to {
+            width: 10vw;
+            opacity: 0.6;
+        }
     }
 }

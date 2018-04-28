@@ -23,16 +23,20 @@
         <div class="ui huge centered inverted header">Testimonials</div>
 
         <div class="ui text testimonial container">
-            <div>
-                <i class="icon quote left"></i>
-                <span class="display message">{{ testimonials.first.message }}</span>
-            </div>
-            <p class="display author">{{ testimonials.first.person }}</p>
-            <p class="display job">{{ testimonials.first.job }}</p>
-            <!--p class="display date">{{ testimonials.first.date|date:"M Y" }}</p-->
+            {% for testimonial in testimonials %}
+                <div class="testimonial item" pk="{{ testimonial.pk }}">
+                    <div>
+                        <i class="icon quote left"></i>
+                        <span class="display message">{{ testimonial.message }}</span>
+                    </div>
+                    <p class="display author">{{ testimonial.person }}</p>
+                    <p class="display job">{{ testimonial.job }}</p>
+                    <!--p class="display date">{{ testimonial.date|date:"M Y" }}</p-->
+                </div>
+            {% endfor %}
         </div>
 
-        <div class="ui text text-centered container">
+        <div class="ui text text-centered container buttons">
             <div style="height: 100px; display: inline-block;"></div>
             {% for testimonial in testimonials %}
                 {% thumbnail testimonial.thumbnail.file "200x200" crop="center" as im %}
@@ -41,18 +45,13 @@
                 {% endthumbnail %}
             {% endfor %}
         </div>
-
-        {% for testimonial in testimonials %}
-            <div class="hidden message" pk="{{ testimonial.pk }}">{{ testimonial.message }}</div>
-            <div class="hidden author" pk="{{ testimonial.pk }}">{{ testimonial.person }}</div>
-            <div class="hidden job" pk="{{ testimonial.pk }}">{{ testimonial.job }}</div>
-            <div class="hidden date" pk="{{ testimonial.pk }}">{{ testimonial.date|date:"M Y" }}</div>
-        {% endfor %}
     </div>
 </div>
 
 
 <script>
+    $('.testimonial.item[pk=' + {{ testimonials.first.pk }} +']').css('visibility', 'visible');
+
     $('.parallax-window').parallax({
         imageSrc: '{% static "scienceshaped/img/triangles.jpg" %}',
     });
@@ -61,10 +60,8 @@
         $('.testimonial.image').removeClass('small').addClass('tiny');
         $(this).addClass('small');
         var pk = $(this).attr('pk');
-        $('.display.message').html($('.hidden.message[pk=' + pk + ']').html());
-        $('.display.author').html($('.hidden.author[pk=' + pk + ']').html());
-        $('.display.job').html($('.hidden.job[pk=' + pk + ']').html());
-        $('.display.date').html($('.hidden.date[pk=' + pk + ']').html());
+        $('.testimonial.item').css('visibility', 'hidden');
+        $('.testimonial.item[pk=' + pk + ']').css('visibility', 'visible');
         {% if perms.projects.change_testimonial %}
             $('.edit.button').attr('href', '/projects/testimonial/' + pk + '/edit');
         {% endif %}
@@ -72,4 +69,20 @@
             $('.delete.button').attr('url', '/projects/testimonial/' + pk + '/delete');
         {% endif %}
     });
+
+    $(function () {
+        setTimeout(reszie_testimonials(), 100);
+    });
+
+    $(window).resize(function () {
+        reszie_testimonials();
+    });
+
+    function reszie_testimonials() {
+        height = Math.max(...$.map($('.testimonial.item'), function (item) {
+            return item.clientHeight;
+        }));
+        $('.testimonial.container').css('height', height);
+    }
+
 </script>
