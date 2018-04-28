@@ -1,52 +1,71 @@
 {% load staticfiles %}
 {% load thumbnail %}
 
-<div id="testimonials" class="parallax-window" data-parallax="scroll" data-image-src="{% static "scienceshaped/img/triangles.jpg" %}">
-    {% if perms.projects.add_testimonial %}
-        <a class="ui button inverted new" href="/projects/testimonial/0/edit">New</a>
-    {% endif %}
-    <div>
-        <h1>Testimonials</h1>
-        <div id="slider">
-            {% for testimonial in testimonials %}
-                <div class="ui segment container">
-                    {% if perms.projects.change_testimonial or perms.projects.delete_testimonial %}
-                        <div class="editor buttons">
-                            {% if perms.projects.change_testimonial %}
-                                <a class="ui green right ribbon label"
-                                   href="/projects/testimonial/{{ testimonial.id }}/edit">Edit</a>
-                            {% endif %}
-                            <br>
-                            {% if perms.projects.delete_testimonial %}
-                                <a class="ui red right ribbon label delete openmodal"
-                                   url="/projects/testimonial/{{ testimonial.id }}/delete/">Delete</a>
-                            {% endif %}
-                        </div>
-                    {% endif %}
-                    <div class="ui stackable grid">
-                        <div class="five wide column left">
-                            {% thumbnail testimonial.thumbnail.file "200x200" crop="center" as im %}
-                                <img class="testimonial image" src="{{ im.url }}">
-                            {% endthumbnail %}
-                        </div>
-                        <div class="ten wide column right">
-                            <p class="testimonial message"><i class="icon quote left"></i> {{ testimonial.message }} <i
-                                    class="icon quote right"></i></p>
-                            <p class="testimonial person"><strong>{{ testimonial.person }}</strong></p>
-                            {% if testimonial.job != '' %}
-                                <p class="testimonial job">{{ testimonial.job }}</p>
-                            {% endif %}
-                        </div>
-                    </div>
-                    <p class="testimonial date">{{ testimonial.date|date:"M Y" }}</p>
+<div class="parallax-window" data-parallax="scroll" data-image-src="{% static "scienceshaped/img/triangles.jpg" %}">
+
+    <div class="testimonials section">
+        {% if perms.projects.add_testimonial %}
+            <a class="ui inverted admin button" href="/projects/testimonial/0/edit">New</a>
+        {% endif %}
+        {% if perms.projects.change_testimonial %}
+            <a class="ui inverted admin edit button"
+               href="/projects/testimonial/{{ testimonials.first.id }}/edit">Edit</a>
+        {% endif %}
+        {% if perms.projects.delete_testimonial %}
+            <a class="ui inverted admin button delete openmodal"
+               url="/projects/testimonial/{{ testimonials.first.id }}/delete/">Delete</a>
+        {% endif %}
+
+        <div class="ui huge centered inverted header">Testimonials</div>
+
+        <div class="ui text testimonial container">
+            <div class="ui icon message">
+                <i class="icon quote left"></i>
+                <div class="content">
+                    <div class="display message ui left aligned header">{{ testimonials.first.message }}</div>
+                    <p class="display author">{{ testimonials.first.person }}, {{ testimonials.first.job }}</p>
+                    <p class="display date ui tiny right aligned inverted header">{{ testimonials.first.date|date:"M Y" }}</p>
                 </div>
+            </div>
+
+        </div>
+
+        <div class="ui text text-centered container">
+            {% for testimonial in testimonials %}
+                {% thumbnail testimonial.thumbnail.file "200x200" crop="center" as im %}
+                    <img class="ui {% if testimonial == testimonials.first %}small{% else %}tiny{% endif %}
+                circular testimonial image" src="{{ im.url }}" pk="{{ testimonial.pk }}">
+                {% endthumbnail %}
             {% endfor %}
         </div>
+
+        {% for testimonial in testimonials %}
+            <div class="hidden message" pk="{{ testimonial.pk }}">{{ testimonial.message }}</div>
+            <div class="hidden author" pk="{{ testimonial.pk }}">{{ testimonial.person }}, {{ testimonial.job }}</div>
+            <div class="hidden date" pk="{{ testimonial.pk }}">{{ testimonial.date|date:"M Y" }}</div>
+        {% endfor %}
     </div>
 </div>
+
 
 <script>
     $('.parallax-window').parallax({
         imageSrc: '{% static "scienceshaped/img/triangles.jpg" %}',
+    });
+
+    $('.testimonial.image').click(function () {
+        $('.testimonial.image').removeClass('small').addClass('tiny');
+        $(this).addClass('small');
+        var pk = $(this).attr('pk');
+        $('.display.message').html($('.hidden.message[pk=' + pk + ']').html());
+        $('.display.author').html($('.hidden.author[pk=' + pk + ']').html());
+        $('.display.date').html($('.hidden.date[pk=' + pk + ']').html());
+        $('.display.image').attr('src', $(this).attr('src'));
+        {% if perms.projects.change_testimonial %}
+            $('.edit.button').attr('href', '/projects/testimonial/' + pk + '/edit');
+        {% endif %}
+        {% if perms.projects.delete_testimonial %}
+            $('.delete.button').attr('url', '/projects/testimonial/' + pk + '/delete');
+        {% endif %}
     });
 </script>

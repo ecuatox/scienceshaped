@@ -5,3 +5,18 @@ body, body.pushable {
 .pusher {
     background-color: transparent !important;
 }
+
+.section {
+    position: relative;
+    padding: 40px;
+}
+
+.modify.button {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
+
+.text-centered {
+    text-align: center;
+}

@@ -1,125 +1,128 @@
 {% load staticfiles %}
 
-<section id="illustrations">
-  {% if perms.projects.add_illustration %}
-    <a class="ui button blue new" href="/projects/illustration/0/edit">New</a>
-  {% endif %}
-  <div id="illustrationsTop">
-    <h1>Illustrations</h1>
+<div class="illustrations section">
+    {% if perms.projects.add_illustration %}
+        <a class="ui button blue admin" href="/projects/illustration/0/edit">New</a>
+    {% endif %}
+    <div id="illustrationsTop">
+        <h1>Illustrations</h1>
 
-    <div class="ui floating dropdown labeled icon button">
-      <i class="filter icon"></i>
-      <span class="text">Filter</span>
-      <div class="menu">
-        <div class="ui icon search input">
-          <i class="search icon"></i>
-          <input type="text" placeholder="Search tags...">
-        </div>
-        <div class="divider"></div>
-        <div class="header">
-          <i class="tags icon"></i>
-          Tag Label
-        </div>
-        <div class="scrolling menu">
-          <div class="item" tag="all">
-            <div class="ui empty circular label"></div>
-            All
-          </div>
-          {% for tag in illustration_tags %}
-            <div class="item" tag="{{ tag|lower }}">
-              <div class="ui empty circular label"></div>
-              {{ tag|title }}
+        <div class="ui floating dropdown labeled icon button">
+            <i class="filter icon"></i>
+            <span class="text">Filter</span>
+            <div class="menu">
+                <div class="ui icon search input">
+                    <i class="search icon"></i>
+                    <input type="text" placeholder="Search tags...">
+                </div>
+                <div class="divider"></div>
+                <div class="header">
+                    <i class="tags icon"></i>
+                    Tag Label
+                </div>
+                <div class="scrolling menu">
+                    <div class="item" tag="all">
+                        <div class="ui empty circular label"></div>
+                        All
+                    </div>
+                    {% for tag in illustration_tags %}
+                        <div class="item" tag="{{ tag|lower }}">
+                            <div class="ui empty circular label"></div>
+                            {{ tag|title }}
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
-          {% endfor %}
         </div>
-      </div>
     </div>
-  </div>
 
-  <br><br>
+    <br><br>
 
-  <div id="gallery" class="ui container">
-    <div class="ui grid">
-      {% for illustration in illustrations %}
-        <div class="grid-item">
-          <div class="ui card" tags="{{ illustration.tags|lower }}">
-            {% if perms.projects.edit_illustration or perms.projects.delete_illustration%}
-              <div class="editor buttons">
-                {% if perms.projects.add_illustration %}
-                <a class="ui green right ribbon label" href="/projects/illustration/{{ illustration.id }}/edit">Edit</a>
-                {% endif %}
-                <br>
-                {% if perms.projects.delete_illustration %}
-                <a class="ui red right ribbon label delete openmodal" url="/projects/illustration/{{ illustration.id }}/delete/" class="delete openmodal">Delete</a>
-                {% endif %}
-              </div>
-            {% endif %}
-            <div class="image previewButton" previewImage="{{ illustration.thumbnail.url }}">
-              <img class="removeloader" src="{{ illustration.thumbnail.url }}">
-              <div class="ui active dimmer">
-                <div class="ui loader"></div>
-              </div>
-            </div>
-            <div class="content">
-              <a class="header">{{ illustration.title }}</a>
-              <div class="meta">
-                <span class="date">{{ illustration.date|date:"M d, Y" }}</span>
-              </div>
-              <div class="description">
-                <p>
-                  {% for line in illustration.short_lines %}
-                    {{ line }}<br>
-                  {% endfor %}
-                </p>
-              </div>
-            </div>
-            <div class="extra content">
-              <a class="readmore" illustration="{{ illustration.id }}">
-                <i class="info icon"></i>
-                Read more
-              </a>
-            </div>
-          </div>
+    <div id="gallery" class="ui container">
+        <div class="ui grid">
+            {% for illustration in illustrations %}
+                <div class="grid-item">
+                    <div class="ui card" tags="{{ illustration.tags|lower }}">
+                        {% if perms.projects.edit_illustration or perms.projects.delete_illustration %}
+                            <div class="editor buttons">
+                                {% if perms.projects.add_illustration %}
+                                    <a class="ui green right ribbon label"
+                                       href="/projects/illustration/{{ illustration.id }}/edit">Edit</a>
+                                {% endif %}
+                                <br>
+                                {% if perms.projects.delete_illustration %}
+                                    <a class="ui red right ribbon label delete openmodal"
+                                       url="/projects/illustration/{{ illustration.id }}/delete/"
+                                       class="delete openmodal">Delete</a>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                        <div class="image previewButton" previewImage="{{ illustration.thumbnail.url }}">
+                            <img class="removeloader" src="{{ illustration.thumbnail.url }}">
+                            <div class="ui active dimmer">
+                                <div class="ui loader"></div>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <a class="header">{{ illustration.title }}</a>
+                            <div class="meta">
+                                <span class="date">{{ illustration.date|date:"M d, Y" }}</span>
+                            </div>
+                            <div class="description">
+                                <p>
+                                    {% for line in illustration.short_lines %}
+                                        {{ line }}<br>
+                                    {% endfor %}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="extra content">
+                            <a class="readmore" illustration="{{ illustration.id }}">
+                                <i class="info icon"></i>
+                                Read more
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-      {% endfor %}
     </div>
-  </div>
 
-  {% for illustration in illustrations %}
-    <div class="ui modal {{ illustration.id }}">
-      <i class="close icon"></i>
-      <!--div class="header">
+    {% for illustration in illustrations %}
+        <div class="ui modal {{ illustration.id }}">
+            <i class="close icon"></i>
+            <!--div class="header">
         {{ illustration.title }}
       </div-->
 
-      <div class="description">
-        <div class="ui header">{{ illustration.title }}</div>
-        <p>
-          {% for line in illustration.description_lines %}
-            {{ line }}<br>
-          {% endfor %}
-        </p>
-        <!--div class="ui card">
+            <div class="description">
+                <div class="ui header">{{ illustration.title }}</div>
+                <p>
+                    {% for line in illustration.description_lines %}
+                        {{ line }}<br>
+                    {% endfor %}
+                </p>
+                <!--div class="ui card">
           <div class="image modalimg previewButton" previewImage="{{ illustration.thumbnail.url }}">
             <img src="{{ illustration.thumbnail.url }}">
           </div>
         </div-->
-        {% for image in illustration.images.all %}
-          <div class="ui card">
-            <div class="image modalimg previewButton" previewImage="{{ image.url }}">
-              <img src="{{ image.url }}">
+                {% for image in illustration.images.all %}
+                    <div class="ui card">
+                        <div class="image modalimg previewButton" previewImage="{{ image.url }}">
+                            <img src="{{ image.url }}">
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
-          </div>
-        {% endfor %}
-      </div>
-      <div class="actions">
-        <div class="date">
-          <p>{{ illustration.date|date:"M d, Y"}}</p>
+            <div class="actions">
+                <div class="date">
+                    <p>{{ illustration.date|date:"M d, Y" }}</p>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  {% endfor %}
+    {% endfor %}
 
-  <script src="{% static "projects/js/illustrations.js" %}"></script>
+    <script src="{% static "projects/js/illustrations.js" %}"></script>
 
-</section>
+</div>
