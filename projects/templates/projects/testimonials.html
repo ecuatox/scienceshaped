@@ -25,7 +25,7 @@
                     {% endif %}
                     <div class="ui stackable grid">
                         <div class="five wide column left">
-                            {% thumbnail testimonial.thumbnail "100x100" crop="center" as im %}
+                            {% thumbnail testimonial.thumbnail.file "200x200" crop="center" as im %}
                                 <img class="testimonial image" src="{{ im.url }}">
                             {% endthumbnail %}
                         </div>
