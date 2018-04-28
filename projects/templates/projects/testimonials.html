@@ -30,10 +30,10 @@
             <p class="display author">{{ testimonials.first.person }}</p>
             <p class="display job">{{ testimonials.first.job }}</p>
             <!--p class="display date">{{ testimonials.first.date|date:"M Y" }}</p-->
-
         </div>
 
         <div class="ui text text-centered container">
+            <div style="height: 100px; display: inline-block;"></div>
             {% for testimonial in testimonials %}
                 {% thumbnail testimonial.thumbnail.file "200x200" crop="center" as im %}
                     <img class="ui {% if testimonial == testimonials.first %}small{% else %}tiny{% endif %}
