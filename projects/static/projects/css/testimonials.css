@@ -62,11 +62,11 @@
 }
 
 .testimonial.container {
-    height: 300px;
+    min-height: 300px;
 }
 
 .parallax-window {
-    height: 640px;
+    min-height: 640px;
 }
 
 @keyframes scaleUp {
