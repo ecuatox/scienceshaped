@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import Illustration, Testimonial
+from .models import Illustration, Testimonial, IllustrationCategory
+
+admin.site.register(IllustrationCategory)
 
 @admin.register(Illustration)
 class IllustrationAdmin(admin.ModelAdmin):

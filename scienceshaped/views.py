@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 
-from projects.models import Illustration, Testimonial
+from projects.models import Illustration, Testimonial, IllustrationCategory
 from tags.models import Tag
 from .forms import Mail
 from contentbox.models import ContentBox
@@ -22,6 +22,7 @@ def index(request, tag='all'):
 
     context = {
         'illustrations': Illustration.filter_tag(tag).filter(hidden=False).order_by('-date'),
+        'illustrationCategories': IllustrationCategory.objects.all(),
         'testimonials': Testimonial.objects.order_by('-date'),
         'mailForm': mailForm,
         'aboutContent': ContentBox.getContent('about'),

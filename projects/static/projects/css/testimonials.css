@@ -1,4 +1,4 @@
-.testimonial.image {
+.selection.image {
     border: #ffffff solid 4px;
     display: inline-block !important;
 }
@@ -51,24 +51,24 @@
     top: 0;
 }
 
-.testimonial.image:hover {
+.selection.image:hover {
     cursor: pointer;
 }
 
-.testimonial.image.tiny {
+.selection.image.tiny {
     animation-name: scaleDown;
     animation-duration: .2s;
     opacity: 0.6;
 }
 
-.testimonial.image.small {
+.selection.image.small {
     width: 120px !important;
     animation-name: scaleUp;
     animation-duration: .2s;
     opacity: 1;
 }
 
-.testimonial.image {
+.selection.image {
     margin: 8px;
 }
 
@@ -99,11 +99,11 @@
 }
 
 @media screen and (max-width: 768px) {
-    .testimonial.image.tiny {
+    .selection.image.tiny {
         width: 10vw !important;
     }
 
-    .testimonial.image.small {
+    .selection.image.small {
         width: 15vw !important;
     }
 

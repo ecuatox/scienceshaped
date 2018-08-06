@@ -16,7 +16,8 @@ class Illustration(models.Model):
     url = models.CharField(max_length=500, blank=True, null=True, verbose_name='URL')
     pdf = models.FileField(upload_to='pdfs', blank=True, null=True, verbose_name='PDF')
 
-    thumbnail = models.ForeignKey(Image, on_delete=models.SET_NULL, blank=True, null=True, related_name='%(app_label)s_%(class)s_related_thumb')
+    thumbnail = models.ForeignKey(Image, on_delete=models.SET_NULL, blank=True, null=True,
+                                  related_name='%(app_label)s_%(class)s_related_thumb')
     thumbnail_size = models.CharField(max_length=4, default=100, verbose_name='Thumbnail size (%)')
 
     date = models.DateField(default=timezone.now, verbose_name='Date')
@@ -41,6 +42,15 @@ class Illustration(models.Model):
 
     def pdf_getname(self):
         return os.path.basename(self.pdf.name)
+
+
+class IllustrationCategory(models.Model):
+    title = models.CharField(max_length=100, unique=True)
+    thumb = models.ImageField(upload_to="categories")
+
+    def __str__(self):
+        return self.title
+
 
 class Testimonial(models.Model):
     person = models.CharField(max_length=100, verbose_name='Person')

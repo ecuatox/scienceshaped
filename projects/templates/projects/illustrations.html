@@ -1,5 +1,6 @@
 {% load staticfiles %}
 {% load scienceshaped_helpers %}
+{% load thumbnail %}
 
 <div id="illustrations" class="illustrations section">
     {% if perms.projects.add_illustration %}
@@ -17,7 +18,7 @@
     <div id="gallery" class="ui container">
         <div class="ui centered grid">
             {% for illustration in illustrations %}
-                <div class="ui card" tags="{{ illustration.tags.all|join_by:" " }}">
+                <div class="ui card {{ illustration.tags.all|add_prefix:"category_"|join_by:" " }}">
                     {% if perms.projects.edit_illustration or perms.projects.delete_illustration %}
                         <div class="content">
                             <div class="editor buttons">
@@ -86,6 +87,35 @@
         </div>
     {% endfor %}
 
+    <div class="ui text-centered container buttons">
+        <div style="height: 100px; display: inline-block;"></div>
+        {% for category in illustrationCategories %}
+            {% thumbnail category.thumb.file "200x200" crop="center" as im %}
+                <img class="ui {% if category == illustrationCategories.first %}small{% else %}tiny{% endif %}
+            circular category selection image" src="{{ im.url }}" category="{{ category.title }}">
+            {% endthumbnail %}
+        {% endfor %}
+    </div>
+
     <script src="{% static "projects/js/illustrations.js" %}"></script>
 
+    <script>
+        onlyShow("{{ illustrationCategories.first.title }}");
+
+        $('#illustrations .category.image').click(function () {
+            $('#illustrations .selection.image').removeClass('small').addClass('tiny');
+            $(this).addClass('small');
+            var category = $(this).attr('category');
+            onlyShow(category);
+        });
+
+        function onlyShow(category) {
+            $('#illustrations .card').css('visibility', 'hidden');
+            $('#illustrations .card').each(function () {
+                if ($(this).hasClass("category_" + category)) {
+                    $(this).css('visibility', 'visible');
+                }
+            });
+        }
+    </script>
 </div>

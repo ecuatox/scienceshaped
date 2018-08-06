@@ -41,7 +41,7 @@
             {% for testimonial in testimonials %}
                 {% thumbnail testimonial.thumbnail.file "200x200" crop="center" as im %}
                     <img class="ui {% if testimonial == testimonials.first %}small{% else %}tiny{% endif %}
-                circular testimonial image" src="{{ im.url }}" pk="{{ testimonial.pk }}">
+                circular testimonial selection image" src="{{ im.url }}" pk="{{ testimonial.pk }}">
                 {% endthumbnail %}
             {% endfor %}
         </div>
@@ -57,7 +57,7 @@
     });
 
     $('.testimonial.image').click(function () {
-        $('.testimonial.image').removeClass('small').addClass('tiny');
+        $('.testimonial.selection.image').removeClass('small').addClass('tiny');
         $(this).addClass('small');
         var pk = $(this).attr('pk');
         $('.testimonial.item').css('visibility', 'hidden');
