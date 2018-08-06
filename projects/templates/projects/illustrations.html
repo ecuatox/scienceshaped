@@ -110,10 +110,10 @@
         });
 
         function onlyShow(category) {
-            $('#illustrations .card').css('visibility', 'hidden');
+            $('#illustrations .card').css('display', 'none');
             $('#illustrations .card').each(function () {
                 if ($(this).hasClass("category_" + category)) {
-                    $(this).css('visibility', 'visible');
+                    $(this).css('display', 'block');
                 }
             });
         }
