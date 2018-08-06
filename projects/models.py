@@ -46,6 +46,7 @@ class Illustration(models.Model):
 
 class IllustrationCategory(models.Model):
     title = models.CharField(max_length=100, unique=True)
+    tag = models.CharField(max_length=100, unique=True)
     thumb = models.ImageField(upload_to="categories")
 
     def __str__(self):

@@ -92,7 +92,7 @@
         {% for category in illustrationCategories %}
             {% thumbnail category.thumb.file "200x200" crop="center" as im %}
                 <img class="ui {% if category == illustrationCategories.first %}small{% else %}tiny{% endif %}
-            circular category selection image" src="{{ im.url }}" category="{{ category.title }}">
+            circular category selection image" src="{{ im.url }}" tag="{{ category.tag }}">
             {% endthumbnail %}
         {% endfor %}
     </div>
@@ -100,13 +100,13 @@
     <script src="{% static "projects/js/illustrations.js" %}"></script>
 
     <script>
-        onlyShow("{{ illustrationCategories.first.title }}");
+        onlyShow("{{ illustrationCategories.first.tag }}");
 
         $('#illustrations .category.image').click(function () {
             $('#illustrations .selection.image').removeClass('small').addClass('tiny');
             $(this).addClass('small');
-            var category = $(this).attr('category');
-            onlyShow(category);
+            var tag = $(this).attr('tag');
+            onlyShow(tag);
         });
 
         function onlyShow(category) {
