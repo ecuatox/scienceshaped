@@ -75,6 +75,6 @@ def delete(request, tag_id):
 def name(request, name):
     try:
         group = TagGroup.objects.get(title=name)
-        return HttpResponseRedirect('/tags/%r/edit/' % group.id)
     except TagGroup.DoesNotExist:
-        return HttpResponseRedirect('/tags/edit/')
+        group = TagGroup.objects.create(title=name)
+    return HttpResponseRedirect('/tags/%r/edit/' % group.id)
