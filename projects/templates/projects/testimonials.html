@@ -1,7 +1,7 @@
 {% load staticfiles %}
 {% load thumbnail %}
 
-<div class="parallax-window" data-parallax="scroll" data-image-src="{% static "scienceshaped/img/triangles.jpg" %}">
+<div id="testimonials" class="parallax-window" data-parallax="scroll" data-image-src="{% static "scienceshaped/img/triangles.jpg" %}">
 
     <div class="testimonials section">
         {% if perms.projects.add_testimonial or perms.projects.change_testimonial or perms.projects.delete_testimonial %}
