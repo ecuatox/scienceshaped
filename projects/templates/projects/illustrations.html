@@ -19,17 +19,19 @@
             {% for illustration in illustrations %}
                 <div class="ui card" tags="{{ illustration.tags.all|join_by:" " }}">
                     {% if perms.projects.edit_illustration or perms.projects.delete_illustration %}
-                        <div class="editor buttons">
-                            {% if perms.projects.add_illustration %}
-                                <a class="ui green right ribbon label"
-                                   href="/projects/illustration/{{ illustration.id }}/edit">Edit</a>
-                            {% endif %}
-                            <br>
-                            {% if perms.projects.delete_illustration %}
-                                <a class="ui red right ribbon label delete openmodal"
-                                   url="/projects/illustration/{{ illustration.id }}/delete/"
-                                   class="delete openmodal">Delete</a>
-                            {% endif %}
+                        <div class="content">
+                            <div class="editor buttons">
+                                {% if perms.projects.add_illustration %}
+                                    <a class="ui green right ribbon label"
+                                       href="/projects/illustration/{{ illustration.id }}/edit">Edit</a>
+                                {% endif %}
+                                <br>
+                                {% if perms.projects.delete_illustration %}
+                                    <a class="ui red right ribbon label delete openmodal"
+                                       url="/projects/illustration/{{ illustration.id }}/delete/"
+                                       class="delete openmodal">Delete</a>
+                                {% endif %}
+                            </div>
                         </div>
                     {% endif %}
                     <div class="image previewButton" previewImage="{{ illustration.thumbnail.url }}">
