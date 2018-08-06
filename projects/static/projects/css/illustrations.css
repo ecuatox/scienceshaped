@@ -28,6 +28,14 @@
     margin: 10px 0;
 }
 
+#illustrations .card img {
+    object-fit: contain;
+    object-position: center;
+    height: 300px !important;
+    width: 100% !important;
+    background-color: #ffffff;
+}
+
 .dropdown {
     margin-left: 20px !important;
     top: -10px;

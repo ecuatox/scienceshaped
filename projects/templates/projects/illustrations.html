@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load scienceshaped_helpers %}
 
 <div id="illustrations" class="illustrations section">
     {% if perms.projects.add_illustration %}
@@ -9,82 +10,39 @@
 
     <div id="illustrationsTop">
         <h1>Illustrations</h1>
-
-        <div class="ui floating dropdown labeled icon button">
-            <i class="filter icon"></i>
-            <span class="text">Filter</span>
-            <div class="menu">
-                <div class="ui icon search input">
-                    <i class="search icon"></i>
-                    <input type="text" placeholder="Search tags...">
-                </div>
-                <div class="divider"></div>
-                <div class="header">
-                    <i class="tags icon"></i>
-                    Tag Label
-                </div>
-                <div class="scrolling menu">
-                    <div class="item" tag="all">
-                        <div class="ui empty circular label"></div>
-                        All
-                    </div>
-                    {% for tag in illustration_tags %}
-                        <div class="item" tag="{{ tag|lower }}">
-                            <div class="ui empty circular label"></div>
-                            {{ tag|title }}
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
     </div>
 
     <br><br>
 
     <div id="gallery" class="ui container">
-        <div class="ui grid">
+        <div class="ui centered grid">
             {% for illustration in illustrations %}
-                <div class="grid-item">
-                    <div class="ui card" tags="{{ illustration.tags|lower }}">
-                        {% if perms.projects.edit_illustration or perms.projects.delete_illustration %}
-                            <div class="editor buttons">
-                                {% if perms.projects.add_illustration %}
-                                    <a class="ui green right ribbon label"
-                                       href="/projects/illustration/{{ illustration.id }}/edit">Edit</a>
-                                {% endif %}
-                                <br>
-                                {% if perms.projects.delete_illustration %}
-                                    <a class="ui red right ribbon label delete openmodal"
-                                       url="/projects/illustration/{{ illustration.id }}/delete/"
-                                       class="delete openmodal">Delete</a>
-                                {% endif %}
-                            </div>
-                        {% endif %}
-                        <div class="image previewButton" previewImage="{{ illustration.thumbnail.url }}">
-                            <img class="removeloader" src="{{ illustration.thumbnail.url }}">
-                            <div class="ui active dimmer">
-                                <div class="ui loader"></div>
-                            </div>
+                <div class="ui card" tags="{{ illustration.tags.all|join_by:" " }}">
+                    {% if perms.projects.edit_illustration or perms.projects.delete_illustration %}
+                        <div class="editor buttons">
+                            {% if perms.projects.add_illustration %}
+                                <a class="ui green right ribbon label"
+                                   href="/projects/illustration/{{ illustration.id }}/edit">Edit</a>
+                            {% endif %}
+                            <br>
+                            {% if perms.projects.delete_illustration %}
+                                <a class="ui red right ribbon label delete openmodal"
+                                   url="/projects/illustration/{{ illustration.id }}/delete/"
+                                   class="delete openmodal">Delete</a>
+                            {% endif %}
                         </div>
-                        <div class="content">
-                            <a class="header">{{ illustration.title }}</a>
-                            <div class="meta">
-                                <span class="date">{{ illustration.date|date:"M d, Y" }}</span>
-                            </div>
-                            <div class="description">
-                                <p>
-                                    {% for line in illustration.short_lines %}
-                                        {{ line }}<br>
-                                    {% endfor %}
-                                </p>
-                            </div>
+                    {% endif %}
+                    <div class="image previewButton" previewImage="{{ illustration.thumbnail.url }}">
+                        <img class="removeloader" src="{{ illustration.thumbnail.url }}">
+                        <div class="ui active dimmer">
+                            <div class="ui loader"></div>
                         </div>
-                        <div class="extra content">
-                            <a class="readmore" illustration="{{ illustration.id }}">
-                                <i class="info icon"></i>
-                                Read more
-                            </a>
-                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a class="readmore" illustration="{{ illustration.id }}">
+                            <i class="info icon"></i>
+                            Read more
+                        </a>
                     </div>
                 </div>
             {% endfor %}
