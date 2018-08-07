@@ -84,7 +84,7 @@
                 </p>
                 {% if illustration.url %}
                   <p>
-                    Publication <a href="{{ illustration.url }}" target="_blank">here</a>.
+                    {{ illustration.url_description|default:"More " }} <a href="{{ illustration.url }}" target="_blank">here</a>.
                   </p>
                 {% endif %}
                 {% if illustration.pdf %}

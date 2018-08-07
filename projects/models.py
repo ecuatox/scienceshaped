@@ -14,6 +14,7 @@ class Illustration(models.Model):
     hidden = models.BooleanField(default=False, verbose_name='Hidden')
 
     url = models.CharField(max_length=500, blank=True, null=True, verbose_name='URL')
+    url_description = models.CharField(max_length=40, blank=True, null=True)
     pdf = models.FileField(upload_to='pdfs', blank=True, null=True, verbose_name='PDF')
 
     thumbnail = models.ForeignKey(Image, on_delete=models.SET_NULL, blank=True, null=True,

@@ -157,6 +157,25 @@
           {% endif %}
         </div>
 
+        <div class="field url">
+          <label for="{{ form.url_description.id_for_label }}">
+            Url description
+          </label>
+          <div class="ui left input">
+            <input id="{{ form.url_description.id_for_label }}"
+                   name="url_description"
+                   type="text"
+                   maxlength="{{ form.fields.url_description.max_length }}"
+                   value="{{ form.url_description.value|default:'' }}">
+          </div>
+
+          {% if form.url_description.errors %}
+            <div class="ui blue pointing label">
+              {{ form.url_description.errors.0 }}
+            </div>
+          {% endif %}
+        </div>
+
         <div class="field file">
           <label for="{{ form.file.id_for_label }}">
             PDF
