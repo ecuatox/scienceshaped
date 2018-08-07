@@ -9,11 +9,15 @@
 }
 
 .info.content {
-    padding-top: 120px;
-    height: 500px;
-    display: flex;
+    display: grid;
+    grid-auto-rows: min-content;
+}
+
+.verticalCenter {
+    display: grid;
     align-items: center;
-    justify-content: space-evenly;
+    height: 500px;
+    padding-top: 120px;
 }
 
 .info.content * {

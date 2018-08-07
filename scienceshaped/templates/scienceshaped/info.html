@@ -5,8 +5,10 @@
 {% endif %}
 <img id="info" class="info image" src="{% static "scienceshaped/img/top.jpg" %}">
 
-<div class="ui text container info content">
-    {% autoescape off %}
-        {{ infoContent }}
-    {% endautoescape %}
+<div class="verticalCenter">
+    <div class="ui text container info content">
+        {% autoescape off %}
+            {{ infoContent }}
+        {% endautoescape %}
+    </div>
 </div>
