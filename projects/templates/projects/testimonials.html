@@ -83,6 +83,7 @@
             return item.clientHeight;
         }));
         $('.testimonial.container').css('height', height);
+        setTimeout(function() {jQuery(window).trigger('resize').trigger('scroll');}, 10);
     }
 
 </script>
