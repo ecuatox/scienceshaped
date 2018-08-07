@@ -47,11 +47,15 @@ class Illustration(models.Model):
 
 class IllustrationCategory(models.Model):
     title = models.CharField(max_length=100, unique=True)
+    order = models.IntegerField(default=0)
     tag = models.CharField(max_length=100, unique=True)
     thumb = models.ImageField(upload_to="categories")
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        ordering = ['order']
 
 
 class Testimonial(models.Model):
