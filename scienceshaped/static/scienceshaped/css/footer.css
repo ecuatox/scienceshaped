@@ -1,6 +1,7 @@
-.footer {
+.ui.blue.inverted.footer.segment {
     margin-top: 100px !important;
     padding: 40px 40px 10px 40px !important;
+    background: #52b1e7 !important;
 }
 
 .footer a {

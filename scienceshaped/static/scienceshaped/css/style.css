@@ -20,3 +20,7 @@ body, body.pushable {
 .text-centered {
     text-align: center;
 }
+
+.ui.blue.button {
+    background: #52b1e7 !important;
+}
