@@ -9,7 +9,7 @@ from tags.models import Tag
 class Illustration(models.Model):
     title = models.CharField(max_length=100, verbose_name='Title')
     short = models.TextField(max_length=200, blank=True, verbose_name='Short Description')
-    description = models.TextField(max_length=500, blank=True, verbose_name='Description')
+    description = models.TextField(max_length=1000, blank=True, verbose_name='Description')
     tags = models.ManyToManyField(Tag, blank=True, verbose_name='Tags')
     hidden = models.BooleanField(default=False, verbose_name='Hidden')
 
