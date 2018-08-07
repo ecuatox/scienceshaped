@@ -19,6 +19,7 @@ class Illustration(models.Model):
     thumbnail = models.ForeignKey(Image, on_delete=models.SET_NULL, blank=True, null=True,
                                   related_name='%(app_label)s_%(class)s_related_thumb')
     thumbnail_size = models.CharField(max_length=4, default=100, verbose_name='Thumbnail size (%)')
+    background_color = models.CharField(max_length=7, blank=True, default='#ffffff')
 
     date = models.DateField(default=timezone.now, verbose_name='Date')
 

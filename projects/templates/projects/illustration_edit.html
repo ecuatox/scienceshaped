@@ -220,6 +220,25 @@
         {% endif %}
       </div>
 
+      <div class="field">
+        <label for="{{ form.background_color.id_for_label }}">
+          Background color
+        </label>
+        <div class="ui left input">
+          <input id="{{ form.background_color.id_for_label }}"
+                 name="background_color"
+                 type="text"
+                 maxlength="{{ form.fields.background_color.max_length }}"
+                 value="{{ form.background_color.value|default:'#ffffff' }}">
+        </div>
+
+        {% if form.background_color.errors %}
+          <div class="ui blue pointing label">
+            {{ form.background_color.errors.0 }}
+          </div>
+        {% endif %}
+      </div>
+
       <div class="field image">
         <label for="{{ form.thumbnail.id_for_label }}">Thumbnail</label>
         <input id="{{ form.thumbnail.id_for_label }}" style="display: none;" name="thumbnail" type="number"

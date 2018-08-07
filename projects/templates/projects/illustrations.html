@@ -36,7 +36,8 @@
                         </div>
                     {% endif %}
                     <div class="image previewButton" previewImage="{{ illustration.thumbnail.url }}">
-                        <img class="removeloader" src="{{ illustration.thumbnail.url }}">
+                        <img class="removeloader" src="{{ illustration.thumbnail.url }}"
+                        style="background-color: {{ illustration.background_color|default_if_none:"#ffffff" }}">
                         <div class="ui active dimmer">
                             <div class="ui loader"></div>
                         </div>
