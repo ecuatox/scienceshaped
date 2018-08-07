@@ -43,6 +43,7 @@
 
 .testimonial.container {
     position: relative;
+    max-width: 600px !important;
 }
 
 .testimonial.item {

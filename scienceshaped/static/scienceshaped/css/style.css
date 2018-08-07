@@ -8,7 +8,7 @@ body, body.pushable {
 
 .section {
     position: relative;
-    padding: 60px;
+    padding: 60px 10px;
 }
 
 .admin.buttons {
