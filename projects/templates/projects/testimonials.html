@@ -1,7 +1,7 @@
 {% load staticfiles %}
 {% load thumbnail %}
 
-<div id="testimonials" class="parallax-window" data-parallax="scroll" data-image-src="{% static "scienceshaped/img/triangles.jpg" %}">
+<div id="testimonials" class="parallax-window" data-parallax="scroll" data-image-src="{% static "scienceshaped/img/triangles.jpg" %}" style="position: relative;">
 
     <div class="testimonials section">
         {% if perms.projects.add_testimonial or perms.projects.change_testimonial or perms.projects.delete_testimonial %}
@@ -47,7 +47,7 @@
         </div>
     </div>
 </div>
-
+</div>
 
 <script>
     $('.testimonial.item[pk=' + {{ testimonials.first.pk }} +']').css('visibility', 'visible');

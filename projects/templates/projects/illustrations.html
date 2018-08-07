@@ -121,6 +121,7 @@
             $(this).addClass('small');
             var tag = $(this).attr('tag');
             onlyShow(tag);
+            jQuery(window).trigger('resize').trigger('scroll');
         });
 
         function onlyShow(category) {
