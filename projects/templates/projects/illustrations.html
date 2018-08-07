@@ -104,7 +104,7 @@
     <div class="ui text-centered container buttons">
         <div style="height: 100px; display: inline-block;"></div>
         {% for category in illustrationCategories %}
-            <div style="display:  inline-block;">
+            <div style="display: inline-block; vertical-align: middle; margin: 10px;">
                 {% thumbnail category.thumb.file "200x200" crop="center" as im %}
                     <img class="ui {% if category == illustrationCategories.first %}small{% else %}tiny{% endif %}
                 circular category selection image" src="{{ im.url }}" tag="{{ category.tag }}">
