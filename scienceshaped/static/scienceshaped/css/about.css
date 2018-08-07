@@ -20,7 +20,7 @@ h1 {
     padding: 0;
 }
 
-#why li, #mission, c.accdk, #linkedin {
+#why li, #mission, .accdk, #linkedin {
     color: #1e98dd;
 }
 
