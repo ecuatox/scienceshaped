@@ -61,17 +61,15 @@
       </div-->
 
             <div class="description">
+                <div class="previewButton main image" previewImage="{{ illustration.thumbnail.url }}">
+                  <img src="{{ illustration.thumbnail.url }}">
+                </div>
                 <div class="ui header">{{ illustration.title }}</div>
                 <p>
                     {% for line in illustration.description_lines %}
                         {{ line }}<br>
                     {% endfor %}
                 </p>
-                <!--div class="ui card">
-          <div class="image modalimg previewButton" previewImage="{{ illustration.thumbnail.url }}">
-            <img src="{{ illustration.thumbnail.url }}">
-          </div>
-        </div-->
                 {% for image in illustration.images.all %}
                     <div class="ui card">
                         <div class="image modalimg previewButton" previewImage="{{ image.url }}">

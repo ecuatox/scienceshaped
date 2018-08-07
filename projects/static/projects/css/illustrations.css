@@ -36,6 +36,17 @@
     background-color: #ffffff;
 }
 
+.main.image {
+    text-align: center;
+}
+
+.main.image img {
+    width: 100% !important;
+    height: 350px !important;
+    object-fit: contain;
+    object-position: center;
+}
+
 .dropdown {
     margin-left: 20px !important;
     top: -10px;
@@ -51,7 +62,7 @@
     padding: 30px;
 }
 
-.modal .card img {
+.modal .card .modalimg img {
     object-fit: cover;
     object-position: center;
     height: 150px !important;
