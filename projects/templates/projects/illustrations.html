@@ -104,10 +104,13 @@
     <div class="ui text-centered container buttons">
         <div style="height: 100px; display: inline-block;"></div>
         {% for category in illustrationCategories %}
-            {% thumbnail category.thumb.file "200x200" crop="center" as im %}
-                <img class="ui {% if category == illustrationCategories.first %}small{% else %}tiny{% endif %}
-            circular category selection image" src="{{ im.url }}" tag="{{ category.tag }}">
-            {% endthumbnail %}
+            <div style="display:  inline-block;">
+                {% thumbnail category.thumb.file "200x200" crop="center" as im %}
+                    <img class="ui {% if category == illustrationCategories.first %}small{% else %}tiny{% endif %}
+                circular category selection image" src="{{ im.url }}" tag="{{ category.tag }}">
+                {% endthumbnail %}
+                <p style="font-size: 12px">{{ category.title }}</p>
+            </div>
         {% endfor %}
     </div>
 
