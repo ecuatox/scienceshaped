@@ -66,10 +66,25 @@
                 </div>
                 <div class="ui header">{{ illustration.title }}</div>
                 <p>
+                    {% for line in illustration.short_lines %}
+                        {{ line }}<br>
+                    {% endfor %}
+                </p>
+                <p>
                     {% for line in illustration.description_lines %}
                         {{ line }}<br>
                     {% endfor %}
                 </p>
+                {% if illustration.url %}
+                  <p>
+                    Publication <a href="{{ illustration.url }}" target="_blank">here</a>.
+                  </p>
+                {% endif %}
+                {% if illustration.pdf %}
+                  <p>
+                    Publication <a href="/media/{{ illustration.pdf }}" target="_blank">here</a>.
+                  </p>
+                {% endif %}
                 {% for image in illustration.images.all %}
                     <div class="ui card">
                         <div class="image modalimg previewButton" previewImage="{{ image.url }}">
