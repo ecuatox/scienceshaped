@@ -35,9 +35,12 @@
                             </div>
                         </div>
                     {% endif %}
-                    <div class="image previewButton" previewImage="{{ illustration.thumbnail.url }}">
-                        <img class="removeloader" src="{{ illustration.thumbnail.url }}"
-                        style="background-color: {{ illustration.background_color|default_if_none:"#ffffff" }}">
+                    <div class="image previewButton" previewImage="
+                        {% thumbnail illustration.thumbnail.file "1080" crop="center" as im %}{{ im.url }}{% endthumbnail %}">
+                        {% thumbnail illustration.thumbnail.file "1080" crop="center" as im %}
+                            <img class="removeloader" src="{{ im.url }}"
+                             style="background-color: {{ illustration.background_color|default_if_none:"#ffffff" }}">
+                        {% endthumbnail %}
                         <div class="ui active dimmer">
                             <div class="ui loader"></div>
                         </div>
@@ -61,8 +64,12 @@
       </div-->
 
             <div class="description">
-                <div class="previewButton main image" previewImage="{{ illustration.thumbnail.url }}">
-                  <img src="{{ illustration.thumbnail.url }}">
+                <div class="previewButton main image"
+                     previewImage="
+                    {% thumbnail illustration.thumbnail.file "1080" crop="center" as im %}{{ im.url }}{% endthumbnail %}">
+                    {% thumbnail illustration.thumbnail.file "1080" crop="center" as im %}
+                        <img src="{{ im.url }}">
+                    {% endthumbnail %}
                 </div>
                 <div class="ui header">{{ illustration.title }}</div>
                 <p>
