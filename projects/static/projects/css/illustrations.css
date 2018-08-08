@@ -26,6 +26,7 @@
 
 #portfolio .card {
     margin: 10px 10px !important;
+    width: 300px;
 }
 
 #portfolio .card img {
