@@ -102,7 +102,7 @@
     display: inline;
 }
 
-@media screen and (max-device-width: 480px), screen and (max-width: 720px) {
+@media screen and (max-device-width: 480px), screen and (max-width: 850px) {
     .mobile {
         display: inline;
     }
@@ -127,8 +127,8 @@
     }
 
     .material-icons {
-        font-size: 80px;
-        margin-top: 20px;
+        font-size: 50px;
+        margin-top: 40px;
         margin-right: 20px;
     }
 
@@ -151,10 +151,9 @@
 
 }
 
-@media screen and (max-device-width: 400px), screen and (max-width: 500px) {
-    .top .logo, .top .material-icons {
-        font-size: 18vw;
-        margin: 0 !important;
-        padding: 0 !important;
+@media screen and (max-device-width: 400px), screen and (max-width: 400px) {
+    .headerLarge .logo {
+        transition: none;
+        width: 60vw !important;
     }
 }
