@@ -258,8 +258,30 @@
         {% endif %}
       </div>
 
+        <div class="field image">
+        <label for="{{ form.image.id_for_label }}">Image</label>
+        <input id="{{ form.image.id_for_label }}" style="display: none;" name="image" type="number"
+               value="{{ form.image.value }}">
+        <div class="ui card image">
+          <div class="image select">
+            {% if form.image.value and form.image.value != '0' %}
+              <img src="/files/image/{{ form.image.value }}/view">
+            {% else %}
+              <img src="{% static "projects/img/click_to_select.png" %}">
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      {% if form.image.errors %}
+        <br>
+        <div class="ui blue pointing label">
+          {{ form.image.errors.0 }}
+        </div>
+      {% endif %}
+
       <div class="field image">
-        <label for="{{ form.thumbnail.id_for_label }}">Thumbnail</label>
+        <label for="{{ form.thumbnail.id_for_label }}">Thumbnail (1:1, min 300px)</label>
         <input id="{{ form.thumbnail.id_for_label }}" style="display: none;" name="thumbnail" type="number"
                value="{{ form.thumbnail.value }}">
         <div class="ui card image">
