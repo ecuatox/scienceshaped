@@ -17,6 +17,12 @@
     padding-top: 50px;
 }
 
+.copyright p {
+    display: inline-block;
+    margin: 0;
+    margin-left: 15px;
+}
+
 .footer .column {
     text-align: left;
 }
