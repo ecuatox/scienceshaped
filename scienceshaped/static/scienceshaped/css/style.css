@@ -2,6 +2,10 @@ body, body.pushable {
     background-color: #F5F5F5 !important;
 }
 
+.header {
+    font-family: 'Quicksand', sans-serif !important;
+}
+
 .pusher {
     background-color: transparent !important;
 }

@@ -23,6 +23,7 @@
 .info.content * {
     line-height: 1em;
     font-family: 'Quicksand', sans-serif;
+    font-weight: 300;
 }
 
 .info.edit.button {
