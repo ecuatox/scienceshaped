@@ -6,7 +6,7 @@ $(function () {
             if (target.length) {
                 $('html, body').clearQueue();
                 $('html, body').animate({
-                    scrollTop: target.offset().top - 80,
+                    scrollTop: target.offset().top - 50,
                 }, {
                     easing: "swing",
                     duration: 500,
