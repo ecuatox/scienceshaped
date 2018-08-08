@@ -1,15 +1,15 @@
-#illustrations {
+#portfolio {
     position: relative;
     margin: 0 auto;
     padding-top: 80px;
     padding-bottom: 80px;
 }
 
-#illustrations .new.button:hover {
+#portfolio .new.button:hover {
     cursor: pointer;
 }
 
-#illustrations .editor.buttons {
+#portfolio .editor.buttons {
     position: absolute;
     top: 3px;
     right: 15px;
@@ -20,15 +20,15 @@
     text-align: center;
 }
 
-#illustrations h1, .dropdown {
+#portfolio h1, .dropdown {
     display: inline-block;
 }
 
-#illustrations .card {
+#portfolio .card {
     margin: 10px 10px !important;
 }
 
-#illustrations .card img {
+#portfolio .card img {
     object-fit: contain;
     object-position: center;
     height: 300px !important;

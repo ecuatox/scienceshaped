@@ -2,7 +2,7 @@
 {% load scienceshaped_helpers %}
 {% load thumbnail %}
 
-<div id="illustrations" class="illustrations section">
+<div id="portfolio" class="illustrations section">
     {% if perms.projects.add_illustration %}
         <div class="admin buttons">
             <a class="ui button blue admin" href="/projects/illustration/0/edit">New</a>
@@ -126,8 +126,8 @@
     <script>
         onlyShow("{{ illustrationCategories.first.tag }}");
 
-        $('#illustrations .category.image').click(function () {
-            $('#illustrations .selection.image').removeClass('small').addClass('tiny');
+        $('#portfolio .category.image').click(function () {
+            $('#portfolio .selection.image').removeClass('small').addClass('tiny');
             $(this).addClass('small');
             var tag = $(this).attr('tag');
             onlyShow(tag);
@@ -135,8 +135,8 @@
         });
 
         function onlyShow(category) {
-            $('#illustrations .card').css('display', 'none');
-            $('#illustrations .card').each(function () {
+            $('#portfolio .card').css('display', 'none');
+            $('#portfolio .card').each(function () {
                 if ($(this).hasClass("category_" + category)) {
                     $(this).css('display', 'block');
                 }
