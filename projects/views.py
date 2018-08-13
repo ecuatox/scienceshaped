@@ -26,12 +26,6 @@ class IllustrationEdit(UpdateView, ContextMixin):
         })
         return context
 
-    def get_initial(self):
-        try:
-            return {'pdf': self.get_object().pdf_getname()}
-        except AttributeError:
-            return {}
-
     def get_object(self, queryset=None):
         try:
             return Illustration.objects.get(pk=self.kwargs['illustration_id'])
