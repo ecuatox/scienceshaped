@@ -34,6 +34,10 @@ class IllustrationEdit(UpdateView, ContextMixin):
 
     def form_valid(self, form):
         response = super(IllustrationEdit, self).form_valid(form)
+        if self.request.POST.get('clearpdf') == 'True':
+            illustration = Illustration.objects.get(pk=self.kwargs['illustration_id'])
+            illustration.pdf = None
+            illustration.save()
         if self.get_object():
             admin_history.log_change(self.request, self.object, form.cleaned_data['title'])
         else:

@@ -98,6 +98,7 @@ $(function () {
     $('#pdfclear').click(function () {
         $('#id_pdf').val('');
         $('#pdf_dummy').val('');
+        $('#clearpdf').val('True');
     });
 
     $('.dropdown').dropdown();

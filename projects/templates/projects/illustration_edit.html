@@ -193,7 +193,9 @@
             Clear
           </label>
           <input id="{{ form.pdf.id_for_label }}" type="file" name="pdf"
-                 style="display: none;" value="{{ form.pdf.value|default:'' }}'>
+                 style="display: none;" value="{{ form.pdf.value|default:'' }}">
+          <input id="clearpdf" type="text" name="clearpdf"
+                 style="display: none;" value="False">
 
         {% if form.pdf.errors %}
           <div class="ui blue pointing label">
