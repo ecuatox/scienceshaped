@@ -16,7 +16,7 @@ class IllustrationAdmin(admin.ModelAdmin):
         }),
         ('Thumbnail', {
             'fields': [
-                'image',
+                'main_image',
                 'thumbnail',
                 'thumbnail_size',
             ]

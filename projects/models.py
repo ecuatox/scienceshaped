@@ -17,7 +17,7 @@ class Illustration(models.Model):
     url_description = models.CharField(max_length=40, blank=True, null=True)
     pdf = models.FileField(upload_to='pdfs', blank=True, null=True, verbose_name='PDF')
 
-    image = models.ForeignKey(Image, on_delete=models.SET_NULL, blank=True, null=True,
+    main_image = models.ForeignKey(Image, on_delete=models.SET_NULL, blank=True, null=True,
                                   related_name='%(app_label)s_%(class)s_related_image')
     thumbnail = models.ForeignKey(Image, on_delete=models.SET_NULL, blank=True, null=True,
                                   related_name='%(app_label)s_%(class)s_related_thumb')

@@ -36,7 +36,7 @@
                         </div>
                     {% endif %}
                     <div class="image previewButton" previewImage="
-                        {% thumbnail illustration.image.file "1080" crop="center" as im %}{{ im.url }}{% endthumbnail %}">
+                        {% thumbnail illustration.main_image.file "1080" crop="center" as im %}{{ im.url }}{% endthumbnail %}">
                         {% thumbnail illustration.thumbnail.file "300" crop="center" as im %}
                             <img class="removeloader" src="{{ im.url }}"
                              style="background-color: {{ illustration.background_color|default_if_none:"#ffffff" }}">
@@ -66,8 +66,8 @@
             <div class="description">
                 <div class="previewButton main image"
                      previewImage="
-                    {% thumbnail illustration.image.file "1080" crop="center" as im %}{{ im.url }}{% endthumbnail %}">
-                    {% thumbnail illustration.image.file "1080" crop="center" as im %}
+                    {% thumbnail illustration.main_image.file "1080" crop="center" as im %}{{ im.url }}{% endthumbnail %}">
+                    {% thumbnail illustration.main_image.file "1080" crop="center" as im %}
                         <img src="{{ im.url }}">
                     {% endthumbnail %}
                 </div>
