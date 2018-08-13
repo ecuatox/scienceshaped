@@ -18,7 +18,7 @@ The users email adress: """ + self.cleaned_data['email'] + """
             subject=self.cleaned_data['subject'],
             body=message,
             from_email=self.cleaned_data['email'],
-            to=settings.CONTACT_EMAIL,
+            to=(settings.CONTACT_EMAIL,),
             reply_to=[self.cleaned_data['email']],
             headers={'From': 'ScienceShaped Contactform'}
         ).send()
