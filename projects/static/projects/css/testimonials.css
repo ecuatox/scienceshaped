@@ -102,10 +102,12 @@
 @media screen and (max-width: 768px) {
     .selection.image.tiny {
         width: 10vw !important;
+        min-width: 50px;
     }
 
     .selection.image.small {
         width: 15vw !important;
+        min-width: 80px;
     }
 
     @keyframes scaleUp {

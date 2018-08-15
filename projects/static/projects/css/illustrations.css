@@ -69,3 +69,19 @@
     height: 150px !important;
     width: 100% !important;
 }
+
+.categorySelector {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 10px;
+}
+
+@media screen and (max-device-width: 400px), screen and (max-width: 400px) {
+    .categorySelector {
+        display: block;
+        margin: 0;
+    }
+    .categorySelector .image, .categorySelector p {
+        display: inline-block;
+    }
+}
