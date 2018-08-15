@@ -36,7 +36,8 @@
             {% endfor %}
         </div>
 
-        <div class="ui text-centered container buttons" style="margin-top: 30px; height: auto;">
+        <div class="ui text-centered container buttons" style="margin-top: 30px;">
+            <div class="categorySelector" style="height: 120px; display: inline-block;"></div>
             {% for testimonial in testimonials %}
                 {% thumbnail testimonial.thumbnail.file "200x200" crop="center" as im %}
                     <img class="ui {% if testimonial == testimonials.first %}small{% else %}tiny{% endif %}

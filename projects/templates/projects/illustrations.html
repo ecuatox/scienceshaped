@@ -108,7 +108,8 @@
         </div>
     {% endfor %}
 
-    <div class="ui text-centered text container buttons" style="margin-top: 30px; height: auto;">
+    <div class="ui text-centered text container buttons" style="margin-top: 30px;">
+        <div class="categorySelector" style="height: 153px; display: inline-block;"></div>
         {% for category in illustrationCategories %}
             <div class="categorySelector">
                 {% thumbnail category.thumb.file "200x200" crop="center" as im %}

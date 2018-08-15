@@ -79,6 +79,8 @@
 @media screen and (max-device-width: 500px), screen and (max-width: 500px) {
     #portfolio .container.buttons {
         text-align: left;
+        height: 420px !important;
+        margin-top: -120px !important;
     }
     .categorySelector {
         display: block;
