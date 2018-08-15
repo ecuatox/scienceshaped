@@ -47,8 +47,7 @@
                     </div>
                     <div class="extra content">
                         <a class="readmore" illustration="{{ illustration.id }}">
-                            <i class="info icon"></i>
-                            Read more
+                            More
                         </a>
                     </div>
                 </div>
@@ -84,12 +83,12 @@
                 </p>
                 {% if illustration.url %}
                   <p>
-                    {{ illustration.url_description|default:"More " }} <a href="{{ illustration.url }}" target="_blank">here</a>.
+                    {{ illustration.url_description|default:"More " }} <a href="{{ illustration.url }}" target="_blank">here</a>
                   </p>
                 {% endif %}
                 {% if illustration.pdf %}
                   <p>
-                    Publication <a href="/media/{{ illustration.pdf }}" target="_blank">here</a>.
+                    Publication <a href="/media/{{ illustration.pdf }}" target="_blank">here</a>
                   </p>
                 {% endif %}
                 {% for image in illustration.images.all %}
