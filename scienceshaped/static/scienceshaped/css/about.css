@@ -33,3 +33,32 @@ h1 {
 .who.edit.button:hover, .why.edit.button:hover {
     cursor: pointer;
 }
+
+.about.grid {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 250px;
+    grid-auto-flow: dense;
+}
+
+#who {
+    grid-column: 2;
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
+#why {
+    grid-column: 1;
+}
+
+@media screen and (max-device-width: 767px), screen and (max-width: 767px) {
+    .about.grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+    }
+    #who {
+        grid-column: 1;
+        grid-row-start: 2;
+    }
+}

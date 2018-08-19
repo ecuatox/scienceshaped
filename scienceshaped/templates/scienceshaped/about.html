@@ -10,8 +10,11 @@
 
     <div class="ui text container">
         <h1 class="ui header">About</h1>
-        <div class="ui stackable grid">
-            <div id="why" class="six wide column">
+        <div class="about grid">
+            <div id="ellen" style="text-align: center; width: 100%;">
+                <img src="{% static "scienceshaped/img/ellen.jpg" %}" style="width: 100%; max-width: 300px; display: inline-block;">
+            </div>
+            <div id="why">
                 <h3 class="ui header">WHY</h3>
                 {% autoescape off %}
                     {{ whyContent }}
@@ -23,11 +26,8 @@
                     <li>E - essential message</li>
                     <li>T - tutoring</li>
                 </ul>
-                <div style="text-align: center; width: 100%;">
-                    <img src="{% static "scienceshaped/img/ellen.jpg" %}" style="width: 100%; max-width: 300px; display: inline-block;">
-                </div>
             </div>
-            <div id="who" class="ten wide column">
+            <div id="who">
                 <h3 class="ui header">WHO</h3>
                 {% autoescape off %}
                     {{ whoContent }}
@@ -36,7 +36,7 @@
             </div>
         </div>
     </div>
-    <div class="ui text container">
+    <div class="ui text container" style="margin-top: 30px;">
         <h3 class="ui header">Former working places</h3>
         <ul>
             <li><span class="accdkwrapper">
