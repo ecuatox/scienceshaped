@@ -51,8 +51,12 @@ h1 {
     text-align: center;
 }
 
+#about .logos p {
+    margin: 5px;
+}
+
 #about .logos img {
     display: inline-block;
-    height: 60px;
+    height: 70px;
     padding: 10px;
 }
