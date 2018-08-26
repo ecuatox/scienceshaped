@@ -69,5 +69,8 @@ class Testimonial(models.Model):
     thumbnail = models.ForeignKey(Image, on_delete=models.SET_NULL, blank=True, null=True)
     date = models.DateField(default=timezone.now, verbose_name='Date')
 
+    def message_lines(self):
+        return self.message.split('\n')
+
     def __str__(self):
         return self.person

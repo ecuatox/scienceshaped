@@ -27,7 +27,9 @@
                 <div class="testimonial item" pk="{{ testimonial.pk }}">
                     <div>
                         <i class="icon quote left"></i>
-                        <span class="display message">{{ testimonial.message }}</span>
+                        {% for line in testimonial.message_lines %}
+                            <span class="display message">{{ line }}</span><br>
+                        {% endfor %}
                     </div>
                     <p class="display author">{{ testimonial.person }}</p>
                     <p class="display job">{{ testimonial.job }}</p>
