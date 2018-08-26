@@ -3,8 +3,7 @@
 <section id="about">
     {% if perms.contentbox.change_contentbox %}
         <div class="admin buttons">
-            <a class="ui button who admin blue" href="/contentbox/who/edit">Edit who</a>
-            <a class="ui button why admin blue" href="/contentbox/why/edit">Edit why</a>
+            <a class="ui button who admin blue" href="/contentbox/about/edit">Edit about</a>
         </div>
     {% endif %}
 
@@ -14,52 +13,21 @@
             <div id="ellen" style="text-align: center; width: 100%;">
                 <img src="{% static "scienceshaped/img/ellen.jpg" %}" style="width: 100%; max-width: 300px; display: inline-block;">
             </div>
-            <div id="why">
-                <h3 class="ui header">WHY</h3>
+            <div id="aboutcontent">
                 {% autoescape off %}
-                    {{ whyContent }}
+                    {{ aboutContent }}
                 {% endautoescape %}
-                <ul>
-                    <li>A - attention-evoking</li>
-                    <li>S - story telling</li>
-                    <li>S - swift information</li>
-                    <li>E - essential message</li>
-                    <li>T - tutoring</li>
-                </ul>
-            </div>
-            <div id="who">
-                <h3 class="ui header">WHO</h3>
-                {% autoescape off %}
-                    {{ whoContent }}
-                {% endautoescape %}
-                <br>
             </div>
         </div>
     </div>
+    <div class="ui text logos container" style="margin-top: 30px;">
+        <img src="{% static "scienceshaped/img/logos/UiO.png" %}">
+        <img src="{% static "scienceshaped/img/logos/OUS.png" %}">
+        <img src="{% static "scienceshaped/img/logos/UiB.png" %}">
+        <img src="{% static "scienceshaped/img/logos/NTNU.png" %}">
+        <img src="{% static "scienceshaped/img/logos/RCN.png" %}">
+    </div>
     <div class="ui text container" style="margin-top: 30px;">
-        <h3 class="ui header">Former working places</h3>
-        <ul>
-            <li><span class="accdkwrapper">
-                <i class="accdk icon caret right"></i>
-                </span>Oslo University Hospital Institute for Cancer Research
-                <br><span style="margin-left:30px">&nbsp;</span> Dept of Tumor Biology and Dept of Cancer Immunity</li>
-            <li><i class="accdk icon caret right"></i>
-                The Norwegian Medicines Agency
-            </li>
-            <li>
-                <i class="accdk icon caret right"></i>
-                Norwegian Institute of Public Health
-            </li>
-            <li>
-                <i class="accdk icon caret right"></i>
-                Vestfold University College
-                (now University of Southeast Norway)
-            </li>
-            <li><i class="accdk icon caret right"></i>
-                Learn more about my professional background and experience at
-                <a id="linkedin" href="https://www.linkedin.com/in/ellen-tenstad-5b3b0631">LinkedIn</a>
-            </li>
-        </ul>
         <p id="mission">My mission is to facilitate science by effective visualisation</p>
     </div>
 </section>
