@@ -61,3 +61,7 @@ h1 {
     height: 70px;
     padding: 10px;
 }
+
+#about .logogroup {
+    display: inline-block;
+}
