@@ -18,7 +18,7 @@ class Illustration(models.Model):
     pdf = models.FileField(upload_to='pdfs', blank=True, null=True, verbose_name='PDF')
 
     main_image = models.ForeignKey(Image, on_delete=models.SET_NULL, blank=True, null=True,
-                                  related_name='%(app_label)s_%(class)s_related_image')
+                                   related_name='%(app_label)s_%(class)s_related_image')
     thumbnail = models.ForeignKey(Image, on_delete=models.SET_NULL, blank=True, null=True,
                                   related_name='%(app_label)s_%(class)s_related_thumb')
     thumbnail_size = models.CharField(max_length=4, default=100, verbose_name='Thumbnail size (%)')
@@ -54,11 +54,11 @@ class IllustrationCategory(models.Model):
     tag = models.CharField(max_length=100, unique=True)
     thumb = models.ImageField(upload_to="categories")
 
-    def __str__(self):
-        return self.title
-
     class Meta:
         ordering = ['order']
+
+    def __str__(self):
+        return self.title
 
 
 class Testimonial(models.Model):
@@ -68,6 +68,10 @@ class Testimonial(models.Model):
     hidden = models.BooleanField(default=False, verbose_name='Hidden')
     thumbnail = models.ForeignKey(Image, on_delete=models.SET_NULL, blank=True, null=True)
     date = models.DateField(default=timezone.now, verbose_name='Date')
+    order = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['order']
 
     def message_lines(self):
         return self.message.split('\n')

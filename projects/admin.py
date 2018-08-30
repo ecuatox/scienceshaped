@@ -61,6 +61,7 @@ class TestimonialAdmin(admin.ModelAdmin):
         ('Meta', {
             'fields': [
                 'date',
+                'order',
                 'hidden',
             ]
         }),
