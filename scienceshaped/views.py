@@ -23,7 +23,7 @@ def index(request, tag='all'):
     context = {
         'illustrations': Illustration.filter_tag(tag).filter(hidden=False).order_by('-date'),
         'illustrationCategories': IllustrationCategory.objects.all(),
-        'testimonials': Testimonial.objects.filter(hidden=False).order_by('-date'),
+        'testimonials': Testimonial.objects.filter(hidden=False),
         'mailForm': mailForm,
         'aboutContent': ContentBox.getContent('about'),
         'infoContent': ContentBox.getContent('info'),
