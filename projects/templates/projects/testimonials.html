@@ -31,9 +31,8 @@
                             <span class="display message">{{ line }}</span><br>
                         {% endfor %}
                     </div>
-                    <p class="display author">{{ testimonial.person }}</p>
+                    <p class="display author">{{ testimonial.person }} <span class="display date">{{ testimonial.date|date:"M Y" }}</span></p>
                     <p class="display job">{{ testimonial.job }}</p>
-                    <p class="display date">{{ testimonial.date|date:"M Y" }}</p>
                 </div>
             {% endfor %}
         </div>

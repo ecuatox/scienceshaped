@@ -28,6 +28,10 @@
     font-size: 18px;
 }
 
+.display.date {
+    font-size: 12px;
+}
+
 .display.job {
     margin: 2px;
     font-size: 14px;
